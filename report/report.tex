@@ -1,0 +1,232 @@
+% =========================================================================
+%   Main LaTeX File for the Research Project
+%   Author: Mert Torun, M.Sc.
+% =========================================================================
+\documentclass[12pt,english,ngerman,openany]{book}
+
+% ---------------------------------------------------------------
+%   PREAMBLE
+% ---------------------------------------------------------------
+
+% --- Core Font and Language Setup ---
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[english,ngerman]{babel}
+
+% --- Page Layout and Typography ---
+\usepackage[a4paper,margin=2.5cm,headheight=17pt]{geometry}
+\usepackage[expansion=false]{microtype}
+\setlength{\emergencystretch}{3em}
+\hbadness=10000 % suppress all underfull hbox warnings (cosmetic)
+\vbadness=10000 % suppress all underfull vbox warnings
+
+% --- Essential Packages for Content ---
+\usepackage{graphicx}
+	\graphicspath{{fig/}}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage[inline]{enumitem}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{siunitx}
+
+% --- Header and Footer Customization ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\small\itshape\nouppercase{\leftmark}\/}
+\fancyhead[RE,LO]{\includegraphics[height=10pt]{logo/th_koeln.png}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% --- Table of Contents Styling ---
+\usepackage{tocloft}
+\setlist{nosep}
+
+% --- Bibliography Configuration ---
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=nyt,
+  giveninits=true,
+  url=false, doi=true, isbn=false
+]{biblatex}
+\addbibresource{bib/references.bib}
+
+% Suppress tracklang dialect warning from glossaries (no datatool for ngerman)
+\makeatletter
+\let\report@origPW\PackageWarning
+\renewcommand{\PackageWarning}[2]{}
+\usepackage[acronym, nomain, nonumberlist, section]{glossaries}
+\let\PackageWarning\report@origPW
+\makeatother
+\glsdisablehyper
+\loadglsentries{abbreviations/abbreviations}
+\makeglossaries
+
+% --- Custom Metadata Commands ---
+\newcommand{\projSubmission}  {\input{meta/submission.tex}}
+\newcommand{\projInstitution} {\input{meta/institution/institution.tex}}
+\newcommand{\projTitle}       {\input{meta/title.tex}}
+\newcommand{\projSubtitle}    {\input{meta/subtitle.tex}}
+\newcommand{\projAuthor}      {\input{meta/author/author.tex}}
+\newcommand{\projAuthorEmail} {\input{meta/author/mail.tex}}
+\newcommand{\projReviewer}    {\input{meta/reviewer/reviewer.tex}}
+\newcommand{\projReviewerEmail}{\input{meta/reviewer/mail.tex}}
+\newcommand{\projFaculty}     {\input{meta/institution/faculty.tex}}
+\newcommand{\projDate}        {\input{meta/date.tex}}
+\newcommand{\projDegreeProgram} {\input{meta/author/degree_program.tex}}
+\newcommand{\projMatriculationNumber} {\input{meta/author/matriculation_number.tex}}
+\newcommand{\projKeywords}    {\input{keywords/en.tex}}
+\newcommand{\projKeywordsDE}  {\input{keywords/de.tex}}
+
+% --- PDF Hyperlinks and Metadata ---
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  citecolor=blue!50!black,
+  urlcolor=blue!70!black,
+  pdfauthor={Mert Torun, M.Sc.},
+  pdftitle={Ensuring Functional Equivalence and Compliance with Functional Safety Standards in Retrofitted Anti-Skid Systems for European Public Transportation},
+  pdfkeywords={Anti-Skid Protection; Cost Efficiency; Deterministic Testing; Embedded Diagnostics; EN 50129; EN 50155; EN 50716; FPGA Emulation; Formal Verification; Functional Equivalence; Hardware-In-The-Loop; IEC 61508; IEEE 1012; Non-Deterministic Testing; Public Transport; Retrofit Validation; Safety Certification; Safety-Critical Systems; Sustainability; Testing Methodology},
+  pdfsubject={M.Sc. Research Report},
+  pdflang={en}
+}
+
+% --- Other Helper Packages ---
+\usepackage[capitalise,nameinlink]{cleveref}
+
+% =========================================================================
+%   DOCUMENT BODY
+% =========================================================================
+\begin{document}
+
+% --- FRONT MATTER ---
+\frontmatter
+\pagestyle{plain}
+
+% Title Page
+\begin{titlepage}
+	\thispagestyle{empty}
+	\begin{flushright}
+		\includegraphics[height=2cm]{logo/th_koeln}
+	\end{flushright}
+	\vspace*{4cm}
+	\centering
+	{\huge\bfseries \projTitle\par}
+	\vspace{1.5em}
+	{\Large\itshape \projSubtitle\/\par}
+	\vfill
+	{\large\bfseries \projAuthor\par}
+	\vspace*{5cm}
+\end{titlepage}
+\clearpage
+
+% Submission Details
+\begin{center}
+	\vspace*{2cm}
+	{\Large\bfseries Submission Details}\\[2em]
+	\begin{tabular}{@{}ll}
+		\textbf{Institution:}       & \projInstitution            \\
+		\textbf{Faculty:}           & \projFaculty                \\
+		\textbf{Degree Program:}    & \projDegreeProgram          \\[1em]
+		\textbf{Document Type:}     & \projSubmission             \\[1em]
+		\textbf{Author:}            & \projAuthor                 \\
+		\textbf{Matriculation No.:} & \projMatriculationNumber    \\
+		\textit{Email:}             & \texttt{\projAuthorEmail}   \\[1em]
+		\textbf{Reviewer:}          & \projReviewer               \\
+		\textit{Email:}             & \texttt{\projReviewerEmail} \\[1em]
+		\textbf{Date:}              & \projDate                   \\
+	\end{tabular}
+\end{center}
+\vfill
+\clearpage
+
+% Abstracts and Keywords
+\selectlanguage{english}
+\pagestyle{plain}
+\chapter*{Abstract}
+\input{abstract/en.tex}
+{
+	\setlength{\parskip}{1em}
+	\setlength{\parindent}{0pt}
+	\par
+	{\bfseries Keywords:} \projKeywords
+}
+\clearpage
+
+\selectlanguage{ngerman}
+\pagestyle{plain}
+\chapter*{Zusammenfassung}
+\input{abstract/de.tex}
+{
+	\setlength{\parskip}{1em}
+	\setlength{\parindent}{0pt}
+	\par
+	{\bfseries Schlüsselwörter:} \projKeywordsDE
+}
+\clearpage
+\selectlanguage{english}
+
+% Lists (ToC, LoF, LoT, Acronyms)
+\pagestyle{fancy}
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
+\printglossary[type=\acronymtype, title=List of Abbreviations]
+\clearpage
+
+% --- MAIN MATTER ---
+\mainmatter
+\pagestyle{fancy}
+
+\include{chapters/chapter1}
+\include{chapters/chapter2}
+\include{chapters/chapter3}
+\include{chapters/chapter4}
+\include{chapters/chapter5}
+\include{chapters/chapter6}
+\include{chapters/chapter7}
+\clearpage
+
+% --- APPENDIX ---
+\appendix
+\pagestyle{fancy}
+
+\include{chapters/appendixA}
+\include{chapters/appendixB}
+\include{chapters/appendixC}
+\include{chapters/appendixD}
+\include{chapters/appendixE}
+\clearpage
+
+% --- Statutory Declaration ---
+\pagestyle{plain}
+\include{meta/declaration}
+\clearpage
+
+% --- BACK MATTER ---
+\backmatter
+\pagestyle{fancy}
+
+\printbibliography[title=References, heading=bibintoc]
+\clearpage
+
+\end{document}

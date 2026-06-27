@@ -1,0 +1,153 @@
+# ==========================================
+# LaTeX
+# ==========================================
+*.aux
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.lof
+*.lot
+*.out
+*.glg
+*.glo
+*.gls
+*.ist
+*.acn
+*.acr
+*.alg
+*.fls
+*.fdb_latexmk
+*.nav
+*.snm
+*.vrb
+*.maf
+*.mtc*
+*.soc
+/out/
+/archive/
+report/out/
+paper/out/
+# In-place build PDFs (staged to .tmp.nosync/dist/ for release; not tracked)
+report/report.pdf
+paper/paper.pdf
+
+# ==========================================
+# C (STM32 / GCC / IDEs)
+# ==========================================
+# Build outputs
+[Dd]ebug/
+[Rr]elease/
+*.elf
+*.bin
+*.hex
+*.map
+*.o
+*.obj
+*.su
+*.d
+# STM32CubeIDE / Keil / IAR project files
+.mxproject
+*.launch
+*.uvopt*
+*.uvproj*
+*.dep
+*.ewp
+*.ewd
+*.eww
+
+# ==========================================
+# VHDL (Libero SoC / ModelSim)
+# ==========================================
+# Libero SoC project files & build directories
+*/synthesis/
+*/simulation/
+*/designer/
+*/hdl/
+*/phy_mst/
+*/smartgen/
+*/stimulus/
+*/constraint/
+*.log
+*.err
+*.prj
+*.adb
+*.stp
+*.srr
+*.srs
+*.srm
+*.tcl
+*.cmd
+*~
+# ModelSim / QuestaSim
+work/
+transcript
+vsim.wlf
+
+# ==========================================
+# Python
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+ENV/
+
+# ==========================================
+# OS & System Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# ==========================================
+# Tool Caches & Directories
+# ==========================================
+.tmp/
+.agents/
+.gemini/
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+\#*\#
+*.nosync
+
+# Reference material for fact-checking (not part of the publication)
+archive_leyer/
+archiv_mto/
+
+# Local talk-prep materials (kept off the published repo)
+slides/presentation_with_notes.tex
+slides/speaker_notes_script.tex
+slides/speaker_notes_cards.tex
+slides/faq.tex
+slides/preparation.tex
+
+# Compiled PDFs are build outputs (staged under .tmp.nosync/dist/ for release upload; not tracked)
+.tmp.nosync/

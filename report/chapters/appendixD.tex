@@ -1,0 +1,66 @@
+% ============================================================
+% Appendix D: YAML Test Cases and VHDL Testbenches
+% ============================================================
+\chapter{YAML Test Cases and VHDL Testbenches}
+\label{app:test_cases}
+
+This appendix provides illustrative examples of the key test definition files and simulation scripts used during the verification and validation process, as detailed in \Cref{chap:testing}.
+
+% ------------------------------------------------------------
+\section{YAML Test Case Definitions for Fixture-Based Testing}
+\label{sec:app_yaml_test_cases}
+
+System-level scenario testing (\Cref{sec:system_scenario_testing}) was driven by sequences defined in \gls{yaml} format and executed via the test fixture~\cite{dolata2023}. The structure allows for the definition of input pin states, expected outputs, and tester interactions.
+
+\subsection*{Example Test Case: Geber 3 Fault Handling}
+The following excerpt from \texttt{tests.yml} illustrates the two-step verification sequence for a \enquote{Geber 3} fault:
+
+\begin{verbatim}
+# Test group for Geber 3 fault simulation
+- name: Geber 3 - I
+  description: >-
+    Test fur den Geber. Bitte 3 Sekunden warten,
+    bis der Fehler angezeigt wird. Danach STW
+    gedruckt halten und Fehlersequenz uberprufen.
+  pin_sets: {18z: 1, 24d: 0} # Simulate fault
+  expected_err_code: "31"    # Expect immediate err 31
+  expected_err_seq: "03 31 09" # Expect seq on STW
+  del: False                 # No 'Loesch' prompt
+
+- name: Geber 3 - II
+  description: STW gedruckt halten und Fehlersequenz uberprufen.
+  pin_sets: {}               # Maintain fault state
+  expected_err_code: "95"    # Expect '95' on STW
+  expected_err_seq: "03 31 09" # Re-verify seq
+  del: True                  # Prompt 'Loesch'
+\end{verbatim}
+
+% ------------------------------------------------------------
+\section{VHDL Snippet for Simulation-Based Verification}
+\label{sec:app_vhdl_testbenches}
+
+Component and interface verification (\Cref{sec:fpga_interface_testing}) utilized deterministic \gls{vhdl} testbenches. The following code snippet from the top-level FPGA module (`atop.vhd`) illustrates the control logic for the \gls{nvram}, including the critical bug-fix for the \texttt{NVRAM\_ble} (active-low enable) signal, which was a key finding of the practical debugging phase~\cite{savchuk2025}.
+
+\subsection*{Example Snippet: NVRAM Control Logic}
+This code block is responsible for asserting the correct control signals (chip enable, output enable, write enable) for the non-volatile memory.
+
+\begin{verbatim}
+-- VHDL snippet from NVRAM control process in atop.vhd
+
+-- Active-low enable pin for NVRAM. Was incorrectly set to '1' in
+-- an earlier version, which disabled the chip.
+NVRAM_ble <= '0'; -- FIX: Set permanently low to enable the component.
+
+NVRAM_oe_s <= rd_n_os;
+NVRAM_ce_s <= not ((not (rd_n_os or p27)) or (not (p27 or wr_n_os)));
+NVRAM_ce <= NVRAM_ce_s;
+NVRAM_we <= wr_n_os;
+
+-- Data bus direction control
+dmem_data_is <= NVRAM_dq;
+
+-- Other control signals for the memory controller state machine
+NVRAM_ctrl(2) <= p2_os(7);
+NVRAM_ctrl(1) <= wr_n_os;
+NVRAM_ctrl(0) <= NVRAM_ce_s;
+\end{verbatim}

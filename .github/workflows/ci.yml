@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build deliverables
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/xu-cheng/texlive-full:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install tools
+        run: apk add --no-cache make git
+
+      - name: Trust workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Lint (ChkTeX)
+        run: make check
+
+      - name: Build paper, report, slides
+        run: make clean && make all
+
+      - name: Upload PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: deliverables
+          path: .tmp.nosync/dist/*.pdf
+
+  release:
+    name: Publish release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/xu-cheng/texlive-full:latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install tools
+        run: apk add --no-cache make git
+
+      - name: Trust workspace
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Build deliverables
+        run: make all
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            .tmp.nosync/dist/paper.pdf
+            .tmp.nosync/dist/report.pdf
+            .tmp.nosync/dist/presentation.pdf
+            .tmp.nosync/dist/handout.pdf
+          body: |
+            Compiled deliverables for the VIMS 2026 anti-skid retrofit verification work: the IEEE paper, the M.Sc. research report, and the presentation deck. See the README for documentation.
+
+            **Full Changelog**: https://github.com/mtorun0x7cd/anti-skid-verification/commits/${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

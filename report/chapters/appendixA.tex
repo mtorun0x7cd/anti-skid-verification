@@ -1,0 +1,161 @@
+% ============================================================
+% Appendix A: Schematics and Layouts
+% ============================================================
+\chapter{Schematics and Layouts}
+\label{app:schematics}
+
+This appendix contains the detailed schematic diagrams and Printed Circuit Board (PCB) layouts for the retrofitted test-diagnosis system modules. It also includes photographic evidence of the inherited Rev 0.0 boards and the corrected, unpopulated Rev 1.0 boards.
+
+\clearpage
+
+% ------------------------------------------------------------
+\section{Inherited Rev 0.0 Prototype Boards}
+\label{app:rev0_photos}
+
+The following figures show the inherited Rev 0.0 prototype boards, which contained several design-for-manufacturing (DFM) errors and required significant rework and debugging as discussed in \Cref{subsec:hardware_challenges}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{old/top/oberplatine.png}
+    \caption[Rev 0.0 Upper Board]{Inherited Rev 0.0 Upper Board (Top View).}
+    \label{fig:rev0_upper_board}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{old/top/stm32.png}
+    \caption[Rev 0.0 STM32 Board]{Inherited Rev 0.0 STM32 Diagnostics Board (Top View), showing incorrect footprints and wiring.}
+    \label{fig:rev0_stm32_board}
+\end{figure}
+
+\clearpage
+
+% ------------------------------------------------------------
+\section{Corrected Rev 1.0 Bare PCBs}
+\label{app:rev1_bare_pcbs}
+
+The following figures show the unpopulated, corrected Rev 1.0 PCBs, manufactured with the fixes for the issues identified in the prototype.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{unsoldered/top/unterplatine.png}
+    \caption[Rev 1.0 Bare Base Board]{Corrected Rev 1.0 Base Board (Top View), unpopulated.}
+    \label{fig:rev1_bare_base_board}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{unsoldered/top/stm32.png}
+    \caption[Rev 1.0 Bare STM32 Board]{Corrected Rev 1.0 STM32 Diagnostics Board (Top View), unpopulated.}
+    \label{fig:rev1_bare_stm32_board}
+\end{figure}
+
+\clearpage
+
+% ------------------------------------------------------------
+\section{Base Board (Unterplatine) Schematics and Layout}
+\label{sec:app_base_board_schematics}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth, angle=90]{schematic/i}
+	\caption[Base Board Schematic (Part 1)]{Base Board Schematic, Part 1: FPGA, Power, Watchdog, and JTAG.}
+	\label{fig:base_schematic_p1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth, angle=90]{schematic/ii}
+	\caption[Base Board Schematic (Part 2)]{Base Board Schematic, Part 2: Memory (NVRAM/Flash), Clock, and Connectors.}
+	\label{fig:base_schematic_p2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{layout/top/unterplatine.png}
+    \caption[Base Board Layout (Top)]{Base Board (Rev 0.0) PCB Layout (Top View), showing component placement.}
+    \label{fig:base_layout_top}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{layout/bottom/unterplatine.png}
+    \caption[Base Board Layout (Bottom)]{Base Board (Rev 0.0) PCB Layout (Bottom View).}
+    \label{fig:base_layout_bottom}
+\end{figure}
+
+\clearpage
+
+% ------------------------------------------------------------
+\section{Upper Board (Oberplatine) and LED Board Schematics and Layout}
+\label{sec:app_upper_board_schematics}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth, angle=90]{schematic/iv}
+	\caption[Upper and LED Board Schematics]{Schematic for the Upper Board and LED Display Driver board.}
+	\label{fig:oberplatine_schematic}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{layout/top/oberplatine.png}
+    \caption[Upper Board Layout (Top)]{Upper Board (Rev 1.0) PCB Layout (Top View).}
+    \label{fig:upper_layout_top}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{layout/bottom/oberplatine.png}
+    \caption[Upper Board Layout (Bottom)]{Upper Board (Rev 1.0) PCB Layout (Bottom View).}
+    \label{fig:upper_layout_bottom}
+\end{figure}
+
+\label{sec:app_led_board_schematics}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{layout/top/led.png}
+    \caption[LED Board Layout (Top)]{LED Board (Rev 1.0) PCB Layout (Top View).}
+    \label{fig:led_layout_top}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{layout/bottom/led.png}
+    \caption[LED Board Layout (Bottom)]{LED Board (Rev 1.0) PCB Layout (Bottom View).}
+    \label{fig:led_layout_bottom}
+\end{figure}
+
+\clearpage
+
+% ------------------------------------------------------------
+\section{STM32 Diagnostics Board Schematics and Layout}
+\label{sec:app_stm32_board_schematics}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth, angle=90]{schematic/iii}
+	\caption[STM32 Diagnostics Board Schematic]{Schematic for the STM32 Diagnostics Board, showing isolated SPI, RTC, SD card, and USB interfaces.}
+	\label{fig:stm32_schematic}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{layout/top/stm32.png}
+    \caption[STM32 Board Layout (Top)]{STM32 Diagnostics Board (Rev 1.0) PCB Layout (Top View).}
+    \label{fig:stm32_layout_top}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{layout/bottom/stm32.png}
+    \caption[STM32 Board Layout (Bottom)]{STM32 Diagnostics Board (Rev 1.0) PCB Layout (Bottom View).}
+    \label{fig:stm32_layout_bottom}
+\end{figure}
+
+\clearpage
+
+% ------------------------------------------------------------
+\section{Connectors}
+\label{sec:app_connectors}
+Key connector systems used include standard pin headers for board-to-board connections and specific parts like TE's AMPMODU System 50 family for compact connections, ensuring robust interconnectivity between the modular boards~\cite{te_ampmodu_sys50}.

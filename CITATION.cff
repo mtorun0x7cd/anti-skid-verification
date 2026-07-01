@@ -18,7 +18,7 @@ authors:
   - given-names: Mert
     family-names: Torun
     email: info@mtorun0x7cd.com
-    affiliation: mtorun0x7cd
+    affiliation: TH Köln
 version: 1.0.0
 date-released: 2026-06-26
 license: MIT
@@ -44,7 +44,7 @@ preferred-citation:
     - given-names: Mert
       family-names: Torun
       email: info@mtorun0x7cd.com
-      affiliation: TH Köln (Cologne University of Applied Sciences)
+      affiliation: TH Köln
   year: 2026
   collection-title: Kölner Beiträge zur technischen Informatik
   issn: 2193-570X

@@ -141,6 +141,7 @@ ehthumbs.db
 # Reference material for fact-checking (not part of the publication)
 archive_leyer/
 archiv_mto/
+ARHICVE_OG/
 
 # Local talk-prep materials (kept off the published repo)
 slides/presentation_with_notes.tex

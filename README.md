@@ -20,13 +20,13 @@
 
 Anti-skid (wheel-slide protection) systems are safety-critical components in European urban rail vehicles, preventing wheel lock-up during braking on low-adhesion track. The *WGMC19* system, deployed across multiple European transit operators, relies on a test-diagnosis module built around the long-obsolete Intel MCS-48 microcontroller family. As these components become unobtainable, operators face a choice between prohibitively expensive full system replacement or targeted board-level retrofit — provided functional equivalence with the original design can be rigorously demonstrated under contemporary safety standards.
 
-This research project addresses the verification challenge by developing a structured, standards-aligned **two-layer verification methodology** derived from the V-model as defined in IEC 61508 and IEEE 1012-2024. The replacement architecture pairs an **Actel A3P1000 FPGA** (flash-based, non-volatile) emulating the MCS-48 CPU and I/O logic with an **STM32F401RET6** ARM Cortex-M4 microcontroller providing galvanically isolated diagnostics. The central contribution is not the hardware itself, but the **methodological framework** for proving functional equivalence — a gap that existed in the literature for board-level legacy-to-FPGA retrofit scenarios.
+This research project addresses the verification challenge by developing a structured, standards-aligned **two-layer verification methodology** derived from the V-model lifecycle of IEC 61508 and EN 50126, with verification and validation activities structured per IEEE 1012-2024. The replacement architecture pairs an **Actel A3P1000 FPGA** (flash-based, non-volatile) emulating the MCS-48 CPU and I/O logic with an **STM32F401RET6** ARM Cortex-M4 microcontroller providing galvanically isolated diagnostics. The central contribution is not the hardware itself, but the **methodological framework** for proving functional equivalence — a gap that existed in the literature for board-level legacy-to-FPGA retrofit scenarios.
 
 An accompanying IEEE-format paper has been accepted for publication in *Kölner Beiträge zur technischen Informatik* (ISSN 2193-570X; VIMS 2026). Lifecycle considerations indicate that board-level retrofits reduce both operational costs and embodied carbon relative to manufacturing new subsystems, supporting the economic and ecological rationale alongside the technical methodology.
 
 ## Abstract
 
-Modernising ageing safety-critical electronics in public transportation is often more cost-effective and environmentally sustainable than complete system replacement — provided functional equivalence with the original design can be rigorously demonstrated under contemporary safety standards. This paper presents a case study of retrofitting a legacy anti-skid test-diagnosis module used in European urban rail. An obsolete Intel MCS-48 microcontroller was replaced with a flash-based Field-Programmable Gate Array (FPGA; Actel A3P1000) emulating the original processor and I/O logic, complemented by a galvanically isolated STM32 microcontroller subsystem for enhanced diagnostics. To verify the retrofit, a two-layer verification methodology was developed, derived from the V-model as defined in IEC 61508 and IEEE 1012: (1) deterministic component and interface testing via VHDL simulation and hardware timing measurements, and (2) scenario-based system-level testing using a dedicated hardware fixture with YAML-defined test cases. Through convergence of three independent evidence lines — simulation, oscilloscope measurement, and integrated scenario testing — functional equivalence of the safety-critical core was demonstrated for all documented fault codes, self-test sequences, and user interactions. Results were mapped to IEC 61508, EN 50129, EN 50716, and IEEE 1012. The methodology is assessed for transferability to other safety-critical retrofit contexts.
+Modernising ageing safety-critical electronics in public transportation is often more cost-effective and environmentally sustainable than complete system replacement — provided functional equivalence with the original design can be rigorously demonstrated under contemporary safety standards. This paper presents a case study of retrofitting a legacy anti-skid test-diagnosis module used in European urban rail. An obsolete Intel MCS-48 microcontroller was replaced with a flash-based Field-Programmable Gate Array (FPGA; Actel A3P1000) emulating the original processor and I/O logic, complemented by a galvanically isolated STM32 microcontroller subsystem for enhanced diagnostics. To verify the retrofit, a two-layer verification methodology was developed, derived from the V-model lifecycle of IEC 61508 and EN 50126, with verification and validation activities structured per IEEE 1012: (1) deterministic component and interface testing via VHDL simulation and hardware timing measurements, and (2) scenario-based system-level testing using a dedicated hardware fixture with YAML-defined test cases. Through convergence of three independent evidence lines — simulation, oscilloscope measurement, and integrated scenario testing — functional equivalence of the safety-critical core was demonstrated for all documented fault codes, self-test sequences, and user interactions. Results were mapped to IEC 61508, EN 50126, EN 50129, EN 50716, and IEEE 1012. The methodology is assessed for transferability to other safety-critical retrofit contexts.
 
 ## Context
 
@@ -43,7 +43,7 @@ Modernising ageing safety-critical electronics in public transportation is often
 ## Features
 
 - **Two-layer verification methodology** — Standards-aligned (IEC 61508 / IEEE 1012-2024) framework combining white-box component testing with black-box system validation, structured around the V-model
-- **FPGA-based MCS-48 emulation** — Actel A3P1000 flash-based FPGA running an adapted OpenCores `t48_core` executing the original 2 KB firmware binary from external Flash ROM
+- **FPGA-based MCS-48 emulation** — Actel A3P1000 flash-based FPGA running the OpenCores `t48` core (integrated unmodified) executing the original firmware image (a 4 KB 2732-type EPROM, ~3 KB populated code) from external Flash ROM
 - **Galvanically isolated diagnostics** — STM32F401RET6 ARM Cortex-M4 subsystem with optocoupler-isolated SPI, RTC-timestamped SD card logging, and USB Type-C data retrieval
 - **YAML-driven test specification** — Machine-parseable, version-controlled test case definitions with requirements-to-test traceability matrices
 - **Empirical bug taxonomy** — Five distinct defect classes (logical, layout, assembly, firmware, interface) discovered and classified during validation
@@ -63,7 +63,7 @@ The retrofit replaces a single 8-bit microcontroller board with a modular, four-
 │  PCB 1: BASE BOARD                   PCB 3: STM32 DIAGNOSTICS BOARD      │
 │  ┌─────────────────────────┐         ┌────────────────────────────────┐  │
 │  │   Actel A3P1000 FPGA    │  SPI    │   STM32F401RET6 (Cortex-M4)   │   │
-│  │   (PQG-208 Package)     │ 100kHz  │                                │  │
+│  │   (PQG208 Package)      │ 100kHz  │                                │  │
 │  │                         │---------│  ┌──────────┐  ┌───────────┐  │   │
 │  │  ┌───────────────────┐  │ Galvanic│  │ FatFS    │  │ DS3231SN  │  │   │
 │  │  │ MCS-48 CPU Core   │  │Isolation│  │ SD Card  │  │ RTC       │  │   │
@@ -99,7 +99,7 @@ The methodology maps to the right side of the V-model through two complementary 
 |-----------|--------|----------|
 | VHDL Simulation (ModelSim ME) | MCS-48 core, memory interfaces, SPI master, frequency sweep, watchdog | Cycle-accurate waveforms |
 | JTAG Boundary-Scan (IEEE 1149.1) | FPGA identification, pin connectivity, solder defect isolation | Pin-level state verification |
-| Oscilloscope Measurement | Watchdog period (3.85 s measured), frequency sweep (850–1550 Hz) | Temporal equivalence proof |
+| Oscilloscope Measurement | Watchdog interaction (3.85 s servicing window measured), frequency sweep (850–1550 Hz) | Temporal equivalence evidence |
 
 **Layer 2 — Scenario-Based System-Level Testing** targets system and acceptance testing: black-box validation of the fully integrated system against original functional requirements using a dedicated hardware test fixture ("Testkartentester").
 
@@ -132,7 +132,7 @@ The methodology's necessity is empirically validated through a taxonomy of five 
 
 | ID | Class | Description | Detected By |
 |----|-------|-------------|-------------|
-| B1 | Logical | NVRAM chip enable (`NVRAM_ble`) held high — memory disabled | Layer 1 (Simulation) |
+| B1 | Logical | NVRAM byte-low-enable (`NVRAM_ble`) held high — memory disabled | Layer 1 (Simulation) |
 | B2 | Layout | STM32 SWD debug pins routed incorrectly | Layer 1 (Boundary-Scan) |
 | B3 | Assembly | ~40 FPGA pins open or shorted from soldering | Layer 1 (JTAG / Scope) |
 | B4 | Firmware | FatFS timing starvation blocking SPI Rx | Layer 2 (Fixture/YAML) |
@@ -151,7 +151,7 @@ Bugs B1–B3 escaped system-level testing; bugs B4–B5 escaped component simula
 | Test Specification | YAML (scenario definitions, requirements-to-test traceability matrices) |
 | Build Automation | GNU Make with deterministic reproducible builds (`SOURCE_DATE_EPOCH`) |
 | Version Control | Git (configuration management per EN 50716) |
-| Standards Framework | IEC 61508, EN 50129, EN 50716, EN 50155, IEEE 1012-2024 |
+| Standards Framework | IEC 61508, EN 50126, EN 50129, EN 50716, EN 50155, IEEE 1012-2024 |
 
 ## Project Structure
 
@@ -234,25 +234,27 @@ The Makefile enforces deterministic builds via `SOURCE_DATE_EPOCH` (derived from
 
 [1] IEC, "IEC 61508: Functional Safety of Electrical/Electronic/Programmable Electronic Safety-Related Systems," Edition 2.0, International Electrotechnical Commission, 2010.
 
-[2] CENELEC, "EN 50129: Railway Applications — Communication, Signalling and Processing Systems — Safety Related Electronic Systems for Signalling," European Committee for Electrotechnical Standardization, 2018.
+[2] CENELEC, "EN 50126-1: Railway Applications — The Specification and Demonstration of Reliability, Availability, Maintainability and Safety (RAMS) — Part 1: Generic RAMS Process," European Committee for Electrotechnical Standardization, 2017.
 
-[3] CENELEC, "EN 50716: Railway Applications — Requirements for Software and Hardware Development and Assessment," European Committee for Electrotechnical Standardization, 2023.
+[3] CENELEC, "EN 50129: Railway Applications — Communication, Signalling and Processing Systems — Safety Related Electronic Systems for Signalling," European Committee for Electrotechnical Standardization, 2018.
 
-[4] CENELEC, "EN 50155: Railway Applications — Rolling Stock — Electronic Equipment," European Committee for Electrotechnical Standardization, 2021.
+[4] CENELEC, "EN 50716: Railway Applications — Requirements for Software Development," European Committee for Electrotechnical Standardization, 2023.
 
-[5] IEEE, "IEEE 1012-2024: IEEE Standard for System, Software, and Hardware Verification and Validation," Institute of Electrical and Electronics Engineers, 2024.
+[5] CENELEC, "EN 50155: Railway Applications — Rolling Stock — Electronic Equipment," European Committee for Electrotechnical Standardization, 2021.
+
+[6] IEEE, "IEEE 1012-2024: IEEE Standard for System, Software, and Hardware Verification and Validation," Institute of Electrical and Electronics Engineers, 2024.
 
 ## Citation
 
 If you reference this work, please cite the accompanying paper. Machine-readable metadata is in [CITATION.cff](CITATION.cff) (GitHub renders a "Cite this repository" control from it).
 
-> Torun, M. (2026). *Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Two-Layer Verification Methodology.* Kölner Beiträge zur technischen Informatik (ISSN 2193-570X), VIMS 2026.
+> Torun, M. (2026). *Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology.* Kölner Beiträge zur technischen Informatik (ISSN 2193-570X), VIMS 2026.
 
 ## License
 
 The documentation in this repository (the paper, the report, and supporting text) is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
-> **Note on the FPGA core.** The MCS-48 emulation described in this work adapts the OpenCores `t48` core, which is distributed under the **GPL-2.0** license. The corresponding HDL is not redistributed here; this repository contains only the paper, the report, and the verification artefacts.
+> **Note on the FPGA core.** The MCS-48 emulation described in this work incorporates the OpenCores `t48` core (used unmodified), which is distributed under the **GPL-2.0** license. The corresponding HDL is not redistributed here; this repository contains only the paper, the report, and the verification artefacts.
 
 ## Contact
 

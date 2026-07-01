@@ -11,9 +11,9 @@ abstract: >-
   in safety-critical FPGA retrofits of legacy railway anti-skid (wheel-slide
   protection) modules. It combines deterministic component and interface testing
   (VHDL simulation, JTAG boundary scan, hardware timing measurement) with
-  scenario-based system-level validation, and is mapped to IEC 61508, EN 50129,
-  EN 50716, and IEEE 1012. Research conducted at TH Köln (Cologne University of
-  Applied Sciences).
+  scenario-based system-level validation, and is mapped to IEC 61508, EN 50126,
+  EN 50129, EN 50716, and IEEE 1012. Research conducted at TH Köln (Cologne
+  University of Applied Sciences).
 authors:
   - given-names: Mert
     family-names: Torun
@@ -39,7 +39,7 @@ preferred-citation:
   type: conference-paper
   title: >-
     Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for
-    European Public Transportation: A Two-Layer Verification Methodology
+    European Public Transportation: A Hybrid Two-Layer Verification Methodology
   authors:
     - given-names: Mert
       family-names: Torun

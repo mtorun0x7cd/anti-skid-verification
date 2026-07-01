@@ -21,6 +21,6 @@ GPL-2.0 and is likewise not included.
 ## Reporting
 
 To report a factual error, a broken build, or any other substantive issue worth
-recording, contact info@mtorun0x7cd.com. As an actively maintained research
+recording, contact <info@mtorun0x7cd.com>. As an actively maintained research
 repository, corrections that affect the published record are handled through the
 normal camera-ready / erratum process.

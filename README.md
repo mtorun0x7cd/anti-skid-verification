@@ -56,7 +56,7 @@ The retrofit replaces a single 8-bit microcontroller board with a modular, four-
 
 ### Dual-Processor System
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                          WGMC19 Anti-Skid System                         │
 │                                                                          │
@@ -96,14 +96,14 @@ The methodology maps to the right side of the V-model through two complementary 
 **Layer 1 — Deterministic Component & Interface Testing** targets unit and integration testing: white-box verification proving that individual VHDL modules and hardware interfaces are correctly implemented against their technical specifications.
 
 | Technique | Target | Evidence |
-|-----------|--------|----------|
+| ----------- | -------- | ---------- |
 | VHDL Simulation (ModelSim ME) | MCS-48 core, memory interfaces, SPI master, frequency sweep, watchdog | Cycle-accurate waveforms |
 | JTAG Boundary-Scan (IEEE 1149.1) | FPGA identification, pin connectivity, solder defect isolation | Pin-level state verification |
 | Oscilloscope Measurement | Watchdog interaction (3.85 s servicing window measured), frequency sweep (850–1550 Hz) | Temporal equivalence evidence |
 
 **Layer 2 — Scenario-Based System-Level Testing** targets system and acceptance testing: black-box validation of the fully integrated system against original functional requirements using a dedicated hardware test fixture ("Testkartentester").
 
-```
+```text
 ┌───────────┐  USB/Serial  ┌───────────┐  GPIO  ┌──────────────┐  48-pin  ┌─────────┐
 │  Host PC  │◄────────────►│  STM32    │◄──────►│ Test Fixture │◄────────►│   DUT   │
 │  Python / │              │  Nucleo   │        │ (Testk.test.)│          │ (Board) │
@@ -131,7 +131,7 @@ Test cases are defined in YAML with full traceability to requirements:
 The methodology's necessity is empirically validated through a taxonomy of five distinct integration bugs discovered during validation:
 
 | ID | Class | Description | Detected By |
-|----|-------|-------------|-------------|
+| ---- | ------- | ------------- | ------------- |
 | B1 | Logical | NVRAM byte-low-enable (`NVRAM_ble`) held high — memory disabled | Layer 1 (Simulation) |
 | B2 | Layout | STM32 SWD debug pins routed incorrectly | Layer 1 (Boundary-Scan) |
 | B3 | Assembly | ~40 FPGA pins open or shorted from soldering | Layer 1 (JTAG / Scope) |
@@ -143,7 +143,7 @@ Bugs B1–B3 escaped system-level testing; bugs B4–B5 escaped component simula
 ## Tech Stack
 
 | Category | Technologies |
-|----------|-------------|
+| ---------- | ------------- |
 | Document Preparation | LaTeX (IEEEtran class), BibLaTeX/Biber, `latexmk` |
 | Hardware Description | VHDL (targeting Actel A3P1000 FPGA via Microsemi Libero SoC) |
 | Diagnostics Firmware | C (STM32F401RET6, ARM Cortex-M4, HAL + FatFS) |
@@ -155,7 +155,7 @@ Bugs B1–B3 escaped system-level testing; bugs B4–B5 escaped component simula
 
 ## Project Structure
 
-```
+```text
 anti-skid-verification/
 ├── paper/                  # IEEE conference paper (LaTeX)
 │   ├── paper.tex           # Main paper source
@@ -224,7 +224,7 @@ The Makefile enforces deterministic builds via `SOURCE_DATE_EPOCH` (derived from
 ## Documentation
 
 | Document | Description |
-|----------|-------------|
+| ---------- | ------------- |
 | [IEEE Paper](https://github.com/mtorun0x7cd/anti-skid-verification/releases/latest/download/paper.pdf) | Conference paper accepted for publication in *Kölner Beiträge zur technischen Informatik* (ISSN 2193-570X; VIMS 2026) |
 | [Research Report](https://github.com/mtorun0x7cd/anti-skid-verification/releases/latest/download/report.pdf) | Comprehensive report with full methodology, schematics, PCB layouts, and appendices |
 | [Test Traceability Matrix](verification/test_traceability.yaml) | YAML-defined requirements-to-test mapping for SPI and data logger modules |

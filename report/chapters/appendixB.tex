@@ -1,0 +1,241 @@
+% ============================================================
+% Appendix B: Bill of Materials (BOM) and DRC Reports
+% ============================================================
+\chapter{Bill of Materials (BOM) and DRC Reports}
+\label{app:bom_drc}
+
+This appendix provides the component lists necessary for assembling the retrofitted hardware modules, based on physical verification of populated components for Revision 1.0, and summaries of the Design Rule Check (DRC) reports confirming layout compliance with manufacturing constraints.
+
+% ------------------------------------------------------------
+\section{Consolidated Bill of Materials (BOM)}
+\label{sec:app_bom}
+
+The following table presents the consolidated Bill of Materials for the Rev 1.0 hardware, based on physical inspection of the populated boards and component data derived from project sourcing files and datasheets. Note that component locations listed may differ from logical groupings shown in schematics (\Cref{app:schematics}) but reflect the as-built state.
+
+\small
+\setlength{\tabcolsep}{2pt}
+\begin{longtable}{@{} p{0.18\linewidth} p{0.04\linewidth} p{0.24\linewidth} p{0.32\linewidth} p{0.12\linewidth} @{}}
+	\caption{Consolidated Bill of Materials (Rev 1.0)} \label{tab:bom}                                                                                                                                          \\
+	\toprule
+	Designator(s)     & Qty & Value/Part Number                    & Description                                                & Module(s)                                                                     \\
+	\midrule
+	\endfirsthead
+	\caption[]{Consolidated Bill of Materials (Rev 1.0) (Continued)}                                                                                                                                            \\
+	\toprule
+	Designator(s)     & Qty & Value/Part Number                    & Description                                                & Module(s)                                                                     \\
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{5}{r@{}}{\textit{Continued on next page}}                                                                                                                                                      \\
+	\endfoot
+	\bottomrule
+	\multicolumn{5}{p{0.95\linewidth}}{\footnotesize $^1$Component Y3 was present on the inherited Rev 0.0 Base Board; markings were illegible. Part number assumed based on Rev 0.0 documentation and schematics.} \\
+	\endlastfoot
+
+	\multicolumn{5}{@{}l}{\textit{LED Display Board Components (Based on physical board inspection)}}                                                                                                           \\
+	Disp1, Disp2      & 2   & Kingbright \texttt{SC03-12EWA}       & 7-Segment Display Red 0.3" Common Cathode                  & LED                                                                           \\
+	Y13A, Y14A        & 2   & TI \texttt{CD4511BE}                 & BCD-to-7-Segment Latch/Decoder/Driver (DIL16)              & LED                                                                           \\
+	R60-R73           & 14  & Yageo \texttt{MF0207FTE52-1K}        & Resistor \SI{1}{\kilo\ohm} 0.6W (Segment Limit)            & LED                                                                           \\
+	C66, C67          & 2   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & LED                                                                           \\
+	\midrule
+
+	\multicolumn{5}{@{}l}{\textit{STM32 Diagnostics Board Components (Based on physical board inspection)}}                                                                                                     \\
+	Y24               & 1   & \texttt{STM32F401RET6}               & Microcontroller Arm Cortex-M4 (LQFP64)                     & STM32                                                                         \\
+	Y19               & 1   & \texttt{DS3231SN\#}                  & Real Time Clock (RTC) IC                                   & STM32                                                                         \\
+	OK5-OK8           & 4   & \texttt{SFH601-3}                    & Optocoupler (SPI Isolation)                                & STM32                                                                         \\
+	Y22               & 1   & XP Power \texttt{IR0505SA}           & Isolated DC/DC Converter 5V-5V                             & STM32                                                                         \\
+	Y23               & 1   & Gaia \texttt{MGDS04-C-C}             & Isolated DC/DC Converter 5V-5V                             & STM32                                                                         \\
+	J6                & 1   & GCT \texttt{MEM2075-\allowbreak{}00-\allowbreak{}140-\allowbreak{}01-\allowbreak{}A}     & MicroSD Card Socket (Push-Push)                            & STM32                                                                         \\
+	X15               & 1   & GCT \texttt{USB4800-03-A}            & USB Type-C Connector                                       & STM32                                                                         \\
+	U1                & 1   & MPD \texttt{BS-7}                    & RTC Battery Holder (CR2032)                                & STM32                                                                         \\
+	Q7                & 1   & ECS \texttt{ECS-120-20-4X-EM}        & Crystal 12MHz                                              & STM32                                                                         \\
+	Q8                & 1   & Abracon \texttt{ABS25-\allowbreak{}32.768KHZ-\allowbreak{}6-\allowbreak{}T} & Crystal 32.768kHz                                          & STM32                                                                         \\
+	X12               & 1   & 1x6 Male Pin Header                  & Connector to Base Board                                    & STM32                                                                         \\
+	X14               & 1   & Pin Header?                          & Connector (Function/Type TBC)                              & STM32                                                                         \\
+	JP1               & 1   & 1 Pin Header                         & Test Point / Jumper (UART\_TX)                             & STM32                                                                         \\
+	SJ2               & 1   & Solder Jumper                        & Solder Jumper (Function/Location TBC)                      & STM32                                                                         \\
+	LED3              & 1   & Wurth \texttt{150080BS75000}         & Status LED (Blue)                                          & STM32                                                                         \\
+	D16               & 1   & Kyocera AVX \texttt{SMBJ5.0A}        & TVS Diode                                                  & STM32                                                                         \\
+	C62               & 1   & \texttt{TPSV686K025R0095}            & Capacitor Tantalum \SI{68}{\micro\farad} 25V               & STM32                                                                         \\
+	C63               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & STM32                                                                         \\
+	C64               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & STM32                                                                         \\
+	C65               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & STM32                                                                         \\
+	C68               & 1   & \SI{4.7}{\micro\farad} Ceramic       & Capacitor Ceramic \SI{4.7}{\micro\farad} 1206              & STM32                                                                         \\
+	C69               & 1   & \texttt{08055A6R8GAT2A}              & Capacitor Ceramic \SI{6.8}{\pico\farad} 0805               & STM32                                                                         \\
+	C71               & 1   & \texttt{08055A6R8GAT2A}              & Capacitor Ceramic \SI{6.8}{\pico\farad} 0805               & STM32                                                                         \\
+	C72               & 1   & \texttt{08053A180JAT2A}              & Capacitor Ceramic \SI{18}{\pico\farad} 0805                & STM32                                                                         \\
+	C73               & 1   & \texttt{08053A180JAT2A}              & Capacitor Ceramic \SI{18}{\pico\farad} 0805                & STM32                                                                         \\
+	C74               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & STM32                                                                         \\
+	C75               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & STM32                                                                         \\
+	C76               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & STM32                                                                         \\
+	C77               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & STM32                                                                         \\
+	R7                & 1   & \texttt{RC0805FR-7W22RL}             & Resistor \SI{22}{\ohm} 0805                                & STM32                                                                         \\
+	R77               & 1   & \texttt{RC0805JR-10470RL}            & Resistor \SI{470}{\ohm} 0805                               & STM32                                                                         \\
+	R81               & 1   & \texttt{PCAN0805E1000BST5}           & Resistor \SI{100}{\ohm} 1W 0805                            & STM32                                                                         \\
+	R82               & 1   & \texttt{RC0805JR-07360RL}            & Resistor \SI{360}{\ohm} 0805 (Opto Input)                  & STM32                                                                         \\
+	R83               & 1   & \texttt{RC0805JR-07360RL}            & Resistor \SI{360}{\ohm} 0805 (Opto Input)                  & STM32                                                                         \\
+	R84               & 1   & \texttt{RC0805JR-07360RL}            & Resistor \SI{360}{\ohm} 0805 (Opto Input)                  & STM32                                                                         \\
+	R85               & 1   & \texttt{RC0805JR-07360RL}            & Resistor \SI{360}{\ohm} 0805 (Opto Input)                  & STM32                                                                         \\
+	R86               & 1   & \texttt{AC0805JR-7W10KL}             & Resistor \SI{10}{\kilo\ohm} 0805 (Opto Pull-up)            & STM32                                                                         \\
+	R88               & 1   & \texttt{AC0805JR-7W10KL}             & Resistor \SI{10}{\kilo\ohm} 0805 (Opto Pull-up)            & STM32                                                                         \\
+	R89               & 1   & \texttt{AC0805JR-7W10KL}             & Resistor \SI{10}{\kilo\ohm} 0805                           & STM32                                                                         \\
+	R90               & 1   & \texttt{AC0805JR-7W10KL}             & Resistor \SI{10}{\kilo\ohm} 0805                           & STM32                                                                         \\
+	R92               & 1   & \texttt{RC0805FR-7W22RL}             & Resistor \SI{22}{\ohm} 0805 (USB Series)                   & STM32                                                                         \\
+	R93               & 1   & \texttt{RC0805FR-7W22RL}             & Resistor \SI{22}{\ohm} 0805 (USB Series)                   & STM32                                                                         \\
+	R94               & 1   & \texttt{RC0805FR-7W22RL}             & Resistor \SI{22}{\ohm} 0805                                & STM32                                                                         \\
+	R95               & 1   & \texttt{AC0805JR-7W10KL}             & Resistor \SI{10}{\kilo\ohm} 0805                           & STM32                                                                         \\
+	R96               & 1   & \texttt{AC0805JR-0733KL}             & Resistor \SI{33}{\kilo\ohm} 0805                           & STM32                                                                         \\
+	R98               & 1   & \texttt{AC0805JR-0782KL}             & Resistor \SI{82}{\kilo\ohm} 0805                           & STM32                                                                         \\
+	R99               & 1   & \texttt{RV0805JR-071ML}              & Resistor \SI{1}{\mega\ohm} 0805 (OSC Feedback?)            & STM32                                                                         \\
+	R100              & 1   & \texttt{RV0805JR-071ML}              & Resistor \SI{1}{\mega\ohm} 0805                            & STM32                                                                         \\
+	R101              & 1   & \texttt{RV0805JR-071ML}              & Resistor \SI{1}{\mega\ohm} 0805                            & STM32                                                                         \\
+	R106              & 1   & \texttt{RV0805JR-071ML}              & Resistor \SI{1}{\mega\ohm} 0805                            & STM32                                                                         \\
+	R107              & 1   & \texttt{AC0805JR-7W10KL}             & Resistor \SI{10}{\kilo\ohm} 0805 (Opto Pull-up)            & STM32                                                                         \\
+	R108              & 1   & \texttt{AC0805JR-7W10KL}             & Resistor \SI{10}{\kilo\ohm} 0805 (Opto Pull-up)            & STM32                                                                         \\
+	R109              & 1   & \texttt{AC0805JR-7W10KL}             & Resistor \SI{10}{\kilo\ohm} 0805                           & STM32                                                                         \\
+	R110              & 1   & \texttt{AC0805JR-7W10KL}             & Resistor \SI{10}{\kilo\ohm} 0805                           & STM32                                                                         \\
+	\midrule
+
+	\multicolumn{5}{@{}l}{\textit{Upper Board Components (Based on physical board inspection)}}                                                                                                                 \\
+	Y4                & 1   & \texttt{CD40106BE}                   & Hex Schmitt Trigger Inverter                               & Upper                                                                         \\
+	Y5                & 1   & \texttt{CD4518BE}                    & Dual BCD Up Counter (DIL16)                                & Upper                                                                         \\
+	Y6                & 1   & \texttt{CD40106BE}                   & Hex Schmitt Trigger Inverter                               & Upper                                                                         \\
+	Q1                & 1   & \texttt{BCY59-X PBFREE}              & NPN Transistor (TO18)                                      & Upper                                                                         \\
+	X8                & 1   & 2x4 Male Pin Header                  & Connector to Base Board (Mates ribbon to X9)               & Upper                                                                         \\
+	S1, S2, S3, S4    & 4   & C\&K \texttt{8125SD9ABE}             & Pushbutton Switch                                          & Upper                                                                         \\
+	JP2               & 1   & 2 Pin Jumper Header?                 & Jumper                                                     & Upper                                                                         \\
+	D1, D2            & 2   & Vishay \texttt{1N4148TR}             & Diode DO35-7                                               & Upper                                                                         \\
+	D3                & 1   & STMicro \texttt{1N6263}              & Diode DO35-7 (Schottky?)                                   & Upper                                                                         \\
+	D4, D5, D8, D9    & 4   & Vishay \texttt{1N4148TR}?            & Diode DO35-10 (Sub for BAV21?)                             & Upper                                                                         \\
+	D6, D7, D10-D15   & 8   & Vishay \texttt{1N4148TR}             & Diode DO35-10                                              & Upper                                                                         \\
+	C7                & 1   & WIMA \texttt{MKS2C031001\allowbreak{}A00JC00}?    & Capacitor Film \SI{100}{\nano\farad} 63V RM5?              & Upper                                                                         \\
+	C8                & 1   & \texttt{08055C102K4T4A}              & Capacitor Ceramic \SI{1}{\nano\farad} 0805                 & Upper                                                                         \\
+	C11               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Upper                                                                         \\
+	C12               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Upper                                                                         \\
+	C13               & 1   & WIMA \texttt{MKS2B034701B00KI00}     & Capacitor Film \SI{470}{\nano\farad} 50V RM5               & Upper                                                                         \\
+	C14, C15          & 2   & WIMA \texttt{MKS4D041002F00KSSD}     & Capacitor Film \SI{1}{\micro\farad} 100V RM7.5             & Upper                                                                         \\
+	C16, C17          & 2   & WIMA \texttt{MKS2D041001K00KC00}     & Capacitor Film \SI{1}{\micro\farad} 100V RM5               & Upper                                                                         \\
+	C18               & 1   & WIMA \texttt{MKS2D031001A00JSSD}     & Capacitor Film \SI{0.1}{\micro\farad} 100V RM5             & Upper                                                                         \\
+	C21               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Upper                                                                         \\
+	C70               & 1   & AVX \texttt{TAP105K050SCS}           & Capacitor Tantalum \SI{1}{\micro\farad} 50V RM2.5          & Upper                                                                         \\
+	R1                & 1   & Yageo \texttt{MF0207FTE52-820K}      & Resistor \SI{820}{\kilo\ohm} 0.6W 0207                     & Upper                                                                         \\
+	R2                & 1   & Yageo \texttt{MF0207FRE52-22K}       & Resistor \SI{22}{\kilo\ohm} 0.6W 0207                      & Upper                                                                         \\
+	R3                & 1   & Yageo \texttt{MF0207FTE52-10K}       & Resistor \SI{10}{\kilo\ohm} 0.6W 0207                      & Upper                                                                         \\
+	R4                & 1   & Yageo \texttt{MF0207FTE52-470K}      & Resistor \SI{470}{\kilo\ohm} 0.6W 0207                     & Upper                                                                         \\
+	R5                & 1   & Yageo \texttt{MF0207FTE52-18K}       & Resistor \SI{18}{\kilo\ohm} 0.6W 0207                      & Upper                                                                         \\
+	R6                & 1   & Yageo \texttt{MF0207FTE52-10K}       & Resistor \SI{10}{\kilo\ohm} 0.6W 0207                      & Upper                                                                         \\
+	R8                & 1   & Yageo \texttt{MF0207FTE52-1K}        & Resistor \SI{1}{\kilo\ohm} 0.6W 0207                       & Upper                                                                         \\
+	R9                & 1   & Yageo \texttt{MF0207FTE52-10K}       & Resistor \SI{10}{\kilo\ohm} 0.6W 0207                      & Upper                                                                         \\
+	R10               & 1   & Yageo \texttt{MF0207FTE52-3M01}      & Resistor \SI{3.01}{\mega\ohm} 0.6W 0207                    & Upper                                                                         \\
+	R11               & 1   & Yageo \texttt{MF0207FTE52-1K}        & Resistor \SI{1}{\kilo\ohm} 0.6W 0207                       & Upper                                                                         \\
+	R12               & 1   & Yageo \texttt{MF0207FTE52-3M01}      & Resistor \SI{3.01}{\mega\ohm} 0.6W 0207                    & Upper                                                                         \\
+	R13               & 1   & Yageo \texttt{MF0207FTE52-1K}        & Resistor \SI{1}{\kilo\ohm} 0.6W 0207                       & Upper                                                                         \\
+	R14               & 1   & Yageo \texttt{MF0207FTE52-3M01}      & Resistor \SI{3.01}{\mega\ohm} 0.6W 0207                    & Upper                                                                         \\
+	R15               & 1   & Yageo \texttt{MF0207FRE52-1M}        & Resistor \SI{1}{\mega\ohm} 0.6W 0207                       & Upper                                                                         \\
+	R16               & 1   & Yageo \texttt{MF0207FTE52-1K}        & Resistor \SI{1}{\kilo\ohm} 0.6W 0207                       & Upper                                                                         \\
+	R17               & 1   & Yageo \texttt{MF0207FTE52-1K}        & Resistor \SI{1}{\kilo\ohm} 0.6W 0207                       & Upper                                                                         \\
+	R18               & 1   & Yageo \texttt{MF0207FTE52-10K}       & Resistor \SI{10}{\kilo\ohm} 0.6W 0207                      & Upper                                                                         \\
+	R19               & 1   & Yageo \texttt{MF0207FTE52-100K}      & Resistor \SI{100}{\kilo\ohm} 0.6W 0207                     & Upper                                                                         \\
+	\midrule
+
+	\multicolumn{5}{@{}l}{\textit{Base Board Components (Based on physical board inspection)}}                                                                                                                  \\
+	Y1                & 1   & \texttt{TPS73615DBV}                 & 1.5V LDO Regulator                                         & Base                                                                          \\
+	Y2                & 1   & \texttt{TPS73633DBV}                 & 3.3V LDO Regulator                                         & Base                                                                          \\
+	Y3$^1$            & 1   & \texttt{TPS3307-18-EPSO-8}           & Triple Voltage Supervisor (BOD)                           & Base                                                                          \\
+	Y7                & 1   & \texttt{CD4050BNSR}                  & Hex Non-inverting Buffer/Level Shifter (SO16)              & Base                                                                          \\
+	Y8                & 1   & TI \texttt{SN74LS245N}?              & Octal Bus Transceiver (DIL20)                              & Base                                                                          \\
+	Y9                & 1   & \texttt{CD4050BNSR}                  & Hex Non-inverting Buffer/Level Shifter (SO16)              & Base                                                                          \\
+	Y10               & 1   & \texttt{CD4050BNSR}                  & Hex Non-inverting Buffer/Level Shifter (SO16)              & Base                                                                          \\
+	Y11               & 1   & \texttt{CD4050BNSR}                  & Hex Non-inverting Buffer/Level Shifter (SO16)              & Base                                                                          \\
+	Y12               & 1   & TI \texttt{SN74LS245N}?              & Octal Bus Transceiver (DIL20)                              & Base                                                                          \\
+	Y15               & 1   & \texttt{CY14B104NA-ZS45XI}           & NVRAM 4Mbit (256K x 16)                                    & Base                                                                          \\
+	Y16               & 1   & \texttt{54HCU04J}                    & Hex Inverter (Clock Buffer/Inv.)                           & Base                                                                          \\
+	Y17               & 1   & \texttt{CD4050BNSR}                  & Hex Non-inverting Buffer/Level Shifter (SO16)              & Base                                                                          \\
+	Y20               & 1   & \texttt{A3P1000-PQG208M}             & FPGA ProASIC3 1M Gates                                     & Base                                                                          \\
+	Y21               & 1   & \texttt{S29AL016J}                   & Flash ROM 16Mbit                                           & Base                                                                          \\
+	Q3, Q4, Q5        & 3   & \texttt{BCY59X}                      & NPN Transistor (TO18)                                      & Base                                                                          \\
+	Q6                & 1   & \texttt{ECS-060-20-4X-DU}            & Crystal 6MHz                                               & Base                                                                          \\
+	X1                & 1   & Harting \texttt{09195107324}         & JTAG Connector (ML10E / SEK10)                             & Base                                                                          \\
+	X2                & 1   & Test Pad?                            & Test Pad / Connector?                                      & Base                                                                          \\
+	X3                & 1   & Test Pad?                            & Test Pad / Connector?                                      & Base                                                                          \\
+	X4                & 1   & Harting \texttt{09062483201222}      & Main System Connector (MZBD48F)                            & Base                                                                          \\
+	X5, X6            & 2   & TE \texttt{5-104186-5}               & Connector to LED Board (2x5 Pin Header)                    & Base                                                                          \\
+	X7                & 1   & 1x4 Male Pin Header?                 & Connector (MA04-2?)                                        & Base                                                                          \\
+	X9                & 1   & 2x4 Male Pin Header                  & Connector to Upper Board (Mates ribbon to X8)              & Base                                                                          \\
+	X13               & 1   & TE \texttt{535541-4}                 & Connector to STM32 Board (1x6 Female Header)               & Base                                                                          \\
+	TP1-TP5           & 5   & \texttt{TPPAD1-13}                   & Test Pad                                                   & Base                                                                          \\
+	SJ1               & 1   & Solder Jumper                        & Solder Jumper (Near FPGA)                                  & Base                                                                          \\
+	D2                & 1   & Vishay \texttt{1N4148TR}             & Diode DO35-7                                               & Base                                                                          \\
+	LED4              & 1   & Wurth \texttt{150080RS75000}         & Status LED (Red?)                                          & Base                                                                          \\
+	LED5              & 1   & Wurth \texttt{150080VS75000}         & Status LED (Green?)                                        & Base                                                                          \\
+	LED6              & 1   & Wurth \texttt{150080YS75000}         & Status LED (Yellow?)                                       & Base                                                                          \\
+	C1, C2, C3, C4    & 4   & \texttt{TPSV686K025R0095}            & Capacitor Tantalum \SI{68}{\micro\farad} 25V               & Base                                                                          \\
+	C5, C6            & 2   & Vishay \texttt{VJ0805Y103KBBBE31}    & Capacitor Ceramic \SI{10}{\nano\farad} 0805                & Base                                                                          \\
+	C9                & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C10               & 1   & \texttt{08055C223J4Z2A}              & Capacitor Ceramic \SI{22}{\nano\farad} 0805                & Base                                                                          \\
+	C19, C20, C22-C25 & 7   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C26-C28           & 3   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C29, C30          & 2   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C31-C36           & 6   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C37, C38          & 2   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C39               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C40, C41          & 2   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C42               & 1   & \texttt{08055C223J4Z2A}              & Capacitor Ceramic \SI{22}{\nano\farad} 0805                & Base                                                                          \\
+	C43               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C45, C46          & 2   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C47, C48          & 2   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C49               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C50, C51          & 2   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C52, C53          & 2   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C54, C55          & 2   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C56               & 1   & \texttt{TPSV686K025R0095}            & Capacitor Tantalum \SI{68}{\micro\farad} 25V               & Base                                                                          \\
+	C57, C58          & 2   & \texttt{08055A220J4T2A}              & Capacitor Ceramic \SI{22}{\pico\farad} 0805 (Crystal Load) & Base                                                                          \\
+	C59               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C60               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	C61               & 1   & \texttt{08055C104K4T2A}              & Capacitor Ceramic \SI{100}{\nano\farad} 0805               & Base                                                                          \\
+	R20-R23           & 4   & Yageo \texttt{MF0207FTE52-1K}        & Resistor \SI{1}{\kilo\ohm} 0.6W 0207                       & Base                                                                          \\
+	R24, R25, R27     & 3   & Yageo \texttt{MF0207FTE52-10K}       & Resistor \SI{10}{\kilo\ohm} 0.6W 0207                      & Base                                                                          \\
+	R26, R28, R29     & 3   & Yageo \texttt{MF0207FTE52-18K}       & Resistor \SI{18}{\kilo\ohm} 0.6W 0207                      & Base                                                                          \\
+	R30, R31          & 2   & Yageo \texttt{MF0207FTE52-10K}       & Resistor \SI{10}{\kilo\ohm} 0.6W 0207                      & Base                                                                          \\
+	R32-R39           & 8   & Yageo \texttt{MF0207FTE52-100K}      & Resistor \SI{100}{\kilo\ohm} 0.6W 0207                     & Base                                                                          \\
+	R40-R42           & 3   & Yageo \texttt{MF0207FTE52-100K}      & Resistor \SI{100}{\kilo\ohm} 0.6W 0207                     & Base                                                                          \\
+	R44-R47           & 4   & Yageo \texttt{MF0207FTE52-100K}      & Resistor \SI{100}{\kilo\ohm} 0.6W 0207                     & Base                                                                          \\
+	R48, R49          & 2   & Yageo \texttt{MF0207FRE52-22K}       & Resistor \SI{22}{\kilo\ohm} 0.6W 0207                      & Base                                                                          \\
+	R50-R55           & 6   & Yageo \texttt{MF0207FRE52-22K}       & Resistor \SI{22}{\kilo\ohm} 0.6W 0207                      & Base                                                                          \\
+	R56-R59           & 4   & Yageo \texttt{MF0207FTE52-10K}       & Resistor \SI{10}{\kilo\ohm} 0.6W 0207                      & Base                                                                          \\
+	R74, R75          & 2   & Yageo \texttt{AC0805JR-7W10KL}       & Resistor \SI{10}{\kilo\ohm} 0805                           & Base                                                                          \\
+	R78               & 1   & Yageo \texttt{MFP-25BRD52-100K}      & Resistor \SI{100}{\kilo\ohm} 0.1\% 0.6W 0207               & Base                                                                          \\
+	R79               & 1   & Yageo \texttt{MFP-25BRD52-10K}       & Resistor \SI{10}{\kilo\ohm} 0.1\% 0.6W 0207                & Base                                                                          \\
+	R80               & 1   & Yageo \texttt{MF0207FRE52-22K}       & Resistor \SI{22}{\kilo\ohm} 0.6W 0207                      & Base                                                                          \\
+	R87               & 1   & Yageo \texttt{RC0805JR-0710RL}       & Resistor \SI{10}{\ohm} 0805                                & Base                                                                          \\
+	R91               & 1   & Yageo \texttt{RC0805JR-0710RL}       & Resistor \SI{10}{\ohm} 0805                                & Base                                                                          \\
+	R97               & 1   & Yageo \texttt{RC0805JR-0710RL}       & Resistor \SI{10}{\ohm} 0805                                & Base                                                                          \\
+	R102              & 1   & Yageo \texttt{MF0207FTE52-2K4}       & Resistor \SI{2.4}{\kilo\ohm} 0.6W (BOD Divider)            & Base                                                                          \\
+	R103              & 1   & Yageo \texttt{MF0207FTE52-4K7}       & Resistor \SI{4.7}{\kilo\ohm} 0.6W (BOD Divider)            & Base                                                                          \\
+	R104              & 1   & Yageo \texttt{MF0207FTE52-5K6}       & Resistor \SI{5.6}{\kilo\ohm} 0.6W (BOD Divider)            & Base                                                                          \\
+	R105              & 1   & Yageo \texttt{MF0207FTE52-6K8}       & Resistor \SI{6.8}{\kilo\ohm} 0.6W (BOD Divider)            & Base                                                                          \\
+
+\end{longtable}
+
+% ------------------------------------------------------------
+\section{Design Rule Check (DRC) Summary}
+\label{sec:app_drc}
+
+Design Rule Checks (DRC) were performed using the Autodesk Eagle EDA software for all revised PCB layouts. The rules enforced are a conservative superset of the constraints provided by typical PCB manufacturers, ensuring high yield and reliability. All Rev 1.0 layouts passed the defined DRC process with zero errors. The key electrical and clearance constraints that were verified are listed below:
+
+\begin{itemize}
+    \item \textbf{Layer Setup:} 4-layer stackup (Top, Ground, Power, Bottom).
+    \item \textbf{Minimum Track Width:} \texttt{8mil} (\texttt{0.2032mm}) for general signal routing.
+    \item \textbf{Minimum Track Spacing (Clearance):} \texttt{8mil} (\texttt{0.2032mm}) between copper features (track-to-track, track-to-pad).
+    \item \textbf{Minimum Drill Size:} \texttt{16mil} (\texttt{0.4mm}) for standard vias and through-holes.
+    \item \textbf{Minimum Annular Ring Width:} \texttt{6mil} (\texttt{0.1524mm}) to ensure a solid connection between a drill hole and its surrounding copper pad.
+    \item \textbf{Via Specification:}
+        \begin{itemize}
+            \item Via Drill Size: \texttt{16mil} (\texttt{0.4mm})
+            \item Via Pad Diameter: \texttt{28mil} (\texttt{0.7112mm})
+        \end{itemize}
+    \item \textbf{Polygon Isolation:} \texttt{12mil} (\texttt{0.3048mm}) for clearance between ground/power planes and signal traces.
+    \item \textbf{Solder Mask "Swell":} \texttt{2mil} (\texttt{0.0508mm}) expansion to ensure pads are fully clear of solder mask.
+\end{itemize}
+
+The successful completion of the DRC verifies that the PCB layouts are physically manufacturable and conform to established best practices for signal integrity and electrical reliability.

@@ -1,0 +1,101 @@
+% ============================================================
+% Chapter 5: Results and Discussion
+% ============================================================
+\chapter{Results and Discussion}
+\label{chap:results}
+
+This chapter presents and analyses the results obtained from the verification and validation (V\&V) activities detailed in~\Cref{chap:testing}. The primary focus is on evaluating the extent to which functional equivalence with the legacy anti-skid test-diagnosis module~\cite{rexroth1992wsp} was achieved. This involves assessing the outcomes of both component-level (Layer~1) and system-level (Layer~2) testing after a significant phase of hands-on debugging and physical rework. Furthermore, the effectiveness of the integrated diagnostic enhancements is evaluated (\Cref{sec:stm32_details}), compliance with relevant safety standards is discussed (\Cref{sec:safety_compliance}), and the management of risks and limitations is analysed (\Cref{sec:results_discussion_risk}).
+
+% ------------------------------------------------------------
+\section{Functional Equivalence and Test Outcomes}
+\label{sec:equivalence_outcomes}
+
+The central goal was to demonstrate that the retrofitted hardware, once stabilized, replicated the behaviour of the original test-diagnosis module. Achieving this state required overcoming the substantial hardware and software integration challenges detailed in \Cref{subsec:hardware_challenges}.
+
+\subsection{Layer 1: FPGA Logic and Interface Verification Results}
+\label{subsec:fpga_interface_results}
+
+Component-level verification was crucial for isolating issues at the hardware and HDL level before system integration:
+\begin{itemize}
+	\item \textbf{\gls{vhdl} Simulation Verification:} Extensive simulations using ModelSim ME were instrumental in achieving logical correctness. Initial discrepancies between expected and simulated behaviour led to key fixes in the \gls{hdl} code, such as correcting the logic for the \texttt{NVRAM\_ble} pin, which was a critical blocker~\cite{savchuk2025}. Once corrected, simulations confirmed that memory interface timings met specifications, peripheral logic produced expected outputs, and watchdog interaction was correct, as illustrated in the simulation capture in \Cref{fig:watchdog_reaction}.
+	\item \textbf{Hardware Timing and Physical Verification:} Oscilloscope measurements on the reworked Rev~1.0 hardware validated real-world timing aspects. More importantly, this phase included the extensive physical rework of the \gls{fpga}, where approximately 40 pins were re-soldered to achieve a stable hardware platform~\cite{savchuk2025}. Post-rework, timing measurements of the watchdog and frequency sweep confirmed correct operation, including a measured watchdog service period of $\Delta t = 3.85$\,s at $V = 3.36$\,V (against a nominal ${\approx}\,5$\,s derived from the external watchdog's RC timing; the deviation is consistent with the tolerances of the timing components and comparator threshold, and with the idealised nature of the \gls{vhdl} timing model) and a frequency sweep from \SI{850}{\hertz} to \SI{1550}{\hertz}.
+	\item \textbf{Basic Connectivity (\gls{jtag}):} Post-assembly~\gls{jtag} checks were used to confirm basic connectivity and successful programming. These checks, however, could not detect the poor quality of the solder joints, which only became apparent through functional testing and subsequent physical inspection.
+\end{itemize}
+The Layer 1 results underscore that while simulation is vital for logical correctness, it cannot replace the need for meticulous physical hardware verification and rework, especially for prototype hardware.
+
+\subsection{Layer 2: Integrated System Scenario Testing Results}
+\label{subsec:system_scenario_results}
+
+Fixture-based testing was the ultimate arbiter of functional equivalence and proved essential for uncovering system-level integration bugs.
+\begin{itemize}
+	\item \textbf{Fault Memory Cycle Functionality:} After resolving the \texttt{NVRAM\_ble} logic error and the communication protocol mismatch (related to multi-pin tests), the system consistently passed all defined fault handling scenarios, as confirmed by follow-on testing~\cite{savchuk2025}. Faults were correctly triggered, displayed, stored in NVRAM across power cycles, and cleared via the \enquote{Lösch} command, matching the legacy fault table~\cite[Blatt~20/25]{rexroth1992wsp}.
+	\item \textbf{Self-Test Functionality:} The legacy self-test sequence, including the correct display codes and activation of the frequency sweep, was successfully executed via fixture commands.
+	\item \textbf{User Interface Equivalence:} Manual interaction confirmed that system behaviour in response to simulated button presses precisely matched the original system manual.
+	\item \textbf{\gls{stm32} Diagnostics Logging:} After re-routing the SWD pins and debugging the STM32 firmware state machine~\cite{savchuk2025}, the diagnostics path was validated. Error events were correctly transmitted from the \gls{fpga} and logged by the \gls{stm32} subsystem, though this was primarily tested with the SD card unmounted due to stability issues with that peripheral (see \Cref{subsec:limitations}). Log data was successfully streamed via the USB virtual COM port.
+\end{itemize}
+These system-level results, achieved after iterative debugging, provide strong evidence that the refined hardware achieves behavioural functional equivalence.
+
+\subsection{Discussion on Equivalence Verification}
+\label{subsec:equivalence_discussion}
+
+The central question of whether functional equivalence has been demonstrated can be answered in the affirmative for the safety-critical core of the system. Confidence in this conclusion is based on the principle of \textbf{Convergence of Evidence}, a fundamental concept in the V\&V of safety-critical systems. This principle states that the highest level of confidence is achieved when multiple independent verification methods lead to the same conclusion.
+
+In this project, three independent lines of evidence converge:
+\begin{enumerate}
+    \item \textbf{Logical Correctness (VHDL Simulation):} Layer 1 simulations demonstrated that the newly designed HDL logic correctly replicates the specified functions and timings of the legacy components.
+    \item \textbf{Physical Correctness (Hardware Measurement):} As documented in the V\&V plan, oscilloscope measurements were performed to confirm critical timing parameters on the physical hardware.
+    \item \textbf{Behavioral Equivalence (System Scenario Testing):} Layer 2 tests on the fixture demonstrated that the integrated system responds to external stimuli in a manner that is identical to the behavior documented in the original system manual, especially under fault conditions.
+\end{enumerate}
+
+The convergence of these three independent lines of evidence forms a coherent chain of reasoning and provides strong evidence of functional equivalence for the emulated legacy system. The known limitations (see \Cref{subsec:limitations}) affect only the new, non-safety-critical diagnostic features and do not invalidate the equivalence of the safety core.
+
+% ------------------------------------------------------------
+\section{Safety Compliance and Standards Conformance}
+\label{sec:safety_compliance}
+
+The project's methodology and artefacts were developed to support a future safety certification process.
+\begin{description}
+	\item[Lifecycle Alignment:] The overall approach aligns with the V-model principles of~\gls{iec61508}~\cite{iec61508_2010}, \gls{en50129}:2018~\cite{en50129_2018} (hardware safety), and~\gls{en50716}:2023~\cite{en50716_2023} (software and firmware). The iterative debugging and documentation of fixes provides a clear audit trail for change management as required by these standards.
+	\item[Evidence for Verification Objectives:] The generated artefacts (\Cref{sec:verification_artefacts}) provide the necessary evidence for V\&V. The detailed logs and debug reports from the follow-on work~\cite{savchuk2025} provide practical evidence of anomaly resolution, which is a key part of any safety lifecycle.
+	\item[Traceability (Implicit):] The structured testing provides implicit traceability from legacy requirements to test cases and results. For formal certification, these links would need to be captured in explicit traceability matrices. The checklist in~\Cref{chap:safety_checklist} provides a step towards this.
+\end{description}
+
+\subsection{Lifecycle Alignment and the V-Model}
+\label{subsec:v_model_mapping}
+
+The project's approach closely follows the principles of the V-model, the lifecycle model commonly used for safety-critical development and reflected in the safety lifecycles of IEC 61508 and EN 50716. As illustrated in \Cref{fig:v_model_mapping}, the two layers of the verification strategy directly map to the right side of the V-model.
+
+\begin{figure}[htbp]
+     \centering
+     \includegraphics[width=0.9\textwidth]{v_model_mapping.png}
+     \caption[Mapping of the Test Strategy to the V-Model]{Mapping the two-layer test strategy to the verification and validation phases of the V-model.}
+     \label{fig:v_model_mapping}
+\end{figure}
+
+The Layer 1 tests (unit and integration tests) verify the correct implementation of the individual design modules at the code and hardware level. The Layer 2 tests (system validation) then validate the fully integrated system against the original functional requirements. This structured approach ensures traceability and provides the necessary evidence for each phase of the development lifecycle, as required by the standards. Prior work by Ayoub and Leyer implicitly followed this principle; this research has made the process explicit and formalized it.
+
+The project successfully demonstrates how to build a V\&V evidence base for a retrofit, establishing a solid foundation for a formal safety assessment. This addresses the second research question (\Cref{sec:research_questions}) by identifying the necessary frameworks and artifacts.
+
+% ------------------------------------------------------------
+\section{Discussion, Risk Management, and Limitations}
+\label{sec:results_discussion_risk}
+
+\subsection{Interpretation and Risk Management}
+The verification outcomes confirm the viability of the \gls{fpga}-based retrofit approach. The project effectively managed several key risks:
+\begin{itemize}
+    \item \textit{Hardware Malfunction:} Risks from hangs or power anomalies were mitigated by the verified hardware watchdog and \gls{bod} circuits. The critical risk of manufacturing defects (poor soldering) was identified and mitigated through extensive rework~\cite{savchuk2025}.
+    \item \textit{Diagnostic Interference:} Galvanic isolation of the \gls{stm32} subsystem was verified, ensuring separation of safety and non-safety domains.
+    \item \textit{Functional Deviation:} This primary risk was managed through the comprehensive testing and debugging cycle, which forced convergence toward legacy behavior.
+\end{itemize}
+
+\subsection{Limitations and Subsequent Findings}
+\label{subsec:limitations}
+A key outcome of rigorous project hand-overs and continued development is the identification of limitations and latent bugs. The `testkartentester24` follow-on project~\cite{savchuk2025} identified several unresolved issues in the system, which are critical to document for academic honesty and to guide future work:
+\begin{itemize}
+	\item \textbf{SD Card Storage (FatFS Timing Starvation):} The instability of the SD card interface is caused by firmware timing starvation. The firmware re-mounts and synchronises the filesystem on every write cycle; the resulting filesystem operations introduce a blocking delay on the order of tens to hundreds of milliseconds. Combined with delays in the main execution loop, this overhead starves the SPI receive-interrupt re-arming window, triggering data overruns. Streaming via the USB CDC virtual COM port instead bypasses the SDIO interface and avoids the blocking, resolving the issue~\cite{savchuk2025}.
+	\item \textbf{SPI Payload Truncation and Alignment:} The VHDL SPI master correctly transmits a 32-bit diagnostic frame (consisting of a 2-bit event-type prefix, 6-bit buttons, and 24-bit error vector). However, the STM32 C firmware is configured to receive only 16 bits per transaction (\texttt{HAL\_SPI\_Receive\_IT} buffer size is set to 2). This size configuration mismatch truncates the payload and leaves the remaining 16 bits unread, triggering a receiver buffer overrun (\texttt{OVR} flag in the SPI status register) and causing frame misalignment on subsequent transfers~\cite{savchuk2025}.
+	\item \textbf{Long-Term Reliability:} While the prototype is now functionally stable on the test bench after significant rework, its long-term reliability is unproven. The reliance on manual soldering for critical high-pin-count components is not suitable for a production environment. A new batch of professionally manufactured and assembled boards would be required for any deployment or accredited environmental testing.
+\end{itemize}
+
+\subsection{Economic and Sustainability Benefits}
+Despite the practical challenges, this board-level retrofit offers clear sustainability and economic advantages over a full system replacement. By enabling the reuse of the existing system enclosure and main connectors, and by extending the life of the overall system, it aligns with the broader rail-sector sustainability rationale for refurbishment~\cite{carbon_infra_uic_2016} (\Cref{subsec:operational_economic_drivers}).

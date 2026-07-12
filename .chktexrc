@@ -1,0 +1,21 @@
+# .chktexrc
+# Retrofitted Anti-Skid Systems
+# Suppressed warnings explained:
+# See: https://www.nongnu.org/chktex/ChkTeX.pdf
+
+CmdLine
+{
+    -n1   # Command terminated with space (intentional in macro definitions)
+    -n6   # No italic correction (\/) before period (cosmetic, handled by microtype)
+    -n8   # Wrong length of dash (German em-dash conventions differ)
+    -n9   # '\%' is not a comment character (false positive on siunitx \%)
+    -n10  # Solo '\\' (intentional line breaks in tabular/align environments)
+    -n12  # Interword spacing ('\ ') after abbreviation (intentional)
+    -n13  # Intersentence spacing ('\@') after abbreviation (false positives)
+    -n17  # Number of 'item' in list doesn't match expected (flexible lists)
+    -n18  # Wrong length of dash may be em-dash (German typography)
+    -n24  # Delete this space to maintain correct pagereferences (false positive)
+    -n29  # Column specification in tabular (booktabs @{} triggers this)
+    -n36  # Mathmode still on at end of LaTeX input (tikz/amsmath constructs)
+    -n38  # No matching 'end' found (beamer frame/note constructs)
+}

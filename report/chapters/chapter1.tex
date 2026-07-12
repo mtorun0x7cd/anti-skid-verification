@@ -1,0 +1,78 @@
+% ============================================================
+% Chapter 1: Introduction
+% ============================================================
+\chapter{Introduction}
+\label{chap:introduction}
+
+Modernising ageing safety-critical systems, particularly in sectors like public transportation, presents significant challenges. Operators must balance the need for enhanced safety and reliability against the often prohibitive costs and environmental impact of complete system replacement~\cite{carbon_infra_uic_2016}. Retrofitting existing hardware with modern electronics offers a potentially more sustainable and cost-effective solution, provided that \textit{functional equivalence} with the original system can be rigorously demonstrated and certified according to contemporary, increasingly stringent safety standards (e.g.,~\gls{iec61508}~\cite{iec61508_2010}, \gls{en50716}~\cite{en50716_2023}). This research report addresses these challenges through a case study focused on retrofitting a legacy anti-skid protection module from European public transportation. This particular anti-skid system~\cite{rexroth1992wsp} serves as a pertinent case study due to its widespread historical deployment across various European rail networks, the documented challenges associated with its component obsolescence~\cite{ayoub2014}, and the availability of foundational reverse-engineering efforts~\cite{ayoub2014, leyer2023}, making it an ideal platform for investigating modern retrofitting and verification methodologies grounded in established practices~\cite{jones2004, watson1996, losada2021}.
+
+% ------------------------------------------------------------
+\section{Purpose}
+\label{sec:purpose}
+
+The specific system under investigation utilises components based on the obsolete Intel~\gls{mcs48} microcontroller family. Foundational work by Ayoub demonstrated the feasibility of emulating the 8035~\gls{cpu} from the system's comparator (V-) card using an~\gls{fpga}~\cite{ayoub2014}. Building upon this conceptual groundwork, Leyer~\cite{leyer2023} extended the emulation concept to the system's test-diagnosis board, migrating its core logic (based on an 8048 variant) to an Actel \texttt{A3P1000}~\gls{fpga} (a Flash-based device) and integrating an~\gls{stm32}-based logger (\texttt{STM32F401RET6}, an Arm\textsuperscript{\textregistered}~Cortex\textsuperscript{\textregistered}-M4 based microcontroller) for enhanced diagnostics. However, Leyer's prototype hardware (Rev~0.0), while conceptually validated, required further refinement and debugging to become a robust and fully operational platform, as documented in~\cite[Section~9.2]{leyer2023} and confirmed by subsequent integration work.
+
+This research, therefore, aims to complete and validate this retrofit initiative while also establishing a reusable verification strategy suitable for safety-critical systems. It has three primary, interconnected goals:
+\begin{enumerate}[label=\arabic*.]
+	\item Finalise the Hardware Retrofit: Produce a corrected Revision~1.0 set of~\glspl{pcb}, assemble fully functional hardware incorporating the~\gls{fpga} emulation (\texttt{A3P1000}) and~\gls{stm32} diagnostics (\texttt{STM32F401RET6}), and meticulously restore all legacy self-test functionalities essential for operational validation.
+	\item Establish Verifiable Compliance: Generate comprehensive verification and certification artefacts that rigorously demonstrate the retrofitted system's functional equivalence to the original design~\cite{rexroth1992wsp} and its compliance with current functional safety standards (including~\gls{iec61508}, \gls{en50129}, \gls{en50155}, \gls{en50716}, and~\gls{ieee1012}).
+	\item Develop a Transferable Methodological Framework: Define and document the structured testing framework used for verification and validation, assessing its potential for broader application in the retrofitting of other safety-critical systems beyond the specific anti-skid case study.
+\end{enumerate}
+
+% ------------------------------------------------------------
+\section{Context and Motivation}
+\label{sec:context}
+
+Anti-skid protection, commonly referred to as~\gls{wsp}, is a long-established safety function on European passenger rolling stock, governed by UIC~541-05 and the more recent~\gls{en15595}~\cite{en15595_2018}. The obsolescence of original components, like the~\gls{mcs48}~\glspl{ic}, forces operators to choose between expensive full system redesigns or targeted retrofitting strategies~\cite{guzman2011obsolescence}. As established by Ayoub~\cite{ayoub2014} and Leyer~\cite{leyer2023}, \gls{fpga} emulation offers a path forward for specific modules but requires careful validation to demonstrate functional equivalence.
+
+The motivation for retrofitting extends beyond merely overcoming obsolescence: refurbishment can defer capital expenditure and reduce the embodied emissions associated with manufacturing entirely new subsystems, consistent with the broader rail-sector sustainability rationale~\cite{carbon_infra_uic_2016}. Furthermore, successful, certified retrofits are increasingly common in the rail industry. Notable examples include the adaptive~\gls{wsp} system upgrade for the~\gls{sncf} Regiolis fleet, certified against~\gls{en15595}~\cite{en15595_2018, wabtec_wsp_cert_2022}, and extensive brake controller and traction system upgrades on UK train fleets like the Class~455 units~\cite{rg_class455_upgrade_2013}. These projects demonstrate the real-world feasibility and benefits of modernising safety-critical electronics through carefully managed retrofits.
+
+% ------------------------------------------------------------
+\section{Research Questions}
+\label{sec:research_questions}
+
+Given this context of technical feasibility, economic incentives, sustainability goals, and demanding regulatory requirements for safety-critical systems, this research seeks to answer the following central questions:
+
+\begin{quote}
+	\textit{How can the functional equivalence of retrofitted safety-critical hardware be rigorously demonstrated through a structured testing program compliant with current functional safety standards?}
+
+	\textit{What verification frameworks, metrics, and artifacts are indispensable—both for the specific anti-skid case study and for potential transferability to other safety-critical sectors—to economically achieve and maintain long-term certification?}
+\end{quote}
+
+These questions drive the investigation into developing not just a working hardware replacement but also a robust, repeatable, and certifiable verification methodology.
+
+% ------------------------------------------------------------
+\section{Objectives and Scope}
+\label{sec:objectives_scope}
+
+To address the research questions outlined above, this study pursues the following specific objectives within a defined scope:
+
+\begin{description}
+	\item[Retrofit Implementation] Complete the physical replacement of the legacy Intel~\gls{mcs48} based test-diagnosis board controller with a modern~\gls{fpga}-based core (\texttt{Actel A3P1000}) accurately emulating the original~\gls{cpu} and~\gls{io} logic, augmented by an integrated~\gls{stm32} diagnostics subsystem (\texttt{STM32F401RET6}).
+	\item[Functional Equivalence Verification] Apply a rigorous, multi-layered testing strategy, comprising (1)~\textit{Component \& Interface tests} (deterministic~\gls{vhdl} simulation, boundary-scan, hardware timing measurements) and (2)~\textit{System-Level tests} (scenario-based, non-deterministic on a dedicated fixture~\cite{dolata2023}), incorporating systematic fault-handling checks based on legacy system documentation~\cite{rexroth1992wsp} and potentially elements inspired by formal verification concepts~\cite{formal_verification_rail_2023, watson1996}. The goal is to ensure the new design precisely replicates the legacy system's behaviour under both normal and fault conditions. Testing methodologies draw inspiration from established practices~\cite{watson1996} and surveys of relevant techniques~\cite{ziade2004faultinjection}.
+	\item[Enhanced Diagnostic Validation] Validate the integrated~\gls{stm32} module's capabilities for real-time monitoring, comprehensive error logging (timestamped via~\gls{rtc}, stored on~\gls{sd}~card), and execution of legacy self-tests, drawing on principles demonstrated in data-driven railway diagnostics~\cite{chen2020diagnostics}.
+	\item[Comprehensive Testing Framework Development] Establish a robust testing framework combining targeted simulations (\gls{vhdl}~testbenches), physical testing on a dedicated test fixture~\cite{dolata2023}, and comparisons against benchmarks derived from~\gls{hil} methodologies used in industry~\cite{hil_rail_suspension_2023, wabtec_wsp_cert_2022, zhou_wu_2020}. This includes environmental stress considerations based on relevant standards (\gls{en50155}:2021~\cite{en50155_2021} and~\gls{en61373}:2010~\cite{en61373_2010}).
+	\item[Compliance Demonstration and Certification Pathway] Ensure adherence to updated safety and certification standards, primarily~\gls{iec61508}~Ed.~2~\cite{iec61508_2010}, \gls{en50129}:2018~\cite{en50129_2018}, \gls{en50155}:2021~\cite{en50155_2021}, and the software-focused~\gls{en50716}:2023~\cite{en50716_2023}. Verification processes will align with~\gls{ieee1012}:2024~\cite{ieee1012_2024}. The methodology aims to produce documentation and evidence suitable for a formal safety certification process, using real-world examples like the Wabtec/\gls{sncf} project as a benchmark~\cite{wabtec_wsp_cert_2022}.
+	\item[Risk Mitigation and Future-Proofing] Implement strategies to mitigate technical and operational risks associated with the retrofit. This includes leveraging redundancy where feasible~\cite{latifshabgahi2009redundancy} (e.g., watchdog, \gls{bod}), using modular~\gls{pcb} design principles~\cite{jones2004}, and selecting components with consideration for long-term availability, thereby ensuring the system's reliability and adaptability.
+\end{description}
+
+The scope is focused on the board-level retrofit of the legacy test-diagnosis module and the development of a verification methodology suitable for demonstrating functional equivalence and compliance for this type of safety-critical component. While full system-level~\gls{hil} testing rigs were beyond the project's resources, the testing framework is designed to align with~\gls{hil} principles to facilitate future integration.
+
+% ------------------------------------------------------------
+\section{Outline of the Report}
+\label{sec:outline}
+
+This report is structured as follows to systematically address the research objectives:
+
+\begin{description}
+	\item[\Cref{chap:introduction} (This Chapter):] Introduces the purpose, context, motivation, research questions, objectives, scope, and outline of the study.
+	\item[\Cref{chap:background_lit_review}:] Provides essential background, detailing the specific prior work by Leyer~\cite{leyer2023} and Ayoub~\cite{ayoub2014}, discussing the practical challenges encountered in this project, reviewing relevant literature on reverse engineering~\cite{wang2010}, obsolescence management~\cite{guzman2011obsolescence}, functional equivalence verification strategies, industry retrofitting practices~\cite{greater_anglia_refurb_2018, wabtec_wsp_cert_2022}, applicable safety standards (\gls{iec61508}~\cite{iec61508_2010}, \gls{en50129}~\cite{en50129_2018}, \gls{en50716}~\cite{en50716_2023}, etc.), including FPGA-specific considerations, and pertinent design principles~\cite{jones2004, midya2013emc}.
+	\item[\Cref{chap:architecture}:] Details the technical implementation of the retrofitted system architecture, focusing on the~\gls{fpga}-based emulation core, the~\gls{stm32} diagnostics subsystem, communication interfaces, and the modular~\gls{pcb} design incorporating enhanced~\gls{emi}/\gls{emc} mitigation and redundancy measures~\cite{midya2013emc}.
+	\item[\Cref{chap:testing}:] Describes the comprehensive, multi-layered testing methodology employed, justifying its selection and scientific basis. This includes deterministic testing (simulation, timing), fixture-based scenario testing~\cite{dolata2023}, fault-handling verification approach~\cite{ziade2004faultinjection}, environmental stress test considerations (\gls{en50155}~\cite{en50155_2021}, \gls{en61373}~\cite{en61373_2010}), alignment with~\gls{hil} benchmarks~\cite{hil_rail_suspension_2023, zhou_wu_2020}, formal verification concepts~\cite{formal_verification_rail_2023}, test coverage concepts, process control aspects, and specifically addresses strategies for the verification of modifications according to EN 50716.
+	\item[\Cref{chap:results}:] Presents and discusses the results obtained from the verification and validation activities. It focuses on demonstrating functional equivalence, evaluates the effectiveness of the diagnostic features, discusses compliance with the targeted safety standards linking evidence to requirements, and integrates evidence from comparable real-world certification efforts~\cite{wabtec_wsp_cert_2022}. Risk management strategies, limitations, and long-term reliability considerations are also addressed, including cost/sustainability aspects.
+	\item[\Cref{chap:conclusion}:] Summarises the key findings, technical contributions, and demonstrated readiness for certification. It reflects on lessons learned during the project and suggests concrete directions for future work, particularly regarding further~\gls{hil} integration, enhanced diagnostics, and the potential for generalising the developed methodology.
+	\item[\Cref{chap:safety_checklist}:] Provides a detailed safety checklist derived from the project's verification activities and applicable standards. It also refers to the sample “Prüfzertifikat” template provided in~\Cref{app:pruefzertifikat}, reflecting modern certification practices and serving as a practical guide for potential future re-certification efforts.
+	\item[Appendices (\Cref{app:schematics} through \Cref{app:pruefzertifikat}):] Contain supplementary materials including detailed schematic diagrams, \glspl{bom}, representative test logs, simulation captures, \gls{yaml}~test case definitions, \gls{vhdl}~testbenches snippets, and the full Prüf-Zertifikat template.
+\end{description}
+
+To fully understand the context and challenges addressed by the objectives outlined above, the following chapter delves into the specific project background, relevant literature, and applicable standards.

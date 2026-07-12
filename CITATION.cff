@@ -1,0 +1,53 @@
+cff-version: 1.2.0
+title: >-
+  Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for
+  European Public Transportation
+message: >-
+  If you use this work, please cite the accompanying paper (see
+  preferred-citation below).
+type: software
+abstract: >-
+  A two-layer verification methodology for demonstrating functional equivalence
+  in safety-critical FPGA retrofits of legacy railway anti-skid (wheel-slide
+  protection) modules. It combines deterministic component and interface testing
+  (VHDL simulation, JTAG boundary scan, hardware timing measurement) with
+  scenario-based system-level validation, and is mapped to IEC 61508,
+  EN 50129, EN 50716, and IEEE 1012. Research conducted at TH Köln (Cologne
+  University of Applied Sciences).
+authors:
+  - given-names: Mert
+    family-names: Torun
+    email: info@mtorun0x7cd.com
+    affiliation: TH Köln
+version: 1.0.0
+date-released: 2026-07-02
+license: CC-BY-NC-ND-4.0
+repository-code: https://github.com/mtorun0x7cd/anti-skid-verification
+url: https://github.com/mtorun0x7cd/anti-skid-verification
+keywords:
+  - safety-critical
+  - functional-equivalence
+  - fpga
+  - retrofit
+  - verification-validation
+  - iec-61508
+  - ieee-1012
+  - railway
+  - vhdl
+  - reproducible-research
+preferred-citation:
+  type: conference-paper
+  title: >-
+    Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for
+    European Public Transportation: A Hybrid Two-Layer Verification Methodology
+  authors:
+    - given-names: Mert
+      family-names: Torun
+      email: info@mtorun0x7cd.com
+      affiliation: TH Köln
+  year: 2026
+  collection-title: Kölner Beiträge zur technischen Informatik
+  issn: 2193-570X
+  conference:
+    name: VIMS 2026
+  status: in-press

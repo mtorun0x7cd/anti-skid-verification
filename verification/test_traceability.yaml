@@ -1,0 +1,44 @@
+---
+project: Retrofitted Anti-Skid System
+document_type: Requirements-to-Test Traceability Matrix
+standard: IEC 61508
+version: 1.0.0
+
+modules:
+  - name: SPI_Master
+    requirements:
+      - req_id: REQ-HDL-SPI-001
+        description: "The SPI Master shall initiate a transmission cycle every 500 ms."
+        tests:
+          - test_id: L2-TS-SPI-001
+            description: "Verify transmission frequency."
+            status: PASS
+      - req_id: REQ-HDL-SPI-002
+        description: "The SPI Master shall transmit a 32-bit diagnostic frame (consisting of a 2-bit prefix, 6-bit button state, and 24-bit error code)."
+        tests:
+          - test_id: L2-TS-SPI-002
+            description: "Verify 32-bit transmission framing in simulation."
+            status: PASS
+      - req_id: REQ-HDL-SPI-003
+        description: "The STM32 diagnostic receiver shall receive the full 32-bit diagnostic frame without truncation."
+        tests:
+          - test_id: L2-TS-SPI-003
+            description: "Verify 32-bit payload reception at the microcontroller."
+            status: PASS
+            note: "Resolved by resizing the SPI reception buffer configuration to 32 bits (4 bytes) in the STM32 firmware."
+
+  - name: Data_Logger
+    requirements:
+      - req_id: REQ-FW-LOG-001
+        description: "The logger shall write received packets to the SD card."
+        tests:
+          - test_id: L2-TS-LOG-001
+            description: "Verify SD card write capability using FatFS."
+            status: PASS
+            note: "Resolved by initializing the filesystem mount once, removing loop-level mount/unmount calls, and reducing heartbeat logging frequency."
+      - req_id: REQ-FW-LOG-002
+        description: "The logger shall stream data over USB as a fallback."
+        tests:
+          - test_id: L2-TS-LOG-002
+            description: "Verify USB streaming."
+            status: PASS

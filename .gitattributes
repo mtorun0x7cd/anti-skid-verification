@@ -1,0 +1,25 @@
+# Normalize line endings on commit; let Git detect text vs binary.
+* text=auto eol=lf
+
+# Text sources
+*.tex      text
+*.bib      text
+*.cls      text
+*.bst      text
+*.sty      text
+*.cfg      text
+*.ist      text
+*.md       text
+*.yml      text
+*.yaml     text
+*.cff      text
+*.svg      text
+.latexmkrc text
+.chktexrc  text
+
+# Binary assets
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.eps  binary

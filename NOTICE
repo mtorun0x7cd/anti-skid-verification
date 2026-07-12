@@ -1,0 +1,19 @@
+anti-skid-verification -- NOTICE
+
+Copyright (c) 2025-2026 Mert Torun, M.Sc. (mtorun0x7cd) <info@mtorun0x7cd.com>
+
+The works authored by Mert Torun in this repository -- the IEEE paper, the
+research report, the presentation and the handout, the verification artefacts,
+all figures, and supporting text -- are licensed under the Creative Commons
+Attribution-NonCommercial-NoDerivatives 4.0 International License
+(CC BY-NC-ND 4.0). The full license text is in the LICENSE file, or at
+https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+Third-party components distributed with this repository are licensed separately
+and are NOT covered by the above license:
+
+  - paper/IEEEtran.cls and paper/IEEEtran.bst -- LaTeX Project Public License
+    (LPPL), by Michael Shell and the IEEEtran project.
+
+The OpenCores `t48` core referenced by this work is licensed under GPL-2.0 and
+is NOT redistributed in this repository.

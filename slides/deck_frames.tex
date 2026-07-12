@@ -1,0 +1,237 @@
+% Frames for the VIMS 2026 deck. Shared by presentation / notes / handout builds.
+
+% ---- Title ---------------------------------------------------------------
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ---- Motivation ----------------------------------------------------------
+\begin{frame}{Motivation: ageing safety-critical electronics}
+  \begin{itemize}
+    \item Anti-skid (wheel-slide protection) modules in European urban rail depend on the obsolete Intel MCS-48 microcontroller family.
+    \item As these parts become unobtainable, operators face a choice:
+      \begin{itemize}
+        \item full system replacement --- expensive; or
+        \item targeted \emph{board-level retrofit} --- cheaper and lower-carbon.
+      \end{itemize}
+    \item The retrofit is admissible only if \alert{functional equivalence} with the original is demonstrated under contemporary safety standards.
+  \end{itemize}
+\end{frame}
+
+% ---- The gap -------------------------------------------------------------
+\begin{frame}{The verification gap}
+  \begin{itemize}
+    \item Prior work covers \emph{formal verification of new} safety-critical designs and \emph{hardware-in-the-loop} testing of complete braking systems.
+    \item No established methodology exists for verifying functional equivalence \alert{at the board level} in legacy-to-FPGA retrofit scenarios.
+  \end{itemize}
+  \vfill
+  \begin{block}{Research question}
+    How can functional equivalence in safety-critical hardware retrofits be rigorously demonstrated through structured, standards-aligned verification?
+  \end{block}
+\end{frame}
+
+% ---- Contributions -------------------------------------------------------
+\begin{frame}{Contributions}
+  \begin{enumerate}
+    \item \textbf{A verification blind spot.} Component-level (white-box) testing is blind to physical-layout defects and runtime overheads; system-level (black-box) testing is blind to latent internal state. Neither paradigm alone is sufficient.
+    \item \textbf{A layered evidence-convergence methodology.} A standards-aligned (IEC~61508 / EN~50716) two-layer framework, structured around the V-model, that closes the blind spot.
+    \item \textbf{Empirical validation.} A taxonomy of five integration defects discovered on a real railway module, each caught by exactly one layer.
+  \end{enumerate}
+\end{frame}
+
+% ---- Architecture --------------------------------------------------------
+\begin{frame}{The retrofit: dual-processor architecture}
+  \begin{columns}[T]
+    \begin{column}{0.56\textwidth}
+      \begin{itemize}\small
+        \item \textbf{Safety core:} Actel A3P1000 flash FPGA emulating the MCS-48 (adapted OpenCores \texttt{t48} core) and running the \emph{original} \SI{2}{\kilo\byte} firmware from external Flash.
+        \item \textbf{Diagnostics:} STM32F401RET6, \alert{galvanically isolated} via four SFH601-3 optocouplers and independent DC/DC.
+        \item Independent watchdog and brown-out supervision; four-PCB modular design.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \centering
+      \begin{tikzpicture}[font=\scriptsize, node distance=4mm,
+        box/.style={draw, rounded corners=2pt, minimum width=2.7cm, minimum height=8mm, align=center}]
+        \node[box, fill=ieeeblue!12] (fpga) {FPGA (A3P1000)\\MCS-48 emulation};
+        \node[box, fill=accentteal!15, below=of fpga] (stm) {STM32F401RET6\\diagnostics};
+        \draw[-{Stealth[length=2mm]}, very thick, densely dashed, red!70!black]
+          (fpga) -- node[right=1pt]{\,isolated SPI} (stm);
+        \node[below=1mm of stm, text=red!70!black] {\itshape galvanic boundary};
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ---- Methodology ---------------------------------------------------------
+\begin{frame}{Two-layer methodology mapped to the V-model}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item \textbf{Layer 1 --- Component \& Interface.} White-box, deterministic: does each artefact meet its specification?
+        \item \textbf{Layer 2 --- System-Level.} Black-box, scenario-based: does the integrated system reproduce legacy behaviour?
+      \end{itemize}
+      \medskip
+      Both map to the right arm of the V-model; together they span structural \emph{and} functional coverage.
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \centering
+      \begin{tikzpicture}[font=\scriptsize, scale=0.8, every node/.style={transform shape},
+        b/.style={draw, rounded corners=2pt, minimum width=1.8cm, minimum height=5mm, align=center}]
+        \node[b, fill=red!12] (sr) at (0,2) {System Req.};
+        \node[b, fill=yellow!18] (md) at (1.1,0.4) {Module design};
+        \node[b, fill=gray!18] (im) at (2.2,-0.6) {Impl.};
+        \node[b, fill=green!18] (ut) at (3.3,0.4) {Unit/Int.\ (L1)};
+        \node[b, fill=ieeeblue!18] (sv) at (4.4,2) {System val.\ (L2)};
+        \draw[-{Stealth[length=1.5mm]}] (sr)--(md); \draw[-{Stealth[length=1.5mm]}] (md)--(im);
+        \draw[-{Stealth[length=1.5mm]}] (im)--(ut); \draw[-{Stealth[length=1.5mm]}] (ut)--(sv);
+        \draw[{Stealth[length=1.5mm]}-{Stealth[length=1.5mm]}, densely dashed, blue!50!black] (sr)--(sv);
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ---- Layer 1 -------------------------------------------------------------
+\begin{frame}{Layer 1 --- deterministic component verification}
+  \begin{itemize}
+    \item \textbf{VHDL simulation} (ModelSim ME): MCS-48 core, memory-interface timing against datasheets, peripheral logic, watchdog interaction.
+    \item \textbf{JTAG boundary scan} (IEEE~1149.1): FPGA identification, pin connectivity, isolation of solder defects --- without running firmware.
+    \item \textbf{Oscilloscope measurement:} watchdog service period and the frequency sweep (\SI{850}{\hertz}--\SI{1550}{\hertz}) on real hardware.
+  \end{itemize}
+  \medskip
+  \footnotesize Bridges simulation-proven logic to physical behaviour (RC tolerances, crystal accuracy, signal integrity).
+\end{frame}
+
+% ---- Layer 2 -------------------------------------------------------------
+\begin{frame}[fragile]{Layer 2 --- fixture-based system validation}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \begin{itemize}\small
+        \item Dedicated fixture (\emph{Testkartentester}) + STM32 Nucleo + Python.
+        \item Machine-parseable \textbf{YAML} scenarios; implicit traceability to legacy requirements.
+        \item Covers fault-memory cycles, self-test + sweep, button equivalence, power-cycle stability, diagnostic SPI.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \scriptsize
+      \begin{semiverbatim}
+- name: Geber 3 - I
+  pin_sets: \{18z: 1, 24d: 0\}
+  expected_err_code: "31"
+  expected_err_seq: "03 31 09"
+  del: False
+      \end{semiverbatim}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ---- Blind spot ----------------------------------------------------------
+\begin{frame}{The diagnostic blind spot}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \textbf{Layer 1 (white-box) is blind to}
+      \begin{itemize}\small
+        \item physical-layout defects;
+        \item real-time integration overheads of decoupled modules.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \textbf{Layer 2 (black-box) is blind to}
+      \begin{itemize}\small
+        \item latent internal state (e.g.\ an inactive memory masked by cache);
+        \item root causes behind the board boundary.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \vfill
+  \begin{center}\alert{Relying on either paradigm in isolation can compromise safety-critical assurance.}\end{center}
+\end{frame}
+
+% ---- Bug taxonomy --------------------------------------------------------
+\begin{frame}{Empirical evidence: five integration defects}
+  \centering\small
+  \begin{tabular}{@{}llcl@{}}
+    \toprule
+    \textbf{ID} & \textbf{Class} & \textbf{Layer} & \textbf{Detected by} \\
+    \midrule
+    B1 & Logical   & L1 & Simulation \\
+    B2 & Layout    & L1 & Boundary-scan \\
+    B3 & Assembly  & L1 & JTAG / scope \\
+    B4 & Firmware  & L2 & Fixture / YAML \\
+    B5 & Interface & L2 & Fixture / USB \\
+    \bottomrule
+  \end{tabular}
+  \vfill
+  \footnotesize B1--B3 escaped system-level testing; B4--B5 escaped component simulation.
+\end{frame}
+
+% ---- Equivalence ---------------------------------------------------------
+\begin{frame}{Functional equivalence: three converging lines}
+  \begin{enumerate}
+    \item \textbf{Logical} (VHDL simulation): correct memory timing, peripheral logic, watchdog interaction.
+    \item \textbf{Physical} (oscilloscope): watchdog period and a validated \SI{850}{\hertz}--\SI{1550}{\hertz} sweep.
+    \item \textbf{Behavioural} (scenario testing): all 20 documented fault codes, the self-test sequence, and the four operator interactions.
+  \end{enumerate}
+  \medskip
+  \footnotesize Equivalence is demonstrated for the documented fault codes, self-test sequences, and user interactions of the safety-critical core.
+\end{frame}
+
+% ---- Sweep figure --------------------------------------------------------
+\begin{frame}{Result: frequency-sweep equivalence}
+  \centering
+  \includegraphics[width=0.49\textwidth]{comp_upsweep.png}\hfill
+  \includegraphics[width=0.49\textwidth]{comp_downsweep.png}
+  \par\medskip
+  \footnotesize Original system vs.\ FPGA emulation: ascending (left) and descending (right) sweeps across \SI{850}{\hertz}--\SI{1550}{\hertz}.
+\end{frame}
+
+% ---- Standards -----------------------------------------------------------
+\begin{frame}{Standards mapping}
+  \centering\small
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \textbf{Standard} & \textbf{Scope} & \textbf{Layer} \\
+    \midrule
+    IEC~61508 & Safety lifecycle, SIL & L1 + L2 \\
+    EN~50129  & Hardware / programmable-logic safety & L1 + L2 \\
+    EN~50716  & Software modification & L1 + L2 \\
+    EN~50155 / EN~61373 & Environmental, shock \& vibration & Future \\
+    IEEE~1012 & V\&V process & L1 + L2 \\
+    \bottomrule
+  \end{tabular}
+  \vfill
+  \footnotesize The retrofit is a \emph{modification}: impact analysis, change verification, regression suite (Layer~2), and Git configuration management address EN~50716.
+\end{frame}
+
+% ---- Limitations ---------------------------------------------------------
+\begin{frame}{Honest scope and limitations}
+  \begin{itemize}
+    \item Two defects remain open in the \alert{non-safety} diagnostic-logging path --- both behind the galvanic boundary, neither affecting the safety core:
+      \begin{itemize}\small
+        \item STM32 SPI reception sized below the 32-bit frame (F401 SPI is 8/16-bit; fix uses multi-byte reception);
+        \item FatFS timing starvation on the SD-card path.
+      \end{itemize}
+    \item Out of scope: formal methods, quantitative structural coverage, accredited environmental testing, full HIL.
+  \end{itemize}
+\end{frame}
+
+% ---- Conclusion ----------------------------------------------------------
+\begin{frame}{Conclusion}
+  \begin{itemize}
+    \item Neither white-box simulation nor black-box system testing alone provides adequate coverage for modernising legacy safety hardware.
+    \item A layered convergence of evidence --- grounded in the V-model and IEEE~1012 --- provides the diagnostic depth to demonstrate functional equivalence for the documented behaviour set.
+    \item The structure transfers to comparable IEC~61508 legacy-to-FPGA retrofits, given HDL source for Layer~1, a legacy functional spec for Layer~2, and boundary-scan-capable hardware.
+  \end{itemize}
+\end{frame}
+
+% ---- Future work + thanks ------------------------------------------------
+\begin{frame}{Future work \& acknowledgements}
+  \begin{itemize}
+    \item Harden the diagnostic firmware: non-blocking, DMA-backed SPI reception and a logging queue decoupled from the receive interrupt.
+    \item Full HIL integration; IEC~62443 cybersecurity assessment; professionally manufactured PCBs for accredited certification.
+  \end{itemize}
+  \vfill
+  \footnotesize Acknowledgements: S.~Ayoub, M.~Leyer, A.~Dolata, D.~Ostermann, F.~Schiffelers, D.~Savchuk, D.~C.~Icyer, E.~Galustian, O.~Al-Selwi, and the supervisor, Prof.\ Dr.\ T.~Krawutschke.
+  \vfill
+  \begin{center}\structure{\large Thank you --- questions welcome.}\end{center}
+\end{frame}

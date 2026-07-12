@@ -1,0 +1,118 @@
+% VIMS 2026 -- printable leave-behind handout.
+%
+% Deliberately NOT the talk deck: a standalone two-page A4 synopsis of the work,
+% for distribution before the talk. Builds from its own preamble (no beamer),
+% so it carries no slide overlays and stays independent of deck_frames.tex.
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[a4paper,top=11mm,bottom=11mm,left=17mm,right=17mm]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{ieeeblue}{HTML}{00629B}
+\definecolor{accentteal}{HTML}{2A9D8F}
+\definecolor{inkgray}{HTML}{4B5563}
+
+\sisetup{range-phrase=\,--\,,range-units=single,detect-weight=true}
+\setlist{nosep,leftmargin=1.35em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.35ex}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+
+\titleformat{\section}{\color{ieeeblue}\bfseries\normalsize}{}{0pt}{}
+\titlespacing{\section}{0pt}{0.9ex}{0.3ex}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\hypersetup{
+  pdftitle={Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation -- Handout},
+  pdfauthor={Mert Torun},
+  pdfsubject={VIMS 2026 -- Two-layer verification methodology for safety-critical FPGA retrofits},
+  pdfkeywords={anti-skid, wheel-slide protection, FPGA retrofit, functional equivalence, IEC 61508, IEEE 1012, V-model, verification and validation},
+  pdflang={en},
+}
+
+\newcommand{\dotsep}{\;\textcolor{inkgray}{\textbullet}\;}
+
+\begin{document}
+
+% ---- Header ---------------------------------------------------------------
+{\color{ieeeblue}\bfseries\LARGE Ensuring Functional Equivalence in Retrofitted\\[0.2ex]
+Anti-Skid Systems for European Public Transportation\par}
+\vspace{0.5ex}
+{\large\color{inkgray} A Two-Layer Verification Methodology for Safety-Critical FPGA Retrofits\par}
+\vspace{0.7ex}
+{\color{ieeeblue}\rule{\linewidth}{1.1pt}}
+\vspace{0.5ex}
+
+\textbf{Mert Torun, M.Sc.}\dotsep TH K\"oln, Faculty of Information, Media and Electrical Engineering\dotsep Supervisor: Prof.\ Dr.\ Tobias Krawutschke\\
+Presented at \textbf{VIMS 2026}\dotsep in press, \emph{K\"olner Beitr\"age zur technischen Informatik} (ISSN 2193-570X)
+
+% ---- Body -----------------------------------------------------------------
+\section{The Retrofit Problem}
+Anti-skid (wheel-slide protection) systems are safety-critical components in European urban rail, preventing wheel lock-up during braking on low-adhesion track. The legacy test-diagnosis module, deployed across multiple transit operators, is built around the long-obsolete Intel MCS-48 microcontroller family. As these parts become unobtainable, operators face a choice between prohibitively expensive full-system replacement and targeted board-level retrofit --- the latter admissible only if functional equivalence with the original design can be rigorously demonstrated under contemporary safety standards. No verification framework existed in the literature for board-level legacy-to-FPGA retrofit; this work supplies one. The contribution is the \textbf{methodological framework}, not the hardware.
+
+\section{Replacement Architecture}
+A flash-based \textbf{Actel A3P1000 FPGA} (non-volatile) emulates the MCS-48 CPU and I/O logic, integrating the unmodified OpenCores \texttt{t48} core and executing the original firmware image (a \qty{4}{\kilo\byte} 2732-type EPROM, roughly \qty{3}{\kilo\byte} of populated code) from external Flash ROM. It is paired with a galvanically isolated \textbf{STM32F401RET6} ARM Cortex-M4 diagnostics subsystem: optocoupler-isolated SPI at \SI{100}{\kilo\hertz}, RTC-timestamped SD-card logging, and USB Type-C retrieval. The safety-critical core and the non-safety diagnostics are separated by a galvanic isolation boundary (optocouplers with independent DC/DC converters), ensuring fault non-propagation.
+
+\section{Two-Layer Verification Methodology}
+Derived from the V-model lifecycle of IEC 61508, with verification and validation activities structured per IEEE 1012:
+
+\begin{itemize}
+  \item \textbf{Layer 1 --- Deterministic component \& interface testing (white-box).} Cycle-accurate VHDL simulation (ModelSim ME); JTAG boundary-scan (IEEE 1149.1) for pin connectivity and solder-defect isolation; oscilloscope measurement establishing temporal equivalence --- a \SI{3.85}{\second} watchdog servicing window and a digital frequency sweep of \SIrange{850}{1550}{\hertz} across 33 up- and 65 down-steps.
+  \item \textbf{Layer 2 --- Scenario-based system-level testing (black-box).} The fully integrated board exercised through a dedicated hardware fixture with machine-parseable YAML test cases and full requirements-to-test traceability.
+\end{itemize}
+
+\section{Central Result --- Evidence Must Converge}
+Functional equivalence of the safety-critical core was demonstrated for all documented fault codes, self-test sequences, and user interactions, through the convergence of three independent evidence lines: simulation, oscilloscope measurement, and integrated scenario testing. The necessity of \emph{both} layers is proven empirically by a taxonomy of five integration defects found during validation:
+
+\vspace{0.4ex}
+\begin{center}
+\small
+\begin{tabular}{@{}l l L{7.0cm} L{3.6cm}@{}}
+\toprule
+\textbf{ID} & \textbf{Class} & \textbf{Defect} & \textbf{Detected by} \\
+\midrule
+B1 & Logical   & NVRAM byte-low-enable held high --- memory disabled & Layer 1 (simulation) \\
+B2 & Layout    & STM32 SWD debug pins routed incorrectly & Layer 1 (boundary-scan) \\
+B3 & Assembly  & \textasciitilde40 FPGA pins open or shorted from soldering & Layer 1 (JTAG / scope) \\
+B4 & Firmware  & FatFS timing starvation blocking SPI receive & Layer 2 (fixture / YAML) \\
+B5 & Interface & SPI payload truncation (16- vs.\ 32-bit buffer) & Layer 2 (fixture / USB) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.3ex}
+
+Bugs B1--B3 escaped system-level testing; B4--B5 escaped component simulation. \textbf{Neither layer alone was sufficient} --- their convergence is the core assurance argument for safety-critical retrofit.
+
+\section{Standards Mapping and Wider Rationale}
+Results were mapped to IEC 61508, EN 50129, EN 50716, and IEEE 1012; configuration management follows EN 50716. Beyond the technical case, lifecycle analysis indicates that board-level retrofit reduces both operational cost and embodied carbon relative to manufacturing new subsystems, supporting an economic and ecological rationale alongside the methodology.
+
+% ---- Footer ---------------------------------------------------------------
+\vfill
+{\color{ieeeblue}\rule{\linewidth}{0.6pt}}
+\vspace{0.3ex}
+% Each note is its own paragraph (not a \\-break inside one paragraph), so a PDF
+% text extractor keeps them on separate lines -- avoids a copy-paste run-on where
+% the URL-terminated contact line would fuse with the following note.
+{\footnotesize\color{inkgray}
+\textbf{Full paper and research report:} \href{https://github.com/mtorun0x7cd/anti-skid-verification}{github.com/mtorun0x7cd/anti-skid-verification} (compiled deliverables attached to each release).
+
+\textbf{Cite:} Torun, M. (2026). \emph{Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology.} K\"olner Beitr\"age zur technischen Informatik (ISSN 2193-570X). In press.
+
+\textbf{Contact:} \href{mailto:info@mtorun0x7cd.com}{info@mtorun0x7cd.com}\dotsep\href{https://mtorun0x7cd.com}{mtorun0x7cd.com}
+
+Licensed under CC BY-NC-ND 4.0. FPGA \texttt{t48} core is GPL-2.0 and is not redistributed here.
+\par}
+
+\end{document}

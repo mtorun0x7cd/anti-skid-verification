@@ -1,0 +1,126 @@
+% ============================================================
+% Chapter 2: Background and Literature Review
+% ============================================================
+\chapter{Background and Literature Review}
+\label{chap:background_lit_review}
+
+This chapter provides the necessary technical and historical context for the research presented. It begins by detailing the specific prior work that forms the foundation of this project, illustrated with block diagrams (\Cref{fig:block_diagram_comparison,fig:ayoub_test_setup}), and outlines the practical hardware challenges encountered at the project's outset (\Cref{sec:specific_background}). Subsequently, it reviews the broader context of reverse engineering and obsolescence management in safety-critical systems (\Cref{sec:re_obsolescence}), relevant railway industry retrofitting practices (\Cref{sec:industry_practices}), the applicable functional safety standards framework~\cite{losada2021} (\Cref{sec:standards_detail}), and pertinent electronic design principles~\cite{jones2004} (\Cref{sec:design_principles}) that informed the hardware implementation.
+
+% ------------------------------------------------------------
+\section{Specific Project Background and Challenges}
+\label{sec:specific_background}
+
+This research directly builds upon efforts initiated in previous projects to modernise a specific legacy anti-skid system~\cite{rexroth1992wsp} used in European public transport. Understanding this lineage, the technical foundations laid, and the inherited challenges is crucial for contextualising the methodology and results presented herein.
+
+\subsection{Foundational Reverse Engineering (Ayoub)}
+\label{subsec:ayoub_vorarbeit}
+
+The initiative commenced with foundational reverse engineering by Samy Ayoub in 2014~\cite{ayoub2014}, driven by the obsolescence of the original Intel~8035~\gls{cpu} (an~\gls{mcs48} family member) used on the system's comparator (V-) card. Ayoub's work focused on the feasibility of replacing this microcontroller by emulating its function within an~\gls{fpga}.
+
+Through analysis of original schematics and extracted firmware, Ayoub successfully demonstrated via simulation and basic hardware tests that the 8035 CPU's behaviour could be functionally replicated using an~\gls{fpga} (initially an Altera Cyclone). The conceptual architecture derived from this analysis is shown in~\Cref{fig:block_diagram_comparison}~(top).
+
+Ayoub's successful proof-of-concept, verified using the test setup shown conceptually in~\Cref{fig:ayoub_test_setup}, established the viability of the~\gls{fpga} emulation strategy. Crucially, it offered a pathway to modernisation while preserving the existing, field-tested control firmware, thereby reducing the significant effort and risk associated with developing entirely new control logic. This demonstrated the technical feasibility upon which subsequent work could build.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.9\textwidth]{block_diagram_comparison}
+	\caption[Block Diagrams: Original vs FPGA Concept]{Conceptual block diagrams illustrating the architecture of the original V-Card analysed by Ayoub (top) and the FPGA-based emulation concept applied in subsequent work (bottom). Based on~\cite{ayoub2014, leyer2023ppt}.}
+	\label{fig:block_diagram_comparison}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{ayoub_test_setup}
+	\caption[Ayoub Test Setup Concept]{Conceptual test setup for verifying the comparator card (Vergleicher Karte) as documented in the Vorarbeit~\cite{ayoub2014}.}
+	\label{fig:ayoub_test_setup}
+\end{figure}
+
+\subsection{Test-Diagnosis Board Retrofit Attempt (Leyer)}
+\label{subsec:leyer_internship}
+
+Building on Ayoub's findings, Mark Leyer's 2023 internship project applied the~\gls{fpga} emulation strategy to the legacy system's test-diagnosis board~\cite{leyer2023}. This board, also based on an obsolete 8048 variant of the~\gls{mcs48} architecture, performs non-real-time diagnostics and self-test functions, including fault code storage/retrieval via a 7-segment display and initiation of a system self-test with frequency sweep output.
+
+Leyer migrated the 8048 core logic and its peripheral functions (frequency sweep, display driving, button handling, \gls{nvram} interface) into~\gls{hdl} targeting an Actel ProASIC3 \texttt{A3P1000}~\gls{fpga}. This specific~\gls{fpga} was chosen for its non-volatility (Flash-based, contrasting with SRAM-based alternatives) and sufficient logic capacity for the emulation task (\Cref{fig:block_diagram_comparison}, bottom), as detailed in~\cite[Figure~2]{leyer2023ppt}.
+
+Recognising the limitations of the legacy system's simple numeric code feedback, Leyer also designed an auxiliary diagnostics subsystem on a separate~\gls{pcb}~\cite{leyer2023, leyer2023ppt}. Centred around an~\gls{stm32} microcontroller (\texttt{STM32F401RET6},~\cite[Section~Purpose]{leyer2023ppt}), this aimed to provide modern data logging (timestamped errors via~\gls{rtc}, persistent~\gls{sd}~card storage, \gls{usb} access). A key design principle, critical for functional safety, was maintaining physical and electrical isolation (via optocoupled~\gls{spi}, see~\Cref{sec:stm32_details}) between this non-safety-critical logging function and the core safety-related~\gls{fpga} emulation.
+
+While Leyer demonstrated basic functional viability, the prototype hardware (Rev~0.0) suffered from critical flaws that prevented robust operation. Subsequent hands-on debugging by a follow-on student project (`testkartentester24`)~\cite{savchuk2025} revealed these were more extensive than initially documented, defining the true technical starting point for the hardware finalisation in this research. \textit{Examples of these inherited boards are shown in \Cref{app:rev0_photos}.}
+
+\subsection{Challenges Encountered in Hardware Finalisation and Integration}
+\label{subsec:hardware_challenges}
+
+The starting point for this research was not just the design files, but a physical prototype that required significant analysis and rework to become a stable, testable platform. The follow-on `testkartentester24` project~\cite{savchuk2025} documented several latent issues that had to be overcome:
+
+\begin{itemize}
+	\item \textbf{Critical FPGA Soldering Defects:} The most significant hardware issue was the physical condition of the main \gls{fpga}. Initial debugging showed the component was unresponsive. Inspection revealed that what was initially thought to be a few poor connections was a systemic issue: a follow-on team documented that \textbf{approximately 40 pins on the FPGA required manual re-soldering} to establish reliable electrical contact~\cite{savchuk2025}. This underscores the gap between a lab prototype and a production-quality board and was the root cause of many initial functional failures.
+	\item \textbf{STM32 Debugging Interface Blockage:} A critical design oversight in the Rev~0.0 layout rendered the \gls{stm32} microcontroller un-debuggable. The standard SWD (Serial Wire Debug) pins (PA13/PA14) had been allocated for general-purpose I/O functions. This made it impossible to connect a debugger, severely hampering firmware development. As documented in~\cite{savchuk2025}, a physical "dead-bug" modification (re-routing pins to PC14/PC15) was required to proceed, and this correction was later formalized in a revised \gls{pcb} layout.
+	\item \textbf{Hardware Logic Errors:} Deep-dive debugging revealed a critical logic error in the hardware implementation related to the \gls{nvram} interface. The low-active enable pin (\texttt{NVRAM\_ble}) was being held high, permanently disabling the chip. Correcting this in the \gls{vhdl} was a key breakthrough that enabled the fault memory functions to work correctly~\cite{savchuk2025}.
+	\item \textbf{\gls{bom} Inaccuracies \& Component Substitution:} The inherited~\gls{bom} required meticulous cross-referencing against schematics (\Cref{app:schematics}) and datasheets due to part number errors. Procurement difficulties necessitated substituting some non-standard components with equivalent standard parts, adding a verification step to confirm equivalence.
+	\item \textbf{Documentation Fragmentation:} Foundational information was scattered across Ayoub's report~\cite{ayoub2014}, Leyer's documentation~\cite{leyer2023, leyer2023ppt}, and the original system manual~\cite{rexroth1992wsp}. Consolidating and verifying this information represented a significant initial overhead before design refinement could proceed.
+\end{itemize}
+These experiences highlight the paramount importance of rigorously verifying all inherited artifacts and the physical hardware itself in continuation projects to mitigate risks of unforeseen delays.
+
+% ------------------------------------------------------------
+\section{Broader Context: Reverse Engineering and Obsolescence Management}
+\label{sec:re_obsolescence}
+The challenge of maintaining long-lifecycle systems reliant on obsolete components, like the~\gls{mcs48} family in this project, is significant in domains such as rail transport~\cite{guzman2011obsolescence}. Reverse engineering (RE) provides techniques to understand and replicate legacy systems~\cite{wang2010}, but requires exceptional rigour in safety-critical applications~\cite{alshennawy2014}. Using~\glspl{fpga} for emulation is a recognised obsolescence management strategy~\cite{guzman2011obsolescence}, allowing legacy software retention while migrating hardware. The choice of a Flash-based~\gls{fpga} (like the Actel ProASIC3 \texttt{A3P1000} used here) specifically addresses potential concerns about configuration-memory upsets (firm errors) often associated with SRAM-based devices in critical environments~\cite{latifshabgahi2009redundancy}. However, as this research demonstrates, \gls{fpga} emulation necessitates thorough verification to ensure functional and timing equivalence, treating the~\gls{fpga} as a complex component requiring specific validation approaches (\Cref{chap:testing}). Component reconstruction techniques, often involving RE, are also relevant in contexts like additive manufacturing~\cite{lopez2021, dalpadulo2022}.
+
+\subsection{Verification Strategies for Functional Equivalence}
+\label{subsec:equivalence_strategies}
+While RE~\cite{wang2010} and~\gls{fpga} emulation~\cite{guzman2011obsolescence} address hardware obsolescence, rigorously demonstrating \textit{functional equivalence} to the original system is paramount, especially under safety standards like~\gls{iec61508}~\cite{iec61508_2010} and~\gls{en50129}~\cite{en50129_2018}. Functional equivalence implies identical behaviour and performance, particularly for safety functions and failure modes~\cite{bozzano2016formal}. Achieving certification-level confidence typically involves combining verification strategies:
+\begin{description}
+	\item[Black-Box System Testing:] Treats original and retrofit systems as black boxes, comparing outputs for identical inputs~\cite{ammann2016introduction}. Effective for overall behaviour validation but achieving full state/transition coverage via external interfaces alone is challenging for complex systems~\cite{hierons2009using}. Hardware-in-the-Loop (\gls{hil}) testing~\cite{hil_rail_suspension_2023, zhou_wu_2020, wabtec_wsp_cert_2022} is a sophisticated variant common in rail, simulating the operational environment.
+	\item[White-Box Analysis and Testing:] Utilised when internal details (legacy design documents, RE results~\cite{alshennawy2014, lopez2021}, or new implementation specifics like~\gls{hdl}) are available. Includes static analysis, code reviews, and structural testing~\cite{ammann2016introduction}. For hardware emulation, this demands detailed simulation, potentially formal verification~\cite{bozzano2016formal}, and critically, ensuring \textit{timing equivalence}~\cite{guzman2011obsolescence}. Deviations in timing (e.g., instruction cycle duration, memory access latency, interrupt response time) can cause failures even with correct logic. Verification must target timing via cycle-accurate simulation, static timing analysis, and hardware measurements.
+	\item[Formal Methods:] Employ mathematical models and proofs for verification, including equivalence checking between representations (e.g., specification vs. implementation, legacy vs. retrofit)~\cite{formal_verification_rail_2023}. Offers high assurance but often requires significant expertise and resources, with potential scalability limits~\cite{bozzano2016formal}. Equivalence checking tools from~\gls{asic} design~\cite{kravets2005formality} might be adaptable, but comparing microcontroller behaviour to an~\gls{fpga} presents unique challenges.
+	\item[Combined Approaches:] Practice often dictates combining strategies to leverage complementary strengths for safety-critical retrofits~\cite{hierons2009using, ammann2016introduction}. White-box techniques (e.g., simulation) can verify component-level emulation logic, while black-box system testing (e.g., fixture-based tests, HIL) validates integrated behaviour. This layered approach builds a comprehensive safety case.
+\end{description}
+The verification methodology in this research (\Cref{chap:testing}) employs such a combined, multi-layered strategy, integrating deterministic white-box checks (Layer~1: simulation, timing analysis, hardware measurement) with non-deterministic, scenario-based system testing (Layer~2: fixture-based validation) aligned with black-box/HIL principles, providing robust evidence for functional equivalence and compliance.
+
+% ------------------------------------------------------------
+\section{Industry Practices and Related Work in Rail Retrofitting}
+\label{sec:industry_practices}
+Examining contemporary rail industry practices provides benchmarks and validates the feasibility of the methods used in this project.
+
+\subsection{Benchmarks in WSP Modernisation and Certification}
+\label{subsec:wsp_benchmarks}
+Modernisation of~\gls{wsp} systems offers direct precedents. The Wabtec/\gls{sncf} adaptive~\gls{wsp} project for the Regiolis fleet~\cite{wabtec_wsp_cert_2022} is particularly relevant. It demonstrates not only the technical feasibility of replacing older~\gls{wsp} components but, crucially, that such retrofits \textit{can achieve certification} against current standards (specifically~\gls{en15595}~\cite{en15595_2018}). This validates the primary compliance goal of this research (\Cref{sec:objectives_scope}). Furthermore, the industry emphasis on rigorous~\gls{hil} testing~\cite{wabtec_wsp_cert_2022, hil_rail_suspension_2023, zhou_wu_2020} highlights the importance of comprehensive system-level validation. While full HIL was beyond this project's scope, the fixture-based testing approach (\Cref{sec:system_scenario_testing}) mirrors HIL principles, facilitating potential future integration (\Cref{sec:future_work}).
+
+\subsection{Operational and Economic Drivers for Retrofitting}
+\label{subsec:operational_economic_drivers}
+Large-scale fleet refurbishments confirm the strategic motivations for retrofitting. Upgrades on fleets like the Greater Anglia Class~317~\cite{greater_anglia_refurb_2018} and the former South West Trains Class~455~\cite{rg_class455_upgrade_2013} illustrate how modernising electronics addresses obsolescence (similar to the~\gls{mcs48} issue here) while achieving key operational and economic goals. By replacing ageing electronics, operators extend rolling stock life, deferring high capital expenditure for new trains. Modern electronics can also improve reliability and reduce maintenance, lowering overall~\gls{opex}. These examples support the cost-effectiveness and sustainability rationale (\Cref{sec:context}) for this retrofit, consistent with the broader rail-sector sustainability rationale~\cite{carbon_infra_uic_2016}.
+
+% ------------------------------------------------------------
+\section{Functional Safety Standards for Railway Systems}
+\label{sec:standards_detail}
+Ensuring safety in retrofits requires adherence to a framework of functional safety standards, which define the compliance objectives (\Cref{sec:objectives_scope}) and inform the verification methodology (\Cref{chap:testing}). Key applicable standards include:
+\begin{description}
+	\item[\gls{iec61508}~\cite{iec61508_2010}] The foundational international standard for E/E/PE safety-related systems (Edition 2.0). It defines the safety lifecycle,~\gls{sil} concept, and requirements for management, documentation, hazard analysis (e.g.,~\gls{fmea}), and V\&V. It provides the top-level safety management framework for this project~\cite{gallina2018standards, losada2021}.
+	\item[\gls{en50129}:2018~\cite{en50129_2018}] Part of the CENELEC EN~5012X railway series, addressing safety-related electronic systems for signalling, with principles widely applied by analogy to other safety-related railway electronics. It details the hardware safety lifecycle (specification, design, V\&V), directly relevant for demonstrating the safety integrity of the~\gls{fpga} emulation---including the~\gls{hdl} implementation---and requiring evidence of hazard control and robust design.
+	\item[\gls{en50155}:2021~\cite{en50155_2021}] Specifies conditions for electronic equipment on rolling stock (environmental: temperature, humidity; electrical; testing). It references other standards for specific conditions, such as~\gls{en61373}:2010~\cite{en61373_2010} for shock and vibration and the~\gls{en50121} series (e.g.,~\cite{en50121_3_2_2016}) for~\gls{emc}. Informs physical design choices (\Cref{sec:pcb_design_impl}) targeting compliance, though formal type testing was out of scope.
+	\item[\gls{en50716}:2023~\cite{en50716_2023}] Governs software development for railway control and protection systems, superseding EN~50128 and EN~50657. It applies to the~\gls{stm32} C firmware and to the reused 8048 object code executing on the soft-core; the~\gls{hdl}/\gls{fpga} implementation itself is treated as safety-related hardware under~\gls{en50129} (Annex~F) and~\gls{iec61508}-2. Emphasizes configuration management, change control, documentation, and verification evidence (including tool confidence).
+	\item[\gls{ieee1012}:2024~\cite{ieee1012_2024}] Provides a generic framework for systematic V\&V processes (requirements tracing, interface analysis, test planning/execution/analysis). Guides the two-layer testing structure (\Cref{chap:testing}) and generation of auditable verification artefacts (\Cref{sec:verification_artefacts,app:test_logs,app:test_cases}).
+\end{description}
+Applying these standards to retrofits requires demonstrating that modifications do not compromise existing safety levels and that new elements are adequately verified. This involves impact analysis, configuration management, and regression testing, core elements addressed by the methodology in~\Cref{chap:testing}.
+
+\subsection{FPGA-Specific Certification Considerations}
+\label{subsec:fpga_certification}
+Using~\glspl{fpga} in safety-critical retrofits, while addressing obsolescence~\cite{guzman2011obsolescence}, introduces specific certification considerations compared to traditional controllers:
+\begin{itemize}
+	\item \textbf{Development Tool Confidence:} Complex~\gls{fpga} tools (synthesis, place-and-route) require justification for safety-related use per~\gls{iec61508} and~\gls{en50716}. This may involve tool qualification or diverse verification measures.
+	\item \textbf{Hardware Verification:} Rigorous verification of the implemented logic is crucial, as outlined in~\gls{en50129}. This involves extensive simulation, potentially formal methods~\cite{formal_verification_rail_2023}, and hardware testing to confirm behaviour and address potential~\gls{fpga} fabric failure modes. Flash-based~\glspl{fpga}, like the ProASIC3 used (\texttt{A3P1000}), are less susceptible to configuration memory upsets than SRAM-based alternatives~\cite{guzman2011obsolescence, latifshabgahi2009redundancy}.
+	\item \textbf{Pre-Developed IP Validation:} Using third-party or open-source Intellectual Property (IP) (like the~\gls{mcs48} core, \Cref{sec:fpga_core_details}) necessitates thorough V\&V by the integrator, as prior safety certification is often lacking. Demonstrating functional and timing equivalence within the application context is paramount.
+\end{itemize}
+Addressing these points is key to building the safety case for an~\gls{fpga}-based safety-critical retrofit.
+
+% ------------------------------------------------------------
+\section{Relevant Design and Manufacturing Principles}
+\label{sec:design_principles}
+The hardware architecture and physical design choices detailed in~\Cref{chap:architecture} were guided by established principles for reliable and compliant railway electronics, informed partly by internal guidelines adapted for this research context:
+\begin{description}
+	\item[PCB Layout Practices~\cite{jones2004}] Careful~\gls{pcb} layout is fundamental. Key practices applied include strategic component placement, appropriate trace widths (impedance/current, adhering to guidelines like those in~\cite[p.~7 \& 10]{jones2004}), adequate clearances, effective grounding (ground planes), and decoupling capacitors close to~\glspl{ic} to ensure signal integrity and minimise noise~\cite[Sec.~Tracks, Pads, Clearances, Grounding, Bypassing]{jones2004}. Specific rules regarding vias, trace angles (45-degree preferred over 90-degree), and pad extensions for manual soldering (as mentioned in the project guidelines) were also considered.
+	\item[Electromagnetic Compatibility (\gls{emc}/\gls{emi})] Railway environments demand robustness against electromagnetic noise. Compliance with~\gls{emc} standards (typically per~\gls{en50155} referencing~\gls{en50121}~\cite{en50121_3_2_2016}) is critical. Design considerations included robust grounding, power filtering, shielding via enclosure, galvanic isolation (\gls{spi} link), and careful layout to manage susceptibility and emissions~\cite{midya2013emc}.
+	\item[DfM and Reliability] {\sloppy Addressing previous~\gls{dfm} issues~\cite{leyer2023} (\Cref{subsec:leyer_internship}) was a primary goal. Reliability requires robustness against harsh environmental factors (\gls{en50155}) and shock/vibration~(\gls{en61373}~\cite{en61373_2010}), influencing component selection~(e.g., industrial temperature ratings, vibration-resistant packages), thermal management, and robust connectors. Adherence to internal design rules (like project guidelines where applicable) contributes to manufacturability.\par}
+	\item[Modularity and Isolation] The modular design (Base, Upper, \gls{stm32}, \gls{led} boards) enhances testability, maintainability, and fault isolation. Galvanic isolation of the~\gls{spi} link (\Cref{sec:stm32_details}) prevents fault propagation between the safety-related (\gls{fpga}) and non-safety-critical (\gls{stm32} diagnostics) domains, a key safety principle.
+	\item[Redundancy and Fail-Safe Concepts~\cite{latifshabgahi2009redundancy}] Achieving functional safety (\gls{sil}) relies on detecting failures and transitioning to a safe state (\gls{iec61508}). While full hardware redundancy was out of scope, specific fail-safe features (\Cref{sec:redundancy_failsafe}) were included: an independent hardware watchdog monitors~\gls{fpga} activity, and a~\gls{bod} supervisor ensures predictable behaviour during power fluctuations, both forcing a defined reset state upon detecting potential failures. The system also retains its legacy self-test capabilities, which contribute to fault detection.
+\end{description}
+These principles directly informed the architectural and design choices (\Cref{chap:architecture}) to achieve a robust, reliable, and compliant system.

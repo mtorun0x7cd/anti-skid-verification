@@ -1,0 +1,80 @@
+% ============================================================
+% Appendix E: Prüf-Zertifikat Document Template
+% ============================================================
+\chapter{Prüf-Zertifikat Document Template}
+\label{app:pruefzertifikat}
+
+This appendix provides the full sample \enquote{Prüfzertifikat} template discussed in \Cref{chap:safety_checklist}. This template illustrates the structure and content reflective of modern certification practices for safety-related systems and serves as a practical guide for potential future re-certification efforts based on the verification performed in this research.
+
+\bigskip
+\hrulefill
+\bigskip
+
+\begin{center}
+	\textbf{\Large Prüfzertifikat / Certification Statement} \\[1em]
+	\textit{\large Retrofitted Safety System Verification}
+\end{center}
+
+\bigskip
+
+\noindent\textbf{Projektname/Project Name:} Functional Equivalence Validation of Retrofitted Anti-Skid Test-Diagnosis Module \\
+\textbf{System Description:} Retrofitted Test-Diagnosis Board for the Legacy Anti-Skid System, comprising FPGA-based emulation (Actel A3P1000) and STM32 Diagnostics Subsystem (\texttt{STM32F401RET6}). \\
+\textbf{Hardware Revision:} Rev 1.0 \\
+\textbf{Firmware Version (FPGA):} [Specify FPGA Bitstream Version/Checksum] \\
+\textbf{Firmware Version (STM32):} [Specify STM32 Firmware Version/Checksum] \\
+\textbf{Verifizierte Standards/Verified Standards:} Principles derived from \gls{iec61508}~Ed.~2, \gls{en50129}:2018, \gls{en50155}:2021, \gls{en50716}:2023, \gls{ieee1012}:2024. \\
+\textbf{Datum der Verifikation/Verification Date:} {2024-10-01} to {2025-08-31} \\
+\textbf{Verifizierungsstelle/Verifying Body:} \projAuthor / \projInstitution
+
+\subsection*{Verifizierte Kriterien/Verified Criteria:}
+
+\begin{enumerate}
+	\item \textbf{Design Dokumentation und Analyse/Design Documentation and Analysis:}
+	      \begin{itemize}
+		      \item Vollständige Dokumentation der ursprünglichen und modifizierten Anforderungen. \textbf{[DONE]}
+		      \item Designänderungen bewertet gegen anwendbare Standards. \textbf{[DONE]}
+		      \item Risikoanalyse durchgeführt (\gls{fmea}/\gls{fta}-Prinzipien angewendet). \textbf{[PARTIAL]}
+		      \item Rückverfolgbarkeit zwischen Anforderungen, Design und Tests etabliert. \textbf{[PARTIAL]}
+	      \end{itemize}
+	\item \textbf{Hardware- und Firmware-Verifikation (Layer 1 \& relevante Teile):}
+	      \begin{itemize}
+		      \item FPGA-Logik verifiziert via Simulation (Kernfunktionen, Schnittstellen, Timing). \textbf{[DONE]}
+		      \item Kritische Hardware-Timing-Parameter via Messung verifiziert. \textbf{[DONE]}
+		      \item Grundlegende STM32-Firmware-Funktionen verifiziert (im Rahmen der Systemtests). \textbf{[DONE]}
+	      \end{itemize}
+	\item \textbf{Systemintegration und Funktionstests (Layer 2):}
+	      \begin{itemize}
+		      \item Fehlerspeicher-Handhabungszyklen erfolgreich gemäß Testprozeduren ausgeführt. \textbf{[DONE]}
+		      \item Legacy-Selbsttestfunktionen korrekt initiiert und ausgeführt. \textbf{[DONE]}
+		      \item Funktionale Äquivalenz des Benutzerinterfaces demonstriert. \textbf{[DONE]}
+		      \item Erweiterte Diagnoseprotokollierung validiert. \textbf{[DONE]}
+		      \item Systemstabilität unter definierten Szenarien und Power-Zyklen demonstriert. \textbf{[DONE]}
+	      \end{itemize}
+	\item \textbf{Konfigurationsmanagement/Configuration Management:}
+	      \begin{itemize}
+		      \item Designdateien, Firmware, Testartefakte und Dokumentation unter Versionskontrolle. \textbf{[DONE]}
+	      \end{itemize}
+	\item \textbf{Herstellungsqualität und Komponenten-Verifikation (Stichprobenbasiert):}
+	      \begin{itemize}
+		      \item PCB-Herstellungsergebnisse inspiziert (visuell, elektrisch grundlegend). \textbf{[DONE]}
+		      \item Bestückung gemäß Dokumentation durchgeführt; Inspektion nach Bestückung erfolgt. \textbf{[DONE]}
+	      \end{itemize}
+	\item \textbf{Dokumentation und Rückverfolgbarkeit:}
+	      \begin{itemize}
+		      \item Umfassende Testprotokolle und Versionskontrolle etabliert. \textbf{[DONE]}
+	      \end{itemize}
+\end{enumerate}
+
+\subsection*{Ergebnis/Outcome:}
+
+Basierend auf den durchgeführten Verifikationsaktivitäten gemäß dem V\&V-Plan des Projekts und den in den zugehörigen Testberichten und Protokollen dokumentierten Nachweisen, bestätigt der Unterzeichnende, dass das oben beschriebene nachgerüstete System für den Umfang der durchgeführten Tests funktionale Äquivalenz mit dem spezifizierten Verhalten des Altsystems demonstriert hat und die Bereitschaft für eine formale Umweltqualifikation und Sicherheitsbewertung gemäß den genannten Standards aufweist.
+
+\bigskip\bigskip
+
+\noindent\textbf{Name des Verifizierers/Verifier Name:} \makebox[5cm]{\hrulefill} \\
+\textbf{Unterschrift/Signature:} \makebox[5cm]{\hrulefill} \\
+\textbf{Datum/Date:} \makebox[5cm]{\hrulefill} \\
+\textbf{Institution/Affiliation:} \makebox[5cm]{\hrulefill}
+
+\bigskip
+\hrulefill

@@ -1,0 +1,53 @@
+% ============================================================
+% Chapter 6: Conclusion and Future Outlook
+% ============================================================
+\chapter{Conclusion and Future Outlook}
+\label{chap:conclusion}
+
+This research successfully addressed the challenge of modernising a legacy, safety-critical anti-skid test-diagnosis module. The project demonstrates that replacing an obsolete~\gls{mcs48}-based controller with a modern~\gls{fpga} (\texttt{Actel A3P1000}) for logic emulation and an~\gls{stm32} microcontroller (\texttt{STM32F401RET6}) for enhanced diagnostics is a viable and powerful strategy. The core achievement of this work is not just the design of the retrofit, but the development and application of a rigorous, multi-layered verification methodology that was proven effective in guiding the system through a complex, hands-on debugging phase to a state of functional equivalence.
+
+Through a structured combination of deterministic component-level simulation (Layer 1) and fixture-based system testing (Layer 2), the project navigated substantial practical challenges—from critical manufacturing defects like poor FPGA soldering to latent hardware and software logic bugs—to ultimately produce a stable, working prototype. This process validated the verification framework itself, showing its value in a realistic engineering context. The generated evidence and documentation, aligned with standards like~\gls{iec61508} and~\gls{en50129}, establish a solid baseline for pursuing formal safety certification.
+
+% ------------------------------------------------------------
+\section{Key Achievements}
+\label{sec:achievements}
+
+The primary goals set forth in~\Cref{sec:purpose} were achieved through a process of design, validation, and iterative refinement:
+\begin{itemize}
+	\item \textbf{Hardware Retrofit Finalisation:} A corrected set of~\glspl{pcb} was designed, and the prototype was brought to a stable, testable state after overcoming significant inherited flaws through intensive debugging and physical rework (\Cref{subsec:hardware_challenges}). The stabilised system executes all legacy self-tests and fault-handling scenarios on the safety-critical core; two defects in the non-safety diagnostic-logging path remain open (\Cref{subsec:limitations}).
+	\item \textbf{Demonstration of Functional Equivalence:} Rigorous testing provided strong, converging evidence that the refined system replicates the critical functions and fault behaviours of the original module. This equivalence was not merely designed but demonstrated through a cycle of testing, fault-finding, and correction.
+	\item \textbf{Development and Validation of a Methodological Framework:} A structured, two-layer testing methodology was defined and its effectiveness was validated in practice. The framework proved indispensable for isolating and resolving the complex integration issues that are typical of such retrofit projects.
+	\item \textbf{Integration of Enhanced, Isolated Diagnostics:} The project successfully integrated an \gls{stm32} subsystem providing enhanced diagnostic data via USB, while maintaining strict galvanic isolation from the core safety functions—a critical architectural achievement.
+\end{itemize}
+
+% ------------------------------------------------------------
+\section{Lessons Learned}
+\label{sec:lessons_learned}
+
+The process yielded several important lessons for safety-critical retrofit projects:
+\begin{itemize}
+	\item \textbf{Physical Verification is Non-Negotiable:} Simulation and logical design are essential, but the discovery of extensive soldering defects highlights that for safety-critical systems, there is no substitute for meticulous physical inspection and hardware testing. A prototype's functionality cannot be assumed based on design files alone.
+	\item \textbf{Design for Debuggability is Paramount:} The initial blocking of the \gls{stm32} debug interface was a critical oversight. Future projects must prioritize access to standard debug interfaces (e.g., SWD, JTAG) from the earliest design stages.
+	\item \textbf{System Integration Uncovers the Deepest Flaws:} Many critical bugs (e.g., the NVRAM logic error, the multi-pin packet protocol) were only discoverable when the complete hardware and software system was tested together. This reinforces the value of an integrated, system-level test fixture.
+	\item \textbf{Plan for Iteration:} Retrofit projects based on inherited work should explicitly plan for a significant \enquote{stabilization and debugging} phase. The assumption that a prior prototype is fully functional introduces high project risk.
+\end{itemize}
+
+% ------------------------------------------------------------
+\section{Recommendations and Future Work}
+\label{sec:future_work}
+
+Based on the final state of the prototype and the limitations uncovered during the hands-on integration work (\Cref{subsec:limitations}), several clear and concrete directions for future work emerge:
+
+\begin{itemize}
+    \item \textbf{Immediate Bug Resolution (High Priority):}
+        \begin{itemize}
+            \item \textit{Correct STM32 SPI Receiver Configuration:} The top priority is to re-size the STM32 SPI reception so that the full 32-bit FPGA frame is captured per transaction. Because the STM32F401 SPI peripheral supports only 8- or 16-bit data frames, this requires a 4-byte buffer at 8-bit data width (or a 2-element buffer at 16-bit width) rather than a single 32-bit transfer, resolving the payload truncation and buffer overrun.
+            \item \textit{Stabilize SD Card Storage:} Resolve the FatFS timing starvation by mounting the volume once at startup and using a non-blocking queue for logging operations to eliminate synchronous block write overhead from the main execution thread.
+        \end{itemize}
+	\item \textbf{Full~\gls{hil} Integration and Validation:} To achieve a higher level of validation confidence, the next logical step is to interface the now-stable system with a real-time~\gls{hil} simulator. This would allow for testing under dynamic conditions and is a prerequisite for serious certification efforts~\cite{hil_rail_suspension_2023, zhou_wu_2020, wabtec_wsp_cert_2022}.
+	\item \textbf{Cybersecurity Assessment and Hardening:} As noted (\Cref{sec:results_discussion_risk}), a thorough cybersecurity risk assessment focusing on the newly introduced interfaces (\gls{usb}, \gls{sd}~card) is recommended before any operational deployment. Hardening measures, potentially guided by standards like~\gls{iec62443}~\cite{iec62443_3_3_2013}, should be implemented to mitigate identified vulnerabilities.
+	\item \textbf{Hardware Production and Qualification:} For deployment, a new batch of~\glspl{pcb} incorporating all layout corrections must be professionally manufactured and assembled to avoid the reliability issues associated with manual rework. These production-quality units would then be subjected to accredited laboratory testing for environmental (\gls{en50155}:2021) and~\gls{emc} (\gls{en50121}~series) compliance.
+	\item \textbf{Methodology Generalisation:} The outcome indicates the two-layer testing framework is effective for this class of retrofit. Validation across further retrofit cases would be needed before generalising it; future academic work could refine and formalise it into a generalised methodology for verifying safety-critical electronic retrofits, with templates and best-practice guidelines for navigating the validation of inherited prototypes.
+\end{itemize}
+
+In conclusion, this research provides a comprehensive and realistic case study in modernising safety-critical legacy electronics. It presents a validated technical solution, a robust verification methodology, and valuable lessons about the importance of integrating meticulous, hands-on debugging with formal testing procedures.

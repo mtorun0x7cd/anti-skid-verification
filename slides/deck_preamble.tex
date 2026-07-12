@@ -1,0 +1,35 @@
+% Shared Beamer preamble for the VIMS 2026 deck (loaded after \documentclass).
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, fit, backgrounds}
+\usepackage{graphicx}
+\graphicspath{{../paper/fig/}}
+
+\usetheme{Boadilla}
+\setbeamertemplate{navigation symbols}{}
+\definecolor{ieeeblue}{HTML}{00629B}
+\definecolor{accentteal}{HTML}{2A9D8F}
+\setbeamercolor{structure}{fg=ieeeblue}
+\setbeamercolor{title}{fg=ieeeblue}
+\setbeamerfont{title}{series=\bfseries}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamertemplate{itemize items}[circle]
+
+\title[Functional Equivalence in Anti-Skid Retrofits]{Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation}
+\subtitle{A Two-Layer Verification Methodology}
+\author[M.\ Torun]{Mert Torun, M.Sc.}
+\institute[TH K\"oln]{Faculty of Information, Media and Electrical Engineering\\TH K\"oln -- University of Applied Sciences}
+\date[VIMS 2026]{VIMS 2026 \quad\textbar\quad K\"olner Beitr\"age zur technischen Informatik}
+
+\hypersetup{
+  pdftitle={Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation},
+  pdfauthor={Mert Torun},
+  pdfsubject={VIMS 2026 - Two-layer verification methodology for safety-critical FPGA retrofits},
+  pdfkeywords={anti-skid, wheel-slide protection, FPGA retrofit, functional equivalence, IEC 61508, IEEE 1012, V-model, verification and validation},
+  pdflang={en},
+}

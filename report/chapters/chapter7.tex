@@ -1,0 +1,78 @@
+% ============================================================
+% Chapter 7: Safety Checklist and Sample Prüfzertifikat
+% ============================================================
+\chapter{Safety Checklist and Sample Prüfzertifikat}
+\label{chap:safety_checklist}
+
+This chapter consolidates practical artefacts derived from the project's verification activities (\Cref{chap:testing}) and its alignment with relevant functional safety standards (\Cref{sec:standards_detail}). It presents a detailed checklist summarising key verification points that proved essential for this retrofit project, serving as a guiding example for verifying similar safety-critical electronic system modernisations. Following the checklist, a template for a \enquote{Prüfzertifikat} (Certification Statement / Verification Report Summary) is provided in~\Cref{app:pruefzertifikat} (Appendix E), illustrating the structure and content typically required to formally document the verification outcomes for safety assessment or potential certification processes.
+
+% ------------------------------------------------------------
+\section{Safety Verification Checklist for Retrofits}
+\label{sec:safety_checklist_items}
+
+This checklist consolidates key verification activities based on the methodology applied (\Cref{chap:testing}) and principles drawn from standards like~\gls{iec61508}~\cite{iec61508_2010}, \gls{en50129}~\cite{en50129_2018}, \gls{en50716}~\cite{en50716_2023}, and~\gls{ieee1012}~\cite{ieee1012_2024}. It serves as a guide for verifying similar safety-critical electronic retrofits, illustrating the types of checks necessary across the lifecycle. The status markers (`[DONE]`, `[PARTIAL]`, `[PLANNED]`) reflect the completion state \textit{within the context of this specific research project}.
+
+\bigskip
+
+\noindent\textbf{A. Requirements, Design Documentation, and Planning}
+\begin{itemize}
+	\item[\textbf{[DONE]}] Legacy functional requirements fully captured and documented (derived from e.g.,~\cite{rexroth1992wsp}).
+	\item[\textbf{[DONE]}] Requirements for new functionalities (e.g.,~enhanced diagnostics via STM32) clearly specified and distinct from safety functions (\Cref{sec:stm32_details}).
+	\item[\textbf{[DONE]}] All modifications introduced by the retrofit, compared to the original design, explicitly documented (Impact Analysis performed implicitly through design documentation \Cref{chap:architecture}).
+	\item[\textbf{[PARTIAL]}] Hazard and Risk Analysis (e.g.,~preliminary~\gls{fmea} or~\gls{pha}) performed, considering failure modes of both legacy functions and new components (\Cref{sec:results_discussion_risk}). (Note: Formal H\&RA often requires more depth than typically feasible in academic project).
+	\item[\textbf{[DONE]}] Mapping of system requirements and design changes to applicable standards clauses completed (\Cref{sec:standards_detail,sec:safety_compliance}).
+	\item[\textbf{[DONE]}] Verification and Validation (V\&V) Plan established (as described in~\Cref{chap:testing}), outlining scope, methodology (Layer~1, Layer~2), tools, and pass/fail criteria.
+	\item[\textbf{[PARTIAL]}] Traceability strategy defined (linking requirements, design, code, tests, results); implicit links established via structured testing and documentation, formal matrices pending (\Cref{sec:verification_artefacts}).
+	\item[\textbf{[DONE]}] Configuration Management Plan implemented (using Git for version control of all artefacts, \Cref{sec:verification_artefacts}).
+\end{itemize}
+
+\medskip
+\noindent\textbf{B. Hardware Component and Interface Verification (Layer~1)} (\Cref{sec:fpga_interface_testing})
+\begin{itemize}
+	\item[\textbf{[DONE]}] \gls{vhdl} logic modules verified via simulation using dedicated testbenches (\Cref{sec:app_vhdl_testbenches}).
+	\item[\textbf{[DONE]}] Simulation results reviewed, documented, and archived (\Cref{sec:app_verification_captures}).
+	\item[\textbf{[DONE]}] Memory interface timing (Flash~\gls{rom}, \gls{nvram}) verified against component specifications in simulation (\Cref{subsec:fpga_interface_results}).
+	\item[\textbf{[DONE]}] Critical peripheral logic (display driving, button handling, frequency sweep, \gls{spi}~master, watchdog interaction) verified in simulation (\Cref{subsec:fpga_interface_results}).
+	\item[\textbf{[DONE]}] Basic hardware connectivity and~\gls{fpga} programming verified via~\gls{jtag} (\Cref{subsec:fpga_interface_results}).
+	\item[\textbf{[DONE]}] Critical hardware timing parameters (watchdog period, frequency sweep accuracy) measured and verified on physical hardware (\Cref{subsec:fpga_interface_results}).
+\end{itemize}
+
+\medskip
+\noindent\textbf{C. Software/Firmware Verification (as applicable)}
+\begin{itemize}
+	\item[\textbf{[PARTIAL]}] \gls{stm32} firmware modules (SPI handler, RTC management, SD card logging, USB interface) verified during integration testing; the SPI reception sizing and SD-card (FatFS) logging remain subject to the open defects in~\Cref{subsec:limitations}.
+	\item[\textbf{[PARTIAL]}] Verification of adherence to defined coding standards (if applicable, not explicitly detailed as a focus within the scope).
+	\item[\textbf{[DONE]}] Legacy firmware preserved unmodified (bit-exact) and its execution behaviour verified via Layer~2 scenario testing within the~\gls{fpga} emulation core (\Cref{subsec:equivalence_discussion}).
+\end{itemize}
+
+\medskip
+\noindent\textbf{D. Integration and System-Level Testing (Layer~2)} (\Cref{sec:system_scenario_testing})
+\begin{itemize}
+	\item[\textbf{[DONE]}] Test scenarios defined (e.g.,~in~\gls{yaml} format, \Cref{app:test_cases}) covering nominal operation, documented legacy fault handling~\cite{rexroth1992wsp}, and self-test initiation/execution.
+	\item[\textbf{[DONE]}] Tests executed on integrated hardware using the dedicated, validated test fixture (\cite{dolata2023}).
+	\item[\textbf{[DONE]}] Fault memory cycle fully tested (detection, display, STW read-out, storage across power cycles, clearing) (\Cref{subsec:system_scenario_results}).
+	\item[\textbf{[DONE]}] Legacy self-test sequences correctly initiated via fixture and sequence execution verified against documentation~\cite{rexroth1992wsp} (\Cref{subsec:system_scenario_results}).
+	\item[\textbf{[DONE]}] User interface behaviour (button responses, display outputs) confirmed equivalent to legacy system descriptions (\Cref{subsec:system_scenario_results}).
+	\item[\textbf{[PARTIAL]}] Enhanced diagnostic logging functionality (\gls{stm32} subsystem receiving data via isolated~\gls{spi}) verified; full validation pending resolution of the SPI receive-sizing defect (\Cref{subsec:limitations}).
+	\item[\textbf{[DONE]}] System stability under defined scenarios and power cycling confirmed through repeated test runs (\Cref{subsec:system_scenario_results}).
+	\item[\textbf{[DONE]}] Test results comprehensively logged, reviewed, and archived (\Cref{sec:app_system_log_excerpts}).
+\end{itemize}
+
+\medskip
+\noindent\textbf{E. Environmental and EMC Considerations}
+\begin{itemize}
+	\item[\textbf{[DONE]}] Design incorporates principles targeting \gls{en50155}/\gls{en61373} requirements (component selection, layout, isolation), as described in~\Cref{sec:design_principles}.
+	\item[\textbf{[DONE]}] \gls{emc} mitigation techniques implemented and documented (\Cref{sec:pcb_design_impl}).
+	\item[\textbf{[PLANNED]}] Formal environmental (\gls{en50155}, \gls{en61373}) and~\gls{emc} (\gls{en50121}~series) qualification testing to be performed by an accredited laboratory for formal certification (\Cref{sec:future_work}).
+\end{itemize}
+
+\medskip
+\noindent\textbf{F. Manufacturing and Documentation}
+\begin{itemize}
+	\item[\textbf{[DONE]}] \gls{pcb} manufacturing outputs inspected (visual checks, basic electrical continuity/short checks where feasible).
+	\item[\textbf{[DONE]}] Assembly performed according to design documentation; post-assembly visual inspection completed.
+	\item[\textbf{[DONE]}] Final design documentation (\glspl{bom}~\Cref{app:bom_drc}, schematics~\Cref{app:schematics}, layouts~\Cref{app:schematics}) under version control and reflects `as-built' state of Rev~1.0.
+	\item[\textbf{[DONE]}] All key verification artefacts (test plans/definitions, test logs, simulation results) archived and under version control (\Cref{app:test_logs,app:test_cases}).
+	\item[\textbf{[PARTIAL]}] Traceability information maintained (implicitly, formal matrices pending, as discussed in~\Cref{sec:verification_artefacts}).
+	\item[\textbf{[DONE]}] Development and verification tool usage documented; justification for tool suitability considered (\Cref{sec:verification_artefacts}).
+\end{itemize}

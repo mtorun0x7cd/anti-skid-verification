@@ -38,7 +38,7 @@ Modernising ageing safety-critical electronics in public transportation is often
 
 | Dimension | Detail |
 | :--- | :--- |
-| **Institution** | TH Köln (Cologne University of Applied Sciences) |
+| **Institution** | TH Köln (University of Applied Sciences) |
 | **Faculty** | Information, Media and Electrical Engineering |
 | **Program** | Computer Science & Engineering (Technische Informatik), M.Sc. |
 | **Type** | Independent Research Publication |

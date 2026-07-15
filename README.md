@@ -110,7 +110,7 @@ The methodology maps to the right side of the V-model through two complementary 
 **Layer 2 — Scenario-Based System-Level Testing** targets system and acceptance testing: black-box validation of the fully integrated system against original functional requirements using a dedicated hardware test fixture ("Testkartentester").
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#E1F0F7', 'edgeColor': '#00629B', 'primaryBorderColor': '#00629B', 'lineColor': '#00629B', 'textColor': '#083A5A' }}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#EFF6FF', 'edgeColor': '#2563EB', 'primaryBorderColor': '#2563EB', 'lineColor': '#2563EB', 'textColor': '#0F172A' }}}%%
 graph LR
     Host["Host PC<br/>Python / YAML"] <-->|USB / Serial| STM["STM32 Nucleo<br/>F401RE"]
     STM <-->|GPIO| Fix["Test Fixture<br/>Testkartentester"]

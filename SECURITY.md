@@ -15,7 +15,7 @@ requirements-to-test traceability matrix (`verification/test_traceability.yaml`)
 and the build tooling that produces the PDFs. There is no production code, no
 credentials, and no network-facing component. The hardware and firmware
 described in the paper (VHDL, STM32 firmware, the Python test fixture) are not
-distributed here; the unmodified OpenCores `t48` core referenced in the work is
+distributed here; the OpenCores `t48` core referenced in the work is
 GPL-2.0 and is likewise not included.
 
 ## Reporting

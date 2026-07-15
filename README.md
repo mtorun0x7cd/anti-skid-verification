@@ -51,7 +51,7 @@ Modernising ageing safety-critical electronics in public transportation is often
 ## Features
 
 - **Two-layer verification methodology** — Standards-aligned (IEC 61508 / IEEE 1012) framework combining white-box component testing with black-box system validation, structured around the V-model
-- **FPGA-based MCS-48 emulation** — Actel A3P1000 flash-based FPGA running an MCS-48 emulation core based on the OpenCores `t48_core`, executing the original 2 KB firmware binary (preserved bit-exact) from external Flash ROM (S29AL016J)
+- **FPGA-based MCS-48 emulation** — Actel A3P1000 flash-based FPGA running an MCS-48 emulation core (the OpenCores `t48_core`, integrated unmodified) executing the original 2 KB firmware binary (preserved bit-exact) from external Flash ROM (S29AL016J)
 - **Galvanically isolated diagnostics** — STM32F401RET6 ARM Cortex-M4 subsystem with optocoupler-isolated SPI, RTC-timestamped SD card logging, and USB Type-C data retrieval
 - **YAML-driven test specification** — Machine-parseable, version-controlled test case definitions with requirements-to-test traceability matrices
 - **Empirical bug taxonomy** — Five distinct defect classes (logical, layout, assembly, firmware, interface) discovered and classified during validation
@@ -267,7 +267,7 @@ The works in this repository authored by Mert Torun — the paper, the research 
 
 > **Note on third-party files.** The LaTeX class and bibliography style `paper/IEEEtran.cls` and `paper/IEEEtran.bst` are the work of the IEEEtran project, redistributed unmodified under the LaTeX Project Public License (LPPL), and are not covered by the license above.
 >
-> **Note on the FPGA core.** The MCS-48 emulation described in this work is based on the OpenCores `t48_core`, which is distributed under the **GPL-2.0** license. The corresponding HDL is not redistributed here; this repository contains only the paper, the report, the slides, and the verification artefacts.
+> **Note on the FPGA core.** The MCS-48 emulation described in this work integrates the unmodified OpenCores `t48_core`, which is distributed under the **GPL-2.0** license. The corresponding HDL is not redistributed here; this repository contains only the paper, the report, the slides, and the verification artefacts.
 
 ## Contact
 

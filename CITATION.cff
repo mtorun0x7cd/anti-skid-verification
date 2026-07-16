@@ -12,8 +12,8 @@ abstract: >-
   protection) modules. It combines deterministic component and interface testing
   (VHDL simulation, JTAG boundary scan, hardware timing measurement) with
   scenario-based system-level validation, and is mapped to IEC 61508,
-  EN 50129, EN 50716, and IEEE 1012. Research conducted at TH Köln (Cologne
-  University of Applied Sciences).
+  EN 50129, EN 50716, and IEEE 1012. Research conducted at TH Köln (University
+  of Applied Sciences).
 authors:
   - given-names: Mert
     family-names: Torun

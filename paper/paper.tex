@@ -566,11 +566,11 @@ Table~\ref{tab:results} provides a quantitative summary of all verification acti
     Buttons (4 cases)           & L2 & Fixture/YAML & 4/4 \\
     Self-test                   & L2 & Fixture/YAML & Pass \\
     Power stability             & L2 & Fixture/YAML & Pass \\
-    SPI (32-bit)                & L2 & Fixture/USB  & Pass$^*$ \\
-    SD card                     & L2 & Firmware      & Pass$^\dagger$ \\
+    SPI (32-bit)                & L2 & Fixture/USB  & Open$^*$ \\
+    SD card                     & L2 & Firmware      & Open$^\dagger$ \\
     \bottomrule
-    \multicolumn{4}{@{}p{\linewidth}@{}}{\scriptsize $^*$Originally truncated to 16 bits; resolved by resizing the SPI reception buffer configuration to 32 bits (4 bytes) in the STM32 firmware.} \\
-    \multicolumn{4}{@{}p{\linewidth}@{}}{\scriptsize $^\dagger$Originally blocked due to filesystem mounting delays; resolved by mounting once at initialization and optimizing the main logging loop.}
+    \multicolumn{4}{@{}p{\linewidth}@{}}{\scriptsize $^*$Truncated to 16 bits by the STM32 receive configuration; sizing the reception to the full 32-bit frame remains open work.} \\
+    \multicolumn{4}{@{}p{\linewidth}@{}}{\scriptsize $^\dagger$Blocked by filesystem mounting delays in the write loop; mounting once at initialisation and decoupling logging from the receive interrupt remains open work.}
   \end{tabular*}
 \end{table}
 
@@ -603,8 +603,8 @@ The empirical validation of the retrofitted system on the target hardware reveal
     B1 & Logical & NVRAM byte-low-enable (\texttt{NVRAM\_ble}) held high & L1 & Simulation & Resolved \\
     B2 & Layout  & STM32 SWD debug pins routed incorrectly           & L1 & Boundary-Scan & Reworked \\
     B3 & Assembly& Approx. 40 FPGA pins open or shorted              & L1 & JTAG / Scope  & Reworked \\
-    B4 & Firmware& FatFS timing starvation blocking SPI Rx           & L2 & Fixture/YAML  & Resolved \\
-    B5 & Interface& SPI payload truncation (16-bit vs 32-bit buffer)  & L2 & Fixture/USB   & Resolved \\
+    B4 & Firmware& FatFS timing starvation blocking SPI Rx           & L2 & Fixture/YAML  & Open \\
+    B5 & Interface& SPI payload truncation (16-bit vs 32-bit buffer)  & L2 & Fixture/USB   & Open \\
     \bottomrule
   \end{tabular*}
 \end{table}
@@ -641,15 +641,15 @@ Table~\ref{tab:standards} summarises how the methodology maps to applicable stan
 
 \subsection{Diagnostic Subsystem Validation}
 
-After re-routing the STM32 Serial Wire Debug (SWD) pins and debugging the firmware state machine~\cite{savchuk2025}, diagnostic data routing was validated via \USB{} serial streaming, confirming isolation integrity, error-free 32-bit \SPI{} packet reception, and robust SD logging.
+After re-routing the STM32 Serial Wire Debug (SWD) pins and debugging the firmware state machine~\cite{savchuk2025}, diagnostic data routing was validated via \USB{} serial streaming, confirming isolation integrity. \SPI{} packet reception and SD logging remain subject to the open defects of Section~\ref{sec:limitations}.
 
-\subsection{Resolved Integration Issues}
+\subsection{Open Integration Issues}
 \label{sec:limitations}
 
-The discovery of the following integration issues during Layer~2 testing validates the necessity of the scenario-based approach; these faults would not have been detected by Layer~1 simulation alone. To preserve safety integrity, these issues were subsequently resolved:
+The discovery of the following integration issues during Layer~2 testing validates the necessity of the scenario-based approach; these faults would not have been detected by Layer~1 simulation alone. Both remain open in the non-safety diagnostic path:
 \begin{itemize}[nosep]
-  \item \textbf{SD Card Storage (FatFS Timing Starvation):} The FatFS implementation on the STM32 initially caused firmware timing starvation during block write attempts to the MicroSD card. Root-cause analysis revealed that the firmware unconditionally mounted and unmounted the filesystem volume on every write loop cycle, which introduced a \SIrange{50}{200}{\milli\second} blocking overhead. This file system overhead, combined with blocking delays in the main execution thread, starved the SPI receive interrupt re-arming window, resulting in data overruns. This was resolved by mounting the SD card once at initialization, removing the loop-level mounting calls, and reducing the logging frequency.
-  \item \textbf{\SPI{} Payload Truncation and Alignment:} The VHDL SPI master correctly transmits a 32-bit diagnostic frame (consisting of a 2-bit event-type prefix, 6-bit button state, and 24-bit error code). However, the STM32 firmware was initially misconfigured to receive only 16 bits per transaction (\texttt{HAL\_SPI\_Receive\_IT} was called with a buffer size of 2). This mismatch truncated the payload and left the remaining 16 bits unread. The leftover clock pulses triggered a receiver buffer overrun (\texttt{OVR} flag in the SPI status register) and caused persistent frame misalignment on subsequent transfers. Correcting the STM32 RX buffer size configuration to 32 bits (4 bytes) resolved the truncation and misalignment.
+  \item \textbf{SD Card Storage (FatFS Timing Starvation):} The FatFS implementation on the STM32 causes firmware timing starvation during block write attempts to the MicroSD card. Root-cause analysis showed that the firmware unconditionally mounts and unmounts the filesystem volume on every write loop cycle, which introduces a \SIrange{50}{200}{\milli\second} blocking overhead. This file system overhead, combined with blocking delays in the main execution thread, starves the SPI receive interrupt re-arming window, resulting in data overruns. Streaming over the \USB{} CDC interface bypasses the SDIO path and avoids the blocking; the identified fix is to mount the volume once at initialisation, remove the loop-level mounting calls, and decouple logging from the receive interrupt.
+  \item \textbf{\SPI{} Payload Truncation and Alignment:} The VHDL SPI master correctly transmits a 32-bit diagnostic frame (consisting of a 2-bit event-type prefix, 6-bit button state, and 24-bit error code). However, the STM32 firmware is configured to receive only 16 bits per transaction (\texttt{HAL\_SPI\_Receive\_IT} is called with a buffer size of 2). This mismatch truncates the payload and leaves the remaining 16 bits unread. The leftover clock pulses trigger a receiver buffer overrun (\texttt{OVR} flag in the SPI status register) and cause persistent frame misalignment on subsequent transfers. The identified fix is to size the reception to the full 32-bit frame; because the F401 SPI peripheral supports only 8- or 16-bit data frames, this requires a four-byte buffer at 8-bit data width rather than a single 32-bit transfer.
   \item \textbf{Residual Scope Gaps:} Formal methods (e.g., model checking, equivalence checking), quantitative structural coverage metrics (statement/branch coverage for VHDL), accredited environmental testing (EN~50155~\cite{en50155_2021}, EN~61373~\cite{en61373_2010}), and full \HIL{} integration with the complete braking system were beyond project scope. These activities are required for formal safety certification and are identified as future work.
 \end{itemize}
 
@@ -665,7 +665,7 @@ This paper has proposed and validated a structured, two-layer verification metho
 
 The practical realities of stabilising an inherited prototype---the re-soldering of roughly 40 \FPGA{} pins alongside several firmware interventions---underline a key lesson for hardware retrofits: legacy migration should include a dedicated hardware-stabilisation phase, and design-for-debuggability should be a primary rather than secondary requirement. These findings are not specific to the anti-skid domain and apply to comparable safety-critical legacy-to-\FPGA{} modernisation efforts.
 
-\textbf{Future work:} The immediate priority is to harden the diagnostic firmware beyond the stopgap fixes of Section~\ref{sec:limitations}---replacing them with a non-blocking, DMA-backed \SPI{} reception path and a logging queue decoupled from the receive interrupt. Longer-term objectives encompass full \HIL{} integration~\cite{hil_rail_suspension_2023,zhou_wu_2020}, cybersecurity assessment compliant with IEC~62443~\cite{iec62443_2013}, and the transition to professionally manufactured \PCB{}s for accredited environmental certification (EN~50155~\cite{en50155_2021}, EN~61373~\cite{en61373_2010}). Future work can formalise the proposed verification architecture into a generalised, certifiable framework for the sustainable modernisation of IEC~61508-compliant railway electronics.
+\textbf{Future work:} The immediate priority is to close the open defects of Section~\ref{sec:limitations}---sizing the \SPI{} reception to the full frame and moving the diagnostic firmware to a non-blocking, DMA-backed reception path with a logging queue decoupled from the receive interrupt. Longer-term objectives encompass full \HIL{} integration~\cite{hil_rail_suspension_2023,zhou_wu_2020}, cybersecurity assessment compliant with IEC~62443~\cite{iec62443_2013}, and the transition to professionally manufactured \PCB{}s for accredited environmental certification (EN~50155~\cite{en50155_2021}, EN~61373~\cite{en61373_2010}). Future work can formalise the proposed verification architecture into a generalised, certifiable framework for the sustainable modernisation of IEC~61508-compliant railway electronics.
 
 % =========================================================================
 % ACKNOWLEDGMENT

@@ -17,7 +17,7 @@
 ![FPGA](https://img.shields.io/badge/FPGA-FF6F00?style=for-the-badge)
 ![STM32](https://img.shields.io/badge/STM32-03234B?style=for-the-badge&logo=stmicroelectronics&logoColor=white)
 ![IEC 61508](https://img.shields.io/badge/IEC_61508-2C3E50?style=for-the-badge)
-![IEEE](https://img.shields.io/badge/IEEE_Paper-00629B?style=for-the-badge&logo=ieee&logoColor=white)
+![IEEE-format paper](https://img.shields.io/badge/IEEE--format_Paper-00629B?style=for-the-badge)
 [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg?style=for-the-badge)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
 ---
@@ -53,7 +53,7 @@ Modernising ageing safety-critical electronics in public transportation is often
 - **Two-layer verification methodology** — Standards-aligned (IEC 61508 / IEEE 1012) framework combining white-box component testing with black-box system validation, structured around the V-model
 - **FPGA-based MCS-48 emulation** — Actel A3P1000 flash-based FPGA running an MCS-48 emulation core (the OpenCores `t48_core`, integrated unmodified) executing the original 2 KB firmware binary (preserved bit-exact) from external Flash ROM (S29AL016J)
 - **Galvanically isolated diagnostics** — STM32F401RET6 ARM Cortex-M4 subsystem with optocoupler-isolated SPI, RTC-timestamped SD card logging, and USB Type-C data retrieval
-- **YAML-driven test specification** — Machine-parseable, version-controlled test case definitions with requirements-to-test traceability matrices
+- **YAML-driven test specification** — Machine-parseable, version-controlled test case definitions, with a partial requirements-to-test matrix for the diagnostic subsystem (`verification/test_traceability.yaml`)
 - **Empirical bug taxonomy** — Five distinct defect classes (logical, layout, assembly, firmware, interface) discovered and classified during validation
 - **Digital frequency sweep generator** — Division-counter logic replacing the legacy analog VCO, covering 850 Hz – 1550 Hz across 33 up-sweep and 65 down-sweep steps
 - **Deterministic reproducible builds** — `latexmk` with `SOURCE_DATE_EPOCH` enforcement for byte-identical PDF output across builds
@@ -68,7 +68,7 @@ The retrofit replaces a single 8-bit microcontroller board with a modular, four-
 ┌───────────────────────────────────────────────────────────────────────────────────────┐
 │                                Legacy Anti-Skid System                                │
 ├─────────────────────────────────────────────┬─────────────────────────────────────────┤
-│ SAFETY-CRITICAL DOMAIN                      │ NON-SAFETY DIAGNOSTICS DOMAIN           │
+│ SAFETY-CRITICAL DOMAIN                      │ DIAGNOSTICS AND OPERATOR BOARDS         │
 │                                             │                                         │
 │ PCB 1 — Base Board                          │ PCB 3 — STM32 Diagnostics               │
 │ ┌────────────────────────────────────┐      │ ┌────────────────────────────┐          │
@@ -90,8 +90,8 @@ The retrofit replaces a single 8-bit microcontroller board with a modular, four-
 │                                             │ │   + debounce + level shift          │ │
 │                                             │ └─────────────────────────────────────┘ │
 ├─────────────────────────────────────────────┴─────────────────────────────────────────┤
-│ Galvanic isolation: SPI @ 100 kHz across SFH601-3 × 4 optocouplers                    │
-│ (separate DC/DC rails); BCD from the FPGA drives the LED display.                     │
+│ Galvanic isolation (PCB 3 only): SPI @ 100 kHz across SFH601-3 × 4 optocouplers       │
+│ with separate DC/DC rails; PCB 2 and PCB 4 attach directly to the Base Board.         │
 └───────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -118,7 +118,7 @@ graph LR
     DUT -->|Pass/Fail log, timestamped| Host
 ```
 
-Test cases are defined in YAML with full traceability to requirements:
+Test cases are defined in YAML with implicit traceability to the legacy functional requirements:
 
 ```yaml
 - name: Geber 3 - I
@@ -153,7 +153,7 @@ Bugs B1–B3 escaped system-level testing; bugs B4–B5 escaped component simula
 | Hardware Description | VHDL (targeting Actel A3P1000 FPGA via Microsemi Libero SoC) |
 | Diagnostics Firmware | C (STM32F401RET6, ARM Cortex-M4, HAL + FatFS) |
 | Simulation | ModelSim ME (pre- and post-synthesis) |
-| Test Specification | YAML (scenario definitions, requirements-to-test traceability matrices) |
+| Test Specification | YAML (scenario definitions, partial requirements-to-test matrix for the diagnostic subsystem) |
 | Build Automation | GNU Make with deterministic reproducible builds (`SOURCE_DATE_EPOCH`) |
 | Version Control | Git (configuration management per EN 50716) |
 | Standards Framework | IEC 61508, EN 50129, EN 50716, EN 50155, IEEE 1012 |
@@ -162,7 +162,7 @@ Bugs B1–B3 escaped system-level testing; bugs B4–B5 escaped component simula
 
 ```text
 anti-skid-verification/
-├── paper/                  # IEEE conference paper (LaTeX)
+├── paper/                  # Conference paper (IEEE-format LaTeX)
 │   ├── paper.tex           # Main paper source
 │   ├── references.bib      # Paper bibliography
 │   ├── IEEEtran.cls        # IEEE LaTeX class
@@ -234,7 +234,7 @@ The Makefile enforces deterministic builds via `SOURCE_DATE_EPOCH` (derived from
 
 | Document | Description |
 | ---------- | ------------- |
-| [IEEE Paper](https://github.com/mtorun0x7cd/anti-skid-verification/releases/latest/download/paper.pdf) | Paper accepted for publication in *Kölner Beiträge zur technischen Informatik* (ISSN 2193-570X) |
+| [Conference Paper](https://github.com/mtorun0x7cd/anti-skid-verification/releases/latest/download/paper.pdf) | Paper accepted for publication in *Kölner Beiträge zur technischen Informatik* (ISSN 2193-570X) |
 | [Research Report](https://github.com/mtorun0x7cd/anti-skid-verification/releases/latest/download/report.pdf) | Comprehensive report with full methodology, schematics, PCB layouts, and appendices |
 | [Test Traceability Matrix](verification/test_traceability.yaml) | YAML-defined requirements-to-test mapping for SPI and data logger modules |
 | [Presentation](https://github.com/mtorun0x7cd/anti-skid-verification/releases/latest/download/presentation.pdf) | VIMS 2026 talk deck (printable [handout](https://github.com/mtorun0x7cd/anti-skid-verification/releases/latest/download/handout.pdf) alongside) |

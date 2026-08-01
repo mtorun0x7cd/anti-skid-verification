@@ -1,0 +1,37 @@
+% V-model mapping of the two-layer verification strategy.
+% Kept as diagram source rather than a bitmap so that it diffs, reviews and
+% rebuilds deterministically with the rest of the document.
+\begin{tikzpicture}[
+    x=1mm, y=-1mm,
+    phase/.style={
+      draw, fill=black!5,
+      text width=38mm, align=center,
+      inner sep=1.6mm, font=\small\bfseries,
+    },
+    stage/.style={
+      draw, text width=38mm, align=center,
+      inner sep=1.6mm, minimum height=14mm, font=\footnotesize,
+    },
+    flow/.style={-{Latex[length=2mm,width=1.6mm]}, thick},
+    corr/.style={-{Latex[length=2mm,width=1.6mm]}, thick, densely dashed},
+  ]
+
+  \node[phase] (specphase) at (24, 6) {Design \& Spezifikation};
+  \node[phase] (vvphase)   at (118, 6) {Verifikation \& Validierung};
+
+  \node[stage] (req)  at (24, 34) {\textbf{Systemanforderungen}\\(Legacy-Verhalten nach Originalhandbuch)};
+  \node[stage] (arch) at (36, 62) {\textbf{Architektur-Design}\\(FPGA/STM32-Trennung, Modul-Aufbau)};
+  \node[stage] (mod)  at (48, 90) {\textbf{Modul- \& Komponenten-Design}\\(VHDL-Logik, Schaltpläne)};
+
+  \node[stage] (unit)  at (106, 90) {\textbf{Unit- \& Modultests}\\\textbf{(Layer 1)}\\(VHDL-Simulation)};
+  \node[stage] (integ) at (118, 62) {\textbf{Integrationstests}\\\textbf{(Layer 1)}\\(Hardware-Messungen, Schnittstellen)};
+  \node[stage] (sys)   at (130, 34) {\textbf{Systemvalidierung}\\\textbf{(Layer 2)}\\(Fixture-Tests, Szenarien)};
+
+  \draw[flow] (req)   -- (arch);
+  \draw[flow] (arch)  -- (mod);
+  \draw[flow] (mod)   -- (unit);
+  \draw[flow] (unit)  -- (integ);
+  \draw[flow] (integ) -- (sys);
+  \draw[corr] (arch)  -- (integ);
+
+\end{tikzpicture}

@@ -2,11 +2,11 @@
 
 ## Status
 
-This repository holds the source and compiled deliverables of an **active
-research publication** — an IEEE-format paper, an M.Sc. research report, and the
-accompanying presentation. It is not a deployed software system: it builds LaTeX
-documents and carries no runtime, no network service, and no executable
-application.
+This repository holds the source of an **active research publication** — an
+IEEE-format paper, an M.Sc. research report, and the accompanying presentation.
+The compiled documents are release assets and are not tracked here. It is not a
+deployed software system: it builds LaTeX documents and carries no runtime, no
+network service, and no executable application.
 
 ## Scope
 

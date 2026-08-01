@@ -48,6 +48,8 @@ preferred-citation:
   year: 2026
   collection-title: Kölner Beiträge zur technischen Informatik
   issn: 2193-570X
+  publisher:
+    name: Cologne Open Science, TH Köln
   conference:
     name: VIMS 2026
   status: in-press

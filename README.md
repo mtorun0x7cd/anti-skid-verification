@@ -46,7 +46,7 @@ Modernising ageing safety-critical electronics in public transportation is often
 | **Date** | August 2025 |
 | **Presented** | VIMS 2026 |
 | **Publication** | *Kölner Beiträge zur technischen Informatik* (ISSN 2193-570X), in press |
-| **ePublications** | Research report to be archived in TH Köln's [institutional repository](https://epb.bibl.th-koeln.de/); persistent URN/DOI added once assigned |
+| **ePublications** | Paper to be deposited with Cologne Open Science, TH Köln ([institutional repository](https://epb.bibl.th-koeln.de/)); persistent URN/DOI added once assigned |
 
 ## Features
 
@@ -166,6 +166,7 @@ anti-skid-verification/
 │   ├── paper.tex           # Main paper source
 │   ├── references.bib      # Paper bibliography
 │   ├── IEEEtran.cls        # IEEE LaTeX class
+│   ├── IEEEtran.bst        # IEEE BibTeX style
 │   └── fig/                # Paper figures (SVG source, PNG included)
 ├── report/                 # Comprehensive research report (LaTeX)
 │   ├── report.tex          # Main report source
@@ -177,7 +178,7 @@ anti-skid-verification/
 │   ├── keywords/           # Keywords (EN/DE)
 │   └── meta/               # Metadata (title, author, institution)
 ├── verification/           # Test artefacts
-│   └── test_traceability.yaml  # Requirements-to-test traceability matrix
+│   └── test_traceability.yaml  # Requirements-to-test mapping for the SPI and data logger modules
 ├── slides/                 # VIMS 2026 talk deck (LaTeX Beamer)
 │   ├── deck_preamble.tex   # Shared deck preamble
 │   ├── deck_frames.tex     # Slide frames (only the presentation builds from these)
@@ -189,14 +190,23 @@ anti-skid-verification/
 │   ├── social_preview_dark.png
 │   ├── social_card.png
 │   └── render.sh
-├── .github/workflows/      # CI: build paper, report, and slides
+├── .github/
+│   ├── workflows/          # CI: build paper, report, and slides
+│   ├── ISSUE_TEMPLATE/     # Correction form and issue chooser
+│   ├── dependabot.yml      # Action update policy
+│   └── FUNDING.yml         # Funding links
+├── .githooks/              # Opt-in pre-commit secret scan
 ├── CITATION.cff            # How to cite this work
+├── CONTRIBUTING.md         # How to report corrections
 ├── SECURITY.md             # Security and reporting policy
 ├── LICENSE                 # CC BY-NC-ND 4.0 (full legal text)
 ├── NOTICE                  # Copyright and third-party licenses
 ├── Makefile                # Deterministic build script
-├── .latexmkrc              # latexmk configuration
+├── .latexmkrc              # latexmk configuration (per-document overrides in paper/, report/, slides/)
 ├── .chktexrc               # LaTeX linting rules
+├── .markdownlint.jsonc     # Markdown linting rules
+├── .gitleaks.toml          # Secret-scan configuration
+├── .gitignore              # Untracked build outputs and local material
 ├── .editorconfig           # Editor configuration
 └── .gitattributes          # Git line-ending rules
 ```
@@ -255,11 +265,11 @@ The Makefile enforces deterministic builds via `SOURCE_DATE_EPOCH` (derived from
 
 If you reference this work, please cite the accompanying paper. Machine-readable metadata is in [CITATION.cff](CITATION.cff) (GitHub renders a "Cite this repository" control from it).
 
-> Torun, M. (2026). *Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology.* Kölner Beiträge zur technischen Informatik (ISSN 2193-570X). In press.
+> Torun, M. (2026). *Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology.* Kölner Beiträge zur technischen Informatik (ISSN 2193-570X). In press. Title provisional until fixed by the series editors.
 
 ## Security
 
-See [`SECURITY.md`](SECURITY.md) for the security stance and how to report issues.
+See [`SECURITY.md`](SECURITY.md) for the security stance and how to report issues. Factual corrections and errata are covered by [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## License
 

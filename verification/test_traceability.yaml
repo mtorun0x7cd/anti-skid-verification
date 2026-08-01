@@ -2,7 +2,8 @@
 project: Retrofitted Anti-Skid System
 document_type: Requirements-to-Test Traceability Matrix
 standard: IEC 61508
-version: 1.0.0
+as_of: 2026-08-01
+source: Layer 2 fixture results recorded in report/chapters/chapter5.tex
 
 modules:
   - name: SPI_Master

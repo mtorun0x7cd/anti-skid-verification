@@ -46,7 +46,7 @@ slides:
 
 check:
 	find paper report slides -name '*.tex' -not -path '*/.tmp.nosync/*' \
-		-exec chktex -q -l .chktexrc {} +
+		-exec chktex -q -I0 -l .chktexrc {} +
 
 clean:
 	-cd paper && $(LATEXMK) -C paper.tex

@@ -69,7 +69,7 @@ jobs:
             .tmp.nosync/dist/presentation.pdf
             .tmp.nosync/dist/handout.pdf
           body: |
-            Compiled deliverables for the anti-skid retrofit verification work (VIMS 2026): the IEEE paper, the M.Sc. research report, the presentation deck, and the printable conference handout. See the README for documentation.
+            Compiled deliverables for the anti-skid retrofit verification work (VIMS 2026): the conference paper, the M.Sc. research report, the presentation deck, and the printable conference handout. See the README for documentation.
 
             **Full Changelog**: https://github.com/mtorun0x7cd/anti-skid-verification/commits/${{ github.ref_name }}
         env:

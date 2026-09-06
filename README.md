@@ -283,7 +283,7 @@ The works in this repository authored by Mert Torun — the paper, the research 
 
 ## Contact
 
-**Mert Torun, M.Sc.** — IT Security Architect · Systems Engineer  
+**Mert Torun, M.Sc.** — Verification of Safety-Critical Systems · Information Security  
 mtorun0x7cd · Research & Development
 
 His work spans the verification and validation of safety-critical systems, infrastructure hardening, and cryptographic integrity, grounded in an M.Sc. in Computer Science & Engineering from TH Köln. This repository accompanies the accepted paper and the comprehensive research report behind it.

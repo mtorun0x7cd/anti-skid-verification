@@ -1,0 +1,120 @@
+# SPDX-FileCopyrightText: 2026 Mert Torun
+# SPDX-License-Identifier: MIT
+
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  epochs:
+    name: Commit time of each document
+    runs-on: ubuntu-24.04
+    outputs:
+      paper: ${{ steps.epoch.outputs.paper }}
+      report: ${{ steps.epoch.outputs.report }}
+      slides: ${{ steps.epoch.outputs.slides }}
+    steps:
+      - name: Check out the repository with its history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # The build date of each document is the time of the last commit that
+      # changed its folder, as the Makefile derives it.
+      - name: Read the commit time of each folder
+        id: epoch
+        run: |
+          echo "paper=$(git log -1 --format=%ct -- paper)" >> "$GITHUB_OUTPUT"
+          echo "report=$(git log -1 --format=%ct -- report)" >> "$GITHUB_OUTPUT"
+          echo "slides=$(git log -1 --format=%ct -- slides paper/fig)" >> "$GITHUB_OUTPUT"
+
+  documents:
+    name: Typeset ${{ matrix.document }} twice and compare
+    needs: epochs
+    runs-on: ubuntu-24.04
+    container:
+      # TeX Live, pinned by digest: xu-cheng/texlive-full as of 2026-07-02.
+      image: ghcr.io/xu-cheng/texlive-full@sha256:11383430b9a3e48c0b79339f34d8092f942f897d91ab3749d4899d06731fea7f
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - document: paper
+            files: paper.tex
+            outputs: paper.pdf
+          - document: report
+            files: report.tex
+            outputs: report.pdf
+          - document: slides
+            files: presentation.tex handout.tex
+            outputs: presentation.pdf handout.pdf
+    env:
+      SOURCE_DATE_EPOCH: ${{ needs.epochs.outputs[matrix.document] }}
+      FORCE_SOURCE_DATE: "1"
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Record the versions of the TeX tools
+        run: |
+          tex --version | head -n 1
+          pdflatex --version | head -n 1
+          biber --version
+          latexmk -v | head -n 2
+          echo "SOURCE_DATE_EPOCH=$SOURCE_DATE_EPOCH"
+
+      # The same command as the Makefile; the folder's .latexmkrc writes the
+      # output into .tmp.nosync/latex/.
+      - name: Typeset ${{ matrix.document }}
+        working-directory: ${{ matrix.document }}
+        run: latexmk -pdf -interaction=nonstopmode -file-line-error -synctex=0 ${{ matrix.files }}
+
+      - name: Typeset it again and compare the bytes
+        working-directory: ${{ matrix.document }}
+        run: |
+          mv .tmp.nosync "$RUNNER_TEMP/first"
+          latexmk -pdf -interaction=nonstopmode -file-line-error -synctex=0 ${{ matrix.files }}
+          for pdf in ${{ matrix.outputs }}; do
+            cmp "$RUNNER_TEMP/first/latex/$pdf" ".tmp.nosync/latex/$pdf"
+            sha256sum ".tmp.nosync/latex/$pdf"
+          done
+
+      - name: Keep the build
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ${{ matrix.document }}-build-from-sources-not-the-version-of-record
+          path: ${{ matrix.document }}/.tmp.nosync/latex/*.pdf
+          # The output folder .tmp.nosync is hidden, and hidden files are left
+          # out unless this is set.
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+
+  lint:
+    name: ChkTeX
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/xu-cheng/texlive-full@sha256:11383430b9a3e48c0b79339f34d8092f942f897d91ab3749d4899d06731fea7f
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Lint the LaTeX sources with the rules of .chktexrc
+        run: find paper report slides -name '*.tex' -exec chktex -q -I0 -l .chktexrc {} +

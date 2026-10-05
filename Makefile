@@ -10,6 +10,8 @@
 #   make verify-deposit   check publication/ against SHA256SUMS
 #   make traceability     check the traceability data and their CSV view, and the
 #                         check itself on mutated copies (needs PyYAML, jsonschema)
+#   make metadata         check that CITATION.cff, codemeta.json, the README's
+#                         BibTeX entry and SHA256SUMS agree (needs PyYAML)
 #
 # Each document is built with SOURCE_DATE_EPOCH set to the time of the last
 # commit that changed its folder, so that two builds of one commit give the
@@ -31,7 +33,7 @@ export PYTHONDONTWRITEBYTECODE := 1
 # The commit time of folder $(1), unless SOURCE_DATE_EPOCH is set.
 epoch = $(or $(SOURCE_DATE_EPOCH),$(shell git log -1 --format=%ct -- $(1) 2>/dev/null),$(error SOURCE_DATE_EPOCH is not set and git gives no commit time for $(1)/))
 
-.PHONY: all paper report slides check verify-deposit traceability
+.PHONY: all paper report slides check verify-deposit traceability metadata
 
 all: paper report slides
 
@@ -55,3 +57,7 @@ verify-deposit:
 traceability:
 	$(PYTHON) tools/check_traceability.py
 	$(PYTHON) tools/check_traceability.py --selftest
+
+metadata:
+	$(PYTHON) tools/check_metadata.py
+	$(PYTHON) tools/check_metadata.py --selftest

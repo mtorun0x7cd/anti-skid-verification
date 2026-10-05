@@ -88,8 +88,9 @@ LICENSES/.
   README files of publication/,
   paper/ and report/
 
-  Makefile, tools/, the           MIT. Build files, scripts and configuration.
-  dotfiles, paper/.latexmkrc,     Copyright 2026 Mert Torun.
+  Makefile, tools/, .github/,     MIT. Build files, scripts, workflows and
+  .githooks/, the dotfiles,       configuration. Copyright 2026 Mert Torun.
+  paper/.latexmkrc,
   report/.latexmkrc,
   slides/.latexmkrc
 

@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: 2026 Mert Torun
+# SPDX-License-Identifier: MIT
+
+name: Traceability
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  data:
+    name: Traceability data of the diagnostic path
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install PyYAML and jsonschema
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check PyYAML==6.0.2 jsonschema==4.25.1
+
+      - name: Check the data against the schema and the rules, and the CSV view
+        run: |
+          "$RUNNER_TEMP/venv/bin/python" tools/check_traceability.py
+
+      - name: Show that each rule refuses the case it is written for
+        run: |
+          "$RUNNER_TEMP/venv/bin/python" tools/check_traceability.py --selftest

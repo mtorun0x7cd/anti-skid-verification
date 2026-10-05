@@ -107,7 +107,7 @@ python3 tools/check_traceability.py --selftest   # each rule refuses the case it
 python3 tools/check_traceability.py --write-csv  # regenerate traceability.csv after a change
 ```
 
-The check holds the YAML file to the schema; requires archived primary evidence for `PASS`; requires the prefix of each test identifier to match its layer and every identifier to be unique; requires every label it cites to be a label in `report/`, every other source a key of the report's bibliography, and every defect a row of Table 5.4; and requires the CSV view to equal its regeneration. Its self-test proves each rule on a mutated copy, among them B4 marked `PASS` on the report's text alone. CI runs both on every push.
+The check holds the YAML file to the schema; requires archived primary evidence for `PASS`; requires the prefix of each test identifier to match its layer and every identifier to be unique; requires every label it cites to be a label in `report/`, every other source a key of the report's bibliography, and every defect a row of Table 5.4; and requires the CSV view to equal its regeneration. Its self-test applies each rule to a mutated copy that the rule has to refuse, among them B4 marked `PASS` on the report's text alone. CI runs both on every push.
 
 ## Reuse
 

@@ -23,7 +23,7 @@ This check holds the file to these rules:
 
     check_traceability.py              check the file and the CSV
     check_traceability.py --write-csv  write verification/traceability.csv
-    check_traceability.py --selftest   prove that each rule refuses a case it is
+    check_traceability.py --selftest   show that each rule refuses a case it is
                                        written for, among them B4 marked PASS on
                                        the report's text alone
 

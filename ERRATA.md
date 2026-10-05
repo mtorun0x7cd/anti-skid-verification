@@ -689,4 +689,4 @@ These are not errors of the author's text. They concern the catalogue record of 
 ## 3. Updates
 
 - **[20] (p. 10).** The printed address `https://www.railtechnologymagazine.com/articles/greater-anglia-1m-class-317-refurb-completed` returns HTTP 404 (checked on 2026-09-24, 2026-09-28 and 2026-10-01). The article is available at <https://www.railtechnologymagazine.com/Rolling-stock/greater-anglia-class-317-refurb-completed>.
-- **Author's website (p. 3).** The address `https://mtorun0x7cd.com` in the author note does not open: the TLS handshake fails (checked on 2026-09-28 and 2026-10-01), and over plain HTTP the hosting provider's placeholder page appears. The author can be reached at the e-mail address printed beside it.
+- **Author's website (p. 3).** The web address printed in the author note does not open: the TLS handshake fails (checked on 2026-09-28 and 2026-10-01), and over plain HTTP the hosting provider's placeholder page appears. The author can be reached at the e-mail address printed beside it.

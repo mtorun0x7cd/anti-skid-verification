@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightText: 2026 Mert Torun
+# SPDX-License-Identifier: MIT
+
+name: Correction
+description: Report an error in the paper, the research report, the slides, the traceability data or the documentation.
+title: "Correction: "
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        The deposited paper does not change: a confirmed error is added to ERRATA.md.
+        Please check ERRATA.md first. A matter that should not be public goes by e-mail,
+        as SECURITY.md describes.
+  - type: dropdown
+    id: item
+    attributes:
+      label: Item
+      description: Where the error is.
+      options:
+        - The deposited paper (publication/, the tag cos-1494)
+        - The corrected manuscript of the paper (paper/)
+        - The research report (report/)
+        - The slides of the talk (slides/)
+        - The traceability data (verification/)
+        - The README or other documentation
+        - The citation metadata (CITATION.cff, codemeta.json)
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: The page and section of the paper or the report, or the file and line.
+      placeholder: "p. 7 (PDF p. 7), Section IV-C"
+    validations:
+      required: true
+  - type: textarea
+    id: quoted-text
+    attributes:
+      label: Quoted text
+      description: The passage as it stands, verbatim.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: A source, a measurement or a passage of the work that supports the correction.
+    validations:
+      required: true
+  - type: checkboxes
+    id: errata
+    attributes:
+      label: ERRATA.md
+      options:
+        - label: I checked ERRATA.md
+          required: true

@@ -84,9 +84,11 @@ LICENSES/.
   CITATION.cff                    CC BY-NC-ND 4.0, because it quotes the
                                   abstract of the paper.
 
-  codemeta.json, NOTICE, the      CC BY 4.0. Copyright 2026 Mert Torun.
-  README files of publication/,
-  paper/ and report/
+  codemeta.json, NOTICE,          CC BY 4.0. Copyright 2026 Mert Torun.
+  SECURITY.md, CONTRIBUTING.md,
+  the README files of
+  publication/, paper/, report/,
+  slides/ and verification/
 
   Makefile, tools/, .github/,     MIT. Build files, scripts, workflows and
   .githooks/, the dotfiles,       configuration. Copyright 2026 Mert Torun.

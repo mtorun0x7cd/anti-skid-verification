@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2026 Mert Torun
+# SPDX-License-Identifier: MIT
+
+blank_issues_enabled: false
+contact_links:
+  - name: Version of record
+    url: https://doi.org/10.57684/COS-1494
+    about: The deposited paper in the catalogue of Cologne Open Science, TH Köln.
+  - name: Private matters
+    url: https://github.com/mtorun0x7cd/anti-skid-verification/blob/main/SECURITY.md
+    about: Credentials, personal data or a security problem go privately, as SECURITY.md describes.

@@ -112,3 +112,17 @@ path = ["NOTICE", "codemeta.json"]
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Mert Torun"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+# The traceability data: the CSV view is generated from the YAML file and has no
+# room for a licence comment; the schema is a JSON file.
+[[annotations]]
+path = ["verification/traceability.csv"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Mert Torun"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["verification/traceability.schema.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Mert Torun"
+SPDX-License-Identifier = "MIT"

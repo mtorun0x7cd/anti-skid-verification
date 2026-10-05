@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtorun0x7cd/anti-skid-verification/blob/main/verification/traceability.schema.json",
+  "title": "Requirements-to-test traceability of a retrofit",
+  "description": "Schema of verification/test_traceability.yaml. verification/README.md is its data dictionary.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "title", "record_status", "applies_to", "as_of", "scope", "requirement_source", "requirements"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "title": {"type": "string", "minLength": 1},
+    "record_status": {"type": "string", "minLength": 1},
+    "applies_to": {"type": "string", "minLength": 1},
+    "as_of": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "scope": {"type": "string", "minLength": 1},
+    "requirement_source": {"type": "string", "minLength": 1},
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/requirement"}
+    }
+  },
+  "$defs": {
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement", "source", "tests"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^REQ-[A-Z]{2,8}-[0-9]{2}$"},
+        "statement": {"type": "string", "minLength": 1},
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label", "locator"],
+          "properties": {
+            "label": {"type": "string", "minLength": 1},
+            "locator": {"type": "string", "minLength": 1}
+          }
+        },
+        "tests": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/test"}
+        }
+      }
+    },
+    "test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "layer", "method", "item", "date", "status", "defect", "evidence", "note"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^L[12]-[A-Z]{2,8}-[0-9]{2}$"},
+        "layer": {"enum": [1, 2]},
+        "method": {"enum": ["simulation", "link-test", "oscilloscope", "jtag", "fixture", "operation", "inspection", "firmware-analysis", "not-tested"]},
+        "item": {"type": "string", "minLength": 1},
+        "date": {"type": ["string", "null"]},
+        "status": {"enum": ["PASS", "OBSERVED", "FIX-APPLIED-NOT-VERIFIED", "OPEN", "NOT-DOCUMENTED"]},
+        "defect": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^B[1-9]$"}]},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "note": {"type": "string", "minLength": 1}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "locator", "kind", "archived", "public"],
+      "properties": {
+        "source": {"type": "string", "minLength": 1},
+        "label": {"type": "string", "minLength": 1},
+        "locator": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["report-text", "project-report", "source-code", "log", "capture", "measurement", "test-protocol"]},
+        "archived": {"type": "boolean"},
+        "public": {"type": "boolean"}
+      },
+      "if": {"properties": {"source": {"const": "report"}}},
+      "then": {"required": ["label"]}
+    }
+  }
+}

@@ -69,6 +69,14 @@ LICENSES/.
                                   snippet, and the captures the deck includes
                                   from paper/fig/ (section 2).
 
+  verification/                   CC BY 4.0 for the data: test_traceability.yaml,
+  (test_traceability.yaml,        traceability.csv and README.md. Copyright 2026
+  traceability.csv, README.md)    Mert Torun.
+
+  verification/                   MIT: the schema and the empty template.
+  (traceability.schema.json,      Copyright 2026 Mert Torun.
+  template.yaml)
+
   ERRATA.md                       CC BY 4.0; the quoted text of each entry is
                                   quoted from the deposited paper and stays
                                   under its licence, CC BY-NC-ND 4.0.
@@ -80,8 +88,8 @@ LICENSES/.
   README files of publication/,
   paper/ and report/
 
-  Makefile, the dotfiles,         MIT. Build files and configuration.
-  paper/.latexmkrc,               Copyright 2026 Mert Torun.
+  Makefile, tools/, the           MIT. Build files, scripts and configuration.
+  dotfiles, paper/.latexmkrc,     Copyright 2026 Mert Torun.
   report/.latexmkrc,
   slides/.latexmkrc
 

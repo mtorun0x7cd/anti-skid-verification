@@ -8,6 +8,8 @@
 #   make slides           typeset the deck and the handout into slides/.tmp.nosync/latex/
 #   make check            run ChkTeX over the LaTeX sources; any warning fails
 #   make verify-deposit   check publication/ against SHA256SUMS
+#   make traceability     check the traceability data and their CSV view, and the
+#                         check itself on mutated copies (needs PyYAML, jsonschema)
 #
 # Each document is built with SOURCE_DATE_EPOCH set to the time of the last
 # commit that changed its folder, so that two builds of one commit give the
@@ -20,14 +22,16 @@ SHELL       := /bin/bash
 
 LATEXMK ?= latexmk
 BIBER   ?= biber
+PYTHON  ?= python3
 LFLAGS  := -pdf -interaction=nonstopmode -file-line-error -synctex=0
 
 export FORCE_SOURCE_DATE := 1
+export PYTHONDONTWRITEBYTECODE := 1
 
 # The commit time of folder $(1), unless SOURCE_DATE_EPOCH is set.
 epoch = $(or $(SOURCE_DATE_EPOCH),$(shell git log -1 --format=%ct -- $(1) 2>/dev/null),$(error SOURCE_DATE_EPOCH is not set and git gives no commit time for $(1)/))
 
-.PHONY: all paper report slides check verify-deposit
+.PHONY: all paper report slides check verify-deposit traceability
 
 all: paper report slides
 
@@ -47,3 +51,7 @@ check:
 verify-deposit:
 	cd publication && if command -v sha256sum >/dev/null; then sha256sum -c SHA256SUMS; \
 		else shasum -a 256 -c SHA256SUMS; fi
+
+traceability:
+	$(PYTHON) tools/check_traceability.py
+	$(PYTHON) tools/check_traceability.py --selftest

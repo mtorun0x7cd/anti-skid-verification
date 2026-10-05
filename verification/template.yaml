@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2026 Mert Torun
+# SPDX-License-Identifier: MIT
+#
+# Empty skeleton of a traceability file in the format of test_traceability.yaml,
+# for another retrofit project. It carries no data and no claim about any system.
+# verification/README.md explains each field; traceability.schema.json is the
+# schema a filled-in copy has to hold. Copy the file, fill in every field, and
+# check the copy with tools/check_traceability.py adapted to its paths.
+
+schema_version: 1
+title: ""
+record_status: ""        # what this file is, where its data come from, what it is not
+applies_to: ""           # the work or the system the file belongs to
+as_of: ""                # YYYY-MM-DD
+scope: ""                # what the file covers, and what it does not
+requirement_source: ""   # where the requirements come from
+
+requirements: []
+# Each requirement:
+#   - id: REQ-XX-01
+#     statement: ""
+#     source: {label: "", locator: ""}
+#     tests:
+#       - id: L1-XX-01       # L1- or L2-, the layer of the test
+#         layer: 1
+#         method: ""         # simulation, link-test, oscilloscope, jtag, fixture,
+#                            # operation, inspection, firmware-analysis, not-tested
+#         item: ""           # what was tested: design, prototype or unit
+#         date: null
+#         status: ""         # PASS, OBSERVED, FIX-APPLIED-NOT-VERIFIED, OPEN, NOT-DOCUMENTED
+#         defect: null
+#         evidence:
+#           - {source: "", label: "", locator: "", kind: "", archived: false, public: false}
+#         note: ""

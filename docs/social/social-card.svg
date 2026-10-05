@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-FileCopyrightText: 2026 Mert Torun
+  SPDX-License-Identifier: CC-BY-4.0
+
+  Social card of this repository, 1280 x 640. render.sh writes social-card.png
+  from this file.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="card-title card-desc">
+  <title id="card-title">Functional Equivalence in Retrofitted Anti-Skid Systems</title>
+  <desc id="card-desc">Working Paper, Kölner Beiträge zur technischen Informatik 2/2026, and research report, TH Köln, 2026. DOI 10.57684/COS-1494.</desc>
+  <rect width="1280" height="640" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="24" height="640" fill="#2563EB"/>
+  <g font-family="Inter, Helvetica, Arial, sans-serif">
+    <text x="112" y="158" font-size="76" font-weight="700" fill="#0F172A">Functional Equivalence</text>
+    <text x="112" y="250" font-size="76" font-weight="700" fill="#0F172A">in Retrofitted</text>
+    <text x="112" y="342" font-size="76" font-weight="700" fill="#0F172A">Anti-Skid Systems</text>
+    <text x="112" y="428" font-size="34" font-weight="400" fill="#475569">Working Paper, Kölner Beiträge zur technischen Informatik 2/2026,</text>
+    <text x="112" y="476" font-size="34" font-weight="400" fill="#475569">and research report, TH Köln, 2026</text>
+    <text x="112" y="548" font-size="40" font-weight="500" fill="#1D4ED8">DOI 10.57684/COS-1494</text>
+  </g>
+</svg>

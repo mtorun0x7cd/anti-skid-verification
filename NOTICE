@@ -88,13 +88,16 @@ LICENSES/.
   SECURITY.md, CONTRIBUTING.md,
   the README files of
   publication/, paper/, report/,
-  slides/ and verification/
+  slides/ and verification/,
+  docs/social/social-card.svg,
+  docs/social/social-card.png
 
   Makefile, tools/, .github/,     MIT. Build files, scripts, workflows and
   .githooks/, the dotfiles,       configuration. Copyright 2026 Mert Torun.
   paper/.latexmkrc,
   report/.latexmkrc,
-  slides/.latexmkrc
+  slides/.latexmkrc,
+  docs/social/render.sh
 
 
 2. Material of third parties

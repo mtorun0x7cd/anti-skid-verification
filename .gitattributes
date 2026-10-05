@@ -38,3 +38,6 @@ paper/IEEEtran.cls  linguist-vendored
 paper/IEEEtran.bst  linguist-vendored
 .latexmkrc          linguist-detectable=false
 **/.latexmkrc       linguist-detectable=false
+
+# The social card and its render script are documentation, not code.
+docs/**             linguist-documentation

@@ -133,3 +133,10 @@ path = ["SECURITY.md", "CONTRIBUTING.md"]
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Mert Torun"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+# The social card, rendered from social-card.svg by render.sh.
+[[annotations]]
+path = ["docs/social/social-card.png"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Mert Torun"
+SPDX-License-Identifier = "CC-BY-4.0"

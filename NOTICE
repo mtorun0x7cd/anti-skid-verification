@@ -62,6 +62,13 @@ LICENSES/.
   report/fig/schematic/,
   report/fig/layout/
 
+  slides/ (the .tex files and     CC BY 4.0. The deck and the handout of the
+  README.md)                      talk, revised in October 2026. Copyright 2026
+                                  Mert Torun. Not covered: the YAML test case
+                                  of the Layer 2 frame, marked as an SPDX
+                                  snippet, and the captures the deck includes
+                                  from paper/fig/ (section 2).
+
   ERRATA.md                       CC BY 4.0; the quoted text of each entry is
                                   quoted from the deposited paper and stays
                                   under its licence, CC BY-NC-ND 4.0.
@@ -75,7 +82,8 @@ LICENSES/.
 
   Makefile, the dotfiles,         MIT. Build files and configuration.
   paper/.latexmkrc,               Copyright 2026 Mert Torun.
-  report/.latexmkrc
+  report/.latexmkrc,
+  slides/.latexmkrc
 
 
 2. Material of third parties
@@ -106,7 +114,8 @@ an Anti-Skid Protection for Trams", internship documentation, TH Köln, 2023
   paper/fig/comp_upsweep.png, paper/fig/comp_downsweep.png
     Oscilloscope captures of the frequency sweep of the original board and of
     the FPGA emulation, July 2023: Figure 5.1 of the report and Fig. 5 of the
-    paper, from Figs. 11 and 12 of the documentation.
+    paper, from Figs. 11 and 12 of the documentation; the deck in slides/
+    includes them from paper/fig/.
   report/fig/watchdog_capture.jpg, paper/fig/watchdog_reaction.png
     The oscilloscope capture of the watchdog reset test on the Rev 0.0
     prototype, 15 August 2023: Figure C.1 of the report and Fig. 3 of the
@@ -128,10 +137,11 @@ André Dolata, Dennis Ostermann and Francisco Schiffelers, "Testkartentester:
 Entwicklung einer Testkarte für die Gleitschutztestkarte", project report,
 TH Köln, 2023 (reference dolata2023 of the report, reference [28] of the
 paper).
-  report/chapters/appendixD.tex, paper/paper.tex and the deposited PDF
-    The YAML test case "Geber 3" of Appendix D.1 of the report and Listing 1
-    of the paper, both adapted from Listing 3 of the project report
-    (ERRATA.md, P-E037).
+  report/chapters/appendixD.tex, paper/paper.tex, slides/deck_frames.tex and
+  the deposited PDF
+    The YAML test case "Geber 3" of Appendix D.1 of the report, Listing 1 of
+    the paper and the Layer 2 frame of the deck, all adapted from Listing 3 of
+    the project report (ERRATA.md, P-E037).
 
 The OpenCores t48 core. The FPGA design the report describes integrates the
 t48 core of the OpenCores project, whose author its sources name (the report

@@ -84,9 +84,9 @@ precedence = "override"
 SPDX-FileCopyrightText = "The IEEEtran authors, as each file names them"
 SPDX-License-Identifier = "LPPL-1.3c"
 
-# The build configuration of the paper.
+# The build configuration of the paper and of the slides.
 [[annotations]]
-path = ["paper/.latexmkrc"]
+path = ["paper/.latexmkrc", "slides/.latexmkrc"]
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Mert Torun"
 SPDX-License-Identifier = "MIT"

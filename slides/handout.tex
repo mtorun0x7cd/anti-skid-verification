@@ -1,0 +1,120 @@
+% SPDX-FileCopyrightText: 2026 Mert Torun
+% SPDX-License-Identifier: CC-BY-4.0
+%
+% Handout of the talk at the VIMS-Workshop 2026: a one-page A4 synopsis,
+% independent of the deck (no beamer). Revised in October 2026, after the
+% presentation; slides/README.md lists the changes. Statements follow the revised
+% edition of the research report (report/), cited by section.
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[a4paper,top=11mm,bottom=11mm,left=17mm,right=17mm]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{ieeeblue}{HTML}{00629B}
+\definecolor{accentteal}{HTML}{2A9D8F}
+\definecolor{inkgray}{HTML}{4B5563}
+
+\setlist{nosep,leftmargin=1.35em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.35ex}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+
+\titleformat{\section}{\color{ieeeblue}\bfseries\normalsize}{}{0pt}{}
+\titlespacing{\section}{0pt}{0.9ex}{0.3ex}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\hypersetup{
+  pdftitle={Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: Handout},
+  pdfauthor={Mert Torun},
+  pdfsubject={Talk at the VIMS-Workshop 2026, TH Koeln; handout revised in October 2026},
+  pdfkeywords={anti-skid, wheel-slide protection, FPGA retrofit, functional equivalence, IEC 61508, IEEE 1012, V-model, verification and validation},
+  pdflang={en},
+}
+
+\newcommand{\dotsep}{\;\textcolor{inkgray}{\textbullet}\;}
+
+\begin{document}
+
+% ---- Header ---------------------------------------------------------------
+{\color{ieeeblue}\bfseries\LARGE Ensuring Functional Equivalence in Retrofitted\\[0.2ex]
+Anti-Skid Systems for European Public Transportation\par}
+\vspace{0.5ex}
+{\large\color{inkgray} A Hybrid Two-Layer Verification Methodology\par}
+\vspace{0.7ex}
+{\color{ieeeblue}\rule{\linewidth}{1.1pt}}
+\vspace{0.5ex}
+
+\textbf{Mert Torun}\dotsep TH K\"oln, Faculty of Information, Media and Electrical Engineering\\
+Presented at the VIMS-Workshop 2026, TH K\"oln, on 22~May 2026\dotsep published as a Working Paper in \emph{K\"olner Beitr\"age zur technischen Informatik} 2/2026 (ISSN 2193-570X)\\
+{\footnotesize\color{inkgray}Revised in October 2026, after the presentation, to agree with the revised edition of the research report.}
+
+% ---- Body -----------------------------------------------------------------
+\section{The Retrofit Problem}
+Anti-skid (wheel-slide protection) systems are safety-critical components of urban rail vehicles. The system of this case has been in service in European urban rail since the early 1990s; its test-diagnosis module is built around the obsolete Intel MCS-48 family (report, Ch.~1). As the parts become unobtainable, the choice is between replacing the system and a targeted board-level retrofit, which has to show functional equivalence with the original design under contemporary safety standards. The work documents one such retrofit and proposes a verification structure for it, which has not been validated.
+
+\section{Replacement Architecture}
+A flash-based \textbf{Actel A3P1000 FPGA} emulates the MCS-48 CPU and I/O logic with the OpenCores \texttt{t48} core, integrated unmodified, and runs the original firmware from an external Flash ROM. An \textbf{STM32F401RET6} diagnostics board receives diagnostic frames over an SPI link through four SFH601-3 optocouplers (three SPI lines and a reset line) and an isolated DC/DC converter, and logs them to an SD card with timestamps of its internal real-time clock. The parts of that board on the Base Board side of the barrier share the Base Board's supply. The board design is M.~Leyer's (2023); the report credits the prior work of S.~Ayoub (2014), M.~Leyer (2023) and A.~Dolata, D.~Ostermann and F.~Schiffelers (2023).
+
+\section{Two-Layer Verification Methodology}
+Mapped to the verification side of the V-model, with IEEE 1012 as the intended process:
+
+\begin{itemize}
+  \item \textbf{Layer 1, component and interface tests (white-box).} VHDL simulation (ModelSim ME), JTAG and pin checks, and oscilloscope measurements of the watchdog reaction and the frequency sweep. The archived simulations and measurements date from 2023, on the Rev~0.0 prototype, before the rebuild.
+  \item \textbf{Layer 2, system-level tests (black-box).} The integrated module on a dedicated test fixture, driven by YAML test cases linked to the fault cases of the legacy manual; the tester checks the displays by hand.
+\end{itemize}
+
+\section{State of the Evidence}
+Simulation and the fixture runs on the rebuilt unit (2025, no log archived) indicate equivalence of the fault handling. The only measurement against the original board, the sweep of 2023, shows a deviation: the emulation ends at about \SI{850}{\hertz}, the original at about \SI{920}{\hertz}. The evidence does not demonstrate equivalence (report, Sec.~5.1.3). Six integration defects documented during the rebuild did not come to light in a planned run of the method, and no single method found all of them:
+
+\vspace{0.4ex}
+\begin{center}
+\scriptsize
+\begin{tabular}{@{}l l L{5.4cm} L{6.2cm}@{}}
+\toprule
+\textbf{ID} & \textbf{Class} & \textbf{Found by} & \textbf{Status} \\
+\midrule
+B1 & Logical      & Symptoms on the fixture, cause by debugging & Resolved \\
+B2 & Test fixture & Failed debugger connection to the fixture & Reworked \\
+B3 & Assembly     & Commissioning: oscilloscope, inspection & Reworked \\
+B4 & Firmware     & Freeze: operation of the diagnostics board (2025); overrun: analysis of the firmware of 2023 & Fix applied (firmware of 2023); diagnostic path not verified separately; freeze with the firmware of 2025: no fix documented \\
+B5 & Interface    & Transmitter: simulation testbench; receiver: not recorded & Receiver: fix applied; transmitter: change not documented; diagnostic path not verified separately \\
+B6 & Schematic and layout & Commissioning of the rebuilt unit & Worked around in the FPGA design \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{0.3ex}
+
+The rebuilt unit was observed operating as a whole in early 2026; its diagnostic path was not verified separately, and no log or capture of that run was archived (report, Sec.~5.3, Table~5.4).
+
+\section{Standards and Limits}
+The layers are mapped to IEC 61508, EN 50129, EN 50716 and IEEE 1012 as whole standards; the mapping is not an assessment of compliance, and no SIL or integrity level has been assigned (report, Sec.~5.4). Formal methods, structural coverage, accredited environmental testing and full HIL integration were beyond the project's scope.
+
+% ---- Footer ---------------------------------------------------------------
+\vfill
+{\color{ieeeblue}\rule{\linewidth}{0.6pt}}
+\vspace{0.3ex}
+% Each note is its own paragraph, so that a PDF text extractor keeps them on
+% separate lines.
+{\footnotesize\color{inkgray}
+\textbf{Paper, research report and data:} \href{https://github.com/mtorun0x7cd/anti-skid-verification}{github.com/mtorun0x7cd/anti-skid-verification}
+
+\textbf{Cite:} Torun, M. (2026). \emph{Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology} (Working Paper). K\"olner Beitr\"age zur technischen Informatik, 2/2026. \href{https://doi.org/10.57684/COS-1494}{https://doi.org/10.57684/COS-1494}
+
+\textbf{Contact:} \href{mailto:info@mtorun0x7cd.com}{info@mtorun0x7cd.com}
+
+This handout is licensed under CC BY 4.0. Corrections to the paper are listed in ERRATA.md of the repository.
+\par}
+
+\end{document}

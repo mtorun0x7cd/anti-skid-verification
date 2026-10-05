@@ -1,0 +1,46 @@
+% SPDX-FileCopyrightText: 2026 Mert Torun
+% SPDX-License-Identifier: CC-BY-4.0
+%
+% Shared Beamer preamble of the deck of the talk at the VIMS-Workshop 2026
+% (loaded after \documentclass by presentation.tex).
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, fit, backgrounds}
+\usepackage{graphicx}
+\graphicspath{{../paper/fig/}}
+
+\usetheme{Boadilla}
+\setbeamertemplate{navigation symbols}{}
+\definecolor{ieeeblue}{HTML}{00629B}
+\definecolor{accentteal}{HTML}{2A9D8F}
+\definecolor{inkgray}{HTML}{4B5563}
+\setbeamercolor{structure}{fg=ieeeblue}
+\setbeamercolor{title}{fg=ieeeblue}
+\setbeamerfont{title}{series=\bfseries}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamertemplate{itemize items}[circle]
+
+% The deck as presented on 22 May 2026 is not archived. Each frame that differs
+% from the earliest preserved sources (July 2026) says what changed.
+\newcommand{\revised}[1]{%
+  \par\vfill{\tiny\color{inkgray}Revised in October 2026, after the presentation: #1\par}}
+
+\title[Functional Equivalence in Anti-Skid Retrofits]{Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation}
+\subtitle{A Hybrid Two-Layer Verification Methodology}
+\author[M.\ Torun]{Mert Torun}
+\institute[TH K\"oln]{Faculty of Information, Media and Electrical Engineering\\TH K\"oln (Technische Hochschule K\"oln)}
+\date[VIMS-Workshop 2026]{VIMS-Workshop 2026 of the research focus Vernetzte intelligente Infrastrukturen und mobile Systeme (VIMS), TH K\"oln, 22~May 2026}
+
+\hypersetup{
+  pdftitle={Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation},
+  pdfauthor={Mert Torun},
+  pdfsubject={Talk at the VIMS-Workshop 2026, TH Koeln; slides revised in October 2026},
+  pdfkeywords={anti-skid, wheel-slide protection, FPGA retrofit, functional equivalence, IEC 61508, IEEE 1012, V-model, verification and validation},
+  pdflang={en},
+}

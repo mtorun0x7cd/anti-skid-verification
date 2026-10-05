@@ -135,7 +135,7 @@ _As printed in the report (pp. vi and vii). The English abstract is authoritativ
 </details>
 
 <details>
-<summary><span lang="fr">Français: Garantir l’équivalence fonctionnelle et la conformité aux normes de sécurité fonctionnelle dans les systèmes anti-enrayeur mis à niveau destinés aux transports publics européens : une approche méthodologique des essais, de la certification et de l’atténuation des risques pour une électronique modernisée et critique pour la sécurité</span></summary>
+<summary><span lang="fr">Français: Garantir l’équivalence fonctionnelle et la conformité aux normes de sécurité fonctionnelle dans les systèmes anti-enrayeur mis à niveau destinés aux transports publics européens: Une approche méthodologique des essais, de la certification et de l’atténuation des risques pour une électronique modernisée et critique pour la sécurité</span></summary>
 
 <div lang="fr">
 
@@ -169,7 +169,7 @@ _As printed in the report (pp. x and xi). The English abstract is authoritative.
 </details>
 
 <details>
-<summary><span lang="es">Español: Garantizar la equivalencia funcional y el cumplimiento de las normas de seguridad funcional en sistemas antideslizamiento modernizados para el transporte público europeo: un enfoque metodológico para las pruebas, la certificación y la mitigación de riesgos en electrónica modernizada y crítica para la seguridad</span></summary>
+<summary><span lang="es">Español: Garantizar la equivalencia funcional y el cumplimiento de las normas de seguridad funcional en sistemas antideslizamiento modernizados para el transporte público europeo: Un enfoque metodológico para las pruebas, la certificación y la mitigación de riesgos en electrónica modernizada y crítica para la seguridad</span></summary>
 
 <div lang="es">
 

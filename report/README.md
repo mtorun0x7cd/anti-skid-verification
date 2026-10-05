@@ -31,7 +31,7 @@ The paper published as <https://doi.org/10.57684/COS-1494> derives from the vers
 - the YAML test case of Appendix D.1, which, like Listing 1 of the paper, is adapted from Listing 3 of the test fixture report;
 - single sentences and captions.
 
-Measured on 2026-10-05 on the text of a build of the report and of pages 3 to 10 of the deposited paper, as pdftotext extracts it, in lower case: 382 of the 42,785 sequences of six words in the report also occur in the paper. They form 106 passages of at most 34 words: the acknowledgements, the title of the paper as the report cites it, entries of the bibliography, items of lists, captions and single sentences.
+Measured on 2026-10-05 on the text of a build of the report and of pages 3 to 10 of the deposited paper, as pdftotext extracts it, in lower case: 382 of the 42,803 sequences of six words in the report also occur in the paper. They form 106 passages of at most 34 words: the acknowledgements, the title of the paper as the report cites it, entries of the bibliography, items of lists, captions and single sentences.
 
 As the title page of the report states, passages that also appear in the paper remain under the paper's licence, CC BY-NC-ND 4.0.
 

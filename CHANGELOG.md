@@ -25,6 +25,7 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 Statements in files that the record tag `cos-1494` holds, corrected here; the tag keeps them as they were:
 
 - `CITATION.cff`: the reference to the research report carries the English abstract of its revised edition; at the tag the reference has no abstract.
+- `report/`: the report calls the paper a Working Paper, the document type of its record, where it called it the article: in its licence notice and in the rights statement of its PDF metadata, in the note on this edition and in Chapter 5; its reference to the paper names the type and the URN. At the tag the report calls the paper the article. `report/README.md` counts the sequences of six words of the changed text.
 
 ## [cos-1494] - 2026-10-05
 

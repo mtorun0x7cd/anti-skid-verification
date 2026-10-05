@@ -129,7 +129,7 @@ SPDX-License-Identifier = "MIT"
 
 # Documentation without room for a licence comment.
 [[annotations]]
-path = ["SECURITY.md", "CONTRIBUTING.md"]
+path = ["CHANGELOG.md", "SECURITY.md", "CONTRIBUTING.md"]
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Mert Torun"
 SPDX-License-Identifier = "CC-BY-4.0"

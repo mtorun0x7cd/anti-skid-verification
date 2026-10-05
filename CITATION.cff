@@ -9,14 +9,15 @@ abstract: >-
   Paper in the series Kölner Beiträge zur technischen Informatik 2/2026 of TH
   Köln, and of the research report from which the paper derives. It holds the
   deposited paper as the version of record, the author's corrected manuscript
-  of the paper, and the LaTeX sources of the report in its revised edition of
-  October 2026.
+  of the paper, the LaTeX sources of the report in its revised edition of
+  October 2026, the sources of the slides of the talk on the paper, and the
+  traceability data of the diagnostic path with the checks that hold them.
 authors:
   - family-names: Torun
     given-names: Mert
     affiliation: Technische Hochschule Köln
     orcid: "https://orcid.org/0009-0003-7932-9043"
-version: cos-1494
+version: 1.1.0
 date-released: "2026-10-05"
 license: MIT
 repository-code: "https://github.com/mtorun0x7cd/anti-skid-verification"

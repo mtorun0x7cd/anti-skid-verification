@@ -69,9 +69,9 @@ LICENSES/.
                                   snippet, and the captures the deck includes
                                   from paper/fig/ (section 2).
 
-  verification/                   CC BY 4.0 for the data: test_traceability.yaml,
-  (test_traceability.yaml,        traceability.csv and README.md. Copyright 2026
-  traceability.csv, README.md)    Mert Torun.
+  verification/                   CC BY 4.0 for the data:
+  (test_traceability.yaml,        test_traceability.yaml, traceability.csv and
+  traceability.csv, README.md)    README.md. Copyright 2026 Mert Torun.
 
   verification/                   MIT: the schema and the empty template.
   (traceability.schema.json,      Copyright 2026 Mert Torun.
@@ -84,12 +84,13 @@ LICENSES/.
   CITATION.cff                    CC BY-NC-ND 4.0, because it quotes the
                                   abstract of the paper.
 
-  codemeta.json, NOTICE,          CC BY 4.0. Copyright 2026 Mert Torun.
-  SECURITY.md, CONTRIBUTING.md,
-  the README files of
-  publication/, paper/, report/,
-  slides/ and verification/,
-  docs/social/social-card.svg,
+  README.md, CHANGELOG.md,        CC BY 4.0. Copyright 2026 Mert Torun.
+  codemeta.json, NOTICE,          README.md quotes the abstract and the
+  SECURITY.md, CONTRIBUTING.md,   index terms of the paper and gives four
+  the README files of             translations of the abstract; they are
+  publication/, paper/, report/,  marked as SPDX snippets and stay under
+  slides/ and verification/,      CC BY-NC-ND 4.0, the licence of the
+  docs/social/social-card.svg,    paper.
   docs/social/social-card.png
 
   Makefile, tools/, .github/,     MIT. Build files, scripts, workflows and

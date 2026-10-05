@@ -2,8 +2,8 @@
   "@context": "https://w3id.org/codemeta/3.0",
   "@type": "SoftwareSourceCode",
   "name": "Sources and version of record of the paper \"Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology\" and of the research report from which it derives",
-  "description": "The companion repository of the paper by Mert Torun published as a Working Paper in the series Kölner Beiträge zur technischen Informatik 2/2026 of TH Köln, and of the research report from which the paper derives. It holds the deposited paper as the version of record, the author's corrected manuscript of the paper, and the LaTeX sources of the report in its revised edition of October 2026.",
-  "version": "cos-1494",
+  "description": "The companion repository of the paper by Mert Torun published as a Working Paper in the series Kölner Beiträge zur technischen Informatik 2/2026 of TH Köln, and of the research report from which the paper derives. It holds the deposited paper as the version of record, the author's corrected manuscript of the paper, the LaTeX sources of the report in its revised edition of October 2026, the sources of the slides of the talk on the paper, and the traceability data of the diagnostic path with the checks that hold them.",
+  "version": "1.1.0",
   "license": [
     "https://spdx.org/licenses/MIT",
     "https://spdx.org/licenses/CC-BY-4.0",
@@ -12,12 +12,18 @@
   ],
   "codeRepository": "https://github.com/mtorun0x7cd/anti-skid-verification",
   "programmingLanguage": [
-    "TeX"
+    "TeX",
+    "Python",
+    "Shell"
   ],
   "softwareRequirements": [
     {
       "@type": "SoftwareApplication",
       "name": "TeX Live with pdfLaTeX, BibTeX, Biber and latexmk"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Python 3 with PyYAML and jsonschema, for the checks in tools/"
     }
   ],
   "developmentStatus": "https://www.repostatus.org/#inactive",

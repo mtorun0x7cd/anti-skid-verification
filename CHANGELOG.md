@@ -19,6 +19,12 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 - `CITATION.cff` and `codemeta.json` carry the version 1.1.0; their description names the slides and the traceability data, and `codemeta.json` names Python and the shell among the languages and Python with PyYAML and jsonschema among the requirements.
 - `NOTICE` and `REUSE.toml` give the licences of the files added; `report/README.md` gives the measured overlap of the text of the report with the deposited paper.
 
+### Fixed
+
+Statements in files that the record tag `cos-1494` holds, corrected here; the tag keeps them as they were:
+
+- `CITATION.cff`: the reference to the research report carries the English abstract of its revised edition; at the tag the reference has no abstract.
+
 ## [cos-1494] - 2026-10-05
 
 ### Added

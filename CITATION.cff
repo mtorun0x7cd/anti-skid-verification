@@ -1,0 +1,82 @@
+cff-version: 1.2.0
+message: >-
+  To cite the paper, use the preferred citation below. To cite the sources and
+  the data in this repository, use the metadata at the top level.
+type: software
+title: "Sources and version of record of the paper \"Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology\" and of the research report from which it derives"
+abstract: >-
+  The companion repository of the paper by Mert Torun published as a Working
+  Paper in the series Kölner Beiträge zur technischen Informatik 2/2026 of TH
+  Köln, and of the research report from which the paper derives. It holds the
+  deposited paper as the version of record, the author's corrected manuscript
+  of the paper, and the LaTeX sources of the report in its revised edition of
+  October 2026.
+authors:
+  - family-names: Torun
+    given-names: Mert
+    affiliation: Technische Hochschule Köln
+    orcid: "https://orcid.org/0009-0003-7932-9043"
+version: cos-1494
+date-released: "2026-10-05"
+license: MIT
+repository-code: "https://github.com/mtorun0x7cd/anti-skid-verification"
+preferred-citation:
+  type: article
+  title: "Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology"
+  authors:
+    - family-names: Torun
+      given-names: Mert
+      affiliation: Technische Hochschule Köln
+      orcid: "https://orcid.org/0009-0003-7932-9043"
+  journal: "Kölner Beiträge zur technischen Informatik"
+  issue: "2/2026"
+  issn: 2193-570X
+  publisher:
+    name: Bibliothek der Technischen Hochschule Köln
+  institution:
+    name: Technische Hochschule Köln
+    city: Köln
+    country: DE
+  department: Faculty of Information, Media and Electrical Engineering
+  year: 2026
+  date-published: "2026-09-22"
+  doi: 10.57684/COS-1494
+  url: "https://doi.org/10.57684/COS-1494"
+  identifiers:
+    - type: other
+      value: "urn:nbn:de:hbz:832-cos4-14942"
+      description: URN of the catalogue record
+  license: CC-BY-NC-ND-4.0
+  languages:
+    - en
+  pages: 10
+  keywords:
+    - "Anti-Skid Protection"
+    - "FPGA Emulation"
+    - "Functional Equivalence"
+    - "Functional Safety"
+    - "IEC 61508"
+    - "Retrofit Verification"
+    - "Safety-Critical Systems"
+    - "V-Model"
+    - "Verification and Validation"
+  notes: "Working Paper in the series Kölner Beiträge zur technischen Informatik, volume 2/2026, published on Cologne Open Science on 2026-09-22; presented at the VIMS-Workshop 2026, TH Köln, on 2026-05-22."
+  abstract: "Modernising ageing safety-critical electronics in public transportation is often more cost-effective and environmentally sustainable than complete system replacement—provided functional equivalence with the original design can be rigorously demonstrated under contemporary safety standards. This paper presents a case study of retrofitting a legacy anti-skid test-diagnosis module used in European urban rail. An obsolete Intel MCS-48 microcontroller was replaced with a flash-based Field-Programmable Gate Array (FPGA; Actel A3P1000) emulating the original processor and I/O logic, complemented by a galvanically isolated STM32 microcontroller subsystem for enhanced diagnostics. To verify the retrofit, a two-layer verification methodology was developed, derived from the V-model as defined in IEC 61508 and IEEE 1012: (1) deterministic component and interface testing via VHDL simulation and hardware timing measurements, and (2) scenario-based system-level testing using a dedicated hardware fixture with YAML-defined test cases. Through convergence of three independent evidence lines—simulation, oscilloscope measurement, and integrated scenario testing—functional equivalence of the safety-critical core was demonstrated for all documented fault codes, self-test sequences, and user interactions. Results were mapped to IEC 61508, EN 50129, EN 50716, and IEEE 1012. The methodology is assessed for transferability to other safety-critical retrofit contexts."
+references:
+  - type: report
+    title: "Ensuring Functional Equivalence and Compliance with Functional Safety Standards in Retrofitted Anti-Skid Systems for European Public Transportation: A Methodological Approach to Testing, Certification, and Risk Mitigation for Modernised Safety-Critical Electronics"
+    authors:
+      - family-names: Torun
+        given-names: Mert
+        affiliation: Technische Hochschule Köln
+        orcid: "https://orcid.org/0009-0003-7932-9043"
+    institution:
+      name: Technische Hochschule Köln
+      city: Köln
+      country: DE
+    department: Faculty of Information, Media and Electrical Engineering
+    year: 2026
+    license: CC-BY-4.0
+    languages:
+      - en
+    notes: "Research report, revised edition of October 2026 of the report submitted in August 2025; not yet deposited. The paper derives from the version of August 2025."

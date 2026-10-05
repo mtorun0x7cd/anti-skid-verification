@@ -1,0 +1,114 @@
+version = 1
+
+# Files without room for an SPDX comment, or whose bytes stay as they were
+# deposited, written or measured, are annotated here. Where several annotations
+# match a file, the last one counts. NOTICE gives the same licences in prose.
+
+# The deposited paper and its checksum file.
+[[annotations]]
+path = ["publication/2026_02_Retrofitted_Anti-Skid_System.pdf", "publication/SHA256SUMS"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Mert Torun"
+SPDX-License-Identifier = "CC-BY-NC-ND-4.0"
+SPDX-FileComment = "CC BY-NC-ND 4.0 is the licence of the catalogue record, https://doi.org/10.57684/COS-1494. It does not cover the series cover and imprint on pages 1 and 2 or the measurement captures of Figs. 3 and 5; see NOTICE."
+
+# The research report: CC BY 4.0, as its title page states. The sources keep the
+# bytes of the revised edition, so the licence stands here and not in the files.
+[[annotations]]
+path = ["report/**"]
+precedence = "closest"
+SPDX-FileCopyrightText = "2025-2026 Mert Torun"
+SPDX-License-Identifier = "CC-BY-4.0"
+SPDX-FileComment = "As the title page of the report states, the licence excludes material credited to others in a caption or in the text, and passages that also appear in the paper (https://doi.org/10.57684/COS-1494) remain under its licence, CC BY-NC-ND 4.0; see NOTICE."
+
+# The build configuration of the report.
+[[annotations]]
+path = ["report/.latexmkrc"]
+precedence = "override"
+SPDX-FileCopyrightText = "2025-2026 Mert Torun"
+SPDX-License-Identifier = "MIT"
+
+# Figure sources of the report adapted from Figs. 1 and 4 of the paper.
+[[annotations]]
+path = ["report/fig/system_overview.tex", "report/fig/test_fixture.tex"]
+precedence = "override"
+SPDX-FileCopyrightText = "2025-2026 Mert Torun"
+SPDX-License-Identifier = "CC-BY-NC-ND-4.0"
+SPDX-FileComment = "Adapted from Figs. 1 and 4 of the paper; passages that also appear in the paper remain under its licence, as the title page of the report states."
+
+# Appendix D: the YAML test case of the test fixture report and the VHDL excerpt
+# of the design of 2023 are third-party material.
+[[annotations]]
+path = ["report/chapters/appendixD.tex"]
+precedence = "override"
+SPDX-FileCopyrightText = ["2025-2026 Mert Torun", "2023 André Dolata, Dennis Ostermann, Francisco Schiffelers", "2023 Mark Leyer"]
+SPDX-License-Identifier = "CC-BY-4.0 AND LicenseRef-third-party"
+SPDX-FileComment = "The YAML test case of Appendix D.1 is adapted from Listing 3 of the test fixture report (dolata2023) and the VHDL excerpt of Appendix D.2 is quoted from the design of Mark Leyer (leyer2023); both are excluded from CC BY 4.0. See NOTICE."
+
+# Photographs of the boards. The Rev 0.0 board designs they show are a third
+# party's, and a logo, a board designation and a production code are masked.
+[[annotations]]
+path = ["report/fig/photos/**"]
+precedence = "override"
+SPDX-FileCopyrightText = ["2025-2026 Mert Torun", "2023 Mark Leyer"]
+SPDX-License-Identifier = "CC-BY-4.0 AND LicenseRef-third-party"
+SPDX-FileComment = "The photographs are CC BY 4.0; the Rev 0.0 board designs they show are Mark Leyer's (leyer2023) and excluded. Edited to mask a third-party logo, board designation and production code; see NOTICE, section 3."
+
+# The mark of TH Köln.
+[[annotations]]
+path = ["report/fig/logo/th_koeln.png"]
+precedence = "override"
+SPDX-FileCopyrightText = "TH Köln (Technische Hochschule Köln)"
+SPDX-License-Identifier = "LicenseRef-third-party"
+
+# Figures reproduced from Ayoub's work report of 2014.
+[[annotations]]
+path = ["report/fig/ayoub/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "2014 Samy Ayoub"
+SPDX-License-Identifier = "LicenseRef-third-party"
+SPDX-FileComment = "Figures 2.1 and 2.2 of the report, reproduced as vector graphics from Figs. 1, 3 and 7 of the work report (ayoub2014)."
+
+# Measurement captures, schematic and layouts of Leyer's documentation and design.
+[[annotations]]
+path = ["report/fig/sweep/**", "report/fig/watchdog_capture.jpg", "report/fig/schematic/**", "report/fig/layout/**", "paper/fig/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "2023 Mark Leyer"
+SPDX-License-Identifier = "LicenseRef-third-party"
+SPDX-FileComment = "Oscilloscope captures of 2023 and the board design of Mark Leyer (leyer2023, reference [10] of the paper); the schematic and layouts are rendered with KiCad from the Eagle design files of 2024. See NOTICE."
+
+# The IEEEtran class and bibliography style, vendored unedited (LPPL 1.3c, clause 6).
+[[annotations]]
+path = ["paper/IEEEtran.cls", "paper/IEEEtran.bst"]
+precedence = "override"
+SPDX-FileCopyrightText = "The IEEEtran authors, as each file names them"
+SPDX-License-Identifier = "LPPL-1.3c"
+
+# The build configuration of the paper.
+[[annotations]]
+path = ["paper/.latexmkrc"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Mert Torun"
+SPDX-License-Identifier = "MIT"
+
+# The errata quote the deposited paper in each entry.
+[[annotations]]
+path = ["ERRATA.md"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Mert Torun"
+SPDX-License-Identifier = "CC-BY-4.0 AND CC-BY-NC-ND-4.0"
+SPDX-FileComment = "The quoted text of each entry is quoted from the deposited paper and stays under its licence, CC BY-NC-ND 4.0; the rest is CC BY 4.0."
+
+# Metadata without room for a licence comment. CITATION.cff quotes the abstract
+# of the paper and carries its licence.
+[[annotations]]
+path = ["CITATION.cff"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Mert Torun"
+SPDX-License-Identifier = "CC-BY-NC-ND-4.0"
+
+[[annotations]]
+path = ["NOTICE", "codemeta.json"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Mert Torun"
+SPDX-License-Identifier = "CC-BY-4.0"

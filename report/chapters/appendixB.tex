@@ -1,0 +1,182 @@
+% ============================================================
+% Appendix B: Bill of Materials (BOM) and Design Rules
+% ============================================================
+\chapter{Bill of Materials (BOM) and Design Rules}
+\label{app:bom_drc}
+
+This appendix lists the parts of the retrofitted hardware modules and gives the design rules of their layouts.
+
+% ------------------------------------------------------------
+\section{Bill of Materials (BOM)}
+\label{sec:app_bom}
+
+\Cref{tab:bom} lists the parts of the Rev~1.0 design board by board; the fitted Base Board is the inherited Rev~0.0 board. The table continues Leyer's bill of materials for Rev~1.0~\cite{leyer2023} and was compiled from the inspection of the populated boards and from the project's sourcing files and datasheets, and checked against the Rev~1.0 schematic and layout files. The group headings give the board that carries a part, which may differ from the schematic sheet that shows it (\Cref{sec:app_schematic_sheets}). Parts of one board share a row only where the Rev~1.0 layout gives them the same value and package and the Rev~1.0 bill of materials the same part number; \enquote{unknown} marks a manufacturer or part number that the sources do not give. Where the sources disagree, or the Rev~1.0 bill of materials does not list a part, the description or a note says so.
+
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\setlength{\LTpost}{0.5\baselineskip}
+% Ragged-right columns; a designator range is kept on one line (\mbox); the group
+% headings give the board, so the table needs no column for it; space, not a rule,
+% separates the groups, so a page break between them does not double the rule of the foot
+\begin{longtable}{@{} >{\raggedright\arraybackslash}p{0.16\linewidth} >{\centering\arraybackslash}p{0.045\linewidth} >{\raggedright\arraybackslash}p{0.148\linewidth} >{\raggedright\arraybackslash}p{0.205\linewidth} >{\raggedright\arraybackslash}p{0.371\linewidth} @{}}
+	\caption{Bill of Materials (Rev~1.0 design; the fitted Base Board is Rev~0.0)} \label{tab:bom} \\
+	\toprule
+	Designator(s) & Qty & Manufacturer & Part Number & Description \\
+	\midrule
+	\endfirsthead
+	\caption[]{Bill of Materials (Rev~1.0 design; the fitted Base Board is Rev~0.0) (Continued)} \\
+	\toprule
+	Designator(s) & Qty & Manufacturer & Part Number & Description \\
+	\midrule
+	\endhead
+	\midrule
+	\multicolumn{5}{r@{}}{\textit{Continued on next page}} \\
+	\endfoot
+	\bottomrule
+	\endlastfoot
+
+	\multicolumn{5}{@{}l}{\textit{LED Display Board}} \\*
+	DS1, DS2$^{a}$ & 2 & Kingbright & \texttt{SC03-12EWA} & 7-Segment Display Red 0.3" Common Cathode \\
+	Y13, Y14 & 2 & TI & \texttt{CD4511BE} & BCD-to-7-Segment Latch/Decoder/Driver (DIL16) \\
+	\mbox{R60--R73} & 14 & Yageo & \texttt{MF0207FTE52-1K} & Resistor \SI{1}{\kilo\ohm} \SI{0.6}{\watt} (Segment Limit) \\
+	C66, C67 & 2 & Kyocera AVX & \texttt{08055C104K4T2A} & Capacitor Ceramic \SI{100}{\nano\farad} 0805 \\
+	X10, X11 & 2 & TE & \texttt{5-104186-5} & Header, 8 Positions, \SI{1.27}{\milli\metre} (AMPMODU System 50), to Base Board \\
+	\addlinespace[0.8em]
+	\multicolumn{5}{@{}l}{\textit{STM32 Diagnostics Board}} \\*
+	Y24 & 1 & STMicro & \texttt{STM32F401RET6} & Microcontroller Arm\textsuperscript{\textregistered}~Cortex\textsuperscript{\textregistered}-M4 (LQFP64) \\
+	Y19$^{b}$ & 1 & TI & \texttt{TPS73633DBVT} & \SI{3.3}{\volt} Low-Dropout (\acrshort{ldo}) Regulator (Isolated Domain) \\
+	\mbox{OK5--OK8}$^{c}$ & 4 & Vishay & \texttt{SFH601-3} & Optocoupler (SPI and NRST Isolation) \\
+	Y22 & 0 & XP Power & \texttt{IR0505SA} & Isolated DC/DC Converter \SI{5}{\volt} to \SI{5}{\volt} (Alternative to Y23, Not Fitted) \\
+	Y23 & 1 & Gaia & \texttt{MGDS04-C-C} & Isolated DC/DC Converter \SI{5}{\volt} to \SI{5}{\volt} \\
+	J6 & 1 & GCT & \texttt{MEM2075-\allowbreak{}00-\allowbreak{}140-\allowbreak{}01-\allowbreak{}A} & MicroSD Card Socket (Push-Push) \\
+	X15 & 1 & GCT & \texttt{USB4800-03-A} & USB Type-C Connector \\
+	U1 & 1 & MPD & \texttt{BS-7} & RTC Battery Holder (CR2032) \\
+	Q7 & 1 & ECS & \texttt{ECS-120-20-4X-EM} & Crystal \SI{12}{\mega\hertz} \\
+	Q8 & 1 & Abracon & \texttt{ABS25-\allowbreak{}32.768KHZ-\allowbreak{}6-\allowbreak{}T} & Crystal \SI{32.768}{\kilo\hertz} \\
+	X12 & 1 & unknown & unknown & Connector to Base Board, 1x6 Male Pin Header \\
+	X14 & 1 & unknown & unknown & SWD Debug Connector, 1x6 Male Pin Header \\
+	JP1$^{d}$ & 1 & unknown & unknown & Test Point / Jumper on the~\gls{uart} Transmit Line (Net \texttt{UART\_TX}), 1 Pin Header \\
+	SJ2 & 1 & -- & none (part of the board) & Solder Jumper across the Isolation (GND3 to GND2), Must Remain Open \\
+	LED3 & 1 & Würth & \texttt{150080BS75000} & Status LED (Blue) \\
+	D16 & 1 & Kyocera AVX & \texttt{SMBJ5.0A} & Transient Voltage Suppressor (\acrshort{tvs}) Diode \\
+	C62 & 1 & Kyocera AVX & \texttt{TPSV686K025R0095} & Capacitor Tantalum \SI{68}{\micro\farad} \SI{25}{\volt} \\
+	C78$^{d}$ & 1 & unknown & unknown & Capacitor Tantalum \SI{68}{\micro\farad} \SI{25}{\volt} (EIA V) \\
+	C63$^{e}$ & 1 & unknown & unknown & Capacitor Ceramic \SI{10}{\nano\farad} 0805 (Noise Reduction, Y19) \\
+	C64$^{f}$, C65, \mbox{C74--C77} & 6 & Kyocera AVX & \texttt{08055C104K4T2A} & Capacitor Ceramic \SI{100}{\nano\farad} 0805 \\
+	C68 & 1 & unknown & unknown & Capacitor Ceramic \SI{4.7}{\micro\farad} 1206 \\
+	C69, C71 & 2 & Kyocera AVX & \texttt{08055A6R8GAT2A} & Capacitor Ceramic \SI{6.8}{\pico\farad} 0805 \\
+	C72, C73 & 2 & Kyocera AVX & \texttt{08053A180JAT2A} & Capacitor Ceramic \SI{18}{\pico\farad} 0805 \\
+	R7, \mbox{R92--R94} & 4 & Yageo & \texttt{RC0805FR-7W22RL} & Resistor \SI{22}{\ohm} 0805 (SWD Series) \\
+	R77 & 1 & Yageo & \texttt{RC0805JR-10470RL} & Resistor \SI{470}{\ohm} 0805 (LED3 Series) \\
+	R81 & 1 & Vishay & \texttt{PCAN0805E1000\allowbreak{}BST5} & Resistor \SI{100}{\ohm} \SI{1}{\watt} 0805 (Load on Isolated \SI{5}{\volt} Rail) \\
+	\mbox{R82--R85} & 4 & Yageo & unknown & Resistor \SI{360}{\ohm} \SI{0.6}{\watt} 0207 (Opto LED Series) \\
+	R86, \mbox{R88--R90}, R95, \mbox{R107--R110} & 9 & Yageo & \texttt{AC0805JR-7W10KL} & Resistor \SI{10}{\kilo\ohm} 0805 (SD Card and Opto Pull-ups, BOOT0 Pull-down R95) \\
+	R96 & 1 & Yageo & \texttt{AC0805JR-0733KL} & Resistor \SI{33}{\kilo\ohm} 0805 (VBUS Sense Divider) \\
+	R98 & 1 & Yageo & \texttt{AC0805JR-0782KL} & Resistor \SI{82}{\kilo\ohm} 0805 (VBUS Sense Divider) \\
+	\mbox{R99--R101}, R106 & 4 & Yageo & \texttt{RV0805JR-071ML} & Resistor \SI{1}{\mega\ohm} 0805 (Opto Base Pull-down) \\
+	\addlinespace[0.8em]
+	\multicolumn{5}{@{}l}{\textit{Upper Board}} \\*
+	Y4, Y6 & 2 & TI & \texttt{CD40106BE} & Hex Schmitt Trigger Inverter (Watchdog Oscillator Y4, Button Debouncing Y6) \\
+	Y5$^{g}$ & 1 & TI & \texttt{CD4518BDSR} & Dual BCD Up Counter (SO16, Watchdog) \\
+	Q1 & 1 & Central Semiconductor & \texttt{BCY59-X PBFREE} & NPN Transistor (TO18) \\
+	X8 & 1 & unknown & unknown & Connector to Base Board (Ribbon Cable to X9), 2x8 Male Pin Header \\
+	\mbox{S1--S4} & 4 & C\&K & \texttt{8125SD9ABE} & Pushbutton Switch \\
+	JP2 & 1 & unknown & unknown & Jumper between Button Lines B2 and B6, 2 Pin Jumper Header \\
+	D1 & 1 & Vishay & \texttt{1N4148TR} & Diode DO35-7 \\
+	D3 & 1 & STMicro & \texttt{1N6263} & Schottky Diode DO35-7 \\
+	D4, D5, D8, D9 & 4 & Vishay & \texttt{1N4148TR} & Diode DO35-10 (Fitted in Place of BAV21) \\
+	D6, D7, \mbox{D10--D15} & 8 & Vishay & \texttt{1N4148TR} & Diode DO35-10 \\
+	C7$^{h}$ & 1 & WIMA & \texttt{MKS2C031001\allowbreak{}A00JC00} & Capacitor Film \SI{100}{\nano\farad} \SI{63}{\volt} RM5 \\
+	C8 & 1 & Kyocera AVX & \texttt{08055C102K4T4A} & Capacitor Ceramic \SI{1}{\nano\farad} 0805 \\
+	C11, C12, C21 & 3 & Kyocera AVX & \texttt{08055C104K4T2A} & Capacitor Ceramic \SI{100}{\nano\farad} 0805 \\
+	C13 & 1 & WIMA & \texttt{MKS2B034701\allowbreak{}B00KI00} & Capacitor Film \SI{470}{\nano\farad} \SI{50}{\volt} RM5 \\
+	C14, C15 & 2 & WIMA & \texttt{MKS4D041002\allowbreak{}F00KSSD} & Capacitor Film \SI{1}{\micro\farad} \SI{100}{\volt} RM7.5 \\
+	C16 & 1 & WIMA & \texttt{MKS2D041001\allowbreak{}K00KC00} & Capacitor Film \SI{1}{\micro\farad} \SI{100}{\volt} RM5 \\
+	C17 & 1 & WIMA & unknown & Capacitor Film \SI{10}{\nano\farad} \SI{100}{\volt} RM5 \\
+	C18 & 1 & WIMA & \texttt{MKS2D031001\allowbreak{}A00JSSD} & Capacitor Film \SI{0.1}{\micro\farad} \SI{100}{\volt} RM5 \\
+	C70$^{i}$ & 1 & Kyocera AVX & \texttt{TAP105K050SCS} & Capacitor Tantalum \SI{1}{\micro\farad} \SI{50}{\volt} RM2.5 \\
+	R1 & 1 & Yageo & \texttt{MF0207FTE52-820K} & Resistor \SI{820}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	R2 & 1 & Yageo & \texttt{MF0207FRE52-22K} & Resistor \SI{22}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	R3, R6, R9, R18 & 4 & Yageo & \texttt{MF0207FTE52-10K} & Resistor \SI{10}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	R4 & 1 & Yageo & \texttt{MF0207FTE52-470K} & Resistor \SI{470}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	R5 & 1 & Yageo & \texttt{MF0207FTE52-18K} & Resistor \SI{18}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	R8, R11, R13, R17 & 4 & Yageo & \texttt{MF0207FTE52-1K} & Resistor \SI{1}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	R10$^{j}$, R12, R14 & 3 & Yageo & \texttt{MF0207FTE52-3M01} & Resistor \SI{3.01}{\mega\ohm} \SI{0.6}{\watt} 0207 \\
+	R15 & 1 & Yageo & \texttt{MF0207FRE52-1M} & Resistor \SI{1}{\mega\ohm} \SI{0.6}{\watt} 0207 \\
+	R16$^{d}$ & 1 & unknown & unknown & Resistor \SI{10}{\kilo\ohm} 0207 \\
+	R19 & 1 & Yageo & \texttt{MF0207FTE52-100K} & Resistor \SI{100}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	\addlinespace[0.8em]
+	\multicolumn{5}{@{}l}{\textit{Base Board (Inherited Rev~0.0 Board)}} \\*
+	Y1 & 1 & TI & \texttt{TPS73615DBV} & \SI{1.5}{\volt} \acrshort{ldo} Regulator \\
+	Y2 & 1 & TI & \texttt{TPS73633DBVT} & \SI{3.3}{\volt} \acrshort{ldo} Regulator \\
+	Y3$^{k}$ & 1 & TI & \texttt{TPS3307-18-\allowbreak{}EPSO-8} & Triple Voltage Supervisor (BOD) \\
+	Y7, \mbox{Y9--Y11}, Y17 & 5 & TI & \texttt{CD4050BNSR} & Hex Non-inverting Buffer/Level Shifter (SO16) \\
+	Y8, Y12 & 2 & TI & \texttt{SN74LS245N} & Octal Bus Transceiver (DIL20), Fitted in Place of 54LS245 \\
+	Y15 & 1 & Infineon & \texttt{CY14B104NA-\allowbreak{}ZS45XI} & NVRAM \SI{4}{\mega\bit} (256K x 16) \\
+	Y16 & 1 & TI & \texttt{54HCU04J} & Hex Inverter (Clock Oscillator), Taken from the Original Board \\
+	Y20 & 1 & Actel & \texttt{A3P1000-PQG208M} & FPGA ProASIC3 1M Gates \\
+	Y21 & 1 & Spansion & \texttt{S29AL016J} & Flash ROM \SI{16}{\mega\bit} \\
+	\mbox{Q3--Q5} & 3 & Central Semiconductor & \texttt{BCY59-X PBFREE} & NPN Transistor (TO18) \\
+	Q6 & 1 & ECS & \texttt{ECS-060-20-4X-DU} & Crystal \SI{6}{\mega\hertz} \\
+	X1, X2 & 2 & -- & none (part of the board) & Test Field, 22 Pads (Flash ROM Signals) \\
+	X3 & 1 & Harting & \texttt{09195107324} & JTAG Connector ML10 (FPGA) \\
+	X4 & 1 & Harting & \texttt{09062483201222} & System Connector DIN~41612 Type F, 48 Pins (MZBD48F) \\
+	X5, X6 & 2 & TE & \texttt{5-104186-5} & Header, 8 Positions, \SI{1.27}{\milli\metre} (AMPMODU System 50), to LED Board \\
+	X7 & 1 & unknown & unknown & FPGA Debug Signals, 2x4 Male Pin Header (MA04-2) \\
+	X9 & 1 & unknown & unknown & Connector to Upper Board (Ribbon Cable to X8), 2x8 Male Pin Header \\
+	X13 & 1 & TE & \texttt{535541-4} & Connector to STM32 Board (1x6 Female Header) \\
+	\mbox{TP1--TP5} & 5 & -- & none (part of the board) & Test Pad \\
+	SJ1$^{d}$ & 1 & -- & none (part of the board) & Solder Jumper, +\SI{3.3}{\volt} to Pin 4 of JTAG Header X3 \\
+	D2 & 1 & Vishay & \texttt{1N4148TR} & Diode DO35-7 \\
+	LED4 & 1 & Würth & \texttt{150080RS75000} & Status LED (Red) \\
+	LED5 & 1 & Würth & \texttt{150080VS75000} & Status LED (Green) \\
+	LED6 & 1 & Würth & \texttt{150080YS75000} & Status LED (Yellow) \\
+	\mbox{C1--C4}, C56 & 5 & Kyocera AVX & \texttt{TPSV686K025R0095} & Capacitor Tantalum \SI{68}{\micro\farad} \SI{25}{\volt} \\
+	C5, C6 & 2 & Vishay & \texttt{VJ0805Y103\allowbreak{}KBBBE31} & Capacitor Ceramic \SI{10}{\nano\farad} 0805 \\
+	C9, C10, C19, C20, \mbox{C22--C41}, \mbox{C43--C55}, \mbox{C59--C61} & 40 & Kyocera AVX & \texttt{08055C104K4T2A} & Capacitor Ceramic \SI{100}{\nano\farad} 0805 \\
+	C42 & 1 & Kyocera AVX & \texttt{08055C223J4Z2A} & Capacitor Ceramic \SI{22}{\nano\farad} 0805 \\
+	C57, C58 & 2 & Kyocera AVX & \texttt{08055A220J4T2A} & Capacitor Ceramic \SI{22}{\pico\farad} 0805 (Crystal Load) \\
+	\mbox{R20--R23} & 4 & Yageo & \texttt{MF0207FTE52-1K} & Resistor \SI{1}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	R24, R25, R27, R30, R31, \mbox{R56--R59} & 9 & Yageo & \texttt{MF0207FTE52-10K} & Resistor \SI{10}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	R26, R28, R29 & 3 & Yageo & \texttt{MF0207FTE52-18K} & Resistor \SI{18}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	\mbox{R32--R47} & 16 & Yageo & \texttt{MF0207FTE52-100K} & Resistor \SI{100}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	\mbox{R48--R55}, R80 & 9 & Yageo & \texttt{MF0207FRE52-22K} & Resistor \SI{22}{\kilo\ohm} \SI{0.6}{\watt} 0207 \\
+	R74, R75 & 2 & Yageo & \texttt{AC0805JR-7W10KL} & Resistor \SI{10}{\kilo\ohm} 0805 \\
+	R78$^{l}$ & 1 & Yageo & \texttt{MFP-25BRD52-100K} & Resistor \SI{100}{\kilo\ohm} 0.1\% \SI{0.6}{\watt} 0207 \\
+	R79$^{l}$ & 1 & Yageo & \texttt{MFP-25BRD52-10K} & Resistor \SI{10}{\kilo\ohm} 0.1\% \SI{0.6}{\watt} 0207 \\
+	R87, R91, R97 & 3 & Yageo & \texttt{RC0805JR-07270RL} & Resistor \SI{270}{\ohm} 0805 (LED Series) \\
+	R102$^{m}$ & 1 & Yageo & \texttt{MF0207FTE52-4K7} & Resistor \SI{4.7}{\kilo\ohm} \SI{0.6}{\watt} (BOD Divider) \\
+	R103$^{m}$ & 1 & Yageo & \texttt{MF0207FTE52-2K4} & Resistor \SI{2.4}{\kilo\ohm} \SI{0.6}{\watt} (BOD Divider) \\
+	R104$^{m}$ & 1 & Yageo & \texttt{MF0207FTE52-5K6} & Resistor \SI{5.6}{\kilo\ohm} \SI{0.6}{\watt} (BOD Divider) \\
+	R105$^{m}$ & 1 & Yageo & \texttt{MF0207FTE52-6K8} & Resistor \SI{6.8}{\kilo\ohm} \SI{0.6}{\watt} (BOD Divider) \\
+	R111$^{d}$ & 1 & unknown & unknown & Resistor \SI{10}{\kilo\ohm} 0207 (Input Pull-up) \\
+
+\end{longtable}
+% The notes follow the table as text, so the table breaks with its regular foot and
+% head on every page; the notes may run on to the next page, but no note is split
+\par\nopagebreak
+{\footnotesize\setlength{\parindent}{0pt}\setlength{\parskip}{0.2em}\interlinepenalty=10000
+\textit{Notes to \Cref{tab:bom}}\par\nopagebreak
+$^{a}$The Rev~1.0 bill of materials lists the end-of-life displays, LED1 and LED2 (\texttt{5082-7613}), in place of DS1 and DS2.\par
+$^{b}$The Rev~1.0 bill of materials lists a \texttt{DS3231SN\#} real-time clock under Y19 and the regulator under Y18; the Rev~1.0 schematic and layout place the \texttt{TPS73633DBV} regulator at Y19, and timekeeping uses the internal RTC of Y24 (\Cref{sec:stm32_details}).\par
+$^{c}$The Rev~1.0 bill of materials lists the optocouplers as OK1 to OK4; its sheet STM32-Platine has two lines for them, one with the \texttt{SFH601-3} (Vishay) listed here and one with \texttt{HCPL0500N8}, part number \texttt{HCPL0500R2} (OnSemi/Fairchild).\par
+$^{d}$C78, JP1, R16, R111 and SJ1 are not in the Rev~1.0 bill of materials; their entries follow the schematic and layout.\par
+$^{e}$The schematic and layout specify \SI{10}{\nano\farad}; the Rev~1.0 bill of materials groups C63 with the \SI{100}{\nano\farad} decoupling capacitors.\par
+$^{f}$The Rev~1.0 bill of materials lists C64 with the decoupling capacitors of the Base Board; the layout places it on the STM32 board.\par
+$^{g}$The Rev~1.0 bill of materials gives the part number \texttt{CD4518BE}; the schematic and layout give \texttt{CD4518BDSR} with an SO16 footprint.\par
+$^{h}$The schematic gives \SI{100}{\micro\farad} for C7; the Rev~1.0 bill of materials notes a measured value of \SI{100}{\nano\farad}, which is fitted.\par
+$^{i}$The schematic labels C70 as \SI{100}{\nano\farad}; the listed part is \SI{1}{\micro\farad}.\par
+$^{j}$The Rev~1.0 bill of materials also lists R10 with R3 in a line for one \SI{10}{\kilo\ohm} resistor; the schematic and layout give \SI{3}{\mega\ohm}, as for R12 and R14.\par
+$^{k}$Component Y3 was present on the inherited Rev 0.0 Base Board; markings were illegible. Part number assumed based on Rev 0.0 documentation and schematics; the Rev~1.0 bill of materials gives \texttt{TPS3307-18MDREP}.\par
+$^{l}$The Rev~1.0 schematic and layout give R78 and R79 the surface-mount footprint R0805, as do the board files of Rev~0.0 and Rev~0.1; the Rev~1.0 bill of materials (sheet Unterplatine) gives them the package 0207/10 with the part numbers listed here. The other sheets of the workbook that list the two resistors give R78 as \SI{10}{\kilo\ohm} and R79 as \SI{100}{\kilo\ohm}, the reverse of the schematic and of the sheet Unterplatine.\par
+$^{m}$For R102 to R105 the sources disagree as well. The Rev~1.0 schematic and the sheet Unterplatine of the Rev~1.0 bill of materials give the values listed here, on which the trip points of \Cref{sec:redundancy_failsafe} rest; the sheets Stückliste and BOM of the same workbook, its sheet with the Rev~0.0 parts list, and the Rev~0.0 schematic on which the prototype is based~\cite[Sec.~9.1]{leyer2023} give the reverse values (R102 \SI{2.4}{\kilo\ohm}, R103 \SI{4.7}{\kilo\ohm}, R104 \SI{6.8}{\kilo\ohm}, R105 \SI{5.6}{\kilo\ohm}). Leyer lists the exchange as needed rework, corrected in the Rev~1.0 schematic and bill of materials, without saying that the prototype was changed~\cite[Sec.~9.2]{leyer2023}, and the fitted Base Board is that prototype; no document records which values the inspection of the populated boards found. With the reverse values, the divider of the \SI{5}{\volt} rail would give about \SI{2.7}{\volt} at \SI{5}{\volt}, below the threshold of \SI{2.93}{\volt} of its sense input~\cite[p.~2]{ti_tps3307}, and the supervisor would hold the reset; Leyer's observation of a reset only below about \SI{4.1}{\volt}~\cite[Sec.~4.7]{leyer2023} fits the values listed here.\par}
+\endgroup
+
+% ------------------------------------------------------------
+\section{Design Rules of the Layouts}
+\label{sec:app_drc}
+
+The Rev~1.0 board files use the manufacturer's rule set \texttt{jlcpcb-4layers} (minimum clearance \SI{5}{mil}, minimum track width \SI{3.5}{mil}, minimum drill \SI{0.2}{\milli\metre}, minimum annular ring \SI{0.13}{\milli\metre}). The routed tracks are at least \SI{0.25}{\milli\metre} wide, and the vias are drilled at \SI{0.35}{\milli\metre}. The stack-up is top, power (layer~2), ground (layer~15) and bottom. The rule set was already used in Leyer's Rev~1.0 files of 2023~\cite{leyer2023}.
+
+The board files store 622 rule-check messages marked as approved (the LED board file four); the same approvals are present in the Rev~0.0 file and were carried over with the design. Approved messages do not count as errors in a check run, but they show that several hundred rule violations were accepted by hand. No separate~\gls{drc} report is archived, and whether a check run today reports errors that are not approved has not been verified.

@@ -1,0 +1,110 @@
+% High-level block diagram of the retrofitted test-diagnosis system.
+% Kept as diagram source rather than a bitmap so that it diffs, reviews and
+% rebuilds deterministically with the rest of the document. Derived from the
+% block diagram of the published paper; the RTC node names the STM32's internal
+% RTC with its 32.768 kHz crystal, which is what the Rev 1.0 schematic and layout
+% show. The board assignment follows the Rev 1.0 Eagle layouts: the BOD
+% supervisor (Y3) and the CD4050 level shifters for the X4 inputs sit on the Base
+% Board, the watchdog (Y4, Y5, Q1) and the debouncing (Y6) on the Upper Board.
+% The BOD output drives the watchdog's reset transistor Q1 over X9/X8, so its
+% reset reaches the FPGA through the Upper Board. The outputs to the system
+% connector X4 leave the Base Board through the 54LS245-type drivers Y8 and Y12
+% (schematic sheets 2 and 3); their arrow leaves the board below the LED Board.
+% Edge labels sit on the side of their arrow away from the neighbouring label,
+% and the STM32 peripherals stand far enough from the STM32 for a visible arrow.
+% The 5 V supply and ground of the Base Board reach the Diagnostics Board through
+% X13/X12 (schematic sheet 4); on the Base Board side of the barrier the 5 V (net
+% PWR_SUPPLY_5V) feeds only the suppressor diode D16 and the input of the isolated
+% converter Y23 (the footprint Y22 is unfitted), drawn as the dark arrow. The LEDs of
+% the optocouplers share only the ground (GND3) and are driven by the logger and
+% reset lines through R82-R85 (X12 pins 2-5); the branch is their ground return.
+% The FPGA reaches the NVRAM over address, data and enable lines (atop.vhd, Rev 1.0
+% schematic: A0-A5, DQ0-DQ7, CE, OE, WE, BLE); the fitted NVRAM needs no STORE and
+% RECALL, and the X4 STORE/RECALL inputs feed only the logger.
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    module/.style={draw, thick, rounded corners=3pt, minimum width=2.6cm,
+                   minimum height=1.2cm, align=center, font=\small},
+    fpga/.style={draw, very thick, rounded corners=5pt, minimum width=5.6cm,
+                 minimum height=4cm, align=center, font=\normalsize\bfseries,
+                 fill=gray!5},
+    pcb/.style={draw, thick, rounded corners=8pt, inner sep=14pt},
+    pcblabel/.style={font=\small\bfseries\sffamily, fill=white, inner sep=3pt},
+    conn/.style={-{Stealth[length=2.5mm]}, thick},
+    bconn/.style={{Stealth[length=2.5mm]}-{Stealth[length=2.5mm]}, thick},
+    isoconn/.style={-{Stealth[length=2.5mm]}, very thick, densely dashed, red!70!black},
+    pwrconn/.style={-{Stealth[length=2.5mm]}, very thick, black!75},
+    lbl/.style={font=\scriptsize, midway, fill=white, inner sep=1.5pt},
+  ]
+  \node[fpga] (fpga) at (0,0) {FPGA\\{\small Actel A3P1000-PQG208M}\\[3pt]{\footnotesize\itshape MCS-48 Emulation\/}};
+
+  \node[module, fill=gray!4] (pwr)   at (-7.5, 1.0) {Power Supply\\{\footnotesize \SI{3.3}{\volt} / \SI{1.5}{\volt}}};
+  \node[module, fill=gray!4] (flash) at (-3.5, 3.5) {Flash ROM\\{\footnotesize S29AL016J}};
+  \node[module, fill=gray!4] (xtal)  at (0, 3.5)    {Crystal\\{\footnotesize \SI{6}{\mega\hertz}}};
+  \node[module, fill=gray!4] (nvram) at (3.5, 3.5)  {NVRAM\\{\footnotesize CY14B104NA}};
+  \node[module, fill=gray!4] (bod)   at (-7.5, -1.3) {BOD\\{\footnotesize TPS3307}};
+  \node[module, fill=gray!4] (jtag)  at (-7.5, 3.5)  {JTAG\\{\footnotesize Debug}};
+  \node[module, fill=gray!4, minimum height=1.0cm] (lvl) at (5.6, -0.2) {Level Shift\\{\footnotesize CD4050}};
+  \node[module, fill=gray!4, minimum height=1.0cm] (drv) at (5.6, -1.8) {Output Drivers\\{\footnotesize 54LS245-type}};
+  \node[module, fill=gray!4] (freq)  at (-3.5, -3.5){Freq.\ Sweep\\{\footnotesize \SI{850}{\hertz}--\SI{1550}{\hertz}}};
+  \node[module, fill=gray!4] (spi)   at (0, -3.5)   {SPI Master\\{\footnotesize (32-bit frames, 2023)}};
+  \node[module, fill=gray!4] (ioexp) at (3.5, -3.5) {I/O \& Port\\{\footnotesize Expander}};
+
+  \node[module, fill=green!8] (bcd)  at (9.3, 0.8)  {BCD Decoder\\{\footnotesize CD4511BE}};
+  \node[module, fill=green!8] (disp) at (12.8, 0.8) {7-Segment\\{\footnotesize Displays ($\times 2$)}};
+
+  \node[module, fill=blue!8] (wd)       at (-7.5, -6.5) {Watchdog\\{\footnotesize CD40106, CD4518}};
+  \node[module, fill=blue!8] (btns)     at (-7.5, -8.5) {Buttons\\{\footnotesize Test, STW, L\"osch, T\"ur/V}};
+  \node[module, fill=blue!8] (debounce) at (-3.5, -8.5) {Debounce};
+
+  \node[module, fill=orange!10] (opto) at (3.5, -7)   {Optocouplers\\{\footnotesize SFH601-3 ($\times 4$)}};
+  \node[module, fill=orange!10] (stm)  at (7, -7)     {STM32\\{\footnotesize F401RET6}};
+  \node[module, fill=orange!10] (rtc)  at (10.8, -5.5)  {RTC\\{\footnotesize internal, \SI{32.768}{\kilo\hertz}}};
+  \node[module, fill=orange!10] (sd)   at (10.8, -7)    {MicroSD\\{\footnotesize (FatFs)}};
+  \node[module, fill=orange!10] (usb)  at (10.8, -8.5)  {USB\\{\footnotesize Type-C}};
+  \node[module, fill=orange!10] (pwrin) at (0.6, -7) {D16, Y23 input\\{\footnotesize Base Board side}};
+
+  \begin{scope}[on background layer]
+    \node[pcb, draw=gray!50, fill=gray!2,
+          fit=(fpga)(pwr)(flash)(xtal)(nvram)(bod)(jtag)(lvl)(drv)(freq)(spi)(ioexp)] (bb) {};
+    \node[pcb, draw=green!40!black, fill=green!2, fit=(bcd)(disp)] (lb) {};
+    \node[pcb, draw=blue!40!black, fill=blue!2, fit=(wd)(btns)(debounce)] (ub) {};
+    \node[pcb, draw=orange!50!black, fill=orange!2, fit=(opto)(stm)(rtc)(sd)(usb)(pwrin)] (sb) {};
+  \end{scope}
+
+  \node[pcblabel, text=gray!60] at (bb.north) {PCB 1: Base Board};
+  \node[pcblabel, text=green!40!black] at (lb.north) {PCB 4: LED Board};
+  \node[pcblabel, text=blue!40!black] at (ub.south) {PCB 2: Upper Board};
+  \node[pcblabel, text=orange!50!black] at (sb.south) {PCB 3: STM32 Diagnostics Board};
+
+  \draw[conn] (pwr.east) -- node[lbl, above] {\SI{1.5}{\volt}} (pwr.east -| fpga.west);
+  \draw[conn] (pwr.south) -- node[lbl, right] {\SI{3.3}{\volt}} (bod.north);
+  \draw[conn] (bod.south) -- node[lbl, right] {Reset} (wd.north);
+  \draw[bconn] (wd.east) -| (-5.45, -0.5) -- node[lbl, above] {Reset / !CS} (fpga.west |- 0, -0.5);
+  \draw[conn] (jtag.east) -- ++(0.8, 0) |- (fpga.west |- 0, 1.6);
+  \draw[conn] (lvl.west) -- node[lbl, above] {X4 inputs} (lvl.west -| fpga.east);
+  \draw[conn] (drv.west -| fpga.east) -- (drv.west);
+  \draw[conn] (drv.east) -- node[lbl, above] {X4 outputs} ++(1.9, 0);
+  \draw[bconn] (flash.south) -- node[lbl, below left] {Firmware} ([xshift=-1.5cm]fpga.north);
+  \draw[conn] (xtal.south) -- node[lbl, left] {CLK} (fpga.north);
+  \draw[bconn] (nvram.south) -- node[lbl, below right] {Address / Data} ([xshift=1.8cm]fpga.north);
+  \draw[conn] (fpga.240) -- (freq.north);
+  \draw[conn] (fpga.south) -- (spi.north);
+  \draw[bconn] ([xshift=1.8cm]fpga.south) -- (ioexp.north);
+  \draw[conn] (fpga.east |- bcd.west) -- node[lbl, above, pos=0.3] {BCD} (bcd.west);
+  \draw[conn] (bcd.east) -- (disp.west);
+  \draw[conn] (btns.east) -- (debounce.west);
+  \draw[conn] (debounce.north) |- (-5.05, -5.0) |- (fpga.west |- 0, -1.5);
+  \draw[isoconn] (spi.south) -- ++(0,-1) -| node[lbl, right, text=red!70!black, font=\scriptsize\bfseries, pos=0.25] {Galvanic Isolation} (opto.north);
+  \draw[conn] (opto.east) -- node[lbl, above] {SPI} (stm.west);
+  \draw[bconn] (stm.north) |- (rtc.west);
+  \draw[bconn] (stm.east) -- (sd.west);
+  \draw[bconn] (stm.south) |- (usb.west);
+  \coordinate (feedx) at (-0.3, 0);
+  \coordinate (ledx) at (2.6, 0);
+  \coordinate (branch) at (-0.3, -5.75);
+  \draw[pwrconn] (bb.south -| feedx) -- node[lbl, left, pos=0.2] {\SI{5}{\volt}, GND} (pwrin.north -| feedx);
+  \draw[pwrconn] (branch) -| node[lbl, below, pos=0.3] {GND} (opto.north -| ledx);
+  \fill[black!75] (branch) circle (2pt);
+\end{tikzpicture}%
+}

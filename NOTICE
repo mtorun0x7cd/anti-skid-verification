@@ -1,0 +1,175 @@
+NOTICE
+
+anti-skid-verification: companion repository of the paper "Ensuring Functional
+Equivalence in Retrofitted Anti-Skid Systems for European Public
+Transportation: A Hybrid Two-Layer Verification Methodology" by Mert Torun, a
+Working Paper in the series Kölner Beiträge zur technischen Informatik
+2/2026, TH Köln (Technische Hochschule Köln), published under
+https://doi.org/10.57684/COS-1494, and of the research report from which the
+paper derives, in its revised edition of October 2026.
+
+This file states the licence of each part of the repository, the material of
+third parties, the declared edits and the licence history. REUSE.toml and the
+SPDX tags in the files give the licence of every file; the licence texts are in
+LICENSES/.
+
+
+1. Licences by path
+
+  publication/                    CC BY-NC-ND 4.0, the licence of the catalogue
+  (the deposited PDF and          record. Copyright 2026 Mert Torun. Not
+  SHA256SUMS)                     covered: the material of third parties in
+                                  the PDF (section 2), and the series cover and
+                                  imprint on its pages 1 and 2, which are the
+                                  series' own.
+
+  paper/paper.tex,                CC BY-NC-ND 4.0, the licence of the paper.
+  paper/references.bib            Copyright 2026 Mert Torun. Listing 1 is
+                                  adapted from a third party (section 2) and
+                                  marked as an SPDX snippet.
+
+  paper/fig/                      LicenseRef-third-party: measurement captures
+                                  of a third party (section 2).
+
+  paper/IEEEtran.cls,             LPPL 1.3c, unedited, as distributed by the
+  paper/IEEEtran.bst              IEEEtran project; copyright with the authors
+                                  each file names.
+
+  report/ (the .tex, .bib and     CC BY 4.0, the licence the title page of the
+  .xmpdata files)                 report states. Copyright 2025, 2026 Mert
+                                  Torun. As the title page also states, the
+                                  licence excludes material credited to others
+                                  in a caption or in the text (section 2), and
+                                  passages that also appear in the paper remain
+                                  under its licence, CC BY-NC-ND 4.0; the
+                                  figure sources report/fig/system_overview.tex
+                                  and report/fig/test_fixture.tex, adapted from
+                                  Figs. 1 and 4 of the paper, carry that
+                                  licence.
+
+  report/chapters/appendixD.tex   CC BY 4.0, except the YAML test case of
+                                  Appendix D.1 and the VHDL excerpt of
+                                  Appendix D.2 (section 2).
+
+  report/fig/photos/              CC BY 4.0 for the photographs; the Rev 0.0
+                                  board designs they show are a third party's
+                                  (section 2), and they are edited (section 3).
+
+  report/fig/logo/,               LicenseRef-third-party (section 2).
+  report/fig/ayoub/,
+  report/fig/sweep/,
+  report/fig/watchdog_capture.jpg,
+  report/fig/schematic/,
+  report/fig/layout/
+
+  ERRATA.md                       CC BY 4.0; the quoted text of each entry is
+                                  quoted from the deposited paper and stays
+                                  under its licence, CC BY-NC-ND 4.0.
+
+  CITATION.cff                    CC BY-NC-ND 4.0, because it quotes the
+                                  abstract of the paper.
+
+  codemeta.json, NOTICE, the      CC BY 4.0. Copyright 2026 Mert Torun.
+  README files of publication/,
+  paper/ and report/
+
+  Makefile, the dotfiles,         MIT. Build files and configuration.
+  paper/.latexmkrc,               Copyright 2026 Mert Torun.
+  report/.latexmkrc
+
+
+2. Material of third parties
+
+The licences above cover what the author created. They do not cover the
+material of third parties listed here: this repository does not license it,
+and all rights remain with the holders named. Each item is credited in the
+caption or the text that uses it.
+
+The mark of TH Köln. report/fig/logo/th_koeln.png is the mark of TH Köln
+(Technische Hochschule Köln), set on the title page and in the running heads
+of the report. All rights remain with TH Köln.
+
+Samy Ayoub, "Reverse Engineering von Steuerkarten: Vergleicher Karte und
+Stromsollwert Karte", work report, Fachhochschule Köln, 2014 (reference
+ayoub2014 of the report).
+  report/fig/ayoub/comparator_card_original.pdf,
+  report/fig/ayoub/comparator_card_fpga.pdf
+    Figure 2.1 of the report, reproduced as vector graphics from Figs. 1 and 3
+    of the work report.
+  report/fig/ayoub/test_setup.pdf
+    Figure 2.2 of the report, reproduced as a vector graphic from its Fig. 7.
+
+Mark Leyer, "Reverse Engineering and Redesigning of the Test-Diagnosis Board of
+an Anti-Skid Protection for Trams", internship documentation, TH Köln, 2023
+(reference leyer2023 of the report, reference [10] of the paper).
+  report/fig/sweep/comp_upsweep.png, report/fig/sweep/comp_downsweep.png,
+  paper/fig/comp_upsweep.png, paper/fig/comp_downsweep.png
+    Oscilloscope captures of the frequency sweep of the original board and of
+    the FPGA emulation, July 2023: Figure 5.1 of the report and Fig. 5 of the
+    paper, from Figs. 11 and 12 of the documentation.
+  report/fig/watchdog_capture.jpg, paper/fig/watchdog_reaction.png
+    The oscilloscope capture of the watchdog reset test on the Rev 0.0
+    prototype, 15 August 2023: Figure C.1 of the report and Fig. 3 of the
+    paper, from Fig. 9 of the documentation.
+  report/fig/schematic/, report/fig/layout/
+    The schematic and the layouts of the four boards (Figures A.5 to A.16 of
+    the report), his design, rendered with KiCad from the Eagle design files
+    of 2024, in which the author replaced the displays and split the design
+    into one file per board.
+  report/fig/photos/
+    The Rev 0.0 board designs the photographs show.
+  report/chapters/appendixD.tex
+    The VHDL excerpt of Appendix D.2, from the top-level design of 2023.
+  publication/2026_02_Retrofitted_Anti-Skid_System.pdf
+    The captures of Figs. 3 and 5, which the paper prints without naming
+    their source (ERRATA.md, P-E029).
+
+André Dolata, Dennis Ostermann and Francisco Schiffelers, "Testkartentester:
+Entwicklung einer Testkarte für die Gleitschutztestkarte", project report,
+TH Köln, 2023 (reference dolata2023 of the report, reference [28] of the
+paper).
+  report/chapters/appendixD.tex, paper/paper.tex and the deposited PDF
+    The YAML test case "Geber 3" of Appendix D.1 of the report and Listing 1
+    of the paper, both adapted from Listing 3 of the project report
+    (ERRATA.md, P-E037).
+
+The OpenCores t48 core. The FPGA design the report describes integrates the
+t48 core of the OpenCores project, whose author its sources name (the report
+names the file t48_core.vhd, Section 3.2). The core's sources are not part of
+this repository, and no file here is licensed under their terms.
+
+
+3. Declared edits
+
+report/fig/photos/
+  Edited to mask a graphic logo and a board designation of third-party origin,
+  and on the unpopulated Rev 1.0 STM32 board also the production code of the
+  PCB manufacturer. No technical content altered (report, page ii and the
+  introduction of Appendix A).
+
+report/fig/layout/
+  Rendered anew from the design files without that logo and designation.
+
+report/fig/watchdog_capture.jpg
+  Cropped to the screen from the archived photograph of the oscilloscope
+  (caption of Figure C.1).
+
+paper/fig/watchdog_reaction.png
+  A crop of the same capture, as the deposited paper prints it.
+
+publication/2026_02_Retrofitted_Anti-Skid_System.pdf
+  None. The file is byte-identical with the file the catalogue record serves.
+
+
+4. Licence history
+
+Until this repository was recreated with a new history on 2026-10-05, it
+stated CC BY-NC-ND 4.0 for everything its author wrote in it: the paper, the
+research report, the slides, the verification data and all figures. That
+statement also took in the figures of third parties listed in section 2,
+which were never the author's to license. From the record tag cos-1494 on,
+the paper and what reproduces it are licensed under CC BY-NC-ND 4.0, the
+report under CC BY 4.0 as its title page states, and the build files under
+the MIT License, as section 1 states; the material of section 2 is excepted.
+The author holds the rights in what he wrote, and copies received under
+CC BY-NC-ND 4.0 from the earlier repository keep that grant.

@@ -1,0 +1,75 @@
+% ============================================================
+% Chapter 6: Conclusion and Future Outlook
+% ============================================================
+\chapter{Conclusion and Future Outlook}
+\label{chap:conclusion}
+
+This research addressed the challenge of modernising a legacy, safety-critical anti-skid test-diagnosis module. The project indicates, but does not yet demonstrate, that replacing an obsolete~\gls{mcs48}-based controller with a modern~\gls{fpga} (\texttt{Actel~A3P1000}) for logic emulation and an~\gls{stm32} microcontroller (\texttt{STM32F401RET6}) for enhanced diagnostics is a viable strategy. What the report contributes is a documented case, a classification of the six defects documented during the rebuild, and a proposed two-layer verification structure that has not been validated: the defects did not come to light in a planned run of it, and they illustrate why complementary methods are needed.
+
+Through simulation, fixture-based testing, commissioning and debugging, the project dealt with substantial practical challenges, from critical manufacturing defects such as poor~\gls{fpga} soldering to latent hardware and software logic bugs, and arrived at a prototype that was observed operating as a whole in the test setup in early 2026. The process showed where the verification framework helps in a realistic engineering context and where its evidence is still incomplete. The generated evidence and documentation, whose verification layers are mapped to standards such as~\gls{iec61508} and~\gls{en50129} (\Cref{tab:standards_mapping}), are a starting point for formal safety certification; \Cref{subsec:limitations} names what is still missing.
+
+% ------------------------------------------------------------
+\section{Summary of Results}
+\label{sec:achievements}
+
+The primary goals set forth in~\Cref{sec:purpose} were pursued through a process of design, validation, and iterative refinement; the first two were reached only in part. The main results are:
+\begin{itemize}
+	\item \textbf{Hardware Retrofit:} The Upper, LED and \gls{stm32} boards were built to Leyer's Rev~1.0 design~\cite{leyer2023}, with the displays changed, and the inherited Rev~0.0 Base Board was brought to a testable state after overcoming significant inherited flaws through intensive debugging and physical rework (\Cref{subsec:hardware_challenges}). After the correction of the \gls{nvram} defect, the fixture's fault-handling tests ran on the rebuilt unit~\cite[pp.~14--15]{savchuk2025}, and a fix of the \gls{stm32} firmware of 2023 has been applied for the two defects found in the non-safety-related diagnostic-logging path (\Cref{sec:diagnostic_resolution}).
+	\item \textbf{Evidence for Functional Equivalence:} Simulation and the fixture runs indicate that the emulation replicates the fault handling of the original module, but the evidence is incomplete, and the only measurement against the original board points to a deviation of the sweep at its low end and in its duration, which is open (\Cref{subsec:equivalence_discussion}).
+	\item \textbf{Development of a Methodological Framework:} A two-layer verification structure was proposed; it has not been validated. The defects documented during the rebuild illustrate why several complementary verification methods are needed for integration issues such as those encountered in this retrofit (\Cref{sec:integration_defects}).
+	\item \textbf{Integration of Enhanced, Isolated Diagnostics:} The project integrated an \gls{stm32} subsystem for enhanced diagnostic data via USB, whose signal path to the core is galvanically isolated by design; its parts on the Base Board side of the barrier share the supply of the core (\Cref{sec:diagnostic_resolution}), and the evidence for its logging path is given in \Cref{tab:evidence_state}.
+\end{itemize}
+
+\Cref{tab:objectives} sets the objectives of \Cref{sec:objectives_scope} against what the project reached.
+
+\begin{table}[htbp]
+	\centering
+	\caption[Objectives and What Was Reached]{The objectives of \Cref{sec:objectives_scope}, what the project reached of each, and where the report shows it.}
+	\label{tab:objectives}
+	\small
+	\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth} >{\raggedright\arraybackslash}p{0.5\textwidth} >{\raggedright\arraybackslash}p{0.22\textwidth}@{}}
+		\toprule
+		Objective & What was reached & Where shown \\
+		\midrule
+		Retrofit implementation & In part: the rebuilt unit carries the Rev~1.0 Upper, LED and \gls{stm32} boards on the inherited Rev~0.0 Base Board and ran the fixture's tests; on its configuration see note~f of \Cref{tab:results_summary} & \Cref{sec:pcb_design_impl,tab:results_summary} \\
+		Functional equivalence verification & In part: simulation and the fixture runs indicate equivalence of the fault handling; the sweep deviates from the only measurement of the original board, and the gaps for the rebuilt unit are listed in \Cref{tab:evidence_state} & \Cref{subsec:equivalence_discussion,tab:evidence_state} \\
+		Enhanced diagnostic validation & Not reached: the diagnostic path was not verified separately, and no log of its operation is archived; a fix of the firmware of 2023 was applied for its two defects (\Cref{tab:bug_taxonomy}) & \Cref{sec:diagnostic_resolution} \\
+		Testing framework development & In part: the two layers are defined; no comparison against benchmarks derived from \gls{hil} methodologies is documented, and no environmental test has been made & \Cref{chap:testing,sec:validation_context} \\
+		Standards alignment and certification pathway & Not reached: the layers are mapped to whole standards only, and no \gls{vv} plan in the sense of \gls{ieee1012} was written & \Cref{sec:safety_compliance} \\
+		Risk mitigation and future-proofing & In part: the watchdog and the \gls{bod} circuit are in the design, and no test of them on the rebuilt unit is documented; on the availability of the parts see below & \Cref{sec:redundancy_failsafe} \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+For the long-term availability of the parts, the sources record only problems. The remarks of the Rev~1.0 bill of materials mark the displays \texttt{5082-7613} as end of life, which this work replaced (\Cref{fig:schematic_sheet3}), and the supervisor \texttt{TPS3307-18} and the 54-series clock inverter \texttt{54HCU04J} as not stocked, the latter taken from the old board; \SI{3.01}{\mega\ohm} resistors were chosen because \SI{3}{\mega\ohm} ones were not stocked (\Cref{tab:bom}). For the \gls{fpga}, new military-grade \texttt{A3P1000} devices could not be obtained, and the fitted one was desoldered from a broken board~\cite[Sec.~6.2]{leyer2023}. The availability of the other parts over the service life of the module has not been assessed.
+
+% ------------------------------------------------------------
+\section{Lessons Learned}
+\label{sec:lessons_learned}
+
+The project suggests the following lessons for safety-critical retrofit projects:
+\begin{itemize}
+	\item \textbf{Physical Verification:} Simulation cannot reveal assembly defects; the soldering defects of the reused~\gls{fpga} (B3) surfaced only during commissioning, when the processor did not start although supply and clock were present (\Cref{sec:integration_defects}). Physical inspection and hardware tests were therefore needed in addition to simulation; a prototype's functionality cannot be assumed from its design files alone.
+	\item \textbf{Design for Debuggability:} Debug pins blocked in the test fixture's firmware delayed the follow-on work~\cite[pp.~10, 12]{savchuk2025}. Standard debug interfaces (\gls{swd}, \gls{jtag}) should be kept free from the earliest design stage, in the device under test and in the test equipment alike.
+	\item \textbf{Complete Models in Testbenches:} The \gls{nvram} enable defect B1 passed the archived simulation because the testbench's model of the memory ignores the byte-low enable (\Cref{subsec:fpga_interface_results}); its symptoms appeared only when the rebuilt unit was tested on the fixture. A model of an external device in a testbench has to cover every control input that the design drives, or the simulation cannot see faults on that input.
+	\item \textbf{Defects Visible Only in Integration:} Some defects became visible only when hardware and software ran together (\Cref{sec:integration_defects}). The freeze of the \gls{sd}-card logging (B4) appeared when the follow-on team ran the diagnostics board with the team's own firmware~\cite[pp.~19, 22]{savchuk2025}, and the PC software's faulty handling of multi-pin tests showed when the fixture ran its tests~\cite[pp.~10--11, 14]{savchuk2025}. This supports running the assembled hardware with its firmware, and the test equipment with its software, early and in addition to simulation.
+	\item \textbf{Plan for Iteration:} Retrofit projects based on inherited work should explicitly plan for a significant \enquote{stabilisation and debugging} phase. In this project, the inherited prototype needed extensive rework before it could be tested (\Cref{subsec:hardware_challenges}).
+\end{itemize}
+
+% ------------------------------------------------------------
+\section{Recommendations and Future Work}
+\label{sec:future_work}
+
+The final state of the prototype and the limitations named in~\Cref{subsec:limitations} suggest the following directions for future work:
+
+\begin{itemize}
+	\item \textbf{Verification and Hardening of the Diagnostic Path:} The path should be tested with an archived log (\Cref{tab:evidence_state}); moving the logging into a non-blocking queue would remove the remaining dependence on the logging rate (\Cref{sec:diagnostic_resolution}).
+	\item \textbf{Archived Evidence:} The Layer~1 timing measurements of the watchdog and the frequency sweep should be repeated on production hardware and archived as captures, since the archived captures come from the inherited prototype, and the Layer~2 suite, including the self-test, all four buttons and power cycles, should be run on the reworked assembly with an archived log (\Cref{subsec:limitations}). The sweep of the original board should be measured again, recording what each readout is measured over, or its sweep circuit checked, to settle the deviation at the low end and in the duration (\Cref{subsec:fpga_interface_results}).
+	\item \textbf{Formal Methods and Coverage Metrics:} Formal equivalence checking of the \gls{hdl}~\cite{mneimneh2005sequential}, test cases derived from the control-flow structure as in structured testing~\cite{watson1996}, fault injection~\cite{ziade2004faultinjection} and quantitative structural coverage metrics would complement the functional evidence of the two layers; which of them a formal safety certification would expect depends on the \gls{sil} to be assigned (\Cref{subsec:limitations}).
+	\item \textbf{Full~\gls{hil} Integration and Validation:} To achieve a higher level of validation confidence, the next logical step, once the Layer~2 suite has been run on the rebuilt unit with an archived log, is to interface the unit with a real-time~\gls{hil} simulator. This would allow for testing under dynamic conditions, as practised on anti-skid test benches~\cite{zhou_wu_2020} and in railway \gls{hil} research~\cite{hil_rail_suspension_2023}.
+	\item \textbf{Cybersecurity Assessment and Hardening:} As noted in \Cref{sec:stm32_details}, a thorough cybersecurity risk assessment focusing on the newly introduced interfaces (\gls{usb}, \gls{sd}~card) is recommended before any operational deployment. Hardening measures, potentially guided by standards such as~\gls{iec62443}~\cite{iec62443_3_3_2013}, should be implemented to mitigate identified vulnerabilities; for signalling systems, \gls{en50129} adds requirements and guidance on the effects of IT-security threats on functional safety in its Clause~6~\cite{en50129_2018}.
+	\item \textbf{Hardware Production and Qualification:} For deployment, a new batch of~\glspl{pcb} incorporating all layout corrections must be professionally manufactured and assembled to avoid the reliability issues associated with manual rework. These production-quality units would then be subjected to accredited laboratory testing for environmental (\gls{en50155}:2021) and~\gls{emc} (\gls{en50121}~series) compliance.
+	\item \textbf{Methodology Generalisation:} The two-layer testing framework can in principle be transferred to other hardware retrofits under \gls{iec61508}, although only this one case has been examined so far (\Cref{subsec:equivalence_discussion}). Validation across further retrofit cases would be needed before generalising it; future academic work could refine and formalise it into a generalised methodology for verifying safety-critical electronic retrofits, with templates and best-practice guidelines for navigating the validation of inherited prototypes.
+\end{itemize}
+
+In conclusion, this report presents a case study in modernising safety-critical legacy electronics: a technical solution whose verification is not yet complete, a proposed two-layer verification structure, and lessons on combining hands-on debugging with systematic testing.

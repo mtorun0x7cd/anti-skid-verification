@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2026 Mert Torun
+# SPDX-License-Identifier: MIT
+
+# Text files are stored with LF line endings.
+* text=auto eol=lf
+
+*.tex      text eol=lf diff=tex
+*.bib      text eol=lf diff=bibtex
+*.cls      text eol=lf
+*.bst      text eol=lf
+*.md       text eol=lf diff=markdown
+*.py       text eol=lf diff=python
+*.sh       text eol=lf
+*.json     text eol=lf
+*.jsonc    text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+*.toml     text eol=lf
+*.cff      text eol=lf
+*.csv      text eol=lf
+*.svg      text eol=lf
+*.txt      text eol=lf
+*.xmpdata  text eol=lf
+.latexmkrc text eol=lf
+.chktexrc  text eol=lf
+
+# Binary files.
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+
+# The version of record and its checksums are stored byte for byte.
+publication/** -text -diff
+
+# The vendored IEEEtran class and style are not counted as this repository's
+# code, and the latexmk configurations are not counted as Perl.
+paper/IEEEtran.cls  linguist-vendored
+paper/IEEEtran.bst  linguist-vendored
+.latexmkrc          linguist-detectable=false
+**/.latexmkrc       linguist-detectable=false

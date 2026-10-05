@@ -1,0 +1,23 @@
+% Layer 2 test infrastructure, kept as diagram source. Derived from the
+% corresponding figure of the published paper. Drawn at its natural size:
+% the gaps between the boxes are wider than every edge label, and the
+% pass/fail log hangs off the host PC, whose application writes it.
+\begin{tikzpicture}[
+    blk/.style={draw, thick, rounded corners=3pt, minimum height=1.1cm,
+                align=center, font=\footnotesize, text width=2.35cm},
+    arr/.style={-{Stealth[length=2.5mm]}, thick},
+    barr/.style={{Stealth[length=2.5mm]}-{Stealth[length=2.5mm]}, thick},
+    lbl/.style={font=\scriptsize, text=black!70, align=center, inner sep=1.5pt},
+    doc/.style={draw, thick, rounded corners=1pt, align=center,
+                font=\scriptsize, inner sep=3pt, red!70!black, text=black},
+  ]
+  \node[blk, fill=blue!10]   (pc)  at (0,0)    {\textbf{Host PC}\\[-1pt]{\scriptsize \mbox{Python / YAML}}};
+  \node[blk, fill=yellow!12] (nuc) at (4.4,0)  {\textbf{STM32}\\[-1pt]{\scriptsize Nucleo F401RE}};
+  \node[blk, fill=orange!12] (fix) at (8.8,0)  {\textbf{Test Fixture}\\[-1pt]{\scriptsize Testkartentester}};
+  \node[blk, fill=green!10]  (dut) at (13.2,0) {\textbf{DUT}\\[-1pt]{\scriptsize Retrofitted Board}};
+  \draw[barr] (pc.east)  -- node[above, lbl] {USB/\\Serial}  (nuc.west);
+  \draw[barr] (nuc.east) -- node[above, lbl] {GPIO}          (fix.west);
+  \draw[barr] (fix.east) -- node[above, lbl] {Connector\\X4} (dut.west);
+  \node[doc, below=0.6cm of pc] (log) {Pass/Fail log};
+  \draw[arr, densely dashed, red!70!black] (pc.south) -- (log.north);
+\end{tikzpicture}

@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2026 Mert Torun
+# SPDX-License-Identifier: MIT
+#
+# ChkTeX configuration for the sources of the paper, the report and the slides.
+#
+# Every suppression below names the construct in these documents that makes the
+# rule systematically wrong here; anything not listed stays active, so the lint
+# is a gate (`make check`), not a formality. The sources of the report keep the
+# text of its revised edition and are not edited to please the lint. Rule
+# numbers are those of the ChkTeX manual.
+
+CmdLine
+{
+    -n1   # macros such as \FPGA are used before a following space by design
+    -n2   # citations in table cells are not tied to the preceding word
+    -n6   # no italic correction before a full stop; microtype handles the spacing
+    -n8   # -- marks ranges and compounds; the dash lengths are deliberate
+    -n9   # siunitx and listings use % and delimiters that are not comments
+    -n10  # \\ breaks lines inside tabular cells and the title block
+    -n12  # sentences may end on an abbreviation
+    -n13  # sentences may end on an acronym
+    -n16  # \makeatletter blocks of the preamble make the math-mode count wrong
+    -n17  # list lengths vary by design
+    -n18  # dashes in German labels follow German typography
+    -n24  # \label stands on its own line after a sectioning command
+    -n25  # file names and paths contain full stops (\includegraphics, \path)
+    -n29  # booktabs column specifications such as @{}l@{} are not products
+    -n35  # plain words that contain ln, log or Pr are not math operators
+    -n36  # TikZ and amsmath constructs confuse the math-mode tracking
+    -n38  # beamer frames and their notes end differently from plain environments
+    -n44  # the user rule against vertical rules misreads @{}l@{} column specifications
+}

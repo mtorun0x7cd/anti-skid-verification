@@ -1,0 +1,63 @@
+% ============================================================
+% Appendix D: YAML Test Cases and VHDL Excerpt
+% ============================================================
+\chapter{YAML Test Cases and VHDL Excerpt}
+\label{app:test_cases}
+
+This appendix provides illustrative examples of the test definition files and the \gls{vhdl} design used during the verification and validation process, as detailed in \Cref{chap:testing}.
+
+% ------------------------------------------------------------
+\section{YAML Test Case Definitions for Fixture-Based Testing}
+\label{sec:app_yaml_test_cases}
+
+System-level scenario testing (\Cref{sec:system_scenario_testing}) was driven by sequences defined in \gls{yaml} format and executed via the test fixture~\cite{dolata2023}. The structure allows for the definition of input pin states, expected outputs, and tester interactions.
+
+\subsection*{Example Test Case: Geber 3 Fault Handling}
+The following test case, adapted from~\cite[Listing~3]{dolata2023}, illustrates the two-step verification sequence for a \enquote{Geber 3} fault; the longer descriptions and the comments were added:
+
+{\footnotesize
+\begin{verbatim}
+# Test group for Geber 3 fault simulation
+- name: Geber 3 - I
+  description: >-
+    Test für den Geber. Bitte 3 Sekunden warten,
+    bis der Fehler angezeigt wird. Danach STW
+    gedrückt halten und Fehlersequenz überprüfen.
+  pin_sets: {18z: 1, 24d: 0} # Simulate fault
+  expected_err_code: "31"    # Fixture: 31; manual: 03
+  expected_err_seq: "03 31 09" # Expect seq on STW
+  del: False                 # No 'Loesch' prompt
+
+- name: Geber 3 - II
+  description: STW gedrückt halten und Fehlersequenz überprüfen.
+  pin_sets: {}               # Fault no longer applied
+  expected_err_code: "95"    # Expect '95': sporadic fault
+  expected_err_seq: "03 31 09" # Re-verify seq
+  del: True                  # Prompt 'Loesch'
+\end{verbatim}
+}
+
+The code 31 that the first step expects on the display is the fixture's expectation; the manual and the table of the fixture report give 03 for this display (\Cref{tab:requirement_basis}, note~b), and the sources do not explain the difference. In the second step the fault is no longer applied, and the display is expected to show 95, the code of a sporadic fault, one that occurred and is no longer active~\cite[Tab.~2, Sec.~9.3]{dolata2023}; Leyer describes it as a temporary error~\cite[Sec.~5.1.3]{leyer2023}.
+
+% ------------------------------------------------------------
+\section{VHDL Excerpt: NVRAM Control}
+\label{sec:app_vhdl_testbenches}
+
+The following excerpt from the top-level design \texttt{atop.vhd} shows the \gls{nvram} control assignments in the version archived with Leyer's documentation in September 2023 (project \texttt{TestDiagnose\_new})~\cite{leyer2023}, with the original line numbers; in the simulated project the same assignment stands in line~473. Line~513 contains defect~B1 (\Cref{tab:bug_taxonomy}): the byte-low enable \texttt{NVRAM\_ble} is held high, so the 8-bit data path (\texttt{NVRAM\_dq}, bits 7 to 0) never reaches the memory. The follow-on project corrected the assignment to \texttt{\textquotesingle 0\textquotesingle}, which enables the lower byte permanently~\cite[pp.~14--15]{savchuk2025}.
+
+{\footnotesize
+\begin{verbatim}
+510      -- nvram
+511      --
+512      --NVRAM_add <= dmem_addr_os (5 downto 0);
+513      NVRAM_ble <= '1';
+514      NVRAM_oe <= rd_n_os;
+515      NVRAM_ce_s <= not ((not (rd_n_os or p27)) or (not (p27 or wr_n_os)));
+516      NVRAM_ce <= NVRAM_ce_s;
+517      NVRAM_we <= wr_n_os;
+518      -- dmem_data_is <= NVRAM_dq;
+519      NVRAM_ctrl (2) <= p2_os(7);
+520      NVRAM_ctrl (1) <= wr_n_os;
+521      NVRAM_ctrl (0) <= NVRAM_ce_s;
+\end{verbatim}
+}

@@ -1,0 +1,64 @@
+{
+  "@context": "https://w3id.org/codemeta/3.0",
+  "@type": "SoftwareSourceCode",
+  "name": "Sources and version of record of the paper \"Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology\" and of the research report from which it derives",
+  "description": "The companion repository of the paper by Mert Torun published as a Working Paper in the series Kölner Beiträge zur technischen Informatik 2/2026 of TH Köln, and of the research report from which the paper derives. It holds the deposited paper as the version of record, the author's corrected manuscript of the paper, and the LaTeX sources of the report in its revised edition of October 2026.",
+  "version": "cos-1494",
+  "license": [
+    "https://spdx.org/licenses/MIT",
+    "https://spdx.org/licenses/CC-BY-4.0",
+    "https://spdx.org/licenses/CC-BY-NC-ND-4.0",
+    "https://spdx.org/licenses/LPPL-1.3c"
+  ],
+  "codeRepository": "https://github.com/mtorun0x7cd/anti-skid-verification",
+  "programmingLanguage": [
+    "TeX"
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "TeX Live with pdfLaTeX, BibTeX, Biber and latexmk"
+    }
+  ],
+  "developmentStatus": "https://www.repostatus.org/#inactive",
+  "keywords": [
+    "Anti-Skid Protection",
+    "FPGA Emulation",
+    "Functional Equivalence",
+    "Functional Safety",
+    "IEC 61508",
+    "Retrofit Verification",
+    "Safety-Critical Systems",
+    "V-Model",
+    "Verification and Validation"
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0009-0003-7932-9043",
+      "givenName": "Mert",
+      "familyName": "Torun",
+      "affiliation": {
+        "@type": "Organization",
+        "@id": "https://ror.org/014nnvj65",
+        "name": "Technische Hochschule Köln"
+      }
+    }
+  ],
+  "referencePublication": {
+    "@type": "schema:ScholarlyArticle",
+    "@id": "https://doi.org/10.57684/COS-1494",
+    "name": "Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology",
+    "author": [
+      {
+        "@type": "Person",
+        "@id": "https://orcid.org/0009-0003-7932-9043",
+        "givenName": "Mert",
+        "familyName": "Torun"
+      }
+    ],
+    "datePublished": "2026-09-22",
+    "schema:inLanguage": "en",
+    "license": "https://spdx.org/licenses/CC-BY-NC-ND-4.0"
+  }
+}

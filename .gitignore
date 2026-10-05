@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: 2026 Mert Torun
+# SPDX-License-Identifier: MIT
+
+# Output of the builds: each folder's .latexmkrc writes into .tmp.nosync/.
+.tmp.nosync/
+
+# A LaTeX run without the Makefile or the latexmk configuration.
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+*.vrb
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+/paper/paper.pdf
+/report/report.pdf
+/slides/presentation.pdf
+/slides/handout.pdf
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Editors and operating systems
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db

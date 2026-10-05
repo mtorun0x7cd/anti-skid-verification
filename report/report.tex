@@ -1,0 +1,406 @@
+% =========================================================================
+%   Main LaTeX File for the Research Project
+%   Author: Mert Torun, M.Sc.
+% =========================================================================
+\documentclass[12pt,ngerman,english,openany]{book}
+% PDF/A-2b for long-term archiving; metadata comes from report.xmpdata
+% pdfx leaves pdf:Keywords and the Info /Keywords empty when \Keywords holds
+% a list. Both are filled here from that same list, joined by semicolons,
+% after pdfx has read report.xmpdata and before it writes the XMP packet.
+\makeatletter
+\AddToHook{package/xmpincl/after}{%
+	\begingroup
+		\def\sep{; }%
+		\xdef\xmp@@Keywords{\xmp@Keywords}%
+	\endgroup
+	\pdfx@ConvertUTFtoBE{\pdfx@pdfKeywords}{\xmp@@Keywords}%
+}
+\makeatother
+\usepackage[a-2b]{pdfx}
+
+% ---------------------------------------------------------------
+%   PREAMBLE
+% ---------------------------------------------------------------
+
+% --- Core Font and Language Setup ---
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+% straight ASCII quotes in verbatim listings, so that copied code stays valid
+\usepackage{upquote}
+% French, Turkish and Spanish print the translated abstracts; shorthands=off
+% keeps babel-turkish from making : ! = active, which breaks the TikZ figures
+\usepackage[shorthands=off,french,turkish,spanish,ngerman,english]{babel}
+\DeclareUnicodeCharacter{202F}{\nobreak\hspace{0.16667em}}
+% never split this word; it broke as Lay-outs in a heading of Appendix A
+\hyphenation{Layouts}
+% nor the acronym of the standards body; it broke as CEN-ELEC in the list of references
+\hyphenation{CENELEC}
+% the patterns find no break in these words, which left loose lines
+\hyphenation{retro-fit retro-fits retro-fit-ted retro-fit-ting}
+
+% --- Page Layout and Typography ---
+\usepackage[a4paper,margin=2.5cm,headheight=17pt]{geometry}
+\usepackage[expansion=false]{microtype}
+\setlength{\emergencystretch}{3em}
+\vbadness=10000 % suppress all underfull vbox warnings
+
+% --- Essential Packages for Content ---
+\usepackage{graphicx}
+	\graphicspath{{fig/}}
+% pdftex.def gives every included PDF page the transparency group
+% /K false /I false, and pdfTeX also copies the page's own group, so a page
+% that has one ends up with /Group twice in its form dictionary. The KiCad
+% layout views carry their own group; they are included with that one only.
+\makeatletter
+\newcommand{\includegraphicsowngroup}[2][]{%
+	\begingroup
+		\let\Gread@transgrouptrue\Gread@transgroupfalse
+		\includegraphics[#1]{#2}%
+	\endgroup}
+\makeatother
+\usepackage{booktabs}
+\usepackage{longtable}
+% a wide figure on a landscape page (the page itself is rotated), placed after
+% the current page so that the text before it is not cut short
+\usepackage{pdflscape}
+\usepackage{afterpage}
+\usepackage[inline]{enumitem}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{siunitx}
+	\sisetup{output-decimal-marker = {.}}
+\usepackage{array}
+
+% --- Header and Footer Customization ---
+\usepackage{fancyhdr}
+% no folio on the blank page \mainmatter inserts to start chapter 1 on a recto
+\usepackage{emptypage}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\small\itshape\nouppercase{\leftmark}\/}
+\fancyhead[RE,LO]{\includegraphics[height=10pt]{logo/th_koeln.png}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% --- Table of Contents Styling ---
+\usepackage{tocloft}
+% room for numbers such as A.16 in the lists of figures and tables, which ran into
+% their titles with the default width
+\setlength{\cftfignumwidth}{3em}
+\setlength{\cfttabnumwidth}{3em}
+\setlist{nosep}
+% The checklist of Chapter 7: each item carries its number and its status in a
+% label box of fixed width that stays inside the text block; the prefix CL keeps
+% the item numbers apart from the defect IDs B1 to B6 of Table 5.4
+% The width is measured at the start of the document, in its fonts, as the widest
+% label of all groups, so that no label is wider than its box
+\newlength{\chkwidth}
+\newlength{\chkwidthb}
+\makeatletter
+\AtBeginDocument{%
+	\setlength{\chkwidth}{0pt}%
+	\@for\chk@grp:=A,B,C,D,E,F\do{%
+		\@for\chk@sts:=PARTIAL,PLANNED,DONE,OPEN\do{%
+			\settowidth{\chkwidthb}{\textbf{CL-\chk@grp8}\enspace\texttt{[\chk@sts]}}%
+			\ifdim\chkwidthb>\chkwidth \setlength{\chkwidth}{\chkwidthb}\fi}}}
+\makeatother
+\newlist{checklist}{itemize}{1}
+\setlist[checklist]{label={}, labelwidth=\chkwidth, labelsep=0.8em, leftmargin=\dimexpr\chkwidth+0.8em\relax, align=left}
+\newcommand{\chk}[2]{\item[\textbf{CL-#1}\enspace\texttt{[#2]}]}
+
+% --- Bibliography Configuration ---
+\usepackage[autostyle=true]{csquotes}
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=nyt,
+  sortcites=true,
+  giveninits=true,
+  url=true, doi=true, isbn=true,
+  % one unambiguous form for every access date: YYYY-MM-DD (the ISO form needs
+  % seconds=true; the dates carry no time, so none is printed)
+  urldate=iso, seconds=true
+]{biblatex}
+\addbibresource{bib/references.bib}
+% keep the access date on one line; it broke at a hyphen of the ISO form
+\DeclareFieldFormat{urldate}{\mkbibparens{\bibstring{urlseen}\space\mbox{#1}}}
+% Keep hyphenated document numbers (IEC 61508-2, UIC 541-05, Part 3-2), with a
+% prefix such as IEC, on one line in the list of references, and keep a prefix
+% such as EN, IEC or IEEE Std with the number that follows it (EN 15595:2018);
+% the bib file stays unchanged
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[fieldsource=number, match=\regexp{((?:\b[A-Z]{2,}(?:\sStd)?\s)?\d+(?:-\d+)+|\b[A-Z]{2,}(?:\sStd)?\s\d+)}, replace=\regexp{\\mbox\{$1\}}]
+    }
+    \map{
+      \step[fieldsource=addendum, match=\regexp{((?:\b[A-Z]{2,}(?:\sStd)?\s)?\d+(?:-\d+)+|\b[A-Z]{2,}(?:\sStd)?\s\d+)}, replace=\regexp{\\mbox\{$1\}}]
+    }
+    \map{
+      \step[fieldsource=title, match=\regexp{(Part\s\d+-\d+)}, replace=\regexp{\\mbox\{$1\}}]
+    }
+  }
+}
+
+% Suppress tracklang dialect warning from glossaries (no datatool for ngerman)
+\makeatletter
+\let\report@origPW\PackageWarning
+\renewcommand{\PackageWarning}[2]{}
+\usepackage[acronym, nomain, nonumberlist, section]{glossaries}
+\let\PackageWarning\report@origPW
+\makeatother
+\glsdisablehyper
+\loadglsentries{abbreviations/abbreviations}
+\makeglossaries
+
+% --- Custom Metadata Commands ---
+\newcommand{\projSubmission}  {\input{meta/submission.tex}}
+\newcommand{\projInstitution} {\input{meta/institution/institution.tex}}
+\newcommand{\projTitle}       {\input{meta/title.tex}}
+\newcommand{\projSubtitle}    {\input{meta/subtitle.tex}}
+\newcommand{\projAuthor}      {\input{meta/author/author.tex}}
+\newcommand{\projAuthorEmail} {\input{meta/author/mail.tex}}
+\newcommand{\projReviewer}    {\input{meta/reviewer/reviewer.tex}}
+\newcommand{\projFaculty}     {\input{meta/institution/faculty.tex}}
+\newcommand{\projDate}        {\input{meta/date.tex}}
+\newcommand{\projDegreeProgram} {\input{meta/author/degree_program.tex}}
+\newcommand{\projKeywords}    {\input{keywords/en.tex}}
+\newcommand{\projKeywordsDE}  {\input{keywords/de.tex}}
+% Translated title and subtitle above an abstract: #1 language code, #2 the note;
+% the abstract after it starts flush left, as it does after a chapter heading
+\makeatletter
+\newcommand{\translatedTitle}[2]{%
+	{\setlength{\parindent}{0pt}\raggedright
+	{\large\bfseries \input{meta/title-#1.tex}\par}
+	\smallskip
+	{\itshape \input{meta/subtitle-#1.tex}\/\par}
+	\medskip
+	{\small #2\par}
+	\bigskip}%
+	\@afterindentfalse\@afterheading}
+\makeatother
+
+% --- PDF Hyperlinks and Metadata ---
+\usepackage{float}
+% Captions as before, with the link anchor of a float at its top (hypcap), so that
+% links to figures and tables land on the float instead of its caption
+\usepackage[hypcap=true]{caption}
+% table captions stand above their tables: the caption skip goes between the caption
+% and the top rule, which it touched before
+\captionsetup[table]{position=top}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, backgrounds, fit, positioning}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  citecolor=blue!50!black,
+  urlcolor=blue!70!black
+}
+
+% --- Other Helper Packages ---
+\usepackage[capitalise,nameinlink]{cleveref}
+
+% =========================================================================
+%   DOCUMENT BODY
+% =========================================================================
+\begin{document}
+
+% --- FRONT MATTER ---
+\frontmatter
+\pagestyle{plain}
+
+% Title Page
+\begin{titlepage}
+	\thispagestyle{empty}
+	\begin{flushright}
+		\includegraphics[height=2cm]{logo/th_koeln}
+	\end{flushright}
+	\vspace*{4cm}
+	\centering
+	{\huge\bfseries \projTitle\par}
+	\vspace{1.5em}
+	{\Large\itshape \projSubtitle\/\par}
+	\vfill
+	{\large\bfseries \projAuthor\par}
+	\vspace{2em}
+	% Submission details and licence notice on the lower half of the title page
+	{\small
+	\begin{tabular}{@{}ll@{}}
+		\textbf{Institution:}       & \projInstitution            \\
+		\textbf{Faculty:}           & \projFaculty                \\
+		\textbf{Degree Programme:}  & \projDegreeProgram          \\[0.5em]
+		\textbf{Document Type:}     & \projSubmission             \\[0.5em]
+		\textbf{Author:}            & \projAuthor                 \\
+		\textbf{Email:}             & \texttt{\projAuthorEmail}   \\[0.5em]
+		\textbf{Supervisor:}        & \projReviewer               \\[0.5em]
+		\textbf{Submitted:}         & \projDate                   \\
+		\textbf{This Edition:}      & Revised edition, October 2026 \\
+	\end{tabular}\par}
+	\vspace{2em}
+	\begin{minipage}{\textwidth}\scriptsize
+	\noindent\textcopyright~2025, 2026 Mert Torun. This report is licensed under CC BY 4.0 (\url{https://creativecommons.org/licenses/by/4.0/}). Excluded from this licence is material credited to others in a caption or in the text, among it the adapted and reproduced figures, the Rev~0.0 board designs, content taken from the legacy manual, the VHDL excerpt in Appendix D, the fixture test case and the TH Köln logo. Passages that also appear in the article (\url{https://doi.org/10.57684/COS-1494}) remain under its licence, CC BY-NC-ND 4.0.
+	\end{minipage}
+\end{titlepage}
+\clearpage
+
+% About this edition (page ii)
+{
+	\footnotesize
+	\setlength{\parskip}{0.5em}
+	\setlength{\parindent}{0pt}
+	\textbf{About this edition.} This is a revised edition of the research report submitted in August 2025. The article~\cite{torun2026}, published in the series \emph{Kölner Beiträge zur technischen Informatik} (\url{https://doi.org/10.57684/COS-1494}), was derived from this report; where this edition differs from the article, this edition is the corrected one. The title states the aim of the project; \Cref{subsec:equivalence_discussion,sec:safety_compliance} state what was reached.
+
+	For this edition the report was checked against the design files, the firmware and hardware description sources, the legacy manual and the cited literature. Errors found in this check have been corrected, among them the real-time clock (the microcontroller's internal clock, not a separate clock chip), designators and values in the bill of materials, the schematic sheets (rendered anew from the design files, with correct umlauts and the fitted displays) and their captions, the design rules of the layouts, the displays shown in the LED Board layout, the watchdog service path, the legacy processor, the authorship of the Rev~1.0 design, how the defects B1 to B3 were found, and several references; the checklist of \Cref{chap:safety_checklist} now marks what is not documented, and no compliance with EN~50716 is claimed. The two defects in the diagnostic path are described with the causes found in the firmware of 2023 and the fix applied to it after the submission; the cause of the freeze seen with the firmware of 2025 is not established (\Cref{sec:diagnostic_resolution}). The submitted report had recorded them as a freeze of the SD-card logging and a corrupted third byte in the SPI transmission, both open at the time. The table of integration defects (\Cref{tab:bug_taxonomy}) is new in this edition and lists six defects. The sixth, the swapped 7-segment displays (B6), is documented in the follow-on report~\cite[p.~13]{savchuk2025}; neither the submitted report nor the article, which counts five defects, mentions it. The rebuilt unit was observed operating as a whole in early 2026; the diagnostic path was not verified separately, and no log or capture of that run was archived. Results and measurement captures that come from prior work are credited to it, and the language has been revised.
+
+	Appendix E of the submitted report (a sample \enquote{Prüfzertifikat} template) and its blank statutory declaration form are not part of this edition; a declaration on the use of aids takes the place of the latter. In the board photographs of Appendix A, a graphic logo and a board designation of third-party origin have been masked, on one board together with the production code of the PCB manufacturer; the layout views of Appendix A, rendered anew from the design files, leave out the logo and the designation. None of these markings carries technical content. The assessment of this report refers to the version submitted in August 2025; this revised edition has not been re-assessed.
+
+	\textbf{Corrected references.} Nine references of the report as submitted in August 2025 could not be traced to any published work during this revision; six of them were carried over into the derived paper (DOI 10.57684/COS-1494) as its references 6, 7, 13, 15, 25 and 27. They had not been checked against the original works. This edition replaces four of them with published works that were read for this revision and removes the other five; the table below gives each former entry and what took its place.
+
+	{\footnotesize
+	\begin{tabular}{@{}p{0.72\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}@{}}
+		\toprule
+		Former entry (report of August 2025) & This edition \\
+		\midrule
+		Bozzano, Cimatti, Katoen, Noll, Tjell: Formal verification and validation for safety-critical systems. ISoLA 2016, pp.~3--20 & Bozzano and Villafiorita~\cite{bozzano2016formal} \\
+		Cascone, Sorniotti, Gruber: Development and validation of a hardware-in-the-loop test rig for railway primary suspensions. VEHITS 2023, pp.~137--146 & Fu et~al.~\cite{hil_rail_suspension_2023} \\
+		Chen, Jiang, Ding: Data-driven fault diagnosis for traction drive systems in high-speed trains. IEEE Trans.\ Syst.\ Man Cybern.\ Syst.\ 50(5), 2020 & Chen et~al.~\cite{chen2020diagnostics} \\
+		Chen, Liu, Liu, Zhang: Formal verification methods for railway signaling safety-critical software. IEEE Trans.\ Intell.\ Transp.\ Syst.\ 24(1), 2023 & Ferrari and ter Beek~\cite{formal_verification_rail_2023} \\
+		Gallina, Skoglund, Falcone: Bridging the gap between functional safety standards. J.\ Syst.\ Archit.\ 85, 2018 & removed \\
+		Kravets, Sakallah: Lexicographical reverse engineering of combinational circuits. DAC 2005, pp.~773--778 & removed \\
+		Latif-Shabgahi: A survey on dependable design techniques for FPGAs. IET Comput.\ Digit.\ Tech.\ 3(5), 2009 & removed \\
+		Midya, Bormann, Schütte: EMC aspects in railway vehicles. Elektrotech.\ Inftech.\ 130(3), 2013 & removed \\
+		Scheithauer, Müller, Goltz: Safety cases for legacy systems in the railway domain. MODELSWARD 2018, pp.~511--518 & removed \\
+		\bottomrule
+	\end{tabular}
+	}
+}
+\clearpage
+
+% Declaration on the use of aids
+\pagestyle{plain}
+\input{meta/declaration_aids.tex}
+\clearpage
+
+% Abstracts and Keywords
+\selectlanguage{english}
+\pagestyle{plain}
+\chapter*{Abstract}
+\input{abstract/en.tex}
+% The abstract no longer fits on one page with its keywords: the keywords are kept
+% in one piece and with the last lines of the abstract (at least two, no widow line),
+% instead of being split across the page break
+{
+	\setlength{\parskip}{1em}
+	\setlength{\parindent}{0pt}
+	\widowpenalty=10000
+	\par\nopagebreak
+	\interlinepenalty=10000
+	{\bfseries Keywords:} \projKeywords\par
+}
+\clearpage
+
+\selectlanguage{ngerman}
+\pagestyle{plain}
+\chapter*{Zusammenfassung}
+\translatedTitle{de}{Titel und Untertitel sind aus dem Englischen übersetzt. Maßgeblich ist die englische Fassung.}
+% A smaller emergency stretch than the document's 3em sets this abstract without
+% the widely spaced line it had; the wording is the approved one, unchanged
+{\setlength{\emergencystretch}{1.2em}\input{abstract/de.tex}\par}
+{
+	\setlength{\parskip}{1em}
+	\setlength{\parindent}{0pt}
+	\par
+	{\bfseries Schlüsselwörter:} \projKeywordsDE
+}
+\clearpage
+
+% Translated abstracts; the English abstract is authoritative
+\begin{otherlanguage}{french}
+\NoAutoSpacing
+\pagestyle{plain}
+\chapter*{Résumé}
+\translatedTitle{fr}{Titre, sous-titre et résumé traduits de l’anglais. Seule la version anglaise fait foi.}
+\input{abstract/fr.tex}
+\clearpage
+\end{otherlanguage}
+
+\selectlanguage{turkish}
+\pagestyle{plain}
+\chapter*{Özet}
+\translatedTitle{tr}{Başlık, alt başlık ve özet İngilizceden çevrilmiştir. İngilizce metin esastır.}
+\input{abstract/tr.tex}
+\clearpage
+
+\selectlanguage{spanish}
+\pagestyle{plain}
+\chapter*{Resumen}
+\translatedTitle{es}{Título, subtítulo y resumen traducidos del inglés. Prevalece la versión en inglés.}
+\input{abstract/es.tex}
+\clearpage
+\selectlanguage{english}
+
+% Acknowledgements
+\pagestyle{plain}
+\chapter*{Acknowledgements}
+The author thanks his supervisor, Prof.\,Dr.\,Tobias Krawutschke, for his guidance throughout this research. The author also thanks S.~Ayoub, M.~Leyer, A.~Dolata, D.~Ostermann, F.~Schiffelers, D.~Savchuk, D.\,C.~Icyer, E.~Galustian and O.~Al-Selwi for their foundational and follow-on contributions to the hardware, firmware and test fixture development.
+\clearpage
+
+% Lists (ToC, LoF, LoT, Acronyms)
+\pagestyle{fancy}
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
+\printglossary[type=\acronymtype, title=List of Abbreviations]
+\clearpage
+
+% --- MAIN MATTER ---
+\mainmatter
+\pagestyle{fancy}
+\glsresetall
+
+\include{chapters/chapter1}
+\include{chapters/chapter2}
+\include{chapters/chapter3}
+\include{chapters/chapter4}
+\include{chapters/chapter5}
+\include{chapters/chapter6}
+\include{chapters/chapter7}
+\clearpage
+
+% --- APPENDIX ---
+\appendix
+\crefalias{chapter}{appendix}
+\pagestyle{fancy}
+
+\include{chapters/appendixA}
+\include{chapters/appendixB}
+\include{chapters/appendixC}
+\include{chapters/appendixD}
+\clearpage
+
+% --- BACK MATTER ---
+\backmatter
+\pagestyle{fancy}
+
+% Ragged right: the long URLs and the standard numbers kept on one line left loose,
+% letterspaced lines in a justified list, and no local emergency stretch removed them
+% without overfull lines
+{\raggedright\printbibliography[title=References, heading=bibintoc]\par}
+\clearpage
+
+\end{document}

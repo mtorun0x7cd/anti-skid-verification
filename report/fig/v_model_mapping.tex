@@ -1,0 +1,44 @@
+% V-model mapping of the two-layer verification strategy.
+% Kept as diagram source rather than a bitmap so that it diffs, reviews and
+% rebuilds deterministically with the rest of the document. The labels were
+% German in earlier editions and are given in English here. Dashed arrows
+% join a design level to the test level that checks it; at the bottom level
+% the dashed arrow runs beside the solid one that continues the V.
+\begin{tikzpicture}[
+    x=1mm, y=-1mm,
+    phase/.style={
+      draw, fill=black!5,
+      text width=42mm, align=center,
+      inner sep=1.6mm, font=\small\bfseries,
+      execute at begin node={\hyphenpenalty=10000 },
+    },
+    stage/.style={
+      draw, text width=42mm, align=center,
+      inner sep=1.6mm, minimum height=14mm, font=\footnotesize,
+      execute at begin node={\hyphenpenalty=10000 },
+    },
+    flow/.style={-{Latex[length=2mm,width=1.6mm]}, thick},
+    corr/.style={-{Latex[length=2mm,width=1.6mm]}, thick, densely dashed},
+  ]
+
+  \node[phase] (specphase) at (24, 6) {Design \& Specification};
+  \node[phase] (vvphase)   at (118, 6) {Verification~\& Validation};
+
+  \node[stage] (req)  at (24, 34) {\textbf{System Requirements}\\(legacy behaviour according to the original manual)};
+  \node[stage] (arch) at (36, 62) {\textbf{Architecture Design}\\(FPGA/STM32 separation, module structure)};
+  \node[stage] (mod)  at (48, 90) {\textbf{Module \& Component Design}\\(VHDL logic, schematics)};
+
+  \node[stage] (unit)  at (106, 90) {\textbf{Unit \& Module Tests}\\\textbf{(Layer 1)}\\(VHDL simulation)};
+  \node[stage] (integ) at (118, 62) {\textbf{Integration Tests}\\\textbf{(Layer 1)}\\(hardware measurements, interfaces)};
+  \node[stage] (sys)   at (130, 34) {\textbf{System Validation}\\\textbf{(Layer 2)}\\(fixture tests, scenarios)};
+
+  \draw[flow] (req)   -- (arch);
+  \draw[flow] (arch)  -- (mod);
+  \draw[flow] ([yshift=-3.5mm]mod.east) -- ([yshift=-3.5mm]unit.west);
+  \draw[flow] (unit)  -- (integ);
+  \draw[flow] (integ) -- (sys);
+  \draw[corr] (req)   -- (sys);
+  \draw[corr] (arch)  -- (integ);
+  \draw[corr] ([yshift=3.5mm]mod.east) -- ([yshift=3.5mm]unit.west);
+
+\end{tikzpicture}

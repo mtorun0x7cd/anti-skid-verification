@@ -17,7 +17,9 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 ### Changed
 
 - `CITATION.cff` and `codemeta.json` carry the version 1.1.0; their description names the slides and the traceability data, and `codemeta.json` names Python and the shell among the languages and Python with PyYAML and jsonschema 4.0 or later among the requirements.
-- `NOTICE` and `REUSE.toml` give the licences of the files added, and `NOTICE` calls the three reports of prior work it credits unpublished, as the README does; `report/README.md` gives the measured overlap of the text of the report with the deposited paper and the word rule of the measurement.
+- `NOTICE` and `REUSE.toml` give the licences of the files added, and `NOTICE` calls the three reports of prior work it credits unpublished, as the README does.
+- `report/README.md` gives the measured overlap of the text of the report with the deposited paper and the word rule of the measurement, and dates the double build of the report 2026-10-06, after the corrections of the report listed under Fixed; at the tag it gives 2026-10-05.
+- `.gitattributes` marks `docs/`, which holds the social card, as documentation.
 - `ERRATA.md`: the entry on the author's website under Updates describes the address printed in the author note without writing it out, since it does not open; at the tag the entry writes it out.
 
 ### Fixed

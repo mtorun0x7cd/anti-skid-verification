@@ -6,15 +6,16 @@
 # dictionary; traceability.schema.json is the schema; tools/check_traceability.py
 # checks this file against both and regenerates traceability.csv from it.
 #
-# Reconstructed in 2026 from Chapter 5 of the research report; formal
-# traceability matrices were not produced during the project (report, Section
-# 4.5). Diagnostic path only. Not a certification artefact.
+# Reconstructed in 2026 from Chapters 3 and 5 of the research report (Sections
+# 3.2, 3.3 and 5.3, Tables 5.3 and 5.4); formal traceability matrices were not
+# produced during the project (report, Section 4.5). Diagnostic path only. Not
+# a certification artefact.
 
 schema_version: 1
 title: Requirements-to-test traceability of the diagnostic path
 record_status: >-
-  Reconstructed in 2026 from report Chapter 5; formal matrices were not
-  produced during the project (report Section 4.5); diagnostic path only;
+  Reconstructed in 2026 from report Chapters 3 and 5; formal matrices were
+  not produced during the project (report Section 4.5); diagnostic path only;
   not a certification artefact.
 applies_to: Research report, revised edition of October 2026 (report/)
 as_of: "2026-10-05"

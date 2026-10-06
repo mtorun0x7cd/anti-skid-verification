@@ -11,7 +11,7 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 - `README.md`: the two works, the abstract of the paper with four translations and the abstract of the report in five languages, the publication, the version of record, a summary of the work, the contents, the traceability data, what is public and what is not, how to reproduce the documents, the limitations, the corrections, the citation and the licences.
 - `slides/`: the sources of the deck and the handout of the talk on the paper at the VIMS-Workshop 2026 on 2026-05-22, revised in October 2026 so that they agree with the revised edition of the report and with `ERRATA.md`; each revised frame says what changed. The research question of the paper and the drawing of the V-model after its Fig. 2, which the deck takes from the paper, keep the licence of the paper. The deck as presented is not archived.
 - `verification/`: the traceability data of the diagnostic path, reconstructed in 2026 from Chapters 3 and 5 of the report: eight requirements and nine tests or checks with their status and the evidence each status rests on, a JSON Schema, a generated CSV view, an empty template and a data dictionary. No test has the status PASS.
-- `tools/check_traceability.py`, which checks the traceability data and refuses PASS without archived primary evidence; `tools/check_metadata.py` and `tools/check_links.py`, which check the citation metadata and the links; and the targets `slides`, `traceability` and `metadata` of the `Makefile`.
+- `tools/check_traceability.py`, which checks the traceability data and refuses PASS without archived primary evidence; `tools/check_metadata.py` and `tools/check_links.py`, which check the citation metadata and the links; the three refuse an unknown argument with exit status 2 and end with 2 when they could not check; and the targets `slides`, `traceability` and `metadata` of the `Makefile`.
 - The workflows, the correction form, `SECURITY.md`, `CONTRIBUTING.md`, `FUNDING.yml`, the opt-in pre-commit hook in `.githooks/`, which scans staged changes with `gitleaks git --staged`, the configurations of gitleaks and markdownlint, and the social card.
 
 ### Changed
@@ -21,6 +21,8 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 - `report/README.md` gives the measured overlap of the text of the report with the deposited paper and the word rule of the measurement, and dates the double build of the report 2026-10-06, after the corrections of the report listed under Fixed; at the tag it gives 2026-10-05.
 - `.gitattributes` marks `docs/`, which holds the social card, as documentation.
 - `ERRATA.md`: the entry on the author's website under Updates describes the address printed in the author note without writing it out, since it does not open; at the tag the entry writes it out.
+- `report/README.md` says that a build of the report is untagged and has no structure tree for assistive technology, which PDF/A-2b does not require; at the tag it does not say so.
+- `NOTICE` and the READMEs of `publication/` and `paper/` write the dates of days in ISO form, as the README and the tables do; at the tag they write them as day, month and year.
 
 ### Fixed
 
@@ -32,6 +34,11 @@ Statements in files that the record tag `cos-1494` holds, corrected here; the ta
 - `publication/README.md` and `report/README.md` call Cologne Open Science and ePublications a publication server of TH Köln, which runs both; at the tag each calls its server the publication server of TH Köln.
 - `NOTICE` says that the author took the photographs of Appendix A of the report, which it licenses under CC BY 4.0, and, like `REUSE.toml`, that all the board designs they show are a third party's, the Rev 1.0 STM32 Diagnostics Board among them. At the tag `NOTICE` does not say who took the photographs, and both files name only the Rev 0.0 designs.
 - `report/README.md` introduces the changes of the revised edition as those a reader of the assessed version needs to know, since its list also holds the front matter and the photographs; at the tag it calls them the changes that bear on the results of the report.
+- `report/README.md` cites page ii of the report only for what that page says, that the paper derives from the report and that the revised edition is the corrected one where the two differ, and gives Section 5.3 and the sources of Figures 3.1 and 4.1 for what the edition takes over from the paper; at the tag it cites page ii for the statement that the revised edition adopts corrected passages from the paper.
+- `publication/README.md` and `paper/README.md` name Listing 1 of the paper, adapted from the test fixture report, as third-party material besides the captures of Figs. 3 and 5, and `REUSE.toml` annotates the deposited PDF as `CC-BY-NC-ND-4.0 AND LicenseRef-third-party`, with the holders of the captures and of the listing, and `SHA256SUMS` apart. At the tag the two READMEs name the captures only, and `REUSE.toml` gives both files `CC-BY-NC-ND-4.0` with a comment that names the series cover, the imprint and the captures.
+- `report/README.md` lists among the overlap with the paper Figure 5.2, which shows the mapping that Fig. 2 of the paper shows in a drawing of its own and stays under CC BY 4.0 with the report; at the tag the list leaves it out.
+- `.chktexrc` names for each suppressed warning the constructs in these sources that trigger it, and says that none triggers warning 38 at present; at the tag the comments of warnings 1, 6, 9, 10, 12, 16, 17, 18, 25, 29, 36 and 38 describe other constructs, and those of 8, 13 and 24 only some of them. The suppressed warnings are the same.
+- `report/README.md` names the board designs of Rev 0.0 and Rev 1.0 among the material that the licence of the report excludes, as `NOTICE` and `REUSE.toml` do, and says that the title page lists the Rev 0.0 designs only; at the tag it names the Rev 0.0 designs only.
 
 ## [cos-1494] - 2026-10-05
 

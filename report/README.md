@@ -66,7 +66,7 @@ With TeX Live (pdfLaTeX, Biber and latexmk with makeglossaries), from the root o
 make report    # writes report/.tmp.nosync/latex/report.pdf
 ```
 
-The build date is the time of the last commit that changed `report/`; outside a clone, set `SOURCE_DATE_EPOCH` by hand. The build is a PDF/A-2b file of 102 pages. On 2026-10-06, two builds with the same `SOURCE_DATE_EPOCH` gave the same bytes, and veraPDF found the build conformant to PDF/A-2b.
+The build date is the time of the last commit that changed `report/`; outside a clone, set `SOURCE_DATE_EPOCH` by hand. The build is a PDF/A-2b file of 102 pages. On 2026-10-06, two builds with the same `SOURCE_DATE_EPOCH` gave the same bytes, and veraPDF found the build conformant to PDF/A-2b. The build is untagged, that is, it has no structure tree for assistive technology: PDF/A-2b does not require one, and pdfinfo reports `Tagged: no`. It declares its language, English, and carries bookmarks and page labels.
 
 ## Licence
 

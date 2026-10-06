@@ -3,30 +3,64 @@
 #
 # ChkTeX configuration for the sources of the paper, the report and the slides.
 #
-# Every suppression below names the construct in these documents that makes the
-# rule systematically wrong here; anything not listed stays active, so the lint
-# is a gate (`make check`), not a formality. The sources of the report keep the
-# text of its revised edition and are not edited to please the lint. Rule
-# numbers are those of the ChkTeX manual.
+# Every suppression below names the constructs in these documents that trigger
+# its warning, as ChkTeX 1.7.9 of TeX Live 2026 reports them for each file and
+# in the one run over all files that `make check` makes; where no construct
+# triggers a warning at present, its line says so. Anything not listed stays
+# active, so the lint is a gate (`make check`), not a formality. The sources of
+# the report keep the text of its revised edition and are not edited to please
+# the lint. Warning numbers are those of the ChkTeX manual.
+#
+# In one run over several files, ChkTeX keeps its math mode from one file to
+# the next. The $1 in the replacement strings of the biblatex source maps in
+# report/report.tex switches it on, so ChkTeX reads the rest of that file, and
+# in `make check` the files of slides/ after it, as math (warnings 16, 25, 35).
 
 CmdLine
 {
-    -n1   # macros such as \FPGA are used before a following space by design
-    -n2   # citations in table cells are not tied to the preceding word
-    -n6   # no italic correction before a full stop; microtype handles the spacing
-    -n8   # -- marks ranges and compounds; the dash lengths are deliberate
-    -n9   # siunitx and listings use % and delimiters that are not comments
-    -n10  # \\ breaks lines inside tabular cells and the title block
-    -n12  # sentences may end on an abbreviation
-    -n13  # sentences may end on an acronym
-    -n16  # \makeatletter blocks of the preamble make the math-mode count wrong
-    -n17  # list lengths vary by design
-    -n18  # dashes in German labels follow German typography
-    -n24  # \label stands on its own line after a sectioning command
-    -n25  # file names and paths contain full stops (\includegraphics, \path)
-    -n29  # booktabs column specifications such as @{}l@{} are not products
-    -n35  # plain words that contain ln, log or Pr are not math operators
-    -n36  # TikZ and amsmath constructs confuse the math-mode tracking
-    -n38  # beamer frames and their notes end differently from plain environments
+    -n1   # a command followed by a space: the \iffirst... conditionals of the
+          # acronym macros in paper.tex, commands at a line end such as
+          # \raggedbottom, \titlepage and the \endhead of longtable, and
+          # \allowbreak, \dotsep and \textquotesingle before text
+    -n2   # citations in the table cells of Table 5.2 are not tied to a word
+    -n6   # the \itshape of the comment style of the listings in paper.tex, whose
+          # group closes without an italic correction
+    -n8   # hyphens in part, standard and ISSN numbers such as MF0207FTE52-1K and
+          # EN 50121-3-2, -- for ranges and empty table cells, and the spaced
+          # hyphen of the YAML test name Geber 3 - I in the deck
+    -n9   # the run-in headings 1) to 3) of Section IV-B in paper.tex: ChkTeX
+          # expects the } of \textbf and finds their )
+    -n10  # the same headings: ChkTeX then takes the } of \textbf for a solo }
+    -n12  # a full stop before a command that begins the next sentence, such as
+          # \gls, \enquote, \emph or \href, which ChkTeX takes for the end of an
+          # abbreviation, and the abbreviation Periph. in a table of the paper
+    -n13  # a capital letter before a full stop, a colon or a semicolon: sentences
+          # that end on an acronym (CPU., ROM.), and FPGA; or Annex~F: in the text
+    -n16  # the $1 of the source maps in report.tex leaves ChkTeX in math mode at
+          # the end of that file
+    -n17  # the run-in headings 1) to 3) of Section IV-B in paper.tex close a
+          # parenthesis that they do not open
+    -n18  # straight double quotes where they belong: the YAML strings of the
+          # Layer 2 frame of the deck, the string delimiter of the YAML language
+          # of the listings in paper.tex, and an inch mark in Appendix B
+    -n24  # \label stands on its own line after a sectioning command or a caption
+    -n25  # underscores that ChkTeX in math mode (see -n16) takes for subscripts:
+          # the logo file name in report.tex and, in `make check`, the YAML keys
+          # and capture file names of the deck
+    -n29  # an x between digits that is no product: the 0x7cd of the e-mail and
+          # web addresses in the author note of paper.tex and of the address in
+          # report/meta/author/mail.tex, and pin-header sizes such as 1x6 and
+          # 2x8 in the bill of materials of Appendix B
+    -n35  # words that contain log, ln or Pr, such as log and logging, which
+          # ChkTeX in math mode (see -n16) takes for \log, \ln and \Pr: in
+          # report.tex and, in `make check`, in the deck and the handout
+    -n36  # no space before an opening parenthesis: the list labels (\alph*) and
+          # (\arabic*) of paper.tex and of the report abstracts, Designator(s)
+          # in the bill of materials, and the regular expressions of the source
+          # maps in report.tex
+    -n38  # no construct triggers it at present under ChkTeX's default logical
+          # quote style; the traditional style would flag the string delimiter
+          # ' of the YAML language in paper.tex and two notes of the deck that
+          # close a quotation before a comma or a full stop
     -n44  # the user rule against vertical rules misreads @{}l@{} column specifications
 }

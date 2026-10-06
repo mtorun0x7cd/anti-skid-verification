@@ -5,11 +5,11 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # slides/
 
-This folder holds the LaTeX sources of the deck and the handout of the talk on the paper at the VIMS-Workshop 2026 of the research focus Vernetzte intelligente Infrastrukturen und mobile Systeme (VIMS), TH Köln, on 22 May 2026, as page 2 of the deposited paper records it. They are sources only; no PDF of the slides is part of this repository.
+This folder holds the LaTeX sources of the deck and the handout of the talk on the paper at the VIMS-Workshop 2026 of the research focus Vernetzte intelligente Infrastrukturen und mobile Systeme (VIMS), TH Köln, on 2026-05-22, as page 2 of the deposited paper records it. They are sources only; no PDF of the slides is part of this repository.
 
 ## Which state this is
 
-The deck as presented on 22 May 2026 is not archived. The earliest preserved sources of the deck and the handout date from 12 July 2026; the sources here are those, revised in October 2026, after the presentation, so that they agree with the revised edition of the research report and with [`ERRATA.md`](../ERRATA.md). Each frame of the deck that differs from the sources of July 2026 says at its foot what changed; the handout says so under its title. The main changes:
+The deck as presented on 2026-05-22 is not archived. The earliest preserved sources of the deck and the handout date from 2026-07-12; the sources here are those, revised in October 2026, after the presentation, so that they agree with the revised edition of the research report and with [`ERRATA.md`](../ERRATA.md). Each frame of the deck that differs from the sources of July 2026 says at its foot what changed; the handout says so under its title. The main changes:
 
 - The title, the venue and the publication are named in full: the paper's title with its subtitle, the workshop with its research focus and date, and the paper as a Working Paper in Kölner Beiträge zur technischen Informatik 2/2026, published under <https://doi.org/10.57684/COS-1494>. The author's degree and the name of the supervisor are no longer printed.
 - The defects follow Table 5.4 of the report: six instead of five, each with how it was found, and B4 and B5 with the status the report gives them: a fix of the firmware of 2023 was applied, the diagnostic path was not verified separately, and no log was archived; for the freeze seen with the firmware of 2025 no fix is documented, and whether the VHDL transmitter was changed is not documented.

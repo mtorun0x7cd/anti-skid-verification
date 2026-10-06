@@ -5,11 +5,11 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # paper/
 
-This folder holds the author's corrected manuscript of the paper, not the source of the deposited file. The version of record is [`publication/2026_02_Retrofitted_Anti-Skid_System.pdf`](../publication/2026_02_Retrofitted_Anti-Skid_System.pdf), the editors' build of the version the author sent on 28 June 2026; the LaTeX sources of that version are not available to this repository.
+This folder holds the author's corrected manuscript of the paper, not the source of the deposited file. The version of record is [`publication/2026_02_Retrofitted_Anti-Skid_System.pdf`](../publication/2026_02_Retrofitted_Anti-Skid_System.pdf), the editors' build of the version the author sent on 2026-06-28; the LaTeX sources of that version are not available to this repository.
 
 ## Relation to the deposited text
 
-The text of `paper.tex` is the text of pages 3 to 10 of the deposited file. Where it differs, the difference is the correction of an error that [`ERRATA.md`](../ERRATA.md) lists; there are no other differences. The manuscript was reconciled with the deposited text in October 2026: changes made to it after 28 June 2026 that do not make the correction an entry of `ERRATA.md` states were taken back, among them the author's degree on the author line. The other errors that `ERRATA.md` lists stand in `paper.tex` as they were deposited.
+The text of `paper.tex` is the text of pages 3 to 10 of the deposited file. Where it differs, the difference is the correction of an error that [`ERRATA.md`](../ERRATA.md) lists; there are no other differences. The manuscript was reconciled with the deposited text in October 2026: changes made to it after 2026-06-28 that do not make the correction an entry of `ERRATA.md` states were taken back, among them the author's degree on the author line. The other errors that `ERRATA.md` lists stand in `paper.tex` as they were deposited.
 
 | Place in the deposited file | Deposited text | Text in `paper.tex` | Erratum |
 | --- | --- | --- | --- |

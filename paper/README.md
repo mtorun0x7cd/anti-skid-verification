@@ -32,7 +32,7 @@ After the tag `cos-1494`, the text of the paper changes only through `ERRATA.md`
 
 | Path | Content | Licence |
 | --- | --- | --- |
-| `paper.tex` | The manuscript, IEEEtran journal format | CC BY-NC-ND 4.0, the licence of the paper |
+| `paper.tex` | The manuscript, IEEEtran journal format | CC BY-NC-ND 4.0, the licence of the paper; Listing 1, adapted from Listing 3 of reference [28] ([P-E037](../ERRATA.md#p-e037)), is third-party material, marked as an SPDX snippet; see [`NOTICE`](../NOTICE) |
 | `references.bib` | Its 29 references, as the deposited reference list prints them | CC BY-NC-ND 4.0 |
 | `fig/watchdog_reaction.png`, `fig/comp_upsweep.png`, `fig/comp_downsweep.png` | Figs. 3 and 5: oscilloscope captures by Mark Leyer of 2023, reproduced from reference [10] ([P-E029](../ERRATA.md#p-e029)) | Third-party material, not licensed by this repository; see [`NOTICE`](../NOTICE) |
 | `IEEEtran.cls`, `IEEEtran.bst` | The IEEEtran class (version 1.8b) and bibliography style (version 1.14), unedited | LPPL 1.3c |

@@ -26,6 +26,7 @@ Page ii also names the corrections that do not change a result: the real-time cl
 The paper published as <https://doi.org/10.57684/COS-1494> derives from the version of this report submitted in August 2025, and where the two differ, the revised edition is the corrected one (page ii). This edition in turn takes over parts of the paper: its description of the causes of B4 and B5 in the firmware of 2023 and of their fix follows Section V-E of the paper (Section 5.3), and Figures 3.1 and 4.1 are derived from Figs. 1 and 4 of the paper, as the comments in `fig/system_overview.tex` and `fig/test_fixture.tex` state. The two works share:
 
 - Figure 3.1 and Figure 4.1, adapted from Figs. 1 and 4 of the paper;
+- Figure 5.2, which shows the mapping of the two layers to the V-model that Fig. 2 of the paper shows, in a drawing of its own: six boxes with a note on each, no box for the implementation and no colours (page 46 of this report, page 6 of the deposited paper);
 - Figure 5.1 and Figure C.1, which reproduce the same measurement captures by Mark Leyer as Figs. 5 and 3 of the paper; they are third-party material in both;
 - Tables 5.2, 5.4 and 5.5, which revise Tables I, II and III of the paper;
 - the YAML test case of Appendix D.1, which, like Listing 1 of the paper, is adapted from Listing 3 of the test fixture report;
@@ -33,7 +34,7 @@ The paper published as <https://doi.org/10.57684/COS-1494> derives from the vers
 
 Measured on 2026-10-06 on the text of a build of the report and of pages 3 to 10 of the deposited paper, as pdftotext extracts it without its layout option, in Unicode form NFKC, with a word divided by a hyphen at a line end joined where the next line begins with a lower-case letter, then in lower case, and with a word taken as a run of the letters a to z and the digits, together with an apostrophe, straight or curly, and the letters that follow it: 379 of the 42,805 sequences of six words in the report also occur in the paper. They form 106 passages of at most 34 words: the acknowledgements, the title of the paper as the report cites it, entries of the bibliography, items of lists, captions and single sentences.
 
-As the title page of the report states, passages that also appear in the paper remain under the paper's licence, CC BY-NC-ND 4.0.
+As the title page of the report states, passages that also appear in the paper remain under the paper's licence, CC BY-NC-ND 4.0; the sources of Figures 3.1 and 4.1 carry that licence ([`NOTICE`](../NOTICE), section 1). Figure 5.2, the report's own drawing, stays under CC BY 4.0 with the report.
 
 ## Contents
 

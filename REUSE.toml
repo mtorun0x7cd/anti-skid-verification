@@ -4,13 +4,21 @@ version = 1
 # deposited, written or measured, are annotated here. Where several annotations
 # match a file, the last one counts. NOTICE gives the same licences in prose.
 
-# The deposited paper and its checksum file.
+# The deposited paper. It holds the captures of Figs. 3 and 5 and Listing 1,
+# which are third-party material.
 [[annotations]]
-path = ["publication/2026_02_Retrofitted_Anti-Skid_System.pdf", "publication/SHA256SUMS"]
+path = ["publication/2026_02_Retrofitted_Anti-Skid_System.pdf"]
+precedence = "override"
+SPDX-FileCopyrightText = ["2026 Mert Torun", "2023 Mark Leyer", "2023 André Dolata, Dennis Ostermann, Francisco Schiffelers"]
+SPDX-License-Identifier = "CC-BY-NC-ND-4.0 AND LicenseRef-third-party"
+SPDX-FileComment = "CC BY-NC-ND 4.0 is the licence of the catalogue record, https://doi.org/10.57684/COS-1494. It does not cover the series cover and imprint on pages 1 and 2; the measurement captures of Figs. 3 and 5, reproduced from the documentation of Mark Leyer (leyer2023, reference [10] of the paper), and Listing 1, adapted from Listing 3 of the test fixture report (dolata2023, reference [28] of the paper), are excluded from it as third-party material. See NOTICE."
+
+# The checksum file of the deposited paper.
+[[annotations]]
+path = ["publication/SHA256SUMS"]
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Mert Torun"
 SPDX-License-Identifier = "CC-BY-NC-ND-4.0"
-SPDX-FileComment = "CC BY-NC-ND 4.0 is the licence of the catalogue record, https://doi.org/10.57684/COS-1494. It does not cover the series cover and imprint on pages 1 and 2 or the measurement captures of Figs. 3 and 5; see NOTICE."
 
 # The research report: CC BY 4.0, as its title page states. The sources keep the
 # bytes of the revised edition, so the licence stands here and not in the files.

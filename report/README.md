@@ -70,4 +70,4 @@ The build date is the time of the last commit that changed `report/`; outside a 
 
 ## Licence
 
-The report is licensed under CC BY 4.0, as its title page states. Excluded is material credited to others in a caption or in the text, among it the adapted and reproduced figures, the Rev 0.0 board designs, content taken from the legacy manual, the VHDL excerpt in Appendix D, the fixture test case and the TH Köln logo; [`NOTICE`](../NOTICE) lists these files. Passages that also appear in the paper remain under its licence, CC BY-NC-ND 4.0.
+The report is licensed under CC BY 4.0, as its title page states. Excluded is material credited to others in a caption or in the text, among it the adapted and reproduced figures, the board designs of Rev 0.0 and Rev 1.0, content taken from the legacy manual, the VHDL excerpt in Appendix D, the fixture test case and the TH Köln logo; [`NOTICE`](../NOTICE) lists these files. The list on the title page names the Rev 0.0 designs only; the Rev 1.0 designs, which Appendix A credits to Leyer, fall under the same exclusion of material credited to others. Passages that also appear in the paper remain under its licence, CC BY-NC-ND 4.0.

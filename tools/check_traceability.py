@@ -22,13 +22,15 @@ This check holds the file to these rules:
      the YAML file, byte for byte, including its constant column record_status.
 
     check_traceability.py              check the file and the CSV
-    check_traceability.py --write-csv  write verification/traceability.csv
+    check_traceability.py --write-csv  write verification/traceability.csv, if
+                                       the file holds the schema
     check_traceability.py --selftest   show that each rule refuses a case it is
                                        written for, among them B4 marked PASS on
                                        the report's text alone
 
-Exit status: 0 the file holds, 1 a rule fails, 2 nothing was checked: a file
-could not be read, or PyYAML or jsonschema 4.0 or later is missing.
+Exit status: 0 the file holds (with --write-csv: the CSV was written), 1 a rule
+fails (with --write-csv: the schema; nothing is written), 2 a file could not
+be read or written, or PyYAML or jsonschema 4.0 or later is missing.
 Needs PyYAML and jsonschema 4.0 or later.
 """
 
@@ -323,14 +325,23 @@ def main(argv):
             return selftest()
         data = load_yaml(DATA)
         if len(argv) > 1 and argv[1] == "--write-csv":
-            CSV_PATH.write_text(render_csv(data), encoding="utf-8")
-            print("  [OK]   wrote %s" % CSV_PATH.relative_to(ROOT))
-            return 0
-        if len(argv) > 1:
+            # The CSV is rendered only from data that hold the schema; malformed data
+            # would otherwise end the rendering in a traceback with exit status 1.
+            found = schema_findings(data, load_schema())
+            if not found:
+                try:
+                    CSV_PATH.write_text(render_csv(data), encoding="utf-8")
+                except OSError as exc:
+                    print("  [ERR]  %s could not be written: %s" % (CSV_PATH.name, exc), file=sys.stderr)
+                    return 2
+                print("  [OK]   wrote %s" % CSV_PATH.relative_to(ROOT))
+                return 0
+        elif len(argv) > 1:
             print("usage: check_traceability.py [--write-csv | --selftest]", file=sys.stderr)
             return 2
-        schema, labels, keys, defects = context()
-        found = check(data, schema, labels, keys, defects, read_csv())
+        else:
+            schema, labels, keys, defects = context()
+            found = check(data, schema, labels, keys, defects, read_csv())
     except ReadError as exc:
         print("  [ERR]  %s; nothing was checked" % exc, file=sys.stderr)
         return 2

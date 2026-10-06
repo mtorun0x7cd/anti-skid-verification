@@ -27,8 +27,9 @@ This check holds the file to these rules:
                                        written for, among them B4 marked PASS on
                                        the report's text alone
 
-Exit status: 0 the file holds, 1 a rule fails, 2 a file could not be read.
-Needs PyYAML and jsonschema.
+Exit status: 0 the file holds, 1 a rule fails, 2 nothing was checked: a file
+could not be read, or PyYAML or jsonschema 4.0 or later is missing.
+Needs PyYAML and jsonschema 4.0 or later.
 """
 
 import copy
@@ -52,7 +53,7 @@ COLUMNS = ["requirement_id", "requirement", "requirement_source", "test_id", "la
 
 
 class ReadError(Exception):
-    """A file could not be read or parsed."""
+    """A file could not be read or parsed, or a package the check needs is missing."""
 
 
 def load_yaml(path):
@@ -120,7 +121,12 @@ def schema_findings(data, schema):
         import jsonschema
     except ImportError:
         raise ReadError("jsonschema is not installed")
-    validator = jsonschema.Draft202012Validator(schema)
+    # A release older than 4.0 has no validator for JSON Schema 2020-12; without this
+    # test the run would end in an AttributeError with exit status 1, a finding's code.
+    validator_class = getattr(jsonschema, "Draft202012Validator", None)
+    if validator_class is None:
+        raise ReadError("jsonschema 4.0 or later is needed")
+    validator = validator_class(schema)
     return ["schema: %s at %s" % (error.message, "/".join(str(p) for p in error.absolute_path) or "(root)")
             for error in sorted(validator.iter_errors(data), key=lambda e: list(e.absolute_path))]
 

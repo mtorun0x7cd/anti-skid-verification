@@ -23,7 +23,7 @@
     },
     {
       "@type": "SoftwareApplication",
-      "name": "Python 3 with PyYAML and jsonschema, for the checks in tools/"
+      "name": "Python 3 with PyYAML and jsonschema 4.0 or later, for the checks in tools/"
     }
   ],
   "developmentStatus": "https://www.repostatus.org/#inactive",

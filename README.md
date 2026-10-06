@@ -343,7 +343,7 @@ The same structure as text: each requirement names its source in the report and 
 | `OPEN` | L1-DP-02 (B5), L2-DP-05 (B4) | A defect was found, and no fix or change is documented |
 | `NOT-DOCUMENTED` | L1-DP-01, L2-DP-07, L1-DP-08 | No test of the item is documented |
 
-No test has the status `PASS`: no log, capture or measurement of the diagnostic path is archived. [`tools/check_traceability.py`](tools/check_traceability.py) holds the data to the schema [`traceability.schema.json`](verification/traceability.schema.json) (JSON Schema 2020-12) and to the rules of the format, refuses `PASS` without archived primary evidence, so that the text of the report alone never supports it, and requires the CSV view to equal its regeneration; its self-test applies each rule to a mutated copy that the rule has to refuse, among them B4 marked `PASS` on the report's text alone. With Python 3, PyYAML and jsonschema:
+No test has the status `PASS`: no log, capture or measurement of the diagnostic path is archived. [`tools/check_traceability.py`](tools/check_traceability.py) holds the data to the schema [`traceability.schema.json`](verification/traceability.schema.json) (JSON Schema 2020-12) and to the rules of the format, refuses `PASS` without archived primary evidence, so that the text of the report alone never supports it, and requires the CSV view to equal its regeneration; its self-test applies each rule to a mutated copy that the rule has to refuse, among them B4 marked `PASS` on the report's text alone. With Python 3, PyYAML and jsonschema 4.0 or later:
 
 ```sh
 make traceability    # check the data and the CSV view, then the self-test of the check
@@ -393,7 +393,7 @@ What cannot be reproduced from this repository: the deposited file, which the ed
 
 ### The data and the metadata
 
-With Python 3, PyYAML and jsonschema:
+With Python 3, PyYAML and jsonschema 4.0 or later:
 
 ```sh
 make traceability     # the traceability data, their CSV view and the self-test of the check

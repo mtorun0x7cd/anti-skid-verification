@@ -9,7 +9,8 @@
 #   make check            run ChkTeX over the LaTeX sources; any warning fails
 #   make verify-deposit   check publication/ against SHA256SUMS
 #   make traceability     check the traceability data and their CSV view, and the
-#                         check itself on mutated copies (needs PyYAML, jsonschema)
+#                         check itself on mutated copies (needs PyYAML and
+#                         jsonschema 4.0 or later)
 #   make metadata         check that CITATION.cff, codemeta.json, the README's
 #                         BibTeX entry and SHA256SUMS agree (needs PyYAML)
 #

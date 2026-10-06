@@ -16,12 +16,16 @@ bibtex block and compares its author, title, journal, number, year, ISSN, DOI
 and address with the preferred citation of CITATION.cff, and requires its note
 to name the document type Working Paper. Last, the SHA-256 of the deposited
 file in publication/SHA256SUMS must stand in README.md and publication/README.md.
+A part of CITATION.cff or codemeta.json that these comparisons read but that
+lacks the form they need (a list of persons, a mapping) is a finding, too.
 
     check_metadata.py            check the files
     check_metadata.py --selftest show that a changed DOI, version, type, title,
-                                 note or checksum is found
+                                 note or checksum, and a paper reference that is
+                                 not a mapping, are found
 
-Exit status: 0 they agree, 1 a value differs, 2 a file could not be read.
+Exit status: 0 they agree, 1 a value differs or lacks its form, 2 a file could
+not be read or PyYAML is missing.
 Needs PyYAML.
 """
 
@@ -79,9 +83,33 @@ def unbrace(text):
     return re.sub(r"[{}]", "", text)
 
 
+def form_findings(cff, meta):
+    """The parts that compare() reads, where they lack the form it needs.
+
+    Without this test such a file would end the run in an AttributeError or a
+    KeyError with exit status 1, a finding's code, and without saying what is wrong.
+    """
+    found = []
+    for what, value in (("CITATION.cff authors", cff.get("authors")),
+                        ("codemeta.json author", meta.get("author"))):
+        if not (isinstance(value, list) and value and all(isinstance(item, dict) for item in value)):
+            found.append("%s is not a list of persons" % what)
+    for what, value in (("CITATION.cff preferred-citation", cff.get("preferred-citation")),
+                        ("codemeta.json referencePublication", meta.get("referencePublication"))):
+        if not isinstance(value, dict):
+            found.append("%s is not a mapping" % what)
+    people = meta.get("author")
+    if isinstance(people, list) and people and isinstance(people[0], dict):
+        if not isinstance(people[0].get("affiliation", {}), dict):
+            found.append("codemeta.json author affiliation is not a mapping")
+    return found
+
+
 def compare(files):
     cff, meta, readme = files["cff"], files["meta"], files["readme"]
-    found = []
+    found = form_findings(cff, meta)
+    if found:
+        return found
 
     def same(what, a, b):
         if a != b:
@@ -103,8 +131,9 @@ def compare(files):
     same("affiliation", authors[0].get("affiliation"), (people[0].get("affiliation") or {}).get("name"))
     same("type of the paper in codemeta.json", ref.get("@type"), ARTICLE_TYPE)
     same("type of the preferred citation", pc.get("type"), "article")
-    languages = pc.get("languages") or [None]
-    same("language of the paper (CFF languages, codemeta %s)" % LANGUAGE, languages[0], ref.get(LANGUAGE))
+    languages = pc.get("languages")
+    first = languages[0] if isinstance(languages, list) and languages else languages
+    same("language of the paper (CFF languages, codemeta %s)" % LANGUAGE, first, ref.get(LANGUAGE))
     if "inLanguage" in ref:
         found.append("codemeta.json gives the language of the paper as inLanguage, a term the CodeMeta 3.0 "
                      "context does not define, so expansion drops it; write %s" % LANGUAGE)
@@ -174,6 +203,8 @@ def selftest():
         ("a changed checksum in SHA256SUMS",
          mutated("sums", ("0" * 64) + "  " + DEPOSIT + "\n")),
         ("a second BibTeX entry", mutated("readme", files["readme"] + "\n```bibtex\n@article{x,\n}\n```\n")),
+        ("a paper reference in codemeta.json that is not a mapping",
+         mutated("meta", dict(meta, referencePublication=[ref]))),
     ]
     failures = 0
     for name, case in cases:

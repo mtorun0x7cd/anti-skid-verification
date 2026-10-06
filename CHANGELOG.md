@@ -16,7 +16,7 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 
 ### Changed
 
-- `CITATION.cff` and `codemeta.json` carry the version 1.1.0; their description names the slides and the traceability data, and `codemeta.json` names Python and the shell among the languages and Python with PyYAML and jsonschema among the requirements.
+- `CITATION.cff` and `codemeta.json` carry the version 1.1.0; their description names the slides and the traceability data, and `codemeta.json` names Python and the shell among the languages and Python with PyYAML and jsonschema 4.0 or later among the requirements.
 - `NOTICE` and `REUSE.toml` give the licences of the files added; `report/README.md` gives the measured overlap of the text of the report with the deposited paper.
 - `ERRATA.md`: the entry on the author's website under Updates describes the address printed in the author note without writing it out, since it does not open; at the tag the entry writes it out.
 

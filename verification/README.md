@@ -99,7 +99,7 @@ The text of the report alone never supports `PASS`; the check refuses such a row
 
 ## Checking the data
 
-With Python 3, PyYAML and jsonschema, from the root of the repository:
+With Python 3, PyYAML and jsonschema 4.0 or later, from the root of the repository:
 
 ```sh
 python3 tools/check_traceability.py              # the schema, the rules and the CSV view

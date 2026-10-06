@@ -39,4 +39,4 @@ make slides    # writes slides/.tmp.nosync/latex/presentation.pdf and handout.pd
 
 ## Licence
 
-The deck and the handout are licensed under CC BY 4.0. Not covered are the material of third parties: the two captures of the frequency sweep by M. Leyer, which the deck includes from `paper/fig/`, and the YAML test case on the Layer 2 frame, adapted from the test fixture report and marked as an SPDX snippet; see [`NOTICE`](../NOTICE).
+The deck and the handout are licensed under CC BY 4.0. Not covered is the material of third parties: the two captures of the frequency sweep by M. Leyer, which the deck includes from `paper/fig/`, and the YAML test case on the Layer 2 frame, adapted from the test fixture report and marked as an SPDX snippet; see [`NOTICE`](../NOTICE). Two parts of `deck_frames.tex` come from the paper and keep its licence, CC BY-NC-ND 4.0, marked as SPDX snippets: the research question on the frame "The question", quoted from page 3 of the deposited paper, and the drawing of the V-model on the frame "Two layers on the V-model", after Fig. 2 of the paper.

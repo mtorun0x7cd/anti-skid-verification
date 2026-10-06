@@ -2,7 +2,9 @@
 % SPDX-License-Identifier: CC-BY-4.0
 %
 % Deck of the talk at the VIMS-Workshop 2026, TH Koeln, 22 May 2026; slides only.
-\documentclass[aspectratio=169,11pt]{beamer}
+% usepdftitle=false keeps Beamer from joining title and subtitle in the PDF
+% metadata with a spaced hyphen; deck_preamble.tex sets the title itself.
+\documentclass[aspectratio=169,11pt,usepdftitle=false]{beamer}
 \input{deck_preamble.tex}
 \begin{document}
 \input{deck_frames.tex}

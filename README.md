@@ -463,7 +463,7 @@ The FPGA design integrates the OpenCores t48 core, release rel_1_2 ([`ERRATA.md`
 | Path | Licence |
 | --- | --- |
 | `publication/`, `paper/paper.tex`, `paper/references.bib`, `CITATION.cff` | CC BY-NC-ND 4.0, the licence of the paper; the measurement captures of Figs. 3 and 5 (`paper/fig/`) are excepted, see [`NOTICE`](NOTICE) |
-| The abstract and the index terms of the paper and their four translations, quoted in this README | CC BY-NC-ND 4.0, marked as SPDX snippets |
+| The abstract and the index terms of the paper and their four translations, quoted in this README; the research question of the paper and the drawing of the V-model after its Fig. 2 in `slides/deck_frames.tex` | CC BY-NC-ND 4.0, marked as SPDX snippets |
 | `paper/IEEEtran.cls`, `paper/IEEEtran.bst` | LPPL 1.3c, unedited |
 | `report/` | CC BY 4.0, as the title page of the report states. Excepted is material credited to others, among it the mark of TH Köln and the figures, board designs, captures and excerpts that [`NOTICE`](NOTICE), section 2, lists; the figure sources `report/fig/system_overview.tex` and `report/fig/test_fixture.tex`, adapted from the paper, remain under its licence; the build file `report/.latexmkrc` is MIT |
 | `slides/`, the data in `verification/`, this README and the other documentation, `ERRATA.md` except its quotations of the paper, `CHANGELOG.md`, `NOTICE`, `codemeta.json`, `docs/social/social-card.*` | CC BY 4.0 |

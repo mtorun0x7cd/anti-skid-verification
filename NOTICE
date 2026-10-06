@@ -68,7 +68,12 @@ LICENSES/.
                                   Mert Torun. Not covered: the YAML test case
                                   of the Layer 2 frame, marked as an SPDX
                                   snippet, and the captures the deck includes
-                                  from paper/fig/ (section 2).
+                                  from paper/fig/ (section 2). Two parts of
+                                  slides/deck_frames.tex come from the paper,
+                                  the research question and a drawing of the
+                                  V-model after its Fig. 2; they are marked as
+                                  SPDX snippets and stay under the licence of
+                                  the paper, CC BY-NC-ND 4.0.
 
   verification/                   CC BY 4.0 for the data:
   (test_traceability.yaml,        test_traceability.yaml, traceability.csv and

@@ -32,9 +32,14 @@
     \item The author is not aware of an established method for verifying functional equivalence \alert{at the board level} when a legacy microcontroller is replaced by FPGA emulation (report, Ch.~1).
   \end{itemize}
   \vfill
+% SPDX-SnippetBegin
+% SPDX-SnippetCopyrightText: 2026 Mert Torun
+% SPDX-License-Identifier: CC-BY-NC-ND-4.0
+% SPDX-SnippetComment: The research question of the paper, quoted from page 3 of the deposited file; licensed like the paper. See NOTICE.
   \begin{block}{Research question}
     How can functional equivalence in safety-critical hardware retrofits be rigorously demonstrated through structured, standards-aligned verification?
   \end{block}
+% SPDX-SnippetEnd
   \revised{``no established methodology exists'' is stated as the author's knowledge; the HIL work cited tests control units, not complete braking systems.}
 \end{frame}
 
@@ -89,6 +94,10 @@
     \end{column}
     \begin{column}{0.5\textwidth}
       \centering
+% SPDX-SnippetBegin
+% SPDX-SnippetCopyrightText: 2026 Mert Torun
+% SPDX-License-Identifier: CC-BY-NC-ND-4.0
+% SPDX-SnippetComment: A simplified drawing after Fig. 2 of the paper, page 6 of the deposited file; licensed like the paper. See NOTICE.
       \begin{tikzpicture}[font=\scriptsize, scale=0.8, every node/.style={transform shape},
         b/.style={draw, rounded corners=2pt, minimum width=1.8cm, minimum height=5mm, align=center}]
         \node[b, fill=red!12] (sr) at (0,2) {System Req.};
@@ -100,6 +109,7 @@
         \draw[-{Stealth[length=1.5mm]}] (im)--(ut); \draw[-{Stealth[length=1.5mm]}] (ut)--(sv);
         \draw[{Stealth[length=1.5mm]}-{Stealth[length=1.5mm]}, densely dashed, blue!50!black] (sr)--(sv);
       \end{tikzpicture}
+% SPDX-SnippetEnd
     \end{column}
   \end{columns}
   \revised{the two layers are described as intended, not as achieved coverage; no requirement list exists for the left arm (report, Sec.~5.4.1).}

@@ -43,11 +43,13 @@ jobs:
 
       # After the record tag, the text of the paper changes only through
       # ERRATA.md: each commit that changes the manuscript names its erratum.
+      # The README of paper/ and the vendored IEEEtran files are not the
+      # manuscript.
       - name: List the commits after cos-1494 that change paper/
         run: |
           git rev-parse --verify --quiet refs/tags/cos-1494 >/dev/null || { echo "the tag cos-1494 is missing"; exit 2; }
           missing=0
-          for commit in $(git log --format=%H cos-1494..HEAD -- paper ':(exclude)paper/README.md'); do
+          for commit in $(git log --format=%H cos-1494..HEAD -- paper ':(exclude)paper/README.md' ':(exclude)paper/IEEEtran.*'); do
             subject=$(git log -1 --format=%s "$commit")
             if git log -1 --format=%B "$commit" | grep -Eq 'P-E[0-9]{3}'; then
               echo "ok      $commit $subject"

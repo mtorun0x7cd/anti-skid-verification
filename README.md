@@ -252,7 +252,7 @@ Simulation and the fixture runs indicate equivalence of the fault handling, but 
 - On the rebuilt unit, the follow-on project ran the fixture's full suite in 2025, which it reports as successful, and a selection of 19 test cases, for which the expected codes were observed on the displays; the fixture's camera could not read them, and no log was archived. The self-test, the Test and Tür/V buttons, power cycles, the watchdog, the sweep and the brown-out detection are not documented for that unit.
 - The only measurement against the original board, the frequency sweep, points to a deviation, described below; it is open.
 
-The abstract of the paper states that functional equivalence of the safety-critical core "was demonstrated". [`ERRATA.md`](ERRATA.md#p-e002), P-E002, corrects this: the three lines of evidence indicate functional equivalence of the safety-critical core, but the evidence for the rebuilt unit is incomplete.
+The abstract of the paper states that functional equivalence of the safety-critical core "was demonstrated", and Section V-A that the convergence of three lines of evidence "provides robust assurance" of it. [`ERRATA.md`](ERRATA.md#p-e002), P-E002, corrects this: "was demonstrated" and "robust assurance" are not supported, and the evidence for the rebuilt unit is incomplete. The revised report states the evidence more narrowly than the replacement wording of P-E002: simulation and the fixture runs indicate equivalence of the fault handling, and the frequency sweep, the only measurement against the original board, points to a deviation that is open (report, Sections 5.1.1 and 5.1.3).
 
 ### Integration defects
 
@@ -301,7 +301,7 @@ The legacy system, its manual and most of the project reports are German, and th
 | [`verification/`](verification/) | The traceability data of the diagnostic path: the data in YAML, a CSV view, the schema, an empty template and a data dictionary | Report, Chapter 5 | CC BY 4.0 for the data; MIT for the schema and the template |
 | [`tools/`](tools/) | Checks of the traceability data, of the citation metadata and of the links | Neither work | MIT |
 | [`docs/social/`](docs/social/) | The social card of this repository and the script that renders it | Neither work | CC BY 4.0; the script MIT |
-| [`ERRATA.md`](ERRATA.md) | The known errors of the paper, the properties of its record and of the deposited file, and moved web addresses | The paper | CC BY 4.0; its quotations of the paper CC BY-NC-ND 4.0 |
+| [`ERRATA.md`](ERRATA.md) | The errors of the paper found so far, the properties of its record and of the deposited file, and moved web addresses | The paper | CC BY 4.0; its quotations of the paper CC BY-NC-ND 4.0 |
 | [`CHANGELOG.md`](CHANGELOG.md), [`NOTICE`](NOTICE), [`CITATION.cff`](CITATION.cff), [`codemeta.json`](codemeta.json) | Changes, licences and credits, citation metadata | Neither work | CC BY 4.0; `CITATION.cff` CC BY-NC-ND 4.0, because it quotes the abstract of the paper |
 | [`SECURITY.md`](SECURITY.md), [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to report a matter privately, and how corrections are made | Neither work | CC BY 4.0 |
 | [`Makefile`](Makefile), [`.github/`](.github/), [`.githooks/`](.githooks/) | Build and checks, workflows, the correction form, an opt-in secret scan for clones | Neither work | MIT |
@@ -417,7 +417,7 @@ make verify-deposit   # the deposited file against publication/SHA256SUMS
 
 ## Corrections
 
-[`ERRATA.md`](ERRATA.md) lists the known errors of the paper under the identifiers P-E001 to P-E049, the properties of its catalogue record and of the deposited file, and the web addresses of the paper that have moved; errors of the report will be listed as R-E001 onwards once it is deposited. The deposited file does not change: a confirmed error is added to `ERRATA.md`, and an error that affects a result is reported to the editors of the series. After the tag `cos-1494`, the manuscript in `paper/` changes only through `ERRATA.md`, and each change names its erratum.
+[`ERRATA.md`](ERRATA.md) lists the errors of the paper found so far under the identifiers P-E001 to P-E049, the properties of its catalogue record and of the deposited file, and the web addresses of the paper that have moved; errors of the report will be listed as R-E001 onwards once it is deposited. The deposited file does not change: a confirmed error is added to `ERRATA.md`, and an error that affects a result is reported to the editors of the series. After the tag `cos-1494`, the manuscript in `paper/` changes only through `ERRATA.md`, and each change names its erratum.
 
 To report an error, open an issue with the form **Correction** and give the location in the work or the file, the quoted text, the proposed correction and the evidence. A matter that should not be public goes by e-mail to [info@mtorun0x7cd.com](mailto:info@mtorun0x7cd.com), as [`SECURITY.md`](SECURITY.md) describes. [`CHANGELOG.md`](CHANGELOG.md) lists the changes of this repository.
 

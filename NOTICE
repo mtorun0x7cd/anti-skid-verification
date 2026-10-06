@@ -51,9 +51,10 @@ LICENSES/.
                                   Appendix D.1 and the VHDL excerpt of
                                   Appendix D.2 (section 2).
 
-  report/fig/photos/              CC BY 4.0 for the photographs; the Rev 0.0
-                                  board designs they show are a third party's
-                                  (section 2), and they are edited (section 3).
+  report/fig/photos/              CC BY 4.0 for the photographs, which the
+                                  author took; the board designs they show are
+                                  a third party's (section 2), and the
+                                  photographs are edited (section 3).
 
   report/fig/logo/,               LicenseRef-third-party (section 2).
   report/fig/ayoub/,
@@ -141,7 +142,8 @@ an Anti-Skid Protection for Trams", internship documentation, TH Köln, 2023
     of 2024, in which the author replaced the displays and split the design
     into one file per board.
   report/fig/photos/
-    The Rev 0.0 board designs the photographs show.
+    The board designs the photographs show: three boards of Rev 0.0 and the
+    Rev 1.0 STM32 Diagnostics Board, unpopulated.
   report/chapters/appendixD.tex
     The VHDL excerpt of Appendix D.2, from the top-level design of 2023.
   publication/2026_02_Retrofitted_Anti-Skid_System.pdf

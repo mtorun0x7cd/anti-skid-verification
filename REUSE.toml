@@ -45,14 +45,14 @@ SPDX-FileCopyrightText = ["2025-2026 Mert Torun", "2023 André Dolata, Dennis Os
 SPDX-License-Identifier = "CC-BY-4.0 AND LicenseRef-third-party"
 SPDX-FileComment = "The YAML test case of Appendix D.1 is adapted from Listing 3 of the test fixture report (dolata2023) and the VHDL excerpt of Appendix D.2 is quoted from the design of Mark Leyer (leyer2023); both are excluded from CC BY 4.0. See NOTICE."
 
-# Photographs of the boards. The Rev 0.0 board designs they show are a third
-# party's, and a logo, a board designation and a production code are masked.
+# Photographs of the boards. The board designs they show are a third party's,
+# and a logo, a board designation and a production code are masked.
 [[annotations]]
 path = ["report/fig/photos/**"]
 precedence = "override"
 SPDX-FileCopyrightText = ["2025-2026 Mert Torun", "2023 Mark Leyer"]
 SPDX-License-Identifier = "CC-BY-4.0 AND LicenseRef-third-party"
-SPDX-FileComment = "The photographs are CC BY 4.0; the Rev 0.0 board designs they show are Mark Leyer's (leyer2023) and excluded. Edited to mask a third-party logo, board designation and production code; see NOTICE, section 3."
+SPDX-FileComment = "The photographs are CC BY 4.0; the board designs they show are Mark Leyer's (leyer2023) and excluded. Edited to mask a third-party logo, board designation and production code; see NOTICE, section 3."
 
 # The mark of TH Köln.
 [[annotations]]

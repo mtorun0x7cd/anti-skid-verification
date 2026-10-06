@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/mtorun0x7cd/anti-skid-verification/blob/main/verification/traceability.schema.json",
+  "$id": "https://raw.githubusercontent.com/mtorun0x7cd/anti-skid-verification/main/verification/traceability.schema.json",
   "title": "Requirements-to-test traceability of a retrofit",
   "description": "Schema of verification/test_traceability.yaml. verification/README.md is its data dictionary.",
   "type": "object",

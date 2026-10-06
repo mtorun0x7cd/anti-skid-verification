@@ -38,7 +38,7 @@ Statements in files that the record tag `cos-1494` holds, corrected here; the ta
 - `publication/2026_02_Retrofitted_Anti-Skid_System.pdf`, the deposited paper, a Working Paper in the series Kölner Beiträge zur technischen Informatik 2/2026, byte-identical with the file behind <https://doi.org/10.57684/COS-1494>: 1,565,058 bytes, SHA-256 `bcf68b4b845c68ab48b43c1d91c855af7f8aac18f7a7a0846a43210ca66a3ebf`; with `SHA256SUMS` and a `README.md` on how to verify it.
 - `paper/`, the author's corrected manuscript of the paper, not the source of the deposited file: its text is the deposited text except where it applies the corrections of P-E003, P-E013, P-E015, P-E018, P-E031 and P-E034. The sources carry the licence of the paper, CC BY-NC-ND 4.0.
 - `report/`, the LaTeX sources of the research report in its revised edition of October 2026, which build a PDF/A-2b file of 102 pages; the report is licensed under CC BY 4.0, as its title page states.
-- `ERRATA.md`: 49 entries on the errors of the paper, the properties of its record and of the deposited file, and the web addresses of the paper that no longer work or have moved.
+- `ERRATA.md`: 49 entries on the errors of the paper (P-E001 to P-E049), and, in two further sections, the properties of its record and of the deposited file and the web addresses of the paper that no longer work or have moved.
 - `CITATION.cff`, `codemeta.json`, `NOTICE`, `REUSE.toml`, the licence texts, the `Makefile` and the configuration files.
 
 [1.1.0]: https://github.com/mtorun0x7cd/anti-skid-verification/compare/cos-1494...v1.1.0

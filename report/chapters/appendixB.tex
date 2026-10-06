@@ -48,7 +48,7 @@ This appendix lists the parts of the retrofitted hardware modules and gives the 
 	Y19$^{b}$ & 1 & TI & \texttt{TPS73633DBVT} & \SI{3.3}{\volt} Low-Dropout (\acrshort{ldo}) Regulator (Isolated Domain) \\
 	\mbox{OK5--OK8}$^{c}$ & 4 & Vishay & \texttt{SFH601-3} & Optocoupler (SPI and NRST Isolation) \\
 	Y22 & 0 & XP Power & \texttt{IR0505SA} & Isolated DC/DC Converter \SI{5}{\volt} to \SI{5}{\volt} (Alternative to Y23, Not Fitted) \\
-	Y23 & 1 & Gaia & \texttt{MGDS04-C-C} & Isolated DC/DC Converter \SI{5}{\volt} to \SI{5}{\volt} \\
+	Y23 & 1 & Gaia & \texttt{MGDS-04-C-C} & Isolated DC/DC Converter \SI{5}{\volt} to \SI{5}{\volt} \\
 	J6 & 1 & GCT & \texttt{MEM2075-\allowbreak{}00-\allowbreak{}140-\allowbreak{}01-\allowbreak{}A} & MicroSD Card Socket (Push-Push) \\
 	X15 & 1 & GCT & \texttt{USB4800-03-A} & USB Type-C Connector \\
 	U1 & 1 & MPD & \texttt{BS-7} & RTC Battery Holder (CR2032) \\
@@ -177,6 +177,6 @@ $^{m}$For R102 to R105 the sources disagree as well. The Rev~1.0 schematic and t
 \section{Design Rules of the Layouts}
 \label{sec:app_drc}
 
-The Rev~1.0 board files use the manufacturer's rule set \texttt{jlcpcb-4layers} (minimum clearance \SI{5}{mil}, minimum track width \SI{3.5}{mil}, minimum drill \SI{0.2}{\milli\metre}, minimum annular ring \SI{0.13}{\milli\metre}). The routed tracks are at least \SI{0.25}{\milli\metre} wide, and the vias are drilled at \SI{0.35}{\milli\metre}. The stack-up is top, power (layer~2), ground (layer~15) and bottom. The rule set was already used in Leyer's Rev~1.0 files of 2023~\cite{leyer2023}.
+The Rev~1.0 board files use the manufacturer's rule set \texttt{jlcpcb-4layers} (minimum clearance \SI{5}{mil}, minimum track width \SI{3.5}{mil}, minimum drill \SI{0.2}{\milli\metre}, minimum annular ring \SI{0.13}{\milli\metre}). The routed tracks are at least \SI{0.25}{\milli\metre} wide, and the vias are drilled at \SI{0.35}{\milli\metre}. The stack-up is top, power, ground and bottom; in Eagle's layer numbering, power is layer~2 and ground layer~15. The rule set was already used in Leyer's Rev~1.0 files of 2023~\cite{leyer2023}.
 
-The board files store 622 rule-check messages marked as approved (the LED board file four); the same approvals are present in the Rev~0.0 file and were carried over with the design. Approved messages do not count as errors in a check run, but they show that several hundred rule violations were accepted by hand. No separate~\gls{drc} report is archived, and whether a check run today reports errors that are not approved has not been verified.
+The board files store 622 rule-check messages marked as approved (the LED Board file four); the same approvals are present in the Rev~0.0 file and were carried over with the design. Approved messages do not count as errors in a check run, but they show that several hundred rule violations were accepted by hand. No separate~\gls{drc} report is archived, and whether a check run today reports errors that are not approved has not been verified.

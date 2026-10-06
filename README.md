@@ -451,7 +451,7 @@ The paper derives from the version of the research report submitted in August 20
 
 The report and the paper continue prior work, which the report cites:
 
-- S. Ayoub, "Reverse Engineering von Steuerkarten: Vergleicher Karte und Stromsollwert Karte", unpublished working report, Fachhochschule Köln, 2014.
+- S. Ayoub, "Reverse Engineering von Steuerkarten: Vergleicher Karte und Stromsollwert Karte", unpublished work report, Fachhochschule Köln, 2014.
 - M. Leyer, "Reverse Engineering and Redesigning of the Test-Diagnosis Board of an Anti-Skid Protection for Trams", unpublished internship documentation, TH Köln, 2023.
 - A. Dolata, D. Ostermann and F. Schiffelers, "Testkartentester: Entwicklung einer Testkarte für die Gleitschutztestkarte", unpublished project report, TH Köln, 2023.
 - "Gleitschutz System Fortsetzung", unpublished report of the follow-on student project, TH Köln, 2025.

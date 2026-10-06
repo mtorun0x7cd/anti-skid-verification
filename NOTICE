@@ -119,8 +119,8 @@ The mark of TH Köln. report/fig/logo/th_koeln.png is the mark of TH Köln
 of the report. All rights remain with TH Köln.
 
 Samy Ayoub, "Reverse Engineering von Steuerkarten: Vergleicher Karte und
-Stromsollwert Karte", work report, Fachhochschule Köln, 2014 (reference
-ayoub2014 of the report).
+Stromsollwert Karte", unpublished work report, Fachhochschule Köln, 2014
+(reference ayoub2014 of the report).
   report/fig/ayoub/comparator_card_original.pdf,
   report/fig/ayoub/comparator_card_fpga.pdf
     Figure 2.1 of the report, reproduced as vector graphics from Figs. 1 and 3
@@ -129,8 +129,9 @@ ayoub2014 of the report).
     Figure 2.2 of the report, reproduced as a vector graphic from its Fig. 7.
 
 Mark Leyer, "Reverse Engineering and Redesigning of the Test-Diagnosis Board of
-an Anti-Skid Protection for Trams", internship documentation, TH Köln, 2023
-(reference leyer2023 of the report, reference [10] of the paper).
+an Anti-Skid Protection for Trams", unpublished internship documentation,
+TH Köln, 2023 (reference leyer2023 of the report, reference [10] of the
+paper).
   report/fig/sweep/comp_upsweep.png, report/fig/sweep/comp_downsweep.png,
   paper/fig/comp_upsweep.png, paper/fig/comp_downsweep.png
     Oscilloscope captures of the frequency sweep of the original board and of
@@ -156,9 +157,9 @@ an Anti-Skid Protection for Trams", internship documentation, TH Köln, 2023
     their source (ERRATA.md, P-E029).
 
 André Dolata, Dennis Ostermann and Francisco Schiffelers, "Testkartentester:
-Entwicklung einer Testkarte für die Gleitschutztestkarte", project report,
-TH Köln, 2023 (reference dolata2023 of the report, reference [28] of the
-paper).
+Entwicklung einer Testkarte für die Gleitschutztestkarte", unpublished
+project report, TH Köln, 2023 (reference dolata2023 of the report,
+reference [28] of the paper).
   report/chapters/appendixD.tex, paper/paper.tex, slides/deck_frames.tex and
   the deposited PDF
     The YAML test case "Geber 3" of Appendix D.1 of the report, Listing 1 of

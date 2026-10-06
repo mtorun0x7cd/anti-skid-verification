@@ -196,9 +196,7 @@ _As printed in the report (pp. xii and xiii). The English abstract is authoritat
 | Programme | none | M.Sc. Computer Science & Engineering (Technische Informatik), as the title page prints it |
 | Submitted | 2026-06-28: the version the author sent to the editors of the series, which the series printed | August 2025; revised edition of October 2026 |
 | Examined | not applicable | The version of August 2025 was assessed; the revised edition has not been re-assessed |
-| Published | 2026-09-22, open access on Cologne Open Science, a publication server of TH Köln | Not yet; the revised edition awaits its deposit on ePublications, a publication server of TH Köln |
-| Presented | 2026-05-22, at the VIMS-Workshop 2026 of the research focus Vernetzte intelligente Infrastrukturen und mobile Systeme, TH Köln, as page 2 of the deposited file records | none |
-| Publisher | Bibliothek der Technischen Hochschule Köln, as the catalogue record names it | after its deposit |
+| Published | 2026-09-22, open access on Cologne Open Science, a publication server of TH Köln, by the Bibliothek der Technischen Hochschule Köln, the publisher the catalogue record names; presented on 2026-05-22 at the VIMS-Workshop 2026 of the research focus Vernetzte intelligente Infrastrukturen und mobile Systeme, TH Köln, as page 2 of the deposited file records | Not yet; the revised edition awaits its deposit on ePublications, a publication server of TH Köln |
 | DOI | <https://doi.org/10.57684/COS-1494> | after its deposit |
 | URN | [urn:nbn:de:hbz:832-cos4-14942](https://nbn-resolving.org/urn:nbn:de:hbz:832-cos4-14942) | after its deposit |
 | Licence | CC BY-NC-ND 4.0, as the catalogue record states; the imprint on page 2 names the licence terms without a version ([`ERRATA.md`](ERRATA.md#2-properties-of-the-record-and-the-deposited-file), section 2). The measurement captures of Figs. 3 and 5 are excepted, see [`NOTICE`](NOTICE) | CC BY 4.0, as the title page states; material credited to others, among it the mark of TH Köln, is excepted, and passages that also appear in the paper remain under its licence |

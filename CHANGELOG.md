@@ -27,6 +27,7 @@ Statements in files that the record tag `cos-1494` holds, corrected here; the ta
 - `CITATION.cff`: the reference to the research report carries the English abstract of its revised edition; at the tag the reference has no abstract.
 - `report/`: the report calls the paper a Working Paper, the document type of its record, where it called it the article: in its licence notice and in the rights statement of its PDF metadata, in the note on this edition and in Chapter 5; its reference to the paper names the type and the URN. At the tag the report calls the paper the article. `report/README.md` counts the sequences of six words of the changed text.
 - `report/`: Chapter 1 says that the cited test bench does hardware-in-the-loop testing of braking and anti-skid control units, not of complete braking systems, and Chapter 2 no longer cites the review of testing from formal specifications for combining test strategies; the errata of the paper correct the same two statements (P-E005, P-E012). The two frequency sweep captures of Chapter 5 are byte copies of the captures in `paper/fig/`, where they were palette re-encodings. At the tag the report has the earlier sentences and captures.
+- `publication/README.md` and `report/README.md` call Cologne Open Science and ePublications a publication server of TH Köln, which runs both; at the tag each calls its server the publication server of TH Köln.
 
 ## [cos-1494] - 2026-10-05
 

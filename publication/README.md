@@ -5,7 +5,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Version of record
 
-This folder holds the paper "Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology" by Mert Torun as it was deposited: a Working Paper in the series Kölner Beiträge zur technischen Informatik, volume 2/2026, published on Cologne Open Science, the publication server of TH Köln, on 2026-09-22.
+This folder holds the paper "Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology" by Mert Torun as it was deposited: a Working Paper in the series Kölner Beiträge zur technischen Informatik, volume 2/2026, published on Cologne Open Science, a publication server of TH Köln, on 2026-09-22.
 
 | File | Work | Record | Bytes | SHA-256 | Licence | Relation to the sources |
 | --- | --- | --- | --- | --- | --- | --- |

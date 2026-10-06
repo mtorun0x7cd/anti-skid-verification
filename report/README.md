@@ -5,7 +5,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # report/
 
-This folder holds the LaTeX sources of the research report "Ensuring Functional Equivalence and Compliance with Functional Safety Standards in Retrofitted Anti-Skid Systems for European Public Transportation: A Methodological Approach to Testing, Certification, and Risk Mitigation for Modernised Safety-Critical Electronics" by Mert Torun, TH Köln. It is the revised edition of October 2026 of the report submitted in August 2025 in the Master's programme Computer Science & Engineering (Technische Informatik). The revised edition is not yet deposited; its record, with a DOI, follows its deposit on ePublications, the publication server of TH Köln.
+This folder holds the LaTeX sources of the research report "Ensuring Functional Equivalence and Compliance with Functional Safety Standards in Retrofitted Anti-Skid Systems for European Public Transportation: A Methodological Approach to Testing, Certification, and Risk Mitigation for Modernised Safety-Critical Electronics" by Mert Torun, TH Köln. It is the revised edition of October 2026 of the report submitted in August 2025 in the Master's programme Computer Science & Engineering (Technische Informatik). The revised edition is not yet deposited; its record, with a DOI, follows its deposit on ePublications, a publication server of TH Köln.
 
 ## Edition note
 

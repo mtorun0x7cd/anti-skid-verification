@@ -21,7 +21,7 @@ Companion repository of the paper by Mert Torun, a Working Paper in the series K
 | Slides of the talk on the paper at the VIMS-Workshop 2026 | The sources of July 2026, revised in October 2026; the deck as presented is not archived | none | [`slides/`](slides/) | CC BY 4.0; material of third parties excepted |
 | Traceability data of the diagnostic path | Reconstructed in 2026 from Chapter 5 of the report | none | [`verification/`](verification/) | CC BY 4.0; the schema and the template MIT |
 
-The paper derives from the version of the report submitted in August 2025; the revised edition adopts corrected passages from the paper, and where the two differ, the revised edition is the corrected one (report, page ii). The two works share figures, tables, a listing, and single sentences and captions; [`report/README.md`](report/README.md#overlap-with-the-paper) lists them. Passages of the report that also appear in the paper remain under the paper's licence, CC BY-NC-ND 4.0.
+The paper derives from the version of the report submitted in August 2025, and where the two differ, the revised edition of the report is the corrected one (report, page ii). The revised edition in turn takes over parts of the paper: its description of the causes of B4 and B5 in the firmware of 2023 and of their fix follows Section V-E of the paper (report, Section 5.3), and Figures 3.1 and 4.1 are derived from Figs. 1 and 4 of the paper, as the comments in their sources in `report/fig/` state. The two works share figures, tables, a listing, and single sentences and captions; [`report/README.md`](report/README.md#overlap-with-the-paper) lists them. Passages of the report that also appear in the paper remain under the paper's licence, CC BY-NC-ND 4.0.
 
 ## Abstract
 
@@ -447,7 +447,7 @@ GitHub's "Cite this repository" builds its entry from [`CITATION.cff`](CITATION.
 
 ## Related works
 
-The paper derives from the version of the research report submitted in August 2025; the revised edition in [`report/`](report/) adopts corrected passages from the paper (report, page ii).
+The paper derives from the version of the research report submitted in August 2025 (report, page ii). The revised edition in [`report/`](report/) takes over parts of the paper: the description of the causes and the fix of B4 and B5 follows Section V-E of the paper (report, Section 5.3), and Figures 3.1 and 4.1 are derived from Figs. 1 and 4 of the paper.
 
 The report and the paper continue prior work, which the report cites:
 

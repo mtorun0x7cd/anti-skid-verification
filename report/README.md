@@ -23,7 +23,7 @@ Page ii also names the corrections that do not change a result: the real-time cl
 
 ## Overlap with the paper
 
-The paper published as <https://doi.org/10.57684/COS-1494> derives from the version of this report submitted in August 2025; this revised edition adopts corrected passages from the paper, and where the two differ, the revised edition is the corrected one (page ii). They share:
+The paper published as <https://doi.org/10.57684/COS-1494> derives from the version of this report submitted in August 2025, and where the two differ, the revised edition is the corrected one (page ii). This edition in turn takes over parts of the paper: its description of the causes of B4 and B5 in the firmware of 2023 and of their fix follows Section V-E of the paper (Section 5.3), and Figures 3.1 and 4.1 are derived from Figs. 1 and 4 of the paper, as the comments in `fig/system_overview.tex` and `fig/test_fixture.tex` state. The two works share:
 
 - Figure 3.1 and Figure 4.1, adapted from Figs. 1 and 4 of the paper;
 - Figure 5.1 and Figure C.1, which reproduce the same measurement captures by Mark Leyer as Figs. 5 and 3 of the paper; they are third-party material in both;

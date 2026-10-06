@@ -17,7 +17,7 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 ### Changed
 
 - `CITATION.cff` and `codemeta.json` carry the version 1.1.0; their description names the slides and the traceability data, and `codemeta.json` names Python and the shell among the languages and Python with PyYAML and jsonschema 4.0 or later among the requirements.
-- `NOTICE` and `REUSE.toml` give the licences of the files added; `report/README.md` gives the measured overlap of the text of the report with the deposited paper.
+- `NOTICE` and `REUSE.toml` give the licences of the files added; `report/README.md` gives the measured overlap of the text of the report with the deposited paper and the word rule of the measurement.
 - `ERRATA.md`: the entry on the author's website under Updates describes the address printed in the author note without writing it out, since it does not open; at the tag the entry writes it out.
 
 ### Fixed
@@ -29,6 +29,7 @@ Statements in files that the record tag `cos-1494` holds, corrected here; the ta
 - `report/`: Chapter 1 says that the cited test bench does hardware-in-the-loop testing of braking and anti-skid control units, not of complete braking systems, and Chapter 2 no longer cites the review of testing from formal specifications for combining test strategies; the errata of the paper correct the same two statements (P-E005, P-E012). The two frequency sweep captures of Chapter 5 are byte copies of the captures in `paper/fig/`, where they were palette re-encodings. At the tag the report has the earlier sentences and captures.
 - `publication/README.md` and `report/README.md` call Cologne Open Science and ePublications a publication server of TH Köln, which runs both; at the tag each calls its server the publication server of TH Köln.
 - `NOTICE` says that the author took the photographs of Appendix A of the report, which it licenses under CC BY 4.0, and, like `REUSE.toml`, that all the board designs they show are a third party's, the Rev 1.0 STM32 Diagnostics Board among them. At the tag `NOTICE` does not say who took the photographs, and both files name only the Rev 0.0 designs.
+- `report/README.md` introduces the changes of the revised edition as those a reader of the assessed version needs to know, since its list also holds the front matter and the photographs; at the tag it calls them the changes that bear on the results of the report.
 
 ## [cos-1494] - 2026-10-05
 

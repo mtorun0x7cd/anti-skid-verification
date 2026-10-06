@@ -9,7 +9,7 @@ This folder holds the LaTeX sources of the research report "Ensuring Functional 
 
 ## Edition note
 
-This is not the version that was assessed. The assessment refers to the report as submitted in August 2025; the revised edition has not been re-assessed. Page ii of the report, "About this edition", lists what changed, and these are the changes that bear on its results:
+This is not the version that was assessed. The assessment refers to the report as submitted in August 2025; the revised edition has not been re-assessed. Page ii of the report, "About this edition", lists what changed, and these are the changes a reader of the assessed version needs to know:
 
 - **The two defects of the diagnostic path, B4 and B5.** The submitted report recorded them as a freeze of the SD-card logging and a corrupted third byte in the SPI transmission, both open. This edition describes the causes found in the STM32 firmware of 2023 and the fix applied to that firmware after the submission; the cause of the freeze seen with the firmware of 2025 is not established (Section 5.3, Table 5.4). The rebuilt unit was observed operating as a whole in early 2026; the diagnostic path was not verified separately, and no log or capture of that run was archived.
 - **The defects and how they were found.** Table 5.4 is new and lists six defects; the sixth, the swapped 7-segment displays (B6), is documented in the follow-on report and was in neither the submitted report nor the paper. How the defects B1 to B3 were found is corrected.
@@ -31,7 +31,7 @@ The paper published as <https://doi.org/10.57684/COS-1494> derives from the vers
 - the YAML test case of Appendix D.1, which, like Listing 1 of the paper, is adapted from Listing 3 of the test fixture report;
 - single sentences and captions.
 
-Measured on 2026-10-06 on the text of a build of the report and of pages 3 to 10 of the deposited paper, as pdftotext extracts it without its layout option, in Unicode form NFKC and in lower case, with words divided at a line end joined and a word taken as a run of the letters a to z and the digits: 379 of the 42,805 sequences of six words in the report also occur in the paper. They form 106 passages of at most 34 words: the acknowledgements, the title of the paper as the report cites it, entries of the bibliography, items of lists, captions and single sentences.
+Measured on 2026-10-06 on the text of a build of the report and of pages 3 to 10 of the deposited paper, as pdftotext extracts it without its layout option, in Unicode form NFKC, with a word divided by a hyphen at a line end joined where the next line begins with a lower-case letter, then in lower case, and with a word taken as a run of the letters a to z and the digits, together with an apostrophe, straight or curly, and the letters that follow it: 379 of the 42,805 sequences of six words in the report also occur in the paper. They form 106 passages of at most 34 words: the acknowledgements, the title of the paper as the report cites it, entries of the bibliography, items of lists, captions and single sentences.
 
 As the title page of the report states, passages that also appear in the paper remain under the paper's licence, CC BY-NC-ND 4.0.
 

@@ -23,7 +23,7 @@ Page ii also names the corrections that do not change a result: the real-time cl
 
 ## Overlap with the paper
 
-The paper published as <https://doi.org/10.57684/COS-1494> derives from the version of this report submitted in August 2025, and where the two differ, the revised edition is the corrected one (page ii). This edition in turn takes over parts of the paper: its description of the causes of B4 and B5 in the firmware of 2023 and of their fix follows Section V-E of the paper (Section 5.3), and Figures 3.1 and 4.1 are derived from Figs. 1 and 4 of the paper, as the comments in `fig/system_overview.tex` and `fig/test_fixture.tex` state. The two works share:
+The paper published as <https://doi.org/10.57684/COS-1494> derives from the research report, and where the two differ, the revised edition is the corrected one (page ii). This edition in turn takes over parts of the paper: its description of the causes of B4 and B5 in the firmware of 2023 and of their fix follows Section V-E of the paper (Section 5.3), and Figures 3.1 and 4.1 are derived from Figs. 1 and 4 of the paper, as the comments in `fig/system_overview.tex` and `fig/test_fixture.tex` state. The two works share:
 
 - Figure 3.1 and Figure 4.1, adapted from Figs. 1 and 4 of the paper;
 - Figure 5.2, which shows the mapping of the two layers to the V-model that Fig. 2 of the paper shows, in a drawing of its own: six boxes with a note on each, no box for the implementation and no colours (page 46 of this report, page 6 of the deposited paper);

@@ -80,7 +80,7 @@ references:
     license: CC-BY-4.0
     languages:
       - en
-    notes: "Research report, revised edition of October 2026 of the report submitted in August 2025; not yet deposited. The paper derives from the version of August 2025."
+    notes: "Research report, revised edition of October 2026 of the report submitted in August 2025; not yet deposited. The paper derives from the research report."
     abstract: |-
       Modernising ageing safety-critical electronics is often more cost-effective and environmentally sustainable than complete replacement, provided that functional equivalence with the original system can be demonstrated and the modernised system re-certified against contemporary, more stringent standards. This case study, which continues prior work, addresses this challenge through the example of a legacy anti-skid test-diagnosis module used in European urban rail.
 

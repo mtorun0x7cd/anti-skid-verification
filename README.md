@@ -431,7 +431,7 @@ The first two targets call `python3`; a Python with these packages under another
 
 ## Corrections
 
-[`ERRATA.md`](ERRATA.md) lists the errors of the paper found so far under the identifiers P-E001 to P-E058, the properties of its catalogue record and of the deposited file, and the web addresses of the paper that have moved; errors of the report will be listed as R-E001 onwards once it is deposited. The deposited file does not change: a confirmed error is added to `ERRATA.md`, and an error that affects a result is reported to the editors of the series. After the tag `cos-1494`, the manuscript in `paper/` changes only through `ERRATA.md`, and each change names its erratum.
+[`ERRATA.md`](ERRATA.md) lists the errors of the paper found so far under the identifiers P-E001 to P-E058, the properties of its catalogue record and of the deposited file, and the web addresses of the paper that have moved; errors of the report will be listed as R-E001 onwards once it is deposited. The deposited file does not change: a confirmed error is added to `ERRATA.md`. After the tag `cos-1494`, the manuscript in `paper/` changes only through `ERRATA.md`, and each change names its erratum.
 
 To report an error, open an issue with the form **Correction** and give the location in the work or the file, the quoted text, the proposed correction and the evidence. A matter that should not be public goes by e-mail to [info@mtorun0x7cd.com](mailto:info@mtorun0x7cd.com), as [`SECURITY.md`](SECURITY.md) describes. [`CHANGELOG.md`](CHANGELOG.md) lists the changes of this repository.
 

@@ -27,12 +27,18 @@ This check holds the file to these rules:
     check_traceability.py --write-csv  write verification/traceability.csv, if
                                        the file holds the schema
     check_traceability.py --selftest   show that each rule refuses a case it is
-                                       written for, among them B4 marked PASS on
-                                       the report's text alone
+                                       written for, with the finding the case
+                                       names and no other, among them B4 marked
+                                       PASS on the report's text alone
 
-Exit status: 0 the file holds (with --write-csv: the CSV was written), 1 a rule
-fails (with --write-csv: the schema; nothing is written), 2 a file could not
-be read or written, or PyYAML or jsonschema 4.0 or later is missing.
+Any other argument, and any argument after one of the two options, is refused
+with a usage line before a file is read or written.
+
+Exit status: 0 the file holds (with --write-csv: the CSV was written; with
+--selftest: every case was refused as named), 1 a rule fails (with --write-csv:
+the schema; nothing is written; with --selftest: a case was not refused as
+named), 2 the arguments were not understood, a file could not be read or
+written, or PyYAML or jsonschema 4.0 or later is missing.
 Needs PyYAML and jsonschema 4.0 or later.
 """
 
@@ -51,6 +57,7 @@ CSV_PATH = ROOT / "verification" / "traceability.csv"
 REPORT = ROOT / "report"
 BIB = REPORT / "bib" / "references.bib"
 
+USAGE = "usage: check_traceability.py [--write-csv | --selftest]"
 PRIMARY = {"log", "capture", "measurement", "test-protocol"}
 COLUMNS = ["requirement_id", "requirement", "requirement_source", "test_id", "layer", "method", "item_tested",
            "date", "status", "defect", "evidence", "note", "record_status"]
@@ -310,44 +317,65 @@ def selftest():
         d["requirements"][0]["tests"].append(copy.deepcopy(d["requirements"][0]["tests"][0]))
         return d
 
+    # Each case names the finding it has to produce; the case holds only if that
+    # finding is its one and only finding, so that a mutation refused by another
+    # rule, or not at all, is a failure of the self-test.
     cases = [
-        ("B4 marked PASS on the report's text alone", b4_pass_on_report_text, None),
-        ("PASS on a capture that is not archived", pass_on_unarchived_capture, None),
-        ("an L1 identifier on a test of layer 2", wrong_layer, None),
-        ("NOT-DOCUMENTED with a method other than not-tested", not_documented_with_a_method, None),
-        ("the method not-tested on a test with a result", not_tested_with_a_result, None),
-        ("a date on a test that is not documented", not_documented_with_a_date, None),
-        ("a status outside the vocabulary", unknown_status, None),
-        ("an evidence label that the report does not define", unknown_label, None),
-        ("an evidence source that the bibliography does not hold", unknown_source, None),
-        ("a defect that Table 5.4 does not list", unknown_defect, None),
-        ("a file without its record_status", no_record_status, None),
-        ("a test identifier used twice", duplicate_test, None),
-        ("a CSV view that differs from the data", None, csv_text.replace("OPEN", "PASS", 1)),
+        ("B4 marked PASS on the report's text alone", b4_pass_on_report_text, None,
+         "L2-DP-06: PASS names no archived primary evidence"),
+        ("PASS on a capture that is not archived", pass_on_unarchived_capture, None,
+         "L1-DP-09: PASS names no archived primary evidence"),
+        ("an L1 identifier on a test of layer 2", wrong_layer, None,
+         "L1-DP-02: the identifier does not carry its layer 2"),
+        ("NOT-DOCUMENTED with a method other than not-tested", not_documented_with_a_method, None,
+         "L2-DP-07: the status NOT-DOCUMENTED goes with the method not-tested and no other"),
+        ("the method not-tested on a test with a result", not_tested_with_a_result, None,
+         "L1-DP-09: the status NOT-DOCUMENTED goes with the method not-tested and no other"),
+        ("a date on a test that is not documented", not_documented_with_a_date, None,
+         "L1-DP-01: a test that is not documented has the date null"),
+        ("a status outside the vocabulary", unknown_status, None,
+         "schema: 'RESOLVED' is not one of "),
+        ("an evidence label that the report does not define", unknown_label, None,
+         "L1-DP-03: evidence label 'sec:no_such_section' is no \\label in report/"),
+        ("an evidence source that the bibliography does not hold", unknown_source, None,
+         "L1-DP-03: evidence source 'unknown2025' is no key of report/bib/references.bib"),
+        ("a defect that Table 5.4 does not list", unknown_defect, None,
+         "L2-DP-05: defect B9 is no row of Table 5.4 of the report"),
+        ("a file without its record_status", no_record_status, None,
+         "schema: 'record_status' is a required property"),
+        ("a test identifier used twice", duplicate_test, None,
+         "test L1-DP-01 stands twice"),
+        ("a CSV view that differs from the data", None, csv_text.replace("OPEN", "PASS", 1),
+         "verification/traceability.csv differs from the CSV generated from the YAML file"),
     ]
     failures = 0
-    for name, mutate, other_csv in cases:
+    for name, mutate, other_csv, expected in cases:
         mutated = mutate(copy.deepcopy(data)) if mutate else data
         # The CSV is regenerated from the mutated data, so that only the rule the
         # case is written for can refuse it; the last case alters the CSV alone.
         found = check(mutated, schema, labels, keys, defects,
                       other_csv if other_csv is not None else render_csv(mutated))
-        ok = bool(found)
+        ok = len(found) == 1 and expected in found[0]
         failures += not ok
-        print("  [%s] %s: %s" % ("ok" if ok else "FAIL", name, found[0] if found else "not found"))
+        print("  [%s] %s: %s" % ("ok" if ok else "FAIL", name, "; ".join(found) if found else "not found"))
+        if not ok:
+            print("         expected only: %s" % expected)
     if failures:
-        print("  [FAIL] selftest: %d of %d case(s) went unnoticed" % (failures, len(cases)))
+        print("  [FAIL] selftest: %d of %d case(s) not refused as their case names" % (failures, len(cases)))
         return 1
-    print("  [OK]   selftest: all %d cases refused" % len(cases))
+    print("  [OK]   selftest: all %d cases refused, each by the finding it names" % len(cases))
     return 0
 
 
 def main(argv):
+    if argv[1:] not in ([], ["--write-csv"], ["--selftest"]):
+        print(USAGE, file=sys.stderr)
+        return 2
     try:
-        if len(argv) > 1 and argv[1] == "--selftest":
+        if argv[1:] == ["--selftest"]:
             return selftest()
         data = load_yaml(DATA)
-        if len(argv) > 1 and argv[1] == "--write-csv":
+        if argv[1:] == ["--write-csv"]:
             # The CSV is rendered only from data that hold the schema; malformed data
             # would otherwise end the rendering in a traceback with exit status 1.
             found = schema_findings(data, load_schema())
@@ -359,9 +387,6 @@ def main(argv):
                     return 2
                 print("  [OK]   wrote %s" % CSV_PATH.relative_to(ROOT))
                 return 0
-        elif len(argv) > 1:
-            print("usage: check_traceability.py [--write-csv | --selftest]", file=sys.stderr)
-            return 2
         else:
             schema, labels, keys, defects = context()
             found = check(data, schema, labels, keys, defects, read_csv())

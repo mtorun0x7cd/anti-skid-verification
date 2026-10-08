@@ -22,10 +22,16 @@ lacks the form they need (a list of persons, a mapping) is a finding, too.
     check_metadata.py            check the files
     check_metadata.py --selftest show that a changed DOI, version, type, title,
                                  note or checksum, and a paper reference that is
-                                 not a mapping, are found
+                                 not a mapping, are found, each by the findings
+                                 its case names and by no other
 
-Exit status: 0 they agree, 1 a value differs or lacks its form, 2 a file could
-not be read or PyYAML is missing.
+Any other argument, and any argument after --selftest, is refused with a usage
+line before a file is read.
+
+Exit status: 0 they agree (with --selftest: every case was found as named), 1 a
+value differs or lacks its form (with --selftest: a case was not found as
+named), 2 the arguments were not understood, a file could not be read or PyYAML
+is missing.
 Needs PyYAML.
 """
 
@@ -40,6 +46,7 @@ ARTICLE_TYPE = "schema:ScholarlyArticle"
 LANGUAGE = "schema:inLanguage"
 REQUIREMENT_TYPE = "SoftwareApplication"
 DEPOSIT = "2026_02_Retrofitted_Anti-Skid_System.pdf"
+USAGE = "usage: check_metadata.py [--selftest]"
 
 
 class ReadError(Exception):
@@ -190,42 +197,56 @@ def selftest():
 
     meta, cff = files["meta"], files["cff"]
     ref = meta["referencePublication"]
+    # Each case names the findings it has to produce, in their order, and the case
+    # holds only if these are all its findings: a mutation that is refused for
+    # another reason, or not at all, is a failure of the self-test.
     cases = [
         ("a changed DOI in codemeta.json",
-         mutated("meta", dict(meta, referencePublication=dict(ref, **{"@id": ref["@id"] + "0"})))),
-        ("a changed version in CITATION.cff", mutated("cff", dict(cff, version="9.9.9"))),
+         mutated("meta", dict(meta, referencePublication=dict(ref, **{"@id": ref["@id"] + "0"}))),
+         ("DOI address: ", "CFF url of the paper: ")),
+        ("a changed version in CITATION.cff", mutated("cff", dict(cff, version="9.9.9")),
+         ("version: '9.9.9' against ",)),
         ("a bare ScholarlyArticle type in codemeta.json",
-         mutated("meta", dict(meta, referencePublication=dict(ref, **{"@type": "ScholarlyArticle"})))),
+         mutated("meta", dict(meta, referencePublication=dict(ref, **{"@type": "ScholarlyArticle"}))),
+         ("type of the paper in codemeta.json: 'ScholarlyArticle' against ",)),
         ("a changed title in the BibTeX entry",
-         mutated("readme", files["readme"].replace("title   = {Ensuring", "title   = {Ensurring", 1))),
+         mutated("readme", files["readme"].replace("title   = {Ensuring", "title   = {Ensurring", 1)),
+         ("BibTeX title: 'Ensurring ",)),
         ("a BibTeX note without Working Paper",
-         mutated("readme", files["readme"].replace("note    = {Working Paper", "note    = {Paper", 1))),
+         mutated("readme", files["readme"].replace("note    = {Working Paper", "note    = {Paper", 1)),
+         ("the BibTeX entry's note does not name the document type Working Paper",)),
         ("a changed checksum in SHA256SUMS",
-         mutated("sums", ("0" * 64) + "  " + DEPOSIT + "\n")),
-        ("a second BibTeX entry", mutated("readme", files["readme"] + "\n```bibtex\n@article{x,\n}\n```\n")),
+         mutated("sums", ("0" * 64) + "  " + DEPOSIT + "\n"),
+         ("the SHA-256 of SHA256SUMS does not stand in README.md",
+          "the SHA-256 of SHA256SUMS does not stand in publication/README.md")),
+        ("a second BibTeX entry", mutated("readme", files["readme"] + "\n```bibtex\n@article{x,\n}\n```\n"),
+         ("the README holds 2 @article entries in bibtex blocks, not one",)),
         ("a paper reference in codemeta.json that is not a mapping",
-         mutated("meta", dict(meta, referencePublication=[ref]))),
+         mutated("meta", dict(meta, referencePublication=[ref])),
+         ("codemeta.json referencePublication is not a mapping",)),
     ]
     failures = 0
-    for name, case in cases:
+    for name, case, expected in cases:
         found = compare(case)
-        ok = bool(found)
+        ok = len(found) == len(expected) and all(want in got for want, got in zip(expected, found))
         failures += not ok
         print("  [%s] %s: %s" % ("ok" if ok else "FAIL", name, "; ".join(found) if found else "not found"))
+        if not ok:
+            print("         expected: %s" % "; ".join(expected))
     if failures:
-        print("  [FAIL] selftest: %d of %d mutation(s) went unnoticed" % (failures, len(cases)))
+        print("  [FAIL] selftest: %d of %d mutation(s) not found as their case names" % (failures, len(cases)))
         return 1
-    print("  [OK]   selftest: %d mutations found" % len(cases))
+    print("  [OK]   selftest: %d mutations found, each by the findings its case names" % len(cases))
     return 0
 
 
 def main(argv):
+    if argv[1:] not in ([], ["--selftest"]):
+        print(USAGE, file=sys.stderr)
+        return 2
     try:
-        if len(argv) > 1 and argv[1] == "--selftest":
+        if argv[1:] == ["--selftest"]:
             return selftest()
-        if len(argv) > 1:
-            print("usage: check_metadata.py [--selftest]", file=sys.stderr)
-            return 2
         files = load(ROOT)
     except ReadError as exc:
         print("  [ERR]  %s; nothing was compared" % exc, file=sys.stderr)

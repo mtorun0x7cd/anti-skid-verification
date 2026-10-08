@@ -30,6 +30,7 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 - `NOTICE` and the READMEs of `publication/` and `paper/` write the dates of days in ISO form, as the README and the tables do; at the tag they write them as day, month and year.
 - `ERRATA.md`: the corrections and the evidence of P-E002, P-E008, P-E015, P-E033 and P-E039 are amended from the revised edition of the report. P-E002 limits what simulation and scenario testing indicate to the fault handling and names the open deviation of the sweep and the two hardware changes that alter the behaviour of the module by design; P-E008 traces the swapped displays to the Rev 1.0 LED Board, whose defect the FPGA design works around; P-E015 treats the FPGA design as hardware, under IEC 61508-2 and, for guidance, Annex F of EN 50129; P-E033 adds that at its low end the sweep of the emulation lies about 70 Hz below that of the original board; and P-E039 reads the timing of the resets from the capture. The title of the file names the paper, and its three sections are no longer numbered. At the tag the five entries have their earlier text, the title is Errata alone and the sections are numbered.
 - `report/README.md` links to the list of the passages that the report shares with the paper and names the command that writes it anew; at the tag it does not.
+- `paper/README.md` names the identifiers of the errata as `P-E001` to `P-E058`; at the tag it names them up to `P-E049`.
 
 ### Fixed
 

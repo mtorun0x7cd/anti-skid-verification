@@ -26,7 +26,7 @@ The text of `paper.tex` is the text of pages 3 to 10 of the deposited file. Wher
 
 Reference [1] keeps its number after its citation in the first sentence was withdrawn, because it is still cited on pages 4 and 9 and the reference list is the deposited one; `paper.tex` keeps the number with a `\nocite`. A build of `paper.tex` has eight pages: the series cover, the imprint and the running header and footer of the deposited file are the editors'. Compared word by word with pages 3 to 10 of the deposited file on 2026-10-05, a build differed only in the corrections above, in line, column and page breaks, and in the order in which a text extractor reads equations, figures and the listing; the citation numbers and the reference list were the same.
 
-After the tag `cos-1494`, the text of the paper changes only through `ERRATA.md`: each later change to the manuscript names the identifier of its erratum (`P-E001` to `P-E049`) in its commit message.
+After the tag `cos-1494`, the text of the paper changes only through `ERRATA.md`: each later change to the manuscript names the identifier of its erratum (`P-E001` to `P-E058`) in its commit message.
 
 ## Contents
 

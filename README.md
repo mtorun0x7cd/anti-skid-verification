@@ -235,12 +235,20 @@ The case is the test-diagnosis module of an anti-skid system that has been in se
 - **LED Board:** the two 7-segment displays that show the fault codes.
 - **STM32 Diagnostics Board:** an STM32F401RET6 microcontroller, galvanically isolated from the core by optocouplers, which logs the diagnostic frames of the FPGA with timestamps to an SD card; a USB connector gives a PC access to the card (report, Section 3.3).
 
+![Block diagram of the rebuilt unit on four boards. PCB 1, Base Board: the FPGA, Actel A3P1000-PQG208M, MCS-48 emulation, with power supply (3.3 V / 1.5 V), BOD TPS3307, JTAG debug, flash ROM S29AL016J (firmware), 6 MHz crystal (clock), NVRAM CY14B104NA (address and data), level shifters CD4050 for the X4 inputs, 54LS245-type drivers for the X4 outputs, frequency sweep 850 Hz to 1550 Hz, SPI master (32-bit frames, 2023) and I/O and port expander. PCB 2, Upper Board: watchdog CD40106 and CD4518, reset by the BOD and linked to the FPGA by Reset / !CS, and the buttons Test, STW, Lösch and Tür/V, debounced into the FPGA. PCB 4, LED Board: BCD decoder CD4511BE, fed BCD by the FPGA, and two 7-segment displays. PCB 3, STM32 Diagnostics Board: SPI across the galvanic isolation through four SFH601-3 optocouplers to an STM32 F401RET6 with internal RTC at 32.768 kHz, microSD (FatFs) and USB Type-C; 5 V and ground of the Base Board feed D16 and the Y23 input on the Base Board side, with a ground branch to the optocouplers.](docs/figures/system_overview.svg)
+
+_Figure 3.1 of the report: block diagram of the rebuilt unit. By Mert Torun, adapted from Fig. 1 of the paper; CC BY-NC-ND 4.0, the licence of the paper._
+
 ### Two layers of verification
 
 The report proposes a verification structure of two layers and maps it to the verification side of the V-model (report, Chapter 4 and Section 5.4.1):
 
 - **Layer 1, component and interface tests:** VHDL simulation of the FPGA design, JTAG and pin checks, and oscilloscope measurements of the watchdog and the frequency sweep.
 - **Layer 2, system-level tests:** scenarios defined in YAML, which a host PC runs through the test fixture at the system connector of the unit, against the behaviour of the legacy module. The suite is designed to cover the fault memory cycles of the legacy diagnosis table, the self-test, the buttons, power cycles and the diagnostic SPI transmission (report, Section 4.3).
+
+![The two layers on the V-model. Left, under Design and Specification, from top to bottom: System Requirements (legacy behaviour according to the original manual), Architecture Design (FPGA/STM32 separation, module structure), Module and Component Design (VHDL logic, schematics). Right, under Verification and Validation, from bottom to top: Unit and Module Tests (Layer 1, VHDL simulation), Integration Tests (Layer 1, hardware measurements, interfaces), System Validation (Layer 2, fixture tests, scenarios). Solid arrows give the order of the phases, down the left side and up the right; dashed arrows join each design level to the test level that checks it.](docs/figures/v_model_mapping.svg)
+
+_Figure 5.2 of the report: the two layers of verification on the V-model. Drawn by Mert Torun; CC BY 4.0._
 
 The structure is proposed, not validated (report, Section 1.4). No requirement list exists for the module; the legacy behaviour serves as the requirement (report, Section 5.4.1).
 

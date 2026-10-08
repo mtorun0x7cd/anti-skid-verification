@@ -148,3 +148,20 @@ path = ["docs/social/social-card.png"]
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Mert Torun"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+# Figures 3.1 and 5.2 of the report, rendered from their TikZ sources for the
+# README. Figure 3.1 is adapted from Fig. 1 of the paper and keeps its licence;
+# Figure 5.2 is the author's own drawing.
+[[annotations]]
+path = ["docs/figures/system_overview.svg"]
+precedence = "override"
+SPDX-FileCopyrightText = "2025-2026 Mert Torun"
+SPDX-License-Identifier = "CC-BY-NC-ND-4.0"
+SPDX-FileComment = "Figure 3.1 of the report, rendered from report/fig/system_overview.tex; adapted from Fig. 1 of the paper, whose licence it keeps."
+
+[[annotations]]
+path = ["docs/figures/v_model_mapping.svg"]
+precedence = "override"
+SPDX-FileCopyrightText = "2025-2026 Mert Torun"
+SPDX-License-Identifier = "CC-BY-4.0"
+SPDX-FileComment = "Figure 5.2 of the report, rendered from report/fig/v_model_mapping.tex; the author's own drawing."

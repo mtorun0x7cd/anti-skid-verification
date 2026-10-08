@@ -36,7 +36,7 @@ This appendix lists the parts of the retrofitted hardware modules and gives the 
 	\bottomrule
 	\endlastfoot
 
-	\multicolumn{5}{@{}l}{\textit{LED Display Board}} \\*
+	\multicolumn{5}{@{}l}{\textit{LED Board}} \\*
 	DS1, DS2$^{a}$ & 2 & Kingbright & \texttt{SC03-12EWA} & 7-Segment Display Red 0.3" Common Cathode \\
 	Y13, Y14 & 2 & TI & \texttt{CD4511BE} & BCD-to-7-Segment Latch/Decoder/Driver (DIL16) \\
 	\mbox{R60--R73} & 14 & Yageo & \texttt{MF0207FTE52-1K} & Resistor \SI{1}{\kilo\ohm} \SI{0.6}{\watt} (Segment Limit) \\
@@ -125,7 +125,7 @@ This appendix lists the parts of the retrofitted hardware modules and gives the 
 	X5, X6 & 2 & TE & \texttt{5-104186-5} & Header, 8 Positions, \SI{1.27}{\milli\metre} (AMPMODU System 50), to LED Board \\
 	X7 & 1 & unknown & unknown & FPGA Debug Signals, 2x4 Male Pin Header (MA04-2) \\
 	X9 & 1 & unknown & unknown & Connector to Upper Board (Ribbon Cable to X8), 2x8 Male Pin Header \\
-	X13 & 1 & TE & \texttt{535541-4} & Connector to STM32 Board (1x6 Female Header) \\
+	X13 & 1 & TE & \texttt{535541-4} & Connector to STM32 Diagnostics Board (1x6 Female Header) \\
 	\mbox{TP1--TP5} & 5 & -- & none (part of the board) & Test Pad \\
 	SJ1$^{d}$ & 1 & -- & none (part of the board) & Solder Jumper, +\SI{3.3}{\volt} to Pin 4 of JTAG Header X3 \\
 	D2 & 1 & Vishay & \texttt{1N4148TR} & Diode DO35-7 \\
@@ -163,14 +163,14 @@ $^{b}$The Rev~1.0 bill of materials lists a \texttt{DS3231SN\#} real-time clock 
 $^{c}$The Rev~1.0 bill of materials lists the optocouplers as OK1 to OK4; its sheet STM32-Platine has two lines for them, one with the \texttt{SFH601-3} (Vishay) listed here and one with \texttt{HCPL0500N8}, part number \texttt{HCPL0500R2} (OnSemi/Fairchild).\par
 $^{d}$C78, JP1, R16, R111 and SJ1 are not in the Rev~1.0 bill of materials; their entries follow the schematic and layout.\par
 $^{e}$The schematic and layout specify \SI{10}{\nano\farad}; the Rev~1.0 bill of materials groups C63 with the \SI{100}{\nano\farad} decoupling capacitors.\par
-$^{f}$The Rev~1.0 bill of materials lists C64 with the decoupling capacitors of the Base Board; the layout places it on the STM32 board.\par
+$^{f}$The Rev~1.0 bill of materials lists C64 with the decoupling capacitors of the Base Board; the layout places it on the STM32 Diagnostics Board.\par
 $^{g}$The Rev~1.0 bill of materials gives the part number \texttt{CD4518BE}; the schematic and layout give \texttt{CD4518BDSR} with an SO16 footprint.\par
 $^{h}$The schematic gives \SI{100}{\micro\farad} for C7; the Rev~1.0 bill of materials notes a measured value of \SI{100}{\nano\farad}, which is fitted.\par
 $^{i}$The schematic labels C70 as \SI{100}{\nano\farad}; the listed part is \SI{1}{\micro\farad}.\par
 $^{j}$The Rev~1.0 bill of materials also lists R10 with R3 in a line for one \SI{10}{\kilo\ohm} resistor; the schematic and layout give \SI{3}{\mega\ohm}, as for R12 and R14.\par
 $^{k}$Component Y3 was present on the inherited Rev 0.0 Base Board; markings were illegible. Part number assumed based on Rev 0.0 documentation and schematics; the Rev~1.0 bill of materials gives \texttt{TPS3307-18MDREP}.\par
 $^{l}$The Rev~1.0 schematic and layout give R78 and R79 the surface-mount footprint R0805, as do the board files of Rev~0.0 and Rev~0.1; the Rev~1.0 bill of materials (sheet Unterplatine) gives them the package 0207/10 with the part numbers listed here. The other sheets of the workbook that list the two resistors give R78 as \SI{10}{\kilo\ohm} and R79 as \SI{100}{\kilo\ohm}, the reverse of the schematic and of the sheet Unterplatine.\par
-$^{m}$For R102 to R105 the sources disagree as well. The Rev~1.0 schematic and the sheet Unterplatine of the Rev~1.0 bill of materials give the values listed here, on which the trip points of \Cref{sec:redundancy_failsafe} rest; the sheets Stückliste and BOM of the same workbook, its sheet with the Rev~0.0 parts list, and the Rev~0.0 schematic on which the prototype is based~\cite[Sec.~9.1]{leyer2023} give the reverse values (R102 \SI{2.4}{\kilo\ohm}, R103 \SI{4.7}{\kilo\ohm}, R104 \SI{6.8}{\kilo\ohm}, R105 \SI{5.6}{\kilo\ohm}). Leyer lists the exchange as needed rework, corrected in the Rev~1.0 schematic and bill of materials, without saying that the prototype was changed~\cite[Sec.~9.2]{leyer2023}, and the fitted Base Board is that prototype; no document records which values the inspection of the populated boards found. With the reverse values, the divider of the \SI{5}{\volt} rail would give about \SI{2.7}{\volt} at \SI{5}{\volt}, below the threshold of \SI{2.93}{\volt} of its sense input~\cite[p.~2]{ti_tps3307}, and the supervisor would hold the reset; Leyer's observation of a reset only below about \SI{4.1}{\volt}~\cite[Sec.~4.7]{leyer2023} fits the values listed here.\par}
+$^{m}$For R102 to R105 the sources disagree as well. The Rev~1.0 schematic and the sheet Unterplatine of the Rev~1.0 bill of materials give the values listed here, on which the trip points of \Cref{sec:redundancy_failsafe} rest. The sheets Stückliste and BOM of the same workbook, its sheet with the Rev~0.0 parts list, and the Rev~0.0 schematic on which the prototype is based~\cite[Sec.~9.1]{leyer2023} give the reverse values (R102 \SI{2.4}{\kilo\ohm}, R103 \SI{4.7}{\kilo\ohm}, R104 \SI{6.8}{\kilo\ohm}, R105 \SI{5.6}{\kilo\ohm}). Leyer lists the exchange as needed rework, corrected in the Rev~1.0 schematic and bill of materials, without saying that the prototype was changed~\cite[Sec.~9.2]{leyer2023}, and the fitted Base Board is that prototype; no document records which values the inspection of the populated boards found. With the reverse values, the divider of the \SI{5}{\volt} rail would give about \SI{2.7}{\volt} at \SI{5}{\volt}, below the threshold of \SI{2.93}{\volt} of its sense input~\cite[p.~2]{ti_tps3307}, and the supervisor would hold the reset; Leyer's observation of a reset only below about \SI{4.1}{\volt}~\cite[Sec.~4.7]{leyer2023} fits the values listed here.\par}
 \endgroup
 
 % ------------------------------------------------------------

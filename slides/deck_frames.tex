@@ -179,9 +179,10 @@
 
 % ---- Evidence ------------------------------------------------------------
 \begin{frame}{State of the evidence}
-  \begin{itemize}
+  \begin{itemize}\small
     \item \textbf{Simulation} (2023) and the \textbf{fixture runs} of the follow-on project on the rebuilt unit (2025, no log archived) indicate equivalence of the fault handling.
-    \item \textbf{The only measurement against the original board}, the frequency sweep of 2023, shows a deviation: the emulation ends at about \SI{850}{\hertz} where the original ends at about \SI{920}{\hertz}, and it changes faster than the original's about \SI{180}{\milli\second}; this point is open.
+    \item \textbf{The only measurement against the original board}, the frequency sweep of 2023, shows a deviation at the low end: the emulation ends at about \SI{850}{\hertz}, the original at about \SI{920}{\hertz}. The duration differs too: by design, the emulation's falling sweep ends after about \SI{102}{\milli\second}, where the fixture report gives about \SI{180}{\milli\second} for the frequency changes of the original test card. Both are open.
+    \item \textbf{Two deviations by design:} the STORE and RECALL inputs of the system connector (08z, 08d) no longer act on the fault memory, and the added brown-out circuit adds a reset; their relevance in the vehicle is open (report, Sec.~4.6).
     \item Not documented for the rebuilt unit: the self-test, the Test and T\"ur/V buttons, power cycles, the watchdog, the sweep and the brown-out circuit.
   \end{itemize}
   \medskip

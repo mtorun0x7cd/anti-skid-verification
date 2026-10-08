@@ -34,6 +34,8 @@ The paper published as <https://doi.org/10.57684/COS-1494> derives from the vers
 
 Measured on 2026-10-08 on the text of a build of the report and of pages 3 to 10 of the deposited paper, as pdftotext extracts it without its layout option, in Unicode form NFKC, with a word divided by a hyphen at a line end joined where the next line begins with a lower-case letter, then in lower case, and with a word taken as a run of the letters a to z and the digits, together with an apostrophe, straight or curly, and the letters that follow it: 379 of the 43,256 sequences of six words in the report also occur in the paper. They form 106 passages of at most 34 words: the acknowledgements, the title of the paper as the report cites it, entries of the bibliography, items of lists, captions and single sentences.
 
+[`SHARED_PASSAGES.md`](SHARED_PASSAGES.md) lists these passages, each with the page of the report on which it begins and its wording, and the totals; [`tools/shared_passages.py`](../tools/shared_passages.py) makes the measurement and writes the list. From the root of the repository, after `make report`, `python3 tools/shared_passages.py report/.tmp.nosync/latex/report.pdf publication/2026_02_Retrofitted_Anti-Skid_System.pdf report/SHARED_PASSAGES.md` writes it anew.
+
 As the title page of the report states, passages that also appear in the paper remain under the paper's licence, CC BY-NC-ND 4.0; the sources of Figures 3.1 and 4.1 carry that licence ([`NOTICE`](../NOTICE), section 1). Figure 5.2, the report's own drawing, stays under CC BY 4.0 with the report.
 
 ## Contents

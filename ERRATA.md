@@ -1,4 +1,4 @@
-# Errata
+# Errata: Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology
 
 This file lists the known errors in the paper by Mert Torun, "Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology", Kölner Beiträge zur technischen Informatik (Cologne Contributions to Computer Engineering), Band 2/2026, TH Köln, published on Cologne Open Science, DOI [10.57684/COS-1494](https://doi.org/10.57684/COS-1494), URN urn:nbn:de:hbz:832-cos4-14942.
 
@@ -6,7 +6,7 @@ This repository keeps the deposited file, byte-identical with the one the librar
 
 Each entry quotes the deposited text verbatim; words divided at a line end are joined, and the narrow space the print sets between a number and its unit is written as a space. The class is one of: typographical; factual, not affecting results; affecting a result; attribution; reference could not be traced; claim not supported by the work's evidence. Errors not listed here can be reported with the issue form Correction or by e-mail to info@mtorun0x7cd.com, the address printed on page 3 of the paper, giving the page and the passage.
 
-## 1. Errata
+## Errata
 
 ### P-E001
 
@@ -27,9 +27,9 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
   - p. 3: "Through convergence of three independent evidence lines—simulation, oscilloscope measurement, and integrated scenario testing—functional equivalence of the safety-critical core was demonstrated for all documented fault codes, self-test sequences, and user interactions."
   - p. 7: "Functional equivalence of the safety-critical core was demonstrated through three converging lines of evidence:"
   - p. 7: "The convergence of these three independent lines of evidence—each addressing a distinct aspect of correctness (logical, physical, behavioural)—provides robust assurance of functional equivalence for the safety-critical core."
-- **Correction:** The three lines are not independent evidence about the rebuilt unit. The oscilloscope captures date from 2023, before the rebuild ([P-E033](#p-e033)). The archived simulations are those of the 2023 design, whose test benches leave the NVRAM_ble signal unconnected and so could not show defect B1 ([P-E030](#p-e030)); no simulation after the correction of B1 is documented ([P-E038](#p-e038)). On the rebuilt unit, the follow-on project ran the fixture's test suite without an archived log, and several scenarios, among them the self-test, are not documented for that unit ([P-E035](#p-e035)). The three lines indicate functional equivalence of the safety-critical core; "was demonstrated" and "robust assurance" are not supported. Read in the Abstract: "Three lines of evidence (simulation, oscilloscope measurement and integrated scenario testing) indicate functional equivalence of the safety-critical core, but the evidence for the rebuilt unit is incomplete."
+- **Correction:** The three lines are not independent evidence about the rebuilt unit, and what they indicate is narrower than functional equivalence of the safety-critical core. The oscilloscope captures date from 2023, before the rebuild ([P-E033](#p-e033)). The archived simulations are those of the 2023 design, whose test benches leave the NVRAM_ble signal unconnected and so could not show defect B1 ([P-E030](#p-e030)); no simulation after the correction of B1 is documented ([P-E038](#p-e038)). On the rebuilt unit, the follow-on project ran the fixture's test suite without an archived log, and several scenarios, among them the self-test, are not documented for that unit ([P-E035](#p-e035)). Simulation and scenario testing indicate equivalence of the fault handling only (fault detection, storage, display and read-out). The only measurement against the original board, the comparison of the frequency sweep in Fig. 5, shows a deviation at the low end of the sweep: about 850 Hz for the emulation against about 920 Hz for the original board. The duration differs as well: by its design values the emulation's falling sweep reaches its end value after about 102 ms, where [28] gives about 180 ms for the frequency change of the original test card. Both points are open ([P-E056](#p-e056)). Two hardware changes alter the module's behaviour by design: the STORE and RECALL inputs of the system connector (08z, 08d) no longer act on the fault memory, and the added brown-out detection adds a reset ([P-E055](#p-e055)); whether either matters in the vehicle is open. The evidence therefore does not demonstrate functional equivalence; "was demonstrated" and "robust assurance" are not supported. Read in the Abstract: "Simulation and integrated scenario testing indicate functional equivalence of the fault handling of the safety-critical core (fault detection, storage, display and read-out); the only measurement against the original board, an oscilloscope comparison of the frequency sweep, shows a deviation that is open (at its low end, about 850 Hz against about 920 Hz), two hardware changes alter the module's behaviour by design, and the evidence for the rebuilt unit is incomplete." Read in Section V-A, opening sentence: "Three lines of evidence bear on the functional equivalence of the safety-critical core; they observe different aspects of correctness, but not the same object:"; closing paragraph, first sentence: "Simulation and scenario testing indicate equivalence of the fault handling; the sweep deviates from that of the original board at its low end and in its duration, two hardware changes alter the module's behaviour by design, and the evidence for the rebuilt unit is incomplete."
 - **Class:** claim not supported by the work's evidence
-- **Evidence:** the paper's own Fig. 3 (on-screen date 15 Aug 2023) and pp. 6 to 8; [10], Sections 4.6 and 4.10; [11], pp. 13 to 15; the archived VHDL test benches of 2023 (project files).
+- **Evidence:** the paper's own Fig. 3 (on-screen date 15 Aug 2023), Fig. 5 and pp. 6 to 8; [10], Sections 4.6 and 4.10; [11], pp. 13 to 15; the archived VHDL test benches of 2023 (project files); the revised edition of the author's research report (October 2026), Sections 3.2, 4.6, 5.1.1 and 5.1.3, Tables 5.2 and 5.3, and Section 6.1, with the sources it cites there for the sweep ([28], Sections 5.1.5 and 5.2 and Fig. 3) and for the two hardware changes ([10], Sections 2 and 2.5; [28], Section 5.1.4; the FPGA design of 2023, atop.vhd, project files).
 - **Found:** 2026-09-27
 - **Reported:** not reported
 - **Status:** Open. Held back until the author has informed the series editor (data provenance).
@@ -110,9 +110,9 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Quoted text:**
   - p. 3: "five distinct classes of hardware, firmware, and logical integration defects"
   - p. 8: "revealed five distinct integration bugs across the hardware, firmware, and logical design domains"
-- **Correction:** The list is incomplete. [11] documents a further defect of the rebuilt board: the two 7-segment displays were swapped, and this was corrected in the VHDL top level; a loose contact at both displays was recorded as unresolved. Of the five defects listed, B2 does not concern the device under test ([P-E011](#p-e011)). Correction: the display defect is added to Table II with source [11], and the count follows.
+- **Correction:** The list is incomplete. [11] documents a further defect of the rebuilt board: the two 7-segment displays were swapped, and this was corrected in the VHDL top level; a loose contact at both displays was recorded as unresolved. The swap originates in the LED Board of Rev 1.0: in its design files of June 2024, in which the displays were replaced, the assignment of the display drivers to the displays is reversed against every design file of 2023 (Y13, the left digit, drives DS2, and Y14, the right digit, drives DS1). The change in the VHDL top level therefore works around a defect of the LED Board rather than correcting it, and the changed VHDL file is not archived. Of the five defects listed, B2 does not concern the device under test ([P-E011](#p-e011)). Correction: the display defect is added to Table II with source [11], as a defect of the schematic and layout of the Rev 1.0 LED Board, noticed during the commissioning of the rebuilt unit and worked around in the FPGA design, and the count follows.
 - **Class:** factual, not affecting results
-- **Evidence:** [11], p. 13 (section on the 7-segment displays).
+- **Evidence:** [11], p. 13 (section on the 7-segment displays); the design files of the LED Board of 2023 and of Rev 1.0 of June 2024 (project files), as the revised edition of the author's research report (October 2026), Table 5.4 (B6) and its note b, compares them.
 - **Found:** 2026-09-24
 - **Reported:** not reported
 - **Status:** Open.
@@ -191,7 +191,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
   - p. 4: "Fleet-level electronics upgrades such as the UK Class 455 [19] and Greater Anglia Class 317 [20] further demonstrate the economic rationale for modernising safety-critical rolling stock [1]."
 - **Correction:** The article [20] reports a refresh of the Class 317 interiors (seat covers, flooring, carpets, paint, signage and cleaning) and the operator's plan to replace its entire fleet with new trains; it is not an example of an electronics upgrade. [20] is withdrawn from this sentence, which stands with [19]; on [1] see [P-E003](#p-e003).
 - **Class:** claim not supported by the work's evidence
-- **Evidence:** [20] at its current address (see [Updates](#3-updates)); [19] in its archived copy of April 2013 ([P-E049](#p-e049)).
+- **Evidence:** [20] at its current address (see [Updates](#updates)); [19] in its archived copy of April 2013 ([P-E049](#p-e049)).
 - **Found:** 2026-09-24
 - **Reported:** not reported
 - **Status:** Open.
@@ -202,9 +202,9 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Quoted text:**
   - p. 4: "EN 50716 [22] (software/HDL modification)"
   - p. 8: "EN 50716 [22] SW/HDL modification L1 + L2"
-- **Correction:** EN 50716 applies exclusively to software and, for the development of user-programmable integrated circuits such as FPGAs, refers to EN 50129:2018, Annex F. "HDL" is withdrawn at both places; the unchanged firmware running on the emulated core stays within the scope of EN 50716.
+- **Correction:** EN 50716 applies only to software and its interaction with the system to which it belongs; the unchanged firmware running on the emulated core stays within its scope. An FPGA design is treated as hardware: under IEC 61508-2, which covers E/E/PE safety-related systems except software, and, for guidance, under the informative Annex F of EN 50129:2018 on user-programmable integrated circuits. "HDL" is withdrawn at both places.
 - **Class:** factual, not affecting results
-- **Evidence:** EN 50716:2023, clauses 1.2 and 1.10 (scope).
+- **Evidence:** the scope of EN 50716:2023 as the description of its German edition DIN EN 50716 (VDE 0115-716):2024-09 gives it, and of EN 50129:2018 as the description of DIN EN 50129 (VDE 0831-129):2019-06 gives it; the revised edition of the author's research report (October 2026), Section 2.4. The clauses of the standards themselves were not read.
 - **Found:** 2026-09-24
 - **Reported:** not reported
 - **Status:** Open.
@@ -446,9 +446,9 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
   - p. 6: "confirming that the actual RC networks, crystal tolerances, and signal integrity meet design expectations"
   - p. 7: "Post-rework oscilloscope measurements (Fig. 3) confirmed critical timing parameters"
   - p. 8: "HW timing: sweep L1 Oscilloscope 850 Hz–1550 Hz"
-- **Correction:** The oscilloscope measurements shown are those of [10], taken in 2023 on the Rev 0.0 prototype, which the paper itself names as the result of [10] (p. 4); the capture in Fig. 3 carries the on-screen date 15 Aug 2023, while the re-soldering is documented in 2025 [11]. No oscilloscope measurement of the watchdog or of the frequency sweep on the reworked board is documented; before the re-soldering, [11] reports oscilloscope checks of the supply and the clock and that the watchdog reset the CPU correctly, and it reports an oscilloscope check of the communication on the diagnostics board. That the measurements confirm the RC networks, crystal tolerances and signal integrity is withdrawn: [10] doubts the watchdog's 1.2 s reset interval, because a capacitor of the watchdog clock measured 100 nF where the original schematic shows 1 µF, and the value was changed for Rev 1.0. Read in Section IV-B 3): "Oscilloscope measurements on the Rev 0.0 prototype in 2023 [10] checked the watchdog behaviour and the frequency sweep profile (850 Hz to 1550 Hz)"; in Section V-A 2): "Oscilloscope measurements on the Rev 0.0 prototype in 2023 [10] (Fig. 3)"; in Table I, the result of the sweep row reads "Pass (Rev 0.0, 2023 [10])".
+- **Correction:** The oscilloscope measurements shown are those of [10], taken in 2023 on the Rev 0.0 prototype, which the paper itself names as the result of [10] (p. 4); the capture in Fig. 3 carries the on-screen date 15 Aug 2023, while the re-soldering is documented in 2025 [11]. No oscilloscope measurement of the watchdog or of the frequency sweep on the reworked board is documented; before the re-soldering, [11] reports oscilloscope checks of the supply and the clock and that the watchdog reset the CPU correctly, and it reports an oscilloscope check of the communication on the diagnostics board. That the measurements confirm the RC networks, crystal tolerances and signal integrity is withdrawn: [10] doubts the 1.2 s it expects for the watchdog reset ([P-E039](#p-e039)), because a capacitor of the watchdog clock measured 100 nF where the original schematic shows 1 µF, and the value was changed for Rev 1.0. The sweep measurement of [10] compares the emulation with the original board, and at the low end the emulation's sweep lies about 70 Hz below the original board's, a deviation that is open ([P-E056](#p-e056)). Read in Section IV-B 3): "Oscilloscope measurements on the Rev 0.0 prototype in 2023 [10] checked the watchdog behaviour and compared the frequency sweep with that of the original board"; in Section V-A 2): "Oscilloscope measurements on the Rev 0.0 prototype in 2023 [10] (Fig. 3)"; in Table I, the result of the sweep row reads "Observed (Rev 0.0 and original board, 2023 [10]); low end about 70 Hz below the original's, open".
 - **Class:** affecting a result
-- **Evidence:** the paper's own Fig. 3 (time stamp) and p. 4; [10], Sections 4.6, 4.10 and 9.2; [11], p. 13 and p. 22, item 7.
+- **Evidence:** the paper's own Fig. 3 (time stamp) and p. 4; [10], Sections 4.6, 4.10 and 9.2; [11], p. 13 and p. 22, item 7; the revised edition of the author's research report (October 2026), Section 5.1.1 and Table 5.2, which gives the sweep as observed on the Rev 0.0 prototype and the original board and as not documented on the rebuilt unit.
 - **Found:** 2026-09-24
 - **Reported:** not reported
 - **Status:** Open. Held back until the author has informed the series editor (data provenance).
@@ -527,9 +527,9 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Quoted text:**
   - p. 7: "including a watchdog service period of ∆t = 3.85 s at V = 3.36 V (expected ≈ 5 s from the VHDL test model; the shorter measured period is attributable to the voltage-dependent RC time constant of the external watchdog circuit)"
   - p. 8: "HW timing: watchdog L1 Oscilloscope 3.85 s"
-- **Correction:** ∆t = 3.85 s and V = 3.36 V are the readouts of two manually placed cursors (∆V = 0.00 V): the time between the cursors and the signal level at their positions. The first cursor lies within a service phase, so the time between them is not a measured service period, and 3.36 V is not a supply voltage. According to [10], the test design services the watchdog 256 times, for some five seconds, and then withholds service for another 256 timer cycles; the watchdog is then expected to pull the reset line low every 1.2 s, a value [10] itself doubts because of a capacitor value. The explanation by the RC time constant has no basis, and neither has the value 3.85 s in Table I. Correction: Fig. 3 is described as [10] explains the capture, with the cursor values marked as cursor readouts; Table I gives "Pass (Rev 0.0, 2023 [10])".
+- **Correction:** ∆t = 3.85 s and V = 3.36 V are the readouts of two manually placed cursors (∆V = 0.00 V): the time between the cursors and the signal level at their positions. The first cursor lies within a service phase, so the time between them is not a measured service period, and 3.36 V is not a supply voltage. According to [10], the test design services the watchdog 256 times, for some five seconds, and then withholds service for another 256 timer cycles; [10] expects the watchdog then to pull the reset line low every 1.2 s, a value it itself doubts because of a capacitor value. Read from Fig. 3, the first reset follows about 1.2 s after the service stops, and resets of about 0.3 s recur about 1.6 s apart; these are approximate readings of a photograph of the screen. They fit a reset by the most significant output of the watchdog's BCD counter at a clock period somewhat below the 180 ms that [10] measured for the watchdog clock, so the 1.2 s that [10] expects is the time to the first reset, not the interval between resets. The explanation by the RC time constant has no basis, and neither has the value 3.85 s in Table I. Correction: Fig. 3 is described as the watchdog reset test of [10] on the Rev 0.0 prototype, with the cursor values marked as cursor readouts and the reset timing as read above; Table I gives "Observed (Rev 0.0, 2023 [10])", since the watchdog of the original board could not be observed as a reference.
 - **Class:** affecting a result
-- **Evidence:** the capture itself (Fig. 3: cursors at t1 = -1.72 s and t2 = 2.13 s, both at 3.36 V); [10], Section 4.6.
+- **Evidence:** the capture itself (Fig. 3: cursors at t1 = -1.72 s and t2 = 2.13 s, both at 3.36 V); [10], Section 4.6; the revised edition of the author's research report (October 2026), Section 5.1.1, which reads the reset timing from the capture, as the caption of its Figure C.1 does, and decodes it with the output Q4 of the CD4518 counter in the Rev 1.0 schematic and the counter's datasheet among the project files, and Table 5.2, which gives the watchdog reaction as observed.
 - **Found:** 2026-09-24
 - **Reported:** not reported
 - **Status:** Open. Held back until the author has informed the series editor (data provenance).
@@ -673,7 +673,122 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Reported:** not reported
 - **Status:** Open.
 
-## 2. Properties of the record and the deposited file
+### P-E050
+
+- **Location:** p. 4 (PDF p. 4), Section III-A, Equation (1) and the sentences around it.
+- **Quoted text:**
+  - p. 4: "translates the 6 MHz system clock to an output frequency fout according to the relation:"
+  - p. 4: "The division factor Ndiv varies between 1935 (yielding fout ≈ 1550.4 Hz) and 3529 (yielding fout ≈ 850.1 Hz), covering the required diagnostic range of 850 Hz to 1550 Hz across 33 steps (up-sweep) and 65 steps (down-sweep)."
+- **Correction:** Equation (1), printed as a fraction, divides fclk by 2 · Ndiv(i). The counter of the generator counts from 0 up to Ndiv before the output toggles, so each half-period lasts Ndiv + 1 cycles of the system clock, and Equation (1) reads fout(i) = fclk / (2 · (Ndiv(i) + 1)); 1935 then gives about 1549.6 Hz and 3529 about 849.9 Hz. The tables have 33 entries for the up-sweep and 65 for the down-sweep, that is 32 and 64 steps of the 600 Hz clock; the up-sweep reaches its end value after 31 steps, about 52 ms, and the down-sweep after 61 steps, about 102 ms. The range of 850 Hz to 1550 Hz is the one [10] gives for the sweep of the original board; no tolerance is defined for it, and on the low end that the captures of the original board show see [P-E056](#p-e056). Read Equation (1) as fout(i) = fclk / (2 · (Ndiv(i) + 1)), and the sentence after it: "The division factor Ndiv varies between 1935 (yielding fout ≈ 1549.6 Hz) and 3529 (yielding fout ≈ 849.9 Hz), covering 850 Hz to 1550 Hz, the end frequencies that [10] gives for the sweep of the original board, with tables of 33 entries (up-sweep) and 65 entries (down-sweep); the up-sweep reaches its end value after about 52 ms and the down-sweep after about 102 ms."
+- **Class:** factual, not affecting results
+- **Evidence:** the revised edition of the author's research report (October 2026), Section 3.2 with Equation 3.1, from the VHDL sources freq_gen.vhd and gen600Hz.vhd (project files), and Section 4.3.1 on the nominal values and the missing tolerances; [10], Section 2.9, as cited there.
+- **Found:** 2026-10-02
+- **Reported:** not reported
+- **Status:** Open.
+
+### P-E051
+
+- **Location:** p. 5 (PDF p. 5), Section III-B.
+- **Quoted text:**
+  - p. 5: "This module interfaces with the legacy system’s mechanical buttons (Test, Control [STW], Clear [Lösch], Door/Speed [Tür/V])"
+- **Correction:** Two of the English glosses do not give the functions of the buttons. STW is the fault query (Störstellen-Abfrage), which shows the stored fault information entry by entry. The button labelled Tür/V in the design files is marked V-SIGN on the front panel in [5]; it lets the speed-dependent signals be checked at standstill without the complete test sequence. Read: "mechanical buttons (Test, Fault query [STW], Clear [Lösch], Speed-signal check [Tür/V])".
+- **Class:** factual, not affecting results
+- **Evidence:** [5], sheet 5/25 (front panel) and sheets 14/25 and 19/25, as the revised edition of the author's research report (October 2026), Section 3.1 and its list of abbreviations, cites them for the meaning of the two buttons.
+- **Found:** 2026-10-06
+- **Reported:** not reported
+- **Status:** Open.
+
+### P-E052
+
+- **Location:** p. 6 (PDF p. 6), Section IV-A, first paragraph.
+- **Quoted text:**
+  - p. 6: "In software development, combining white-box and black-box testing throughout the V-model is standard practice; this work adapts and maps these complementary software engineering principles specifically to a hardware/firmware retrofit."
+- **Correction:** The sentence gives no source for the claim of standard practice. Read: "This work maps the complementary principles of white-box and black-box testing along the V-model onto a hardware/firmware retrofit.", or the claim is stated with a work that carries it.
+- **Class:** claim not supported by the work's evidence
+- **Evidence:** the paper's own p. 6, where the sentence cites no reference; the revised edition of the author's research report (October 2026), Section 4.1, which states the mapping without the claim.
+- **Found:** 2026-10-02
+- **Reported:** not reported
+- **Status:** Open.
+
+### P-E053
+
+- **Location:** p. 6 (PDF p. 6), Section IV-A, item "Layer 1"; p. 7 (PDF p. 7), Section IV-C ("YAML-Based Scenarios"); p. 8 (PDF p. 8), Section V-C.
+- **Quoted text:**
+  - p. 6: "verification proving that individual design artifacts (VHDL modules, hardware interfaces) are correctly implemented against their technical specifications."
+  - p. 7: "This format ensures repeatability and provides implicit traceability to legacy requirements [5]."
+  - p. 8: "Layer 1 tests trace to HDL module requirements from reverse engineering; Layer 2 YAML scenarios trace to legacy functional requirements [5]."
+- **Correction:** No requirement list exists for the module, and no traceability matrix was made. The Layer 1 test benches and test designs were derived from the functions identified by reverse engineering [10]; they are stimulus files without assertions, whose results were checked by eye, and no module requirement is documented for them to trace to. The archived simulation of the complete design passed the design with defect B1 ([P-E030](#p-e030)); simulation of this kind gives no more than baseline confidence in the logic design. The Layer 2 YAML cases are linked to the legacy behaviour documented in [5] by the name of the fault case: each case names a fault of the diagnosis table and gives the codes it expects; the self-test was not among the cases of 2023 [28]. The paper itself calls these links implicit and says that they would have to be formalised for certification (p. 8). Read on p. 6: "verification meant to show that individual design artifacts (VHDL modules, hardware interfaces) are correctly implemented against the datasheets of the parts they connect to and the functions identified by reverse engineering."; on p. 7: "This format ensures repeatability; each case is named after a fault of the diagnosis table of [5] and gives the codes it expects."; on p. 8: "Layer 1 tests were derived from the functions identified by reverse engineering, with no documented requirement to trace to; Layer 2 YAML scenarios are linked to the fault cases of the legacy diagnosis table [5] by name, without the self-test."
+- **Class:** claim not supported by the work's evidence
+- **Evidence:** the revised edition of the author's research report (October 2026), Sections 4.1, 4.2, 4.5 and 5.4, and items CL-A7 and CL-F5 of its checklist (Chapter 7), with the sources it cites there ([10], Section 2; [28], Sections 6.2 and 9.3 and Listing 3); the archived test benches of 2023 (project files), which, as Section 4.2 there records, contain no assertions.
+- **Found:** 2026-10-02
+- **Reported:** not reported
+- **Status:** Open. Held back until the author has informed the series editor (data provenance).
+
+### P-E054
+
+- **Location:** p. 7 (PDF p. 7), Section IV-C, paragraph before Listing 1, and Listing 1 (first step).
+- **Quoted text:**
+  - p. 7: "The first step triggers the fault via pin_sets, asserts the expected immediate display code (31) and stored fault sequence (03 31 09)."
+- **Correction:** 31 is the display code that the fixture's test case expects. For a sensor fault of axle card 3, the diagnosis table of [5] and the table of [28] give 03 on the display, and 31 appears only in the read-out sequence 03 31 09; the sources do not explain the difference. A pass of this case therefore shows agreement with the fixture's expectation, not with the legacy diagnosis table. Read: "The first step triggers the fault via pin_sets and asserts the display code that the fixture expects (31, where the diagnosis table of [5] gives 03) and the stored fault sequence (03 31 09)." On the attribution of Listing 1 see [P-E037](#p-e037); on the record of the Layer 2 runs, [P-E035](#p-e035).
+- **Class:** factual, not affecting results
+- **Evidence:** [5], sheet 20/25, and [28], Table 2, Section 9.3 and Listing 3, as the revised edition of the author's research report (October 2026), Section 4.3, Table 4.1 with its note b, Section 5.1.2 and Appendix D.1, compares them.
+- **Found:** 2026-10-02
+- **Reported:** not reported
+- **Status:** Open. Held back until the author has informed the series editor (data provenance).
+
+### P-E055
+
+- **Location:** p. 7 (PDF p. 7), Section IV-D.
+- **Quoted text:**
+  - p. 7: "D. EN 50716 Modification Compliance"
+  - p. 7: "As a retrofit constitutes a modification, compliance with EN 50716 [22] was addressed through: impact analysis (modification confined to hardware; safety-critical firmware unchanged), change verification (the two-layer methodology itself), regression testing (Layer 2 scenarios as a comprehensive regression suite), and configuration management (Git version control for all artifacts)."
+- **Correction:** EN 50716 applies only to software and its interaction with the system; in this retrofit it bears on the unchanged program and the STM32 firmware, while the replacement of the controller hardware falls to the hardware standards ([P-E015](#p-e015)). No impact analysis is documented. That the modification is confined to the hardware and the firmware is unchanged is the premise of the design, but two of the hardware changes alter the module's behaviour: the added brown-out detection holds the emulated controller in reset when a sensed supply voltage falls below its threshold, and the STORE and RECALL inputs of the system connector (08z, 08d), which on the original test card trigger the storing and the recalling of the fault memory, feed only the logger in the FPGA design of 2023 and no longer act on the fault memory. The Layer 2 scenarios are meant to serve as a regression suite, but no logged run on the rebuilt unit is documented, nor a run of the self-test on it ([P-E035](#p-e035)). Configuration management is incomplete: the follow-on work kept its sources in Git, but the Layer 2 test definitions and logs were not archived. Read the heading as "D. Verification of the Modification", and the paragraph: "As a retrofit constitutes a modification, the methodology addresses four elements of change management; EN 50716 [22] bears only on its software side, the reused program and the STM32 firmware. No impact analysis is documented, and two hardware changes alter the module's behaviour: the added brown-out detection, and the STORE and RECALL inputs, which no longer act on the fault memory. The two-layer methodology is designed to verify the change. The Layer 2 scenarios are meant to serve as a regression suite, but no logged run on the rebuilt unit is documented, and configuration management is incomplete, since the Layer 2 test definitions and logs were not archived."
+- **Class:** claim not supported by the work's evidence
+- **Evidence:** the scope of EN 50716:2023 as the description of its German edition DIN EN 50716 (VDE 0115-716):2024-09 gives it ([P-E015](#p-e015)); the revised edition of the author's research report (October 2026), Sections 2.4, 4.5 and 4.6 and Table 5.3, with the sources it cites there ([10], Sections 2 and 2.5; [28], Section 5.1.4; [11], p. 7; the FPGA design of 2023, atop.vhd, project files).
+- **Found:** 2026-10-02
+- **Reported:** not reported
+- **Status:** Open. Held back until the author has informed the series editor (data provenance).
+
+### P-E056
+
+- **Location:** p. 7 (PDF p. 7), Section V-A 2); p. 8 (PDF p. 8), paragraph before Section V-B; p. 9 (PDF p. 9), Fig. 5 (caption).
+- **Quoted text:**
+  - p. 7: "and a validated frequency sweep from 850 Hz to 1550 Hz"
+  - p. 8: "Fig. 5 provides direct visual evidence of functional equivalence for the frequency sweep—a key anti-skid diagnostic function. The thin trend lines in both captures show close agreement between the original and emulated sweep profiles across the full 850 Hz–1550 Hz range."
+  - p. 9: "Left panel: ascending sweep (850 Hz–1550 Hz). Right panel: descending sweep (1550 Hz–850 Hz). The thin trend lines confirm matching frequency-response curves."
+- **Correction:** Fig. 5, the only measurement against the original board, does not show agreement across the full range. At the end of the falling sweep the captures read 922.36 Hz for the original board and 850.31 Hz for the emulation. Further captures of the original board, and the raw export of one of them, put its low end at about 920 Hz, about 70 Hz above the emulation's, and [28] gives a change from 1540 Hz to 920 Hz for the original test card. Whether 920 Hz is the design value of the original circuit or a drift of this board is open. The duration differs as well: by its design values the emulation's falling sweep reaches its end value after about 102 ms, and about 920 Hz after about 55 ms ([P-E050](#p-e050)), where [28] gives about 180 ms for the frequency change of the original test card. The thin lines are the oscilloscope's trends of the frequency measurement, not frequency-response curves: they plot successive measured values, 100 per division for the original board and 20 for the emulation, so their horizontal axis is not the time base of the traces, and they do not show the sweep profiles over time. "validated", "direct visual evidence of functional equivalence", "close agreement" across the full range and "confirm matching frequency-response curves" are withdrawn; the ranges in the caption hold for the emulation's design, while the original board's falling sweep ends at about 920 Hz. Read on p. 7: "and a frequency sweep designed for 850 Hz to 1550 Hz, compared with that of the original board in Fig. 5"; on p. 8: "Fig. 5 compares the frequency sweep, a key anti-skid diagnostic function, of the original board with that of the FPGA emulation [10]. At the end of the falling sweep the original board reads 922.36 Hz and the emulation 850.31 Hz; this deviation is open."; in the caption of Fig. 5: "Left panel: rising sweep; right panel: falling sweep. The thin lines are the oscilloscope's trends of the frequency measurement over successive measurements, not over time." On Table I see [P-E033](#p-e033); on the attribution of Fig. 5, [P-E029](#p-e029).
+- **Class:** affecting a result
+- **Evidence:** the captures of Fig. 5; [10], Section 4.10 (Figs. 11 and 12), and [28], Sections 5.1.5 and 5.2 and Fig. 3, as the revised edition of the author's research report (October 2026), Section 5.1.1 and Table 5.1, reads them; that section also evaluates further captures of the original board, which read 919.69 Hz to 921.80 Hz at the low end, and the raw export of one of them (459 periods between 916 Hz and 926 Hz); Section 3.2 there for the emulation's design values, and Table 5.3 there, which records both deviations as open.
+- **Found:** 2026-10-02
+- **Reported:** not reported
+- **Status:** Open. Held back until the author has informed the series editor (data provenance).
+
+### P-E057
+
+- **Location:** p. 9 (PDF p. 9), Section V-E, item "SPI Payload Truncation and Alignment".
+- **Quoted text:**
+  - p. 9: "The leftover clock pulses triggered a receiver buffer overrun (OVR flag in the SPI status register) and caused persistent frame misalignment on subsequent transfers."
+  - p. 9: "Correcting the STM32 RX buffer size configuration to 32 bits (4 bytes) resolved the truncation and misalignment."
+- **Correction:** A reception of four bytes removes the truncation, but the sources do not show that it restores the alignment of the frames. According to the archived firmware of 2023 and its driver, no further frame is received after an overrun, so the code does not show the persistent misalignment described. Two further facts of the design bear on the alignment. The optocoupler stages invert the SPI lines, so that at the STM32 the slave select is active and the clock high while the link is idle, and the data arrive inverted. The firmware of 2023 takes its hardware slave select from the pin PA15, which the board leaves unconnected, while the schematic routes the slave select to PA4, in Rev 0.0 as in Rev 1.0. A buffer of four bytes makes the receiver take a whole frame per call but does not mark where a frame begins, which is the task of the slave select; without it, the alignment holds only as long as no clock edge is lost or added. What the applied fix did about the polarity and the slave select is not documented. Read: "The leftover clock pulses triggered a receiver buffer overrun (OVR flag in the SPI status register), after which, according to the firmware's code, no further frame was received. Correcting the STM32 RX buffer size configuration to 32 bits (4 bytes) removes the truncation; the alignment also depends on the polarity of the SPI lines, which the optocouplers invert, and on the slave select, which the firmware takes from an unconnected pin, and what the applied fix did about these two is not documented." On the status of B5 see [P-E041](#p-e041), on its findings [P-E042](#p-e042), on the transmitter [P-E043](#p-e043).
+- **Class:** claim not supported by the work's evidence
+- **Evidence:** the revised edition of the author's research report (October 2026), Section 5.3 with its part on the polarity and the slave select of the SPI link, and Table 5.4 (B5), from the schematics of Rev 0.0 and Rev 1.0 (project files: optocoupler stages OK5, OK6 and OK8 with collector pull-ups R108 to R110; slave select on PA4, net MCU_SPI_!SS), the STM32 firmware of 2023 (USB_RTC_SD_Test: main.c, lines 125, 166 and 455 to 457) with the archived driver stm32f4xx_hal_spi.c, SPI_core.vhd and atop.vhd of 2023 (project files), and the STM32 reference manual RM0368, Sections 20.3.1 and 20.3.10, as cited there.
+- **Found:** 2026-10-02
+- **Reported:** not reported
+- **Status:** Open. Held back until the author has informed the series editor (data provenance).
+
+### P-E058
+
+- **Location:** p. 9 (PDF p. 9), Section V-E, item "Residual Scope Gaps".
+- **Quoted text:**
+  - p. 9: "Formal methods (e.g., model checking, equivalence checking), quantitative structural coverage metrics (statement/branch coverage for VHDL), accredited environmental testing (EN 50155 [23], EN 61373 [29]), and full HIL integration with the complete braking system were beyond project scope. These activities are required for formal safety certification and are identified as future work."
+- **Correction:** That these activities are required for formal safety certification is stated without a source and holds only in part. Which formal methods and structural coverage metrics a certification would expect depends on the SIL to be assigned: IEC 61508 grades its techniques and measures against the safety integrity level in Part 2 and against the required systematic capability in Part 3, and no SIL has been assigned, because no hazard analysis has been made. For full HIL integration with the complete braking system the paper cites no requirement of a standard. Tests against EN 50155 and EN 61373 would be needed to show compliance with these standards. Read: "These activities are identified as future work. Tests against EN 50155 and EN 61373 would be needed to show compliance with these standards; which formal methods and coverage metrics a formal safety certification would expect depends on the SIL to be assigned, and none has been assigned."
+- **Class:** claim not supported by the work's evidence
+- **Evidence:** the revised edition of the author's research report (October 2026), Sections 4.4, 5.4 and 5.5.2 and Section 6.3, with IEC 61508-2 and IEC 61508-3 as cited there, and item CL-E3 of its checklist (Chapter 7) on the environmental qualification tests.
+- **Found:** 2026-10-02
+- **Reported:** not reported
+- **Status:** Open.
+
+## Properties of the record and the deposited file
 
 These are not errors of the author's text. They concern the catalogue record of Cologne Open Science, the DOI metadata at DataCite, the copy of the record at the German National Library, and the container that the editors built around the paper. The record, the DOI metadata and the copy were last checked on 2026-10-01.
 
@@ -686,7 +801,7 @@ These are not errors of the author's text. They concern the catalogue record of 
 - **Document metadata.** The document information dictionary has no Title and no Author entry, and the XMP metadata carry no title or creator. Found 2026-09-24; not reported.
 - **DOI in the file.** The DOI 10.57684/COS-1494 is printed nowhere in the file. Found 2026-09-27; not reported.
 
-## 3. Updates
+## Updates
 
 - **[20] (p. 10).** The printed address `https://www.railtechnologymagazine.com/articles/greater-anglia-1m-class-317-refurb-completed` returns HTTP 404 (checked on 2026-09-24, 2026-09-28 and 2026-10-01). The article is available at <https://www.railtechnologymagazine.com/Rolling-stock/greater-anglia-class-317-refurb-completed>.
 - **Author's website (p. 3).** The web address printed in the author note does not open: the TLS handshake fails (checked on 2026-09-28 and 2026-10-01), and over plain HTTP the hosting provider's placeholder page appears. The author can be reached at the e-mail address printed beside it.

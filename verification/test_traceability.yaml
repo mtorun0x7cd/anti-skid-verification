@@ -251,7 +251,7 @@ requirements:
     tests:
       - id: L2-DP-07
         layer: 2
-        method: operation
+        method: not-tested
         item: Rebuilt unit
         date: null
         status: NOT-DOCUMENTED
@@ -264,7 +264,7 @@ requirements:
             archived: true
             public: true
         note: >-
-          The report documents no result of this function on the rebuilt unit.
+          The report documents no test of this function on the rebuilt unit.
 
   - id: REQ-DP-07
     statement: >-

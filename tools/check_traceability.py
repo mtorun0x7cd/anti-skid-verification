@@ -14,11 +14,13 @@ This check holds the file to these rules:
      report alone never supports PASS;
   3. the layer of a test agrees with the prefix of its identifier (L1- or L2-),
      and requirement and test identifiers are unique;
-  4. every label the file cites (a requirement's source, an evidence entry of
+  4. a test has the status NOT-DOCUMENTED exactly when its method is
+     not-tested, and such a test has the date null: no test is documented;
+  5. every label the file cites (a requirement's source, an evidence entry of
      the report) is a \\label in the LaTeX sources of report/, and every other
      evidence source is a key of report/bib/references.bib;
-  5. every defect it names (B1 to B6) is a row of Table 5.4 of the report;
-  6. verification/traceability.csv equals the CSV this script generates from
+  6. every defect it names (B1 to B6) is a row of Table 5.4 of the report;
+  7. verification/traceability.csv equals the CSV this script generates from
      the YAML file, byte for byte, including its constant column record_status.
 
     check_traceability.py              check the file and the CSV
@@ -195,6 +197,12 @@ def rule_findings(data, labels, keys, defects, csv_text):
             prefix = re.match(r"L([12])-", tid)
             if not prefix or int(prefix.group(1)) != test.get("layer"):
                 found.append("%s: the identifier does not carry its layer %r" % (tid, test.get("layer")))
+            not_documented = test.get("status") == "NOT-DOCUMENTED"
+            if not_documented != (test.get("method") == "not-tested"):
+                found.append("%s: the status NOT-DOCUMENTED goes with the method not-tested and no other, "
+                             "here status %s with method %s" % (tid, test.get("status"), test.get("method")))
+            if not_documented and test.get("date") is not None:
+                found.append("%s: a test that is not documented has the date null, here %r" % (tid, test.get("date")))
             evidence = test.get("evidence") or []
             if test.get("status") == "PASS" and not any(
                     e.get("kind") in PRIMARY and e.get("archived") is True for e in evidence):
@@ -266,6 +274,18 @@ def selftest():
         find_test(d, "L1-DP-02")["layer"] = 2
         return d
 
+    def not_documented_with_a_method(d):
+        find_test(d, "L2-DP-07")["method"] = "operation"
+        return d
+
+    def not_tested_with_a_result(d):
+        find_test(d, "L1-DP-09")["method"] = "not-tested"
+        return d
+
+    def not_documented_with_a_date(d):
+        find_test(d, "L1-DP-01")["date"] = "2023"
+        return d
+
     def unknown_status(d):
         find_test(d, "L2-DP-04")["status"] = "RESOLVED"
         return d
@@ -294,6 +314,9 @@ def selftest():
         ("B4 marked PASS on the report's text alone", b4_pass_on_report_text, None),
         ("PASS on a capture that is not archived", pass_on_unarchived_capture, None),
         ("an L1 identifier on a test of layer 2", wrong_layer, None),
+        ("NOT-DOCUMENTED with a method other than not-tested", not_documented_with_a_method, None),
+        ("the method not-tested on a test with a result", not_tested_with_a_result, None),
+        ("a date on a test that is not documented", not_documented_with_a_date, None),
         ("a status outside the vocabulary", unknown_status, None),
         ("an evidence label that the report does not define", unknown_label, None),
         ("an evidence source that the bibliography does not hold", unknown_source, None),

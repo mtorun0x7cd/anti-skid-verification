@@ -384,7 +384,9 @@ make slides    # slides/.tmp.nosync/latex/presentation.pdf (15 frames) and hando
 make check     # ChkTeX over the LaTeX sources
 ```
 
-Each document is built with `SOURCE_DATE_EPOCH` set to the time of the last commit that changed its folder; the slides also count `paper/fig/`, whose captures the deck includes. Outside a clone, set `SOURCE_DATE_EPOCH` by hand. On 2026-10-06, each of the three, typeset twice from two copies of this repository in separate directories with TeX Live 2026 on macOS, gave the same bytes both times, and veraPDF 1.30.2 found the report conformant to PDF/A-2b. CI typesets each document twice in the container `ghcr.io/xu-cheng/texlive-full@sha256:11383430b9a3e48c0b79339f34d8092f942f897d91ab3749d4899d06731fea7f` and compares the bytes; its artifacts are builds, not the version of record.
+The targets call `latexmk` and, for the report, `biber` as the `PATH` finds them; another program is named on the command line, as in `make report BIBER=/path/to/biber` or `make paper LATEXMK=/path/to/latexmk`.
+
+Each document is built with `SOURCE_DATE_EPOCH` set to the time of the last commit that changed its folder; the slides also count `paper/fig/`, whose captures the deck includes. Outside a clone, set `SOURCE_DATE_EPOCH` by hand, in the environment or on the command line, as in `make paper SOURCE_DATE_EPOCH=<seconds>`; it then applies to every document. On 2026-10-06, each of the three, typeset twice from two copies of this repository in separate directories with TeX Live 2026 on macOS, gave the same bytes both times, and veraPDF 1.30.2 found the report conformant to PDF/A-2b. CI typesets each document twice in the container `ghcr.io/xu-cheng/texlive-full@sha256:11383430b9a3e48c0b79339f34d8092f942f897d91ab3749d4899d06731fea7f` and compares the bytes; its artifacts are builds, not the version of record.
 
 A build of `paper/` is not the deposited file: it has neither the series cover, the imprint nor the running header and footer of the series, and its text differs by the corrections that [`paper/README.md`](paper/README.md) lists. A build of `report/` is the revised edition, not the version that was assessed in 2025.
 
@@ -399,6 +401,8 @@ make traceability     # the traceability data, their CSV view and the self-test 
 make metadata         # CITATION.cff, codemeta.json, the BibTeX entry below and SHA256SUMS agree
 make verify-deposit   # the deposited file against publication/SHA256SUMS
 ```
+
+The first two targets call `python3`; a Python with these packages under another name, such as that of a virtual environment, is named on the command line, as in `make traceability PYTHON=.venv/bin/python3` or `make metadata PYTHON=.venv/bin/python3`.
 
 ### The checks CI runs
 

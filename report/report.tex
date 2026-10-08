@@ -127,12 +127,28 @@
   sortcites=true,
   giveninits=true,
   url=true, doi=true, isbn=true,
-  % one unambiguous form for every access date: YYYY-MM-DD (the ISO form needs
-  % seconds=true; the dates carry no time, so none is printed)
-  urldate=iso, seconds=true
+  % publication dates and access dates in one form, day month year, as the
+  % text writes dates (the form is set below)
+  date=long, urldate=long
 ]{biblatex}
 \addbibresource{bib/references.bib}
-% keep the access date on one line; it broke at a hyphen of the ISO form
+% The long date of english.lbx with the day first and without the comma, as in
+% 7~September 2023 in the text; the months stay abbreviated as biblatex
+% abbreviates them, and the bib file stays unchanged
+\DefineBibliographyExtras{english}{%
+	\protected\def\mkbibdatelong#1#2#3{%
+		\iffieldundef{#3}
+			{}
+			{\stripzeros{\thefield{#3}}%
+			 \iffieldundef{#2}{}{\nobreakspace}}%
+		\iffieldundef{#2}
+			{}
+			{\mkbibmonth{\thefield{#2}}%
+			 \iffieldundef{#1}{}{\space}}%
+		\iffieldbibstring{#1}
+			{\bibstring{\thefield{#1}}}
+			{\dateeraprintpre{#1}\stripzeros{\thefield{#1}}}}}
+% keep the access date on one line
 \DeclareFieldFormat{urldate}{\mkbibparens{\bibstring{urlseen}\space\mbox{#1}}}
 % Keep hyphenated document numbers (IEC 61508-2, UIC 541-05, Part 3-2), with a
 % prefix such as IEC, on one line in the list of references, and keep a prefix

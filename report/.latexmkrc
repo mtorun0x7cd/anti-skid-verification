@@ -1,6 +1,13 @@
 # Keep build artefacts out of the source tree (project convention).
 $aux_dir = '.tmp.nosync/latex';
 $out_dir = '.tmp.nosync/latex';
+# The first pdflatex pass writes the aux file of each included chapter into the
+# folder chapters/ of the aux directory; latexmk creates that folder only after
+# the pass has failed on it. Creating it here keeps the first pass of a clean
+# build free of that fatal error; make_path creates what is missing and deletes
+# nothing.
+use File::Path qw(make_path);
+make_path("$aux_dir/chapters");
 $biber = 'biber %O %S';
 add_cus_dep('glo', 'gls', 0, 'run_makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'run_makeglossaries');

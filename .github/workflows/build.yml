@@ -116,5 +116,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Lint the LaTeX sources with the rules of .chktexrc
-        run: find paper report slides -name '*.tex' -exec chktex -q -I0 -l .chktexrc {} +
+      # One run per file, as in the Makefile: in one run over several files,
+      # ChkTeX keeps its math mode from one file to the next, so that a file
+      # left in math mode hides warnings of the files after it.
+      - name: Lint each LaTeX source with the rules of .chktexrc
+        run: |
+          set -o pipefail
+          find paper report slides -name '*.tex' -print0 | xargs -0 -n 1 chktex -q -I0 -l .chktexrc

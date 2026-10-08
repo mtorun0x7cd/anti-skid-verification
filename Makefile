@@ -6,7 +6,8 @@
 #   make paper            typeset paper/paper.tex into paper/.tmp.nosync/latex/paper.pdf
 #   make report           typeset report/report.tex into report/.tmp.nosync/latex/report.pdf
 #   make slides           typeset the deck and the handout into slides/.tmp.nosync/latex/
-#   make check            run ChkTeX over the LaTeX sources; any warning fails
+#   make check            run ChkTeX over each LaTeX source on its own; any
+#                         warning fails
 #   make verify-deposit   check publication/ against SHA256SUMS
 #   make traceability     check the traceability data and their CSV view, and the
 #                         check itself on mutated copies (needs PyYAML and
@@ -62,8 +63,12 @@ report:
 slides:
 	cd slides && SOURCE_DATE_EPOCH=$(call epoch,slides paper/fig) $(LATEXMK) $(LFLAGS) presentation.tex handout.tex
 
+# ChkTeX runs once per file: in one run over several files it keeps its math mode
+# from one file to the next, so that a file left in math mode hides warnings of
+# the files after it. xargs ends with a non-zero status if any run finds one.
 check:
-	find paper report slides -name '*.tex' -not -path '*/.tmp.nosync/*' -exec chktex -q -I0 -l .chktexrc {} +
+	find paper report slides -name '*.tex' -not -path '*/.tmp.nosync/*' -print0 \
+		| xargs -0 -n 1 chktex -q -I0 -l .chktexrc
 
 verify-deposit:
 	cd publication && if command -v sha256sum >/dev/null; then sha256sum -c SHA256SUMS; \

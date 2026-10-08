@@ -17,7 +17,7 @@ Use GitHub's private vulnerability reporting (the tab Security, then Report a vu
 
 ## What is not a vulnerability
 
-The isolation of the diagnostics board, the watchdog and the brown-out supervision are design features that the works describe; the report says what of them was tested and what was not, and recommends a cybersecurity assessment of the USB and SD-card interfaces before any deployment. The scripts in `tools/` are checks of this repository, not hardened software. An error in the text of the paper or the report is a correction, not a security report; see the README, section Corrections.
+The isolation of the STM32 Diagnostics Board, the watchdog and the brown-out supervision are design features that the works describe; the report says what of them was tested and what was not, and recommends a cybersecurity assessment of the USB and SD-card interfaces before any deployment. The scripts in `tools/` are checks of this repository, not hardened software. An error in the text of the paper or the report is a correction, not a security report; see the README, section Corrections.
 
 ## What to expect
 

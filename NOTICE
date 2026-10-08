@@ -176,9 +176,9 @@ this repository, and no file here is licensed under their terms.
 
 report/fig/photos/
   Edited to mask a graphic logo and a board designation of third-party origin,
-  and on the unpopulated Rev 1.0 STM32 board also the production code of the
-  PCB manufacturer. No technical content altered (report, page ii and the
-  introduction of Appendix A).
+  and on the unpopulated Rev 1.0 STM32 Diagnostics Board also the production
+  code of the PCB manufacturer. No technical content altered (report, page ii
+  and the introduction of Appendix A).
 
 report/fig/layout/
   Rendered anew from the design files without that logo and designation.

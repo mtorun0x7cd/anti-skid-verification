@@ -7,7 +7,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 This folder holds the traceability data of the diagnostic path of the retrofitted test-diagnosis module: for each requirement, the tests or checks made of it, their status and the evidence each status rests on. The data were reconstructed in 2026 from Chapters 3 and 5 of the research report: the requirements from the design description of Sections 3.2 and 3.3 and from Section 5.3, the statuses from what these sections and Tables 5.3 and 5.4 say of the tests; formal traceability matrices were not produced during the project (report, Section 4.5). They cover the diagnostic path only and are not a certification artefact. The same statement stands at the head of the YAML file and in every row of the CSV view, column `record_status`, because both files travel without this README.
 
-The diagnostic path is the SPI link from the FPGA logger through the optocouplers to the STM32 diagnostics board, and the logging of the frames on the SD card and over USB. The fault handling of the safety-related core is not covered here; Tables 4.1, 5.2 and 5.3 of the report describe it.
+The diagnostic path is the SPI link from the FPGA logger through the optocouplers to the STM32 Diagnostics Board, and the logging of the frames on the SD card and over USB. The fault handling of the safety-related core is not covered here; Tables 4.1, 5.2 and 5.3 of the report describe it.
 
 ## Files
 

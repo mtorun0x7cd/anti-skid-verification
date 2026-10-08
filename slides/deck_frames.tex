@@ -61,7 +61,7 @@
       \begin{itemize}\small
         \item \textbf{Base Board:} Actel A3P1000 flash FPGA emulating the MCS-48 with the OpenCores \texttt{t48} core, integrated unmodified, and running the original firmware from an external Flash ROM.
         \item \textbf{STM32 Diagnostics Board:} STM32F401RET6 logger behind four SFH601-3 optocouplers (three SPI lines and a reset line) and an isolated DC/DC converter.
-        \item \textbf{Upper and LED Boards:} the legacy buttons, the external watchdog and the displays; brown-out supervision on the Base Board.
+        \item \textbf{Upper and LED boards:} the legacy buttons, the external watchdog and the displays; brown-out supervision on the Base Board.
       \end{itemize}
     \end{column}
     \begin{column}{0.44\textwidth}
@@ -77,7 +77,7 @@
     \end{column}
   \end{columns}
   \medskip
-  \footnotesize The boards' design is M.~Leyer's (2023); the parts of the diagnostics board on the Base Board side of the barrier share its supply (report, Secs.~3.1 and 3.3).
+  \footnotesize The boards' design is M.~Leyer's (2023); the parts of the STM32 Diagnostics Board on the Base Board side of the barrier share its supply (report, Secs.~3.1 and 3.3).
   \revised{no firmware size is given, since it is not established; the optocouplers and the single isolated converter are described as fitted; the design is credited.}
 \end{frame}
 
@@ -167,7 +167,7 @@
     B1 & Logical      & Symptoms on the fixture (L2), cause by debugging & Resolved \\
     B2 & Test fixture & Failed debugger connection to the fixture & Reworked \\
     B3 & Assembly     & Commissioning: oscilloscope, inspection & Reworked \\
-    B4 & Firmware     & Freeze: operation of the diagnostics board (2025); overrun: analysis of the firmware of 2023 & Fix applied (firmware of 2023); diagnostic path not verified separately; freeze with the firmware of 2025: no fix documented \\
+    B4 & Firmware     & Freeze: operation of the STM32 Diagnostics Board (2025); overrun: analysis of the firmware of 2023 & Fix applied (firmware of 2023); diagnostic path not verified separately; freeze with the firmware of 2025: no fix documented \\
     B5 & Interface    & Transmitter: simulation testbench (L1); receiver: not recorded & Receiver: fix applied; transmitter: change not documented; diagnostic path not verified separately \\
     B6 & Schematic and layout & Commissioning of the rebuilt unit & Worked around in the FPGA design \\
     \bottomrule

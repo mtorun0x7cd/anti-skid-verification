@@ -43,7 +43,7 @@ As the title page of the report states, passages that also appear in the paper r
 | Title page, page ii, page iii, abstracts, acknowledgements | `report.tex`, `meta/`, `abstract/`, `keywords/` | Title page with the licence; the edition note; the author's declaration; the abstract in English and, marked as translations, in German, French, Turkish and Spanish |
 | Chapter 1 | `chapters/chapter1.tex` | Introduction: purpose, research questions, contributions and who did what, objectives and scope |
 | Chapter 2 | `chapters/chapter2.tex` | Background: the prior work this report continues, verification strategies, rail retrofits, standards |
-| Chapter 3 | `chapters/chapter3.tex` | System architecture: the four boards, the FPGA core, the STM32 diagnostics board, supervision and isolation |
+| Chapter 3 | `chapters/chapter3.tex` | System architecture: the four boards, the FPGA core, the STM32 Diagnostics Board, supervision and isolation |
 | Chapter 4 | `chapters/chapter4.tex` | Testing methodology: the two layers, the requirement basis (Table 4.1), the verification artefacts |
 | Chapter 5 | `chapters/chapter5.tex` | Results: test outcomes (Table 5.2), the state of the evidence (Table 5.3), the integration defects (Table 5.4), the causes of B4 and B5 and the fix applied (Section 5.3), the standards (Table 5.5), limitations |
 | Chapter 6 | `chapters/chapter6.tex` | Conclusion, lessons learned, future work |

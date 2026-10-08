@@ -65,7 +65,7 @@ Presented at the VIMS-Workshop 2026, TH K\"oln, on 22~May 2026\dotsep published 
 Anti-skid (wheel-slide protection) systems are safety-critical components of urban rail vehicles. The system of this case has been in service in European urban rail since the early 1990s; its test-diagnosis module is built around the obsolete Intel MCS-48 family (report, Ch.~1). As the parts become unobtainable, the choice is between replacing the system and a targeted board-level retrofit, which has to show functional equivalence with the original design under contemporary safety standards. The work documents one such retrofit and proposes a verification structure for it, which has not been validated.
 
 \section{Replacement Architecture}
-A flash-based \textbf{Actel A3P1000 FPGA} emulates the MCS-48 CPU and I/O logic with the OpenCores \texttt{t48} core, integrated unmodified, and runs the original firmware from an external Flash ROM. An \textbf{STM32F401RET6} diagnostics board receives diagnostic frames over an SPI link through four SFH601-3 optocouplers (three SPI lines and a reset line) and an isolated DC/DC converter, and logs them to an SD card with timestamps of its internal real-time clock. The parts of that board on the Base Board side of the barrier share the Base Board's supply. The board design is M.~Leyer's (2023); the report credits the prior work of S.~Ayoub (2014), M.~Leyer (2023) and A.~Dolata, D.~Ostermann and F.~Schiffelers (2023).
+A flash-based \textbf{Actel A3P1000 FPGA} emulates the MCS-48 CPU and I/O logic with the OpenCores \texttt{t48} core, integrated unmodified, and runs the original firmware from an external Flash ROM. An \textbf{STM32F401RET6} on the STM32 Diagnostics Board receives diagnostic frames over an SPI link through four SFH601-3 optocouplers (three SPI lines and a reset line) and an isolated DC/DC converter, and logs them to an SD card with timestamps of its internal real-time clock. The parts of that board on the Base Board side of the barrier share the Base Board's supply. The board design is M.~Leyer's (2023); the report credits the prior work of S.~Ayoub (2014), M.~Leyer (2023) and A.~Dolata, D.~Ostermann and F.~Schiffelers (2023).
 
 \section{Two-Layer Verification Methodology}
 Mapped to the verification side of the V-model, with IEEE 1012 as the intended process:
@@ -88,7 +88,7 @@ Simulation and the fixture runs on the rebuilt unit (2025, no log archived) indi
 B1 & Logical      & Symptoms on the fixture, cause by debugging & Resolved \\
 B2 & Test fixture & Failed debugger connection to the fixture & Reworked \\
 B3 & Assembly     & Commissioning: oscilloscope, inspection & Reworked \\
-B4 & Firmware     & Freeze: operation of the diagnostics board (2025); overrun: analysis of the firmware of 2023 & Fix applied (firmware of 2023); diagnostic path not verified separately; freeze with the firmware of 2025: no fix documented \\
+B4 & Firmware     & Freeze: operation of the STM32 Diagnostics Board (2025); overrun: analysis of the firmware of 2023 & Fix applied (firmware of 2023); diagnostic path not verified separately; freeze with the firmware of 2025: no fix documented \\
 B5 & Interface    & Transmitter: simulation testbench; receiver: not recorded & Receiver: fix applied; transmitter: change not documented; diagnostic path not verified separately \\
 B6 & Schematic and layout & Commissioning of the rebuilt unit & Worked around in the FPGA design \\
 \bottomrule

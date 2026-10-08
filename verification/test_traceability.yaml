@@ -21,7 +21,7 @@ applies_to: Research report, revised edition of October 2026 (report/)
 as_of: "2026-10-05"
 scope: >-
   The diagnostic path: the SPI link from the FPGA logger through the
-  optocouplers to the STM32 diagnostics board, and the logging of the frames
+  optocouplers to the STM32 Diagnostics Board, and the logging of the frames
   on the SD card and over USB. The fault handling of the safety-related core
   is not covered here; report Tables 4.1, 5.2 and 5.3 describe it.
 requirement_source: >-
@@ -33,7 +33,7 @@ requirements:
   - id: REQ-DP-01
     statement: >-
       The FPGA logger of 2023 sends diagnostic frames of 32 bits to the STM32
-      diagnostics board: a 2-bit event-type prefix (error change or button
+      Diagnostics Board: a 2-bit event-type prefix (error change or button
       change), the six button states and the 24-bit error vector.
     source:
       label: sec:fpga_core_details
@@ -65,7 +65,7 @@ requirements:
   - id: REQ-DP-02
     statement: >-
       The logger of the follow-on project of 2025 sends the 24-bit error
-      vector to the STM32 diagnostics board as three bytes.
+      vector to the STM32 Diagnostics Board as three bytes.
     source:
       label: sec:fpga_core_details
       locator: Section 3.2, SPI Master Interface
@@ -104,7 +104,7 @@ requirements:
 
   - id: REQ-DP-03
     statement: >-
-      Error codes reach the STM32 diagnostics board over the galvanically
+      Error codes reach the STM32 Diagnostics Board over the galvanically
       isolated SPI link.
     source:
       label: sec:stm32_details
@@ -187,7 +187,7 @@ requirements:
       - id: L2-DP-05
         layer: 2
         method: operation
-        item: Diagnostics board with the firmware of the follow-on project (2025)
+        item: STM32 Diagnostics Board with the firmware of the follow-on project (2025)
         date: "2025"
         status: OPEN
         defect: B4
@@ -268,8 +268,8 @@ requirements:
 
   - id: REQ-DP-07
     statement: >-
-      Faults on the isolated side of the diagnostics board do not feed back
-      into the FPGA domain through the signal path.
+      Faults on the isolated side of the STM32 Diagnostics Board do not feed
+      back into the FPGA domain through the signal path.
     source:
       label: sec:stm32_details
       locator: Section 3.3, Galvanically Isolated SPI Slave and Isolated Power Supply
@@ -296,8 +296,8 @@ requirements:
             public: true
         note: >-
           The isolation is provided by design and has not been tested. The parts
-          of the diagnostics board on the Base Board side of the barrier, the
-          suppressor diode, the input of the isolated converter and the
+          of the STM32 Diagnostics Board on the Base Board side of the barrier,
+          the suppressor diode, the input of the isolated converter and the
           optocoupler LEDs, remain a fault path into the Base Board.
 
   - id: REQ-DP-08
@@ -311,7 +311,7 @@ requirements:
       - id: L1-DP-09
         layer: 1
         method: oscilloscope
-        item: Diagnostics board of the rebuilt unit
+        item: STM32 Diagnostics Board of the rebuilt unit
         date: "2025"
         status: OBSERVED
         defect: null
@@ -328,8 +328,8 @@ requirements:
             archived: true
             public: false
         note: >-
-          The follow-on project reports that an oscilloscope check of the
-          diagnostics board showed no unstable communication; no capture is
+          The follow-on project reports that an oscilloscope check of the STM32
+          Diagnostics Board showed no unstable communication; no capture is
           archived. On the datasheet's typical curve, the turn-off time at the
           fitted 10 kOhm pull-ups is many times the half-period, so the link
           has no timing margin on these figures; the timing across the barrier

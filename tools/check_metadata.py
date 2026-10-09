@@ -11,7 +11,9 @@ DOI, title, date of publication, language and licence. It checks two forms that
 the CodeMeta 3.0 context needs and that JSON-LD expansion would otherwise lose
 without a warning: the paper is typed schema:ScholarlyArticle and its language
 is given as schema:inLanguage, and each software requirement is a node of type
-SoftwareApplication with a name. It parses the @article entry in the README's
+SoftwareApplication with a name. The preferred citation of CITATION.cff must be
+typed report: the publisher types the paper a Working Paper, for which CFF 1.2.0
+has no type. It parses the @article entry in the README's
 bibtex block and compares its author, title, journal, number, year, ISSN, DOI
 and address with the preferred citation of CITATION.cff, and requires its note
 to name the document type Working Paper. Last, the SHA-256 of the deposited
@@ -137,7 +139,7 @@ def compare(files):
     same("author ORCID iD", authors[0].get("orcid"), people[0].get("@id"))
     same("affiliation", authors[0].get("affiliation"), (people[0].get("affiliation") or {}).get("name"))
     same("type of the paper in codemeta.json", ref.get("@type"), ARTICLE_TYPE)
-    same("type of the preferred citation", pc.get("type"), "article")
+    same("type of the preferred citation", pc.get("type"), "report")
     languages = pc.get("languages")
     first = languages[0] if isinstance(languages, list) and languages else languages
     same("language of the paper (CFF languages, codemeta %s)" % LANGUAGE, first, ref.get(LANGUAGE))
@@ -206,6 +208,9 @@ def selftest():
          ("DOI address: ", "CFF url of the paper: ")),
         ("a changed version in CITATION.cff", mutated("cff", dict(cff, version="9.9.9")),
          ("version: '9.9.9' against ",)),
+        ("an article type in CITATION.cff",
+         mutated("cff", dict(cff, **{"preferred-citation": dict(cff["preferred-citation"], type="article")})),
+         ("type of the preferred citation: 'article' against 'report'",)),
         ("a bare ScholarlyArticle type in codemeta.json",
          mutated("meta", dict(meta, referencePublication=dict(ref, **{"@type": "ScholarlyArticle"}))),
          ("type of the paper in codemeta.json: 'ScholarlyArticle' against ",)),

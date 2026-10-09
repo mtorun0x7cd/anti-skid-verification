@@ -4,7 +4,7 @@ All notable changes to this repository are listed here. The format follows [Keep
 
 This repository was recreated with a new history on 2026-10-05; the earlier release, v1.0.3 of 2026-08-01, was not the version of record and is withdrawn. It carried the research report in its state before the revision.
 
-## [1.1.0] - 2026-10-05
+## [1.1.0] - 2026-10-09
 
 ### Added
 

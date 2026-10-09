@@ -4,6 +4,12 @@ All notable changes to this repository are listed here. The format follows [Keep
 
 This repository was recreated with a new history on 2026-10-05; the earlier release, v1.0.3 of 2026-08-01, was not the version of record and is withdrawn. It carried the research report in its state before the revision.
 
+## [Unreleased]
+
+### Fixed
+
+- `README.md`: the labels of the diagram keep their ends on GitHub at every zoom. Each label breaks its own lines, and the diagram raises Mermaid's wrapping width to 400 px, so that Mermaid wraps none of them; in Safari, a label that Mermaid wrapped could be measured too narrow at some page zooms and lose its end. The wording is unchanged.
+
 ## [1.1.0] - 2026-10-09
 
 ### Added
@@ -68,5 +74,6 @@ Statements in files that the record tag `cos-1494` holds, corrected here; the ta
 - `ERRATA.md`: 49 entries on errors of the paper (P-E001 to P-E049), and, in two further sections, the properties of its record and of the deposited file and the web addresses of the paper that no longer work or have moved.
 - `CITATION.cff`, `codemeta.json`, `NOTICE`, `REUSE.toml`, the licence texts, the `Makefile` and the configuration files.
 
+[Unreleased]: https://github.com/mtorun0x7cd/anti-skid-verification/compare/v1.1.0...HEAD
 [1.1.0]: https://github.com/mtorun0x7cd/anti-skid-verification/compare/cos-1494...v1.1.0
 [cos-1494]: https://github.com/mtorun0x7cd/anti-skid-verification/releases/tag/cos-1494

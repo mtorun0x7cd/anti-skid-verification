@@ -333,11 +333,16 @@ The legacy system, its manual and most of the project reports are German, and th
 [`verification/`](verification/) holds the requirement-to-test data of the diagnostic path of the rebuilt unit, that is, the SPI link from the FPGA logger through the optocouplers to the STM32 Diagnostics Board and the logging of the frames: 8 requirements, 9 tests or checks, the status of each and the evidence each status rests on. The data were reconstructed in 2026 from Chapters 3 and 5 of the report: the requirements from the design description of Sections 3.2 and 3.3 and from Section 5.3, the statuses from what these sections and Tables 5.3 and 5.4 say of the tests; formal traceability matrices were not produced during the project (report, Section 4.5). They cover the diagnostic path only and are not a certification artefact. The same statement stands at the head of the YAML file and in every row of the CSV view, because both travel without this README.
 
 ```mermaid
+---
+config:
+  flowchart:
+    wrappingWidth: 400
+---
 flowchart LR
     accTitle: Structure of the traceability data
     accDescr: A requirement of the diagnostic path names the place in the report that describes it and has one or more tests or checks. Each test has a layer, a method, the item tested, a status and the defect of Table 5.4 it concerns, and rests on one or more pieces of evidence, each marked as archived or not and as published or not. The status PASS needs at least one archived piece of primary evidence, that is, a log, a capture, a measurement or a test protocol.
-    R["Requirement REQ-DP-nn<br/>with its source in the report"] -->|"is tested by"| T["Test or check L1-DP-nn or L2-DP-nn<br/>layer, method, item, date, status"]
-    T -->|"rests on"| E["Evidence<br/>kind, locator, archived, published"]
+    R["Requirement REQ-DP-nn<br/>with its source<br/>in the report"] -->|"is tested by"| T["Test or check<br/>L1-DP-nn or L2-DP-nn<br/>layer, method, item,<br/>date, status"]
+    T -->|"rests on"| E["Evidence<br/>kind, locator,<br/>archived, published"]
     T -->|"concerns"| D["Defect of Table 5.4"]
 ```
 

@@ -6,6 +6,10 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 
 ## [Unreleased]
 
+### Added
+
+- `CITATION.cff` and `codemeta.json`: the Software Heritage identifier of the release `cos-1494`, the repository at the version of record, `swh:1:rel:18b64645891f7a156ebdc2860534df08dbb20efc`.
+
 ### Fixed
 
 - `README.md`: the labels of the diagram keep their ends on GitHub at every zoom. Each label breaks its own lines, and the diagram raises Mermaid's wrapping width to 400 px, so that Mermaid wraps none of them; in Safari, a label that Mermaid wrapped could be measured too narrow at some page zooms and lose its end. The wording is unchanged.

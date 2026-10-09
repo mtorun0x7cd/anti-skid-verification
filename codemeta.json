@@ -54,6 +54,7 @@
   "referencePublication": {
     "@type": "schema:ScholarlyArticle",
     "@id": "https://doi.org/10.57684/COS-1494",
+    "identifier": "swh:1:rel:18b64645891f7a156ebdc2860534df08dbb20efc",
     "name": "Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology",
     "author": [
       {

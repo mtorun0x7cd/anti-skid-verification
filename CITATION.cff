@@ -50,6 +50,11 @@ preferred-citation:
     - type: other
       value: "urn:nbn:de:hbz:832-cos4-14942"
       description: URN of the catalogue record
+    - type: swh
+      value: "swh:1:rel:18b64645891f7a156ebdc2860534df08dbb20efc"
+      description: >-
+        Software Heritage identifier of the release cos-1494, the repository at
+        the version of record
   license: CC-BY-NC-ND-4.0
   languages:
     - en

@@ -21,10 +21,18 @@ version: 1.1.0
 date-released: "2026-10-09"
 license: MIT
 repository-code: "https://github.com/mtorun0x7cd/anti-skid-verification"
+keywords:
+  - "Anti-Skid Protection"
+  - "FPGA Emulation"
+  - "Functional Equivalence"
+  - "Functional Safety"
+  - "IEC 61508"
+  - "Retrofit Verification"
+  - "Safety-Critical Systems"
+  - "V-Model"
+  - "Verification and Validation"
+  - "Requirements Traceability"
 preferred-citation:
-  # Typed as the publisher types the paper: a Working Paper in its catalogue
-  # record and at DataCite. CFF 1.2.0 has no type for a working paper; report
-  # is the usual mapping.
   type: report
   title: "Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology"
   authors:

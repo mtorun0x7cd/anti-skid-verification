@@ -11,6 +11,10 @@
     "https://spdx.org/licenses/LPPL-1.3c"
   ],
   "codeRepository": "https://github.com/mtorun0x7cd/anti-skid-verification",
+  "readme": "https://github.com/mtorun0x7cd/anti-skid-verification/blob/main/README.md",
+  "releaseNotes": "https://github.com/mtorun0x7cd/anti-skid-verification/blob/main/CHANGELOG.md",
+  "buildInstructions": "https://github.com/mtorun0x7cd/anti-skid-verification/blob/main/README.md#reproducing",
+  "issueTracker": "https://github.com/mtorun0x7cd/anti-skid-verification/issues",
   "programmingLanguage": [
     "TeX",
     "Python",
@@ -36,7 +40,8 @@
     "Retrofit Verification",
     "Safety-Critical Systems",
     "V-Model",
-    "Verification and Validation"
+    "Verification and Validation",
+    "Requirements Traceability"
   ],
   "author": [
     {

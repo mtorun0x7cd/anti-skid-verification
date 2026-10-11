@@ -5,20 +5,20 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology
 
-Companion repository of the paper by Mert Torun, a Working Paper in the series Kölner Beiträge zur technischen Informatik, 2/2026, TH Köln, and of the research report from which the paper derives, submitted in 2025 and revised in 2026. Version of record of the paper: <https://doi.org/10.57684/COS-1494>
+Companion repository of the paper by Mert Torun, a Working Paper in the series Kölner Beiträge zur technischen Informatik, 2/2026, TH Köln, and of the research report from which the paper derives, submitted in 2025 and revised in 2026; besides the deposited paper, it holds the author's corrected manuscript of the paper, the LaTeX sources of the report, the sources of the slides of the talk on the paper and the traceability data of the diagnostic path. Version of record of the paper: <https://doi.org/10.57684/COS-1494>
 
 [![DOI: 10.57684/COS-1494](https://img.shields.io/badge/DOI-10.57684%2FCOS--1494-1D4ED8?style=flat)](https://doi.org/10.57684/COS-1494) [![Paper: CC BY-NC-ND 4.0](https://img.shields.io/badge/Paper-CC_BY--NC--ND_4.0-1D4ED8?style=flat)](LICENSES/CC-BY-NC-ND-4.0.txt) [![Report: CC BY 4.0](https://img.shields.io/badge/Report-CC_BY_4.0-1D4ED8?style=flat)](LICENSES/CC-BY-4.0.txt) [![Code: MIT](https://img.shields.io/badge/Code-MIT-1D4ED8?style=flat)](LICENSE) [![Status: Inactive](https://img.shields.io/badge/Status-Inactive-1D4ED8?style=flat)](https://www.repostatus.org/#inactive)
 
 > [!IMPORTANT]
-> [`publication/2026_02_Retrofitted_Anti-Skid_System.pdf`](publication/2026_02_Retrofitted_Anti-Skid_System.pdf) is the deposited paper, byte for byte (1,565,058 bytes, SHA-256 `bcf68b4b845c68ab48b43c1d91c855af7f8aac18f7a7a0846a43210ca66a3ebf`). [`paper/`](paper/) holds the author's corrected manuscript, not the source of that file. It applies the corrections of six of the 58 entries of [`ERRATA.md`](ERRATA.md), that of P-E003 at one of its three places; where its text differs from the deposited text, the difference is one of these corrections, and the other errors, P-E002 on the core claim among them, stand in it as deposited. [`report/`](report/) holds the research report in a revised edition of October 2026, which has not been re-assessed and awaits its deposit.
+> [`publication/2026_02_Retrofitted_Anti-Skid_System.pdf`](publication/2026_02_Retrofitted_Anti-Skid_System.pdf) is the deposited paper, byte for byte (1,565,058 bytes, SHA-256 `bcf68b4b845c68ab48b43c1d91c855af7f8aac18f7a7a0846a43210ca66a3ebf`). [`paper/`](paper/) holds the author's corrected manuscript, not the source of that file. It applies the corrections of six of the 58 entries of [`ERRATA.md`](ERRATA.md), that of [P-E003](ERRATA.md#p-e003) at one of its three places; where its text differs from the deposited text, the difference is one of these corrections, and the other errors stand in it as deposited, among them [P-E002](ERRATA.md#p-e002): the statement of the abstract that functional equivalence was demonstrated, which the evidence does not support ([The state of the evidence](#the-state-of-the-evidence)). [`report/`](report/) holds the research report in a revised edition of October 2026, which has not been re-assessed and awaits its deposit.
 
 ## Works in this repository
 
 | Work | Status | Identifier | In this repository | Licence |
 | --- | --- | --- | --- | --- |
-| Paper: "Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology" | Working Paper in the series Kölner Beiträge zur technischen Informatik, 2/2026, published on 2026-09-22 on Cologne Open Science; presented at the VIMS-Workshop 2026, TH Köln, on 2026-05-22 | DOI [10.57684/COS-1494](https://doi.org/10.57684/COS-1494) | [`publication/`](publication/), the deposited file; [`paper/`](paper/), the corrected manuscript; [`ERRATA.md`](ERRATA.md) | CC BY-NC-ND 4.0; material of third parties, and the series cover and imprint of the deposited file, excepted |
-| Research report: "Ensuring Functional Equivalence and Compliance with Functional Safety Standards in Retrofitted Anti-Skid Systems for European Public Transportation: A Methodological Approach to Testing, Certification, and Risk Mitigation for Modernised Safety-Critical Electronics" | Submitted in August 2025; revised edition of October 2026, not re-assessed, awaiting its deposit | a DOI after its deposit | [`report/`](report/), the LaTeX sources | CC BY 4.0; material credited to others excepted |
-| Slides of the talk on the paper at the VIMS-Workshop 2026 | The sources of July 2026, revised in October 2026; the deck as presented is not archived | none | [`slides/`](slides/) | CC BY 4.0; material of third parties excepted; the research question and the drawing of the V-model taken from the paper keep its licence, CC BY-NC-ND 4.0 |
+| Paper: "Ensuring Functional Equivalence in Retrofitted Anti-Skid Systems for European Public Transportation: A Hybrid Two-Layer Verification Methodology" | Working Paper 2/2026, published on 2026-09-22 on Cologne Open Science | DOI [10.57684/COS-1494](https://doi.org/10.57684/COS-1494) | [`publication/`](publication/), the deposited file; [`paper/`](paper/), the corrected manuscript; [`ERRATA.md`](ERRATA.md) | CC BY-NC-ND 4.0; exceptions under [Licence](#licence) |
+| Research report: "Ensuring Functional Equivalence and Compliance with Functional Safety Standards in Retrofitted Anti-Skid Systems for European Public Transportation: A Methodological Approach to Testing, Certification, and Risk Mitigation for Modernised Safety-Critical Electronics" | Submitted in August 2025; revised edition of October 2026, not re-assessed, awaiting its deposit | a DOI after its deposit | [`report/`](report/), the LaTeX sources | CC BY 4.0; exceptions under [Licence](#licence) |
+| Slides of the talk on the paper at the VIMS-Workshop 2026 | The sources of July 2026, revised in October 2026; the deck as presented is not archived | none | [`slides/`](slides/) | CC BY 4.0; exceptions under [Licence](#licence) |
 | Traceability data of the diagnostic path | Reconstructed in 2026 from Chapters 3 and 5 of the report | none | [`verification/`](verification/) | CC BY 4.0; the schema and the template MIT |
 
 The paper derives from the research report, and where the two differ, the revised edition of the report is the corrected one (report, page ii). The revised edition in turn takes over parts of the paper: its description of the causes of B4 and B5 in the firmware of 2023 and of their fix follows Section V-E of the paper (report, Section 5.3), and Figures 3.1 and 4.1 are derived from Figs. 1 and 4 of the paper, as the comments in their sources in `report/fig/` state. The two works share figures, tables, a listing, and single sentences and captions; [`report/README.md`](report/README.md#overlap-with-the-paper) lists them. Passages of the report that also appear in the paper remain under the paper's licence, CC BY-NC-ND 4.0.
@@ -202,13 +202,13 @@ _As printed in the report (pp. xii and xiii). The English abstract is authoritat
 | Licence | CC BY-NC-ND 4.0, as the catalogue record states; the imprint on page 2 names the licence terms without a version ([`ERRATA.md`](ERRATA.md#properties-of-the-record-and-the-deposited-file)). Excepted are the series cover and the imprint on pages 1 and 2, which are the series' own, and, as material of third parties, the measurement captures of Figs. 3 and 5 and Listing 1, which is adapted from the test fixture report; see [`NOTICE`](NOTICE) | CC BY 4.0, as the title page states; material credited to others, among it the mark of TH Köln, is excepted, and passages that also appear in the paper remain under its licence |
 | Language | English | English; title and abstract are printed in five languages, English, German, French, Turkish and Spanish, and the English version is authoritative |
 | Pages | 10: the series cover (p. 1), the imprint (p. 2) and the paper (pp. 3 to 10) | 82; a build has 102 pages, 20 of them front matter |
-| Classification | DDC 004 (Data processing & computer science) and 621.3 (Electrical engineering, electronics); ACM CCS 1998: B.6.3 (Design Aids), subentry "Verification", B.8.1 (Reliability, Testing, and Fault-Tolerance) and C.3 (Special-Purpose and Application-Based Systems); as the catalogue record holds them on 2026-10-04 | after its deposit |
+| Classification | DDC 004 (Data processing & computer science) and 621.3 (Electrical engineering, electronics); ACM CCS 1998: B.6.3 (Design Aids), subentry "Verification", B.8.1 (Reliability, Testing, and Fault-Tolerance) and C.3 (Special-Purpose and Application-Based Systems); as the catalogue record holds them on 2026-10-11 | after its deposit |
 
 ## Version of record
 
 [`publication/2026_02_Retrofitted_Anti-Skid_System.pdf`](publication/2026_02_Retrofitted_Anti-Skid_System.pdf) is byte-identical with the file the catalogue record serves under the DOI above: 1,565,058 bytes, SHA-256 `bcf68b4b845c68ab48b43c1d91c855af7f8aac18f7a7a0846a43210ca66a3ebf`. It is the editors' build of the version the author sent on 2026-06-28, with the series cover, the imprint and the running header and footer of the series added. The tag `cos-1494` marks the state of this repository that holds it.
 
-The LaTeX sources of the version of 2026-06-28 are not available to this repository; the earliest that are, of 2026-07-12, already differ from the deposited text. [`paper/`](paper/) therefore holds the author's corrected manuscript: its text is the text of pages 3 to 10 of the deposited file, except where it applies the corrections of six entries of [`ERRATA.md`](ERRATA.md), P-E003, P-E013, P-E015, P-E018, P-E031 and P-E034; [`paper/README.md`](paper/README.md) names each difference. A build of `paper/` is therefore not the version of record. The research report is not deposited yet; its record joins this folder after its deposit, under a tag of its own.
+The LaTeX sources of the version of 2026-06-28 are not available to this repository; the earliest that are, of 2026-07-12, already differ from the deposited text. [`paper/`](paper/) therefore holds the author's corrected manuscript: its text is the text of pages 3 to 10 of the deposited file, except where it applies the corrections of six entries of [`ERRATA.md`](ERRATA.md), [P-E003](ERRATA.md#p-e003), [P-E013](ERRATA.md#p-e013), [P-E015](ERRATA.md#p-e015), [P-E018](ERRATA.md#p-e018), [P-E031](ERRATA.md#p-e031) and [P-E034](ERRATA.md#p-e034); [`paper/README.md`](paper/README.md) names each difference. A build of `paper/` is therefore not the version of record. The research report is not deposited yet; its record joins this folder after its deposit, under a tag of its own.
 
 [`publication/README.md`](publication/README.md) states how the deposited file came about and gives the ways to verify it, with and without a GitHub account.
 
@@ -230,12 +230,12 @@ Who assembled the Rev 1.0 boards and who applied the fix of B4 and B5 is not rec
 
 The case is the test-diagnosis module of an anti-skid system that has been in service in European urban rail since the early 1990s; its controller belongs to the obsolete Intel MCS-48 family (report, Chapter 1). The rebuilt unit is the inherited Rev 0.0 Base Board with the Rev 1.0 Upper, LED and STM32 boards (report, Section 3.1):
 
-- **Base Board:** an Actel A3P1000, a flash-based FPGA, emulates the original processor and its I/O logic. Its MCS-48 core is "the OpenCores t48 core, release rel_1_2, integrated without changes to the core" ([`ERRATA.md`](ERRATA.md#p-e018), P-E018).
+- **Base Board:** an Actel A3P1000, a flash-based FPGA, emulates the original processor and its I/O logic. Its MCS-48 core is "the OpenCores t48 core, release rel_1_2, integrated without changes to the core" ([`ERRATA.md`](ERRATA.md), [P-E018](ERRATA.md#p-e018)).
 - **Upper Board:** the four legacy buttons and the external watchdog with its reset circuit.
 - **LED Board:** the two 7-segment displays that show the fault codes.
 - **STM32 Diagnostics Board:** an STM32F401RET6 microcontroller, galvanically isolated from the core by optocouplers, which logs the diagnostic frames of the FPGA with timestamps to an SD card; a USB connector gives a PC access to the card (report, Section 3.3).
 
-![Block diagram of the rebuilt unit on four boards. PCB 1, Base Board: the FPGA, Actel A3P1000-PQG208M, MCS-48 emulation, with power supply (3.3 V / 1.5 V), BOD TPS3307, JTAG debug, flash ROM S29AL016J (firmware), 6 MHz crystal (clock), NVRAM CY14B104NA (address and data), level shifters CD4050 for the X4 inputs, 54LS245-type drivers for the X4 outputs, frequency sweep 850 Hz to 1550 Hz, SPI master (32-bit frames, 2023) and I/O and port expander. PCB 2, Upper Board: watchdog CD40106 and CD4518, reset by the BOD and linked to the FPGA by Reset / !CS, and the buttons Test, STW, Lösch and Tür/V, debounced into the FPGA. PCB 4, LED Board: BCD decoder CD4511BE, fed BCD by the FPGA, and two 7-segment displays. PCB 3, STM32 Diagnostics Board: SPI across the galvanic isolation through four SFH601-3 optocouplers to an STM32 F401RET6 with internal RTC at 32.768 kHz, microSD (FatFs) and USB Type-C; 5 V and ground of the Base Board feed D16 and the Y23 input on the Base Board side, with a ground branch to the optocouplers.](docs/figures/system_overview.svg)
+![Block diagram of the rebuilt unit on the four boards listed above, with the parts the list does not name. PCB 1, Base Board: the FPGA, A3P1000-PQG208M, with power supply (3.3 V / 1.5 V), BOD TPS3307, JTAG debug, flash ROM S29AL016J (firmware), 6 MHz crystal (clock), NVRAM CY14B104NA (address and data), level shifters CD4050 for the X4 inputs, 54LS245-type drivers for the X4 outputs, frequency sweep 850 Hz to 1550 Hz, SPI master (32-bit frames, 2023) and I/O and port expander. PCB 2, Upper Board: watchdog CD40106 and CD4518, reset by the BOD and linked to the FPGA by Reset / !CS, and the buttons Test, STW, Lösch and Tür/V, debounced into the FPGA. PCB 4, LED Board: BCD decoder CD4511BE, fed BCD by the FPGA. PCB 3, STM32 Diagnostics Board: SPI through four SFH601-3 optocouplers to the STM32, with internal RTC at 32.768 kHz, microSD (FatFs) and USB Type-C; 5 V and ground of the Base Board feed D16 and the Y23 input on the Base Board side, with a ground branch to the optocouplers.](docs/figures/system_overview.svg)
 
 _Figure 3.1 of the report: block diagram of the rebuilt unit. By Mert Torun, adapted from Fig. 1 of the paper; CC BY-NC-ND 4.0, the licence of the paper._
 
@@ -261,7 +261,7 @@ Simulation and the fixture runs indicate equivalence of the fault handling, but 
 - The only measurement against the original board, the frequency sweep, points to a deviation, described below; it is open.
 - Two hardware changes alter the behaviour of the module by design: the STORE and RECALL inputs of the system connector (08z, 08d) no longer act on the fault memory, and the added brown-out detection adds a reset. Whether either matters in the vehicle is open (report, Section 4.6 and Table 5.3).
 
-The abstract of the paper states that functional equivalence of the safety-critical core "was demonstrated", and Section V-A that the convergence of three lines of evidence "provides robust assurance" of it. [`ERRATA.md`](ERRATA.md#p-e002), P-E002, corrects this: "was demonstrated" and "robust assurance" are not supported, and the evidence for the rebuilt unit is incomplete. Its correction states the evidence as the revised report does: simulation and the fixture runs indicate equivalence of the fault handling, the frequency sweep, the only measurement against the original board, points to a deviation that is open, and two hardware changes alter the behaviour of the module by design (report, Sections 4.6, 5.1.1 and 5.1.3).
+The abstract of the paper states that functional equivalence of the safety-critical core "was demonstrated", and Section V-A that the convergence of three lines of evidence "provides robust assurance" of it. [`ERRATA.md`](ERRATA.md), [P-E002](ERRATA.md#p-e002), corrects this: "was demonstrated" and "robust assurance" are not supported, and the evidence for the rebuilt unit is incomplete. Its correction states the evidence as the revised report does: simulation and the fixture runs indicate equivalence of the fault handling, the frequency sweep, the only measurement against the original board, points to a deviation that is open, and two hardware changes alter the behaviour of the module by design (report, Sections 4.6, 5.1.1 and 5.1.3).
 
 ### Integration defects
 
@@ -314,7 +314,9 @@ The legacy system, its manual and most of the project reports are German, and th
 | [`ERRATA.md`](ERRATA.md) | The errors of the paper found so far, the properties of its record and of the deposited file, and moved web addresses | The paper | CC BY 4.0; its quotations of the paper CC BY-NC-ND 4.0 |
 | [`CHANGELOG.md`](CHANGELOG.md), [`NOTICE`](NOTICE), [`CITATION.cff`](CITATION.cff), [`codemeta.json`](codemeta.json) | Changes, licences and credits, citation metadata | Neither work | CC BY 4.0; `CITATION.cff` CC BY-NC-ND 4.0, because it quotes the abstract of the paper |
 | [`SECURITY.md`](SECURITY.md), [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to report a matter privately, and how corrections are made | Neither work | CC BY 4.0 |
-| [`Makefile`](Makefile), [`.github/`](.github/), [`.githooks/`](.githooks/) | Build and checks, workflows, the correction form, an opt-in secret scan for clones | Neither work | MIT |
+| [`Makefile`](Makefile), [`.github/`](.github/) | Build and checks, workflows, the correction form | Neither work | MIT |
+| `LICENSE`, `LICENSES/`, `REUSE.toml` | The MIT text, the texts of the licences that files use, and the licence of every path without a header | Neither work | none of their own: REUSE 3.3 exempts them from its check |
+| `.editorconfig`, `.gitattributes`, `.gitignore`, `.markdownlint.jsonc`, `.chktexrc`, `.latexmkrc`, `.githooks/`, `.gitleaks.toml` | Editor, git, lint and build configuration, and the opt-in secret scan for clones with its configuration | Neither work | MIT |
 
 ### The paper and the report
 
@@ -412,23 +414,23 @@ With Python 3, PyYAML and jsonschema 4.0 or later:
 
 ```sh
 make traceability     # the traceability data, their CSV view and the self-test of the check
-make metadata         # CITATION.cff, codemeta.json, the BibTeX entry below and SHA256SUMS agree
+make metadata         # CITATION.cff, codemeta.json, the BibTeX entry below, SHA256SUMS and the errata index agree
 make verify-deposit   # the deposited file against publication/SHA256SUMS
 ```
 
-The first two targets call `python3`; a Python with these packages under another name, such as that of a virtual environment, is named on the command line, as in `make traceability PYTHON=.venv/bin/python3` or `make metadata PYTHON=.venv/bin/python3`.
+The first two targets call `python3`; a Python with these packages under another name, such as that of a virtual environment, is named on the command line, as in `make traceability PYTHON=.venv/bin/python3` or `make metadata PYTHON=.venv/bin/python3`. CI installs PyYAML 6.0.2 and jsonschema 4.25.1 for the traceability check, and cffconvert 2.0.0, PyYAML 6.0.2, pyld 2.0.4 and reuse 5.0.2 for its validation of the metadata and of the licences.
 
 ### The checks CI runs
 
 - [`build.yml`](.github/workflows/build.yml): the paper, the report and the slides, each typeset twice in the pinned container and compared byte for byte; ChkTeX.
-- [`checks.yml`](.github/workflows/checks.yml): the deposited file against `SHA256SUMS`; every commit after the tag `cos-1494` that changes the manuscript in `paper/` names its erratum; `CITATION.cff` with cffconvert and against schema 1.2.0 through a plain YAML loader; `codemeta.json` expanded as JSON-LD; the agreement of `CITATION.cff`, `codemeta.json`, the BibTeX entry below and `SHA256SUMS`; REUSE; and the links to doi.org, nbn-resolving.org and the addresses of this repository, a check that runs on push and is not required.
+- [`checks.yml`](.github/workflows/checks.yml): the deposited file against `SHA256SUMS`; every commit after the tag `cos-1494` that changes the manuscript in `paper/` names its erratum; `CITATION.cff` with cffconvert and against schema 1.2.0 through a plain YAML loader; `codemeta.json` expanded as JSON-LD; the agreement of `CITATION.cff`, `codemeta.json`, the BibTeX entry below and `SHA256SUMS`, and the index of `ERRATA.md` against its entries; REUSE; and the links to doi.org, nbn-resolving.org and the addresses of this repository, a check that runs on push and is not required.
 - [`traceability.yml`](.github/workflows/traceability.yml): the traceability data and the self-test of their check.
 - [`docs.yml`](.github/workflows/docs.yml) lints the Markdown files; [`secret-scan.yml`](.github/workflows/secret-scan.yml) scans the history with gitleaks.
 
 ## Limitations
 
 - No certification or independent compliance assessment was performed; IEC 61508, IEEE 1012 and EN 50716 frame the method. The report maps its two layers to whole standards, not to individual clauses, and the mapping is not an assessment of compliance; no safety integrity level and no integrity level in the sense of IEEE 1012 were assigned, because no hazard analysis was made (report, Section 5.4 and Table 5.5).
-- The evidence does not demonstrate functional equivalence (report, Section 5.1.3); the statement of the paper that it was demonstrated is not supported ([`ERRATA.md`](ERRATA.md#p-e002), P-E002). The deviation of the frequency sweep from the only measurement of the original board is open.
+- The evidence does not demonstrate functional equivalence (report, Section 5.1.3); the statement of the paper that it was demonstrated is not supported ([`ERRATA.md`](ERRATA.md), [P-E002](ERRATA.md#p-e002)). The deviation of the frequency sweep from the only measurement of the original board is open.
 - The verification structure is proposed, not validated, and only this one case has been examined (report, Sections 1.4 and 5.1.3).
 - No requirement list exists for the module, and no traceability matrix was produced during the project; the traceability data here are a reconstruction for the diagnostic path only (report, Section 4.5).
 - B4 and B5 stand as Table 5.4 of the report gives them: the fixes of the firmware of 2023 were applied, the diagnostic path was not verified separately, and no log was archived; for the freeze with the firmware of 2025 no fix is documented, and a change of the VHDL transmitter is not documented.
@@ -436,7 +438,7 @@ The first two targets call `python3`; a Python with these packages under another
 
 ## Corrections
 
-[`ERRATA.md`](ERRATA.md) lists the errors of the paper found so far under the identifiers P-E001 to P-E058, the properties of its catalogue record and of the deposited file, and the web addresses of the paper that have moved; errors of the report will be listed as R-E001 onwards once it is deposited. The deposited file does not change: a confirmed error is added to `ERRATA.md`. After the tag `cos-1494`, the manuscript in `paper/` changes only through `ERRATA.md`, and each change names its erratum.
+[`ERRATA.md`](ERRATA.md) lists the errors of the paper found so far under the identifiers [P-E001](ERRATA.md#p-e001) to [P-E058](ERRATA.md#p-e058), the properties of its catalogue record and of the deposited file, and the web addresses of the paper that have moved; errors of the report will be listed as R-E001 onwards once it is deposited. The deposited file does not change: a confirmed error is added to `ERRATA.md`. After the tag `cos-1494`, the manuscript in `paper/` changes only through `ERRATA.md`, and each change names its erratum.
 
 To report an error, open an issue with the form **Correction** and give the location in the work or the file, the quoted text, the proposed correction and the evidence. A matter that should not be public goes by e-mail to [info@mtorun0x7cd.com](mailto:info@mtorun0x7cd.com), as [`SECURITY.md`](SECURITY.md) describes. [`CHANGELOG.md`](CHANGELOG.md) lists the changes of this repository.
 
@@ -464,6 +466,12 @@ BibTeX:
 
 GitHub's "Cite this repository" builds its entry from [`CITATION.cff`](CITATION.cff); the entry above also names the document type, Working Paper. The report receives an entry of its own once it is deposited.
 
+### Citing the code
+
+`swh:1:rel:18b64645891f7a156ebdc2860534df08dbb20efc` identifies the release `cos-1494`, the repository at the version of record, in the Software Heritage archive; the paper is cited by its DOI above.
+
+[![Archived: release cos-1494](https://archive.softwareheritage.org/badge/swh:1:rel:18b64645891f7a156ebdc2860534df08dbb20efc/)](https://archive.softwareheritage.org/swh:1:rel:18b64645891f7a156ebdc2860534df08dbb20efc)
+
 ## Related works
 
 The paper derives from the research report (report, page ii). The revised edition in [`report/`](report/) takes over parts of the paper: the description of the causes and the fix of B4 and B5 follows Section V-E of the paper (report, Section 5.3), and Figures 3.1 and 4.1 are derived from Figs. 1 and 4 of the paper.
@@ -475,9 +483,9 @@ The report and the paper continue prior work, which the report cites:
 - A. Dolata, D. Ostermann and F. Schiffelers, "Testkartentester: Entwicklung einer Testkarte für die Gleitschutztestkarte", unpublished project report, TH Köln, 2023.
 - D. Savchuk, D. C. Icyer, E. Galustian and O. Al-Selwi, "Gleitschutz System Fortsetzung", unpublished report of the follow-on student project, TH Köln, 2025.
 
-The FPGA design integrates the OpenCores t48 core, release rel_1_2 ([`ERRATA.md`](ERRATA.md#p-e018), P-E018); its sources are not part of this repository.
+The FPGA design integrates the OpenCores t48 core, release rel_1_2 ([`ERRATA.md`](ERRATA.md), [P-E018](ERRATA.md#p-e018)); its sources are not part of this repository.
 
-## License
+## Licence
 
 | Path | Licence |
 | --- | --- |

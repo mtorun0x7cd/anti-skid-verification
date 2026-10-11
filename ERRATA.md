@@ -18,7 +18,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** IEEE Std 1012-2016, clause 1.1 (Scope), describes the standard as compatible with all life cycle models; the edition defines no V-model, and the term does not occur in it. The 2024 edition cited as [24] was not read; the IEEE SA page of that edition describes the working group's active project P1012 with the same sentence.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E002
 
@@ -32,7 +32,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the paper's own Fig. 3 (on-screen date 15 Aug 2023), Fig. 5 and pp. 6 to 8; [10], Sections 4.6 and 4.10; [11], pp. 13 to 15; the archived VHDL test benches of 2023 (project files); the revised edition of the author's research report (October 2026), Sections 3.2, 4.6, 5.1.1 and 5.1.3, Tables 5.2 and 5.3, and Section 6.1, with the sources it cites there for the sweep ([28], Sections 5.1.5 and 5.2 and Fig. 3) and for the two hardware changes ([10], Sections 2 and 2.5; [28], Section 5.1.4; the FPGA design of 2023, atop.vhd, project files).
 - **Found:** 2026-09-27
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E003
 
@@ -46,7 +46,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [1] itself: UIC, "Carbon Footprint of Railway Infrastructure", subtitle "Comparing existing methodologies on typical corridors. Recommendations for harmonized approach", June 2016, ISBN 978-2-7461-2500-1. Its text contains none of "refurbish", "retrofit", "moderni", "upgrad" or "safety", and "embodied" occurs only for infrastructure projects in Great Britain. [19] reports the fleet owner's view that re-equipping the Class 455 fleet has a sound business case.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E004
 
@@ -58,7 +58,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [5] as printed on p. 10 names a single vehicle series ("Serie 1992/93"); the manual itself is dated April 1992. [10], Section 1, dates the development of the system to the early 1980s.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E005
 
@@ -70,7 +70,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [8], p. 155 (abstract): an industrial PC provides a virtual train vehicle, running environment, electric brake unit and pneumatic valve unit around the physical brake control unit.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E006
 
@@ -89,7 +89,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [11], pp. 10 to 14 and 21; the paper's own p. 9 ("Residual Scope Gaps"); the entries named above.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E007
 
@@ -102,7 +102,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the paper's own p. 7 (the application "prompts the operator for manual checks").
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E008
 
@@ -115,7 +115,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [11], p. 13 (section on the 7-segment displays); the design files of the LED Board of 2023 and of Rev 1.0 of June 2024 (project files), as the revised edition of the author's research report (October 2026), Table 5.4 (B6) and its note b, compares them.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E009
 
@@ -127,7 +127,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the work report, pp. 5 and 10; [10], Section 1.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E010
 
@@ -144,7 +144,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [11], p. 13; [11] contains no occurrence of "JTAG", "boundary" or "scan"; the author's research report as submitted in August 2025 (unpublished), Chapter 5, on the JTAG checks.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E011
 
@@ -158,7 +158,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [11], pp. 10 and 12, and p. 22, item 9 (only the fixture's PCB redesigned); [28], Table 7 (p. 23); schematics of Rev 0.0 as ordered and of Rev 1.0 (project files): nets SWD_TMS on PA13 and SWD_TCK on PA14 to the header X14, labelled "SWD".
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E012
 
@@ -170,7 +170,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [16], abstract, which states the article's subject as the ways in which a formal specification can assist testing; DOI 10.1145/1459352.1459354.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E013
 
@@ -182,7 +182,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [17] at <https://www.wabteccorp.com/newsroom/press-releases/wabtec-s-innovative-adaptive-wheel-slide-protection-solution-gains-certification>, read on 2026-09-24.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E014
 
@@ -194,7 +194,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [20] at its current address (see [Updates](#updates)); [19] in its archived copy of April 2013 ([P-E049](#p-e049)).
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E015
 
@@ -207,7 +207,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the scope of EN 50716:2023 as the description of its German edition DIN EN 50716 (VDE 0115-716):2024-09 gives it, and of EN 50129:2018 as the description of DIN EN 50129 (VDE 0831-129):2019-06 gives it; the revised edition of the author's research report (October 2026), Section 2.4. The clauses of the standards themselves were not read.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E016
 
@@ -220,7 +220,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [3], its classification of FPGA technologies and its introduction.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E017
 
@@ -236,7 +236,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the paper's own text.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E018
 
@@ -248,7 +248,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** comparison of the project's VHDL sources (project files) with OpenCores t48, release rel_1_2: in one archived version of the design, 47 of the 48 files it shares with the release are byte-identical, and the one that differs is a system-level RAM model with an added reset port; in the later version, all 46 shared files are identical. [10], Section 2.10, states that the code was taken from OpenCores.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E019
 
@@ -260,7 +260,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the original schematic of the test-diagnosis board (project files); [10], Section 2.4; the archived flash image (project files), stored with every byte twice: a 4096-byte image whose last byte other than 0xFF lies at 0x0B8E, with 663 such bytes above 0x07FF.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E020
 
@@ -272,7 +272,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the paper cites no source for the operating history, and no operating records are among the project files.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E021
 
@@ -286,7 +286,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** board files of Rev 1.0 (project files): the Upper Board carries CD40106, CD4518 and BCY59, and no CD4050 or TPS3307; [10], Section 4.6, describes the watchdog as a clock and a 4518 counter.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E022
 
@@ -299,7 +299,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** schematics of Rev 0.0 as ordered and of Rev 1.0 (project files): no DS3231, crystal Q8 of 32.768 kHz and battery holder U1; STM32 firmware of 2023 (project files), which initialises and reads the internal RTC.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E023
 
@@ -314,7 +314,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the library's own documentation at <http://elm-chan.org/fsw/ff/>.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E024
 
@@ -326,7 +326,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** schematic of Rev 1.0 (project files): optocouplers OK5 to OK8 on the nets of SPI data, SPI clock, chip select and the STM32 reset; bill of materials of Rev 1.0, sheet of the STM32 board: Y22 marked as not fitted, Y23 fitted.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E025
 
@@ -338,7 +338,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** VHDL source of the SPI master of 2023 (project files), state "send": the clock toggles when the counter exceeds 29, and the counter is then reset to 0; [11], p. 20.
 - **Found:** 2026-09-27
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E026
 
@@ -352,7 +352,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** SFH601 datasheet (document number 83663): switching characteristics (turn-on and turn-off time typically 3 µs at VCC = 5 V, IC = 2 mA, RL = 100 Ω) and Fig. 14 (switching time against load resistance); schematic of Rev 1.0 (project files): collector resistors R107 to R110 of 10 kΩ; [11], p. 22, item 7.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E027
 
@@ -365,7 +365,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** schematic of Rev 1.0 (project files): supervisor Y3 (TPS3307-18), SENSE1 between R103 (2.4 kΩ, from the 5 V rail) and R105 (6.8 kΩ), net label 3.700 V; SENSE2 between R102 (4.7 kΩ, from the 3.3 V rail) and R104 (5.6 kΩ), net label 1.794 V; SENSE3 on the 1.5 V core rail; the bill of materials of Rev 1.0, sheet of the Base Board, with the same values; Texas Instruments SLVS199C (TPS3307-18, -25, -33), Electrical Characteristics: negative-going input thresholds 2.93 V (SENSE1), 1.68 V (SENSE2) and 1.25 V, 1.22 to 1.29 V (SENSE3); Microsemi DS0106 (Military ProASIC3/EL), Revision 6.0, Table 7: 1.5 V core supply of the A3P1000 1.425 to 1.575 V, 3.3 V I/O supply 3.0 to 3.6 V; [10], Section 4.7.
 - **Found:** 2026-09-28
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E028
 
@@ -379,7 +379,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** schematic of Rev 1.0 (project files): connector X12 brings the Base Board's 5 V supply (pin 6) and ground (pin 1, named GND3 on the sheet of the diagnostics board) onto that board; the header X13 of the Base Board carries the same signals pin for pin, and the sheet notes "GND3 ist verbunden mit GND"; D16 (SMBJ5.0A) and the input pins of Y23 lie between these two nets; R82 to R85 (360 Ω) feed the LEDs of OK5 to OK8, whose cathodes lie on GND3; SJ2 lies between GND3 and the isolated ground GND2; the bill of materials of Rev 1.0 fits Y23 (MGDS-04-C-C); Gaia Converter, MGDM-04 series datasheet (FC97-008.05/23, Revision T): galvanic isolation, permanent short-circuit protection, input current in short-circuit mode at most 50 mA for the 5 V input models; [11], p. 22, item 7.
 - **Found:** 2026-09-28
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E029
 
@@ -393,7 +393,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [10], Section 4.6 (Fig. 9) and Section 4.10 (Figs. 11 and 12). The capture in Fig. 3 shows the same cursor readouts and the same on-screen time stamp (15:48:36, 15 Aug 2023) as [10], Fig. 9; the two images of Fig. 5 are identical in their pixel data with those of [10], Figs. 11 and 12.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E030
 
@@ -409,7 +409,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [11], p. 14; [10], Section 4.4; the archived VHDL test benches of 2023 (project files), in which the port NVRAM_ble is left open.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E031
 
@@ -423,7 +423,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** pin definitions in the datasheet of the CY14B101LA/CY14B101NA, a smaller member of the nvSRAM family of the fitted CY14B104NA: BLE is the byte low enable, active low, for data lines DQ0 to DQ7, and CE the separate chip enable input; [11], p. 14.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E032
 
@@ -436,7 +436,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [10], Sections 4.1 to 4.3.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E033
 
@@ -451,7 +451,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the paper's own Fig. 3 (time stamp) and p. 4; [10], Sections 4.6, 4.10 and 9.2; [11], p. 13 and p. 22, item 7; the revised edition of the author's research report (October 2026), Section 5.1.1 and Table 5.2, which gives the sweep as observed on the Rev 0.0 prototype and the original board and as not documented on the rebuilt unit.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E034
 
@@ -463,7 +463,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** schematics of Rev 0.0 and Rev 1.0 (project files): connector X4 is a 48-pin type F connector with rows b, d and z; the paper's own Listing 1 (p. 7) addresses contacts 18z and 24d, and [28], Table 7 (p. 23), contacts in rows z, b and d.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E035
 
@@ -481,7 +481,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [11], p. 15; [5], sheet 20/25 (21 fault codes).
 - **Found:** 2026-09-27
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E036
 
@@ -495,7 +495,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [11] does not mention power cycles, and no test record for them is among the project files.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E037
 
@@ -507,7 +507,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [28], Listing 3 (p. 44): the same test names, pin settings ({18z: 1, 24d: 0}), expected codes (31 and 95), stored sequence (03 31 09) and delete flags.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E038
 
@@ -519,7 +519,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** no simulation run after 2023 is among the project files; [11] documents simulation only of its own SPI transmitter (p. 21).
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E039
 
@@ -532,7 +532,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the capture itself (Fig. 3: cursors at t1 = -1.72 s and t2 = 2.13 s, both at 3.36 V); [10], Section 4.6; the revised edition of the author's research report (October 2026), Section 5.1.1, which reads the reset timing from the capture, as the caption of its Figure C.1 does, and decodes it with the output Q4 of the CD4518 counter in the Rev 1.0 schematic and the counter's datasheet among the project files, and Table 5.2, which gives the watchdog reaction as observed.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E040
 
@@ -544,7 +544,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [5], sheet 20/25 (diagnosis table).
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E041
 
@@ -562,7 +562,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [11], pp. 19, 21 and 22 (items 5 and 13); the author's research report as submitted in August 2025 (unpublished), which lists both defects as unresolved and states that successful logging tests bypassed the SD card.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E042
 
@@ -579,7 +579,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [11], pp. 16, 17, 19 and 21; the STM32 firmware of 2023 and the VHDL logger of 2023 (project files).
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E043
 
@@ -592,7 +592,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [10], Sections 3.3 and 4.11; [11], pp. 3, 16, 20 and 21, and p. 22, items 11 to 13; the VHDL logger of 2023 (project files), which builds the frame from a 2-bit prefix, the six button states and 24 error lines and hands it to the SPI core as two 16-bit words.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E044
 
@@ -604,7 +604,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the copy of [2] available to the author: no date in the document, most recent cited year 2015, file created on 3 June 2016 and last modified on 23 March 2021.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E045
 
@@ -617,7 +617,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** EN 15595:2018, European foreword (prepared by Technical Committee CEN/TC 256 "Railway applications"); national catalogue entries for EN 50129:2018, which give the full title.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E046
 
@@ -634,7 +634,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** at least three queries for each reference in at least two bibliographic sources, among them Crossref (2026-09-24; Crossref repeated on 2026-09-28); where the author's earlier bibliography recorded a DOI for one of them, it is not registered or leads to a different work; in the proceedings of ISoLA 2016, Part I (LNCS 9952), pp. 3 to 15 hold a different chapter, and neither part contains a chapter by the authors of [6].
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E047
 
@@ -646,7 +646,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the work report itself (unpublished), title page; it treats an emulated CPU on an FPGA (pp. 5 and 10) and does not contain the word "Vorarbeit".
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E048
 
@@ -658,7 +658,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** DOI 10.1145/1459352.1459354: Crossref lists 15 authors, and neither printed name is among them; the author line of the article agrees.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E049
 
@@ -671,7 +671,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the addresses above, read on 2026-09-24 and 2026-09-28; both answered again on 2026-10-01.
 - **Found:** 2026-09-24
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E050
 
@@ -684,7 +684,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the revised edition of the author's research report (October 2026), Section 3.2 with Equation 3.1, from the VHDL sources freq_gen.vhd and gen600Hz.vhd (project files), and Section 4.3.1 on the nominal values and the missing tolerances; [10], Section 2.9, as cited there.
 - **Found:** 2026-10-02
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E051
 
@@ -696,7 +696,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [5], sheet 5/25 (front panel) and sheets 14/25 and 19/25, as the revised edition of the author's research report (October 2026), Section 3.1 and its list of abbreviations, cites them for the meaning of the two buttons.
 - **Found:** 2026-10-06
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E052
 
@@ -708,7 +708,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the paper's own p. 6, where the sentence cites no reference; the revised edition of the author's research report (October 2026), Section 4.1, which states the mapping without the claim.
 - **Found:** 2026-10-02
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E053
 
@@ -722,7 +722,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the revised edition of the author's research report (October 2026), Sections 4.1, 4.2, 4.5 and 5.4, and items CL-A7 and CL-F5 of its checklist (Chapter 7), with the sources it cites there ([10], Section 2; [28], Sections 6.2 and 9.3 and Listing 3); the archived test benches of 2023 (project files), which, as Section 4.2 there records, contain no assertions.
 - **Found:** 2026-10-02
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E054
 
@@ -734,7 +734,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** [5], sheet 20/25, and [28], Table 2, Section 9.3 and Listing 3, as the revised edition of the author's research report (October 2026), Section 4.3, Table 4.1 with its note b, Section 5.1.2 and Appendix D.1, compares them.
 - **Found:** 2026-10-02
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E055
 
@@ -747,7 +747,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the scope of EN 50716:2023 as the description of its German edition DIN EN 50716 (VDE 0115-716):2024-09 gives it ([P-E015](#p-e015)); the revised edition of the author's research report (October 2026), Sections 2.4, 4.5 and 4.6 and Table 5.3, with the sources it cites there ([10], Sections 2 and 2.5; [28], Section 5.1.4; [11], p. 7; the FPGA design of 2023, atop.vhd, project files).
 - **Found:** 2026-10-02
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E056
 
@@ -761,7 +761,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the captures of Fig. 5; [10], Section 4.10 (Figs. 11 and 12), and [28], Sections 5.1.5 and 5.2 and Fig. 3, as the revised edition of the author's research report (October 2026), Section 5.1.1 and Table 5.1, reads them; that section also evaluates further captures of the original board, which read 919.69 Hz to 921.80 Hz at the low end, and the raw export of one of them (459 periods between 916 Hz and 926 Hz); Section 3.2 there for the emulation's design values, and Table 5.3 there, which records both deviations as open.
 - **Found:** 2026-10-02
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E057
 
@@ -774,7 +774,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the revised edition of the author's research report (October 2026), Section 5.3 with its part on the polarity and the slave select of the SPI link, and Table 5.4 (B5), from the schematics of Rev 0.0 and Rev 1.0 (project files: optocoupler stages OK5, OK6 and OK8 with collector pull-ups R108 to R110; slave select on PA4, net MCU_SPI_!SS), the STM32 firmware of 2023 (USB_RTC_SD_Test: main.c, lines 125, 166 and 455 to 457) with the archived driver stm32f4xx_hal_spi.c, SPI_core.vhd and atop.vhd of 2023 (project files), and the STM32 reference manual RM0368, Sections 20.3.1 and 20.3.10, as cited there.
 - **Found:** 2026-10-02
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ### P-E058
 
@@ -786,7 +786,7 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 - **Evidence:** the revised edition of the author's research report (October 2026), Sections 4.4, 5.4 and 5.5.2 and Section 6.3, with IEC 61508-2 and IEC 61508-3 as cited there, and item CL-E3 of its checklist (Chapter 7) on the environmental qualification tests.
 - **Found:** 2026-10-02
 - **Reported:** not reported
-- **Status:** Open.
+- **Status:** confirmed
 
 ## Properties of the record and the deposited file
 

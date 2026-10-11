@@ -9,6 +9,16 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 ### Added
 
 - `CITATION.cff` and `codemeta.json`: the Software Heritage identifier of the release `cos-1494`, the repository at the version of record, `swh:1:rel:18b64645891f7a156ebdc2860534df08dbb20efc`.
+- `README.md`: the section Citing the code under Citation, with that identifier and the badge of the Software Heritage archive.
+- `ERRATA.md`: an index before the first entry, with the number of entries per class and one row per entry, which `tools/check_metadata.py` holds against the entries; and, under the properties of the record, the series name as the catalogue record gives it, read again on 2026-10-11.
+- `CITATION.cff`: the keywords at the top level, as `codemeta.json` gives them; `codemeta.json`: the addresses of the README, the changelog, the build instructions and the issue tracker.
+
+### Changed
+
+- `README.md`: the identity line says what the repository holds besides the deposited paper; the alert names the claim that P-E002 corrects; the table of the works keeps its cells short and points to Licence for the exceptions; the alternative text of Figure 3.1 leaves out what the list above it says; the Contents table names every path at the root; every cited erratum links to its entry; the heading Licence is spelled as in the rest of the repository; the classification is dated by the reading of the catalogue record on 2026-10-11; Reproducing names the versions of the Python packages that CI installs.
+- `CITATION.cff`: no comment about the type of the preferred citation.
+- `ERRATA.md`: the series volume is written as volume (Band) 2/2026, as elsewhere in the repository.
+- `ERRATA.md`: the status of every entry reads "confirmed", as in the other two works of the family; it read "Open.".
 
 ### Fixed
 

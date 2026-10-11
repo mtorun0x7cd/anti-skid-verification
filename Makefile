@@ -13,7 +13,8 @@
 #                         check itself on mutated copies (needs PyYAML and
 #                         jsonschema 4.0 or later)
 #   make metadata         check that CITATION.cff, codemeta.json, the README's
-#                         BibTeX entry and SHA256SUMS agree (needs PyYAML)
+#                         BibTeX entry, SHA256SUMS and the errata index agree
+#                         (needs PyYAML)
 #
 # Variables to set on the command line where the default does not fit:
 #

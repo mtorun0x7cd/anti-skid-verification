@@ -20,12 +20,19 @@ to name the document type Working Paper. Last, the SHA-256 of the deposited
 file in publication/SHA256SUMS must stand in README.md and publication/README.md.
 A part of CITATION.cff or codemeta.json that these comparisons read but that
 lacks the form they need (a list of persons, a mapping) is a finding, too.
+The index of ERRATA.md is held against its entries: every entry under the
+heading Errata has exactly one row, whose location (the entry's Location up to
+its first comma), class and status are those of the entry, no row names an
+entry that does not exist, and the sentence before the table counts the
+entries per class as they are. A section without an entry is a finding, not a
+pass.
 
     check_metadata.py            check the files
     check_metadata.py --selftest show that a changed DOI, version, type, title,
-                                 note or checksum, and a paper reference that is
-                                 not a mapping, are found, each by the findings
-                                 its case names and by no other
+                                 note or checksum, a paper reference that is
+                                 not a mapping, and an errata index row whose
+                                 class differs from its entry, are found, each
+                                 by the findings its case names and by no other
 
 Any other argument, and any argument after --selftest, is refused with a usage
 line before a file is read.
@@ -66,11 +73,12 @@ def load(root):
         readme = (root / "README.md").read_text(encoding="utf-8")
         record = (root / "publication" / "README.md").read_text(encoding="utf-8")
         sums = (root / "publication" / "SHA256SUMS").read_text(encoding="utf-8")
+        errata = (root / "ERRATA.md").read_text(encoding="utf-8")
     except (OSError, ValueError, yaml.YAMLError) as exc:
         raise ReadError(str(exc))
     if not isinstance(cff, dict) or not isinstance(meta, dict):
         raise ReadError("CITATION.cff or codemeta.json is not a mapping")
-    return {"cff": cff, "meta": meta, "readme": readme, "record": record, "sums": sums}
+    return {"cff": cff, "meta": meta, "readme": readme, "record": record, "sums": sums, "errata": errata}
 
 
 def bibtex_entry(readme):
@@ -90,6 +98,70 @@ def bibtex_entry(readme):
 
 def unbrace(text):
     return re.sub(r"[{}]", "", text)
+
+
+def errata_index_findings(text):
+    """The differences between the index under '## Errata' and the entries below it."""
+    section = re.search(r"^## Errata\n(.*?)(?=^## |\Z)", text, re.S | re.M)
+    if not section:
+        return ["ERRATA.md has no section Errata"]
+    body = section.group(1)
+    first = re.search(r"^### ", body, re.M)
+    head = body[:first.start()] if first else body
+    found, entries = [], []
+    for match in re.finditer(r"^### (\S+)\n(.*?)(?=^### |\Z)", body, re.S | re.M):
+        fields = dict(re.findall(r"^- \*\*(Location|Class|Status):\*\* (.*)$", match.group(2), re.M))
+        missing = [name for name in ("Location", "Class", "Status") if name not in fields]
+        if missing:
+            found.append("ERRATA.md %s has no %s field" % (match.group(1), " or ".join(missing)))
+            continue
+        location = fields["Location"].split(",")[0].strip()
+        if location.endswith("."):
+            location = location[:-1]
+        entries.append((match.group(1), location, fields["Class"].strip(), fields["Status"].strip()))
+    if not entries and not found:
+        return ["ERRATA.md has no entry under Errata, so its index was not compared"]
+    rows = {}
+    for line in head.splitlines():
+        if not line.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        if cells[0] in ("Entry", "---"):
+            continue
+        link = re.fullmatch(r"\[([^\]]+)\]\(#([^)]+)\)", cells[0])
+        if len(cells) != 4 or not link:
+            found.append("ERRATA.md index: a row that is not entry, location, class and status: %r" % line)
+            continue
+        if link.group(2) != link.group(1).lower():
+            found.append("ERRATA.md index: %s links to #%s, not to its anchor" % (link.group(1), link.group(2)))
+        rows.setdefault(link.group(1), []).append(cells[1:])
+    for ident, location, kind, status in entries:
+        got = rows.pop(ident, [])
+        if len(got) != 1:
+            found.append("ERRATA.md index: %s has %d row(s), not one" % (ident, len(got)))
+            continue
+        for what, want, have in zip(("location", "class", "status"), (location, kind, status), got[0]):
+            if want != have:
+                found.append("ERRATA.md index: the %s of %s is %r, the entry says %r" % (what, ident, have, want))
+    for ident in rows:
+        found.append("ERRATA.md index: a row for %s, which has no entry" % ident)
+    counted = re.search(r"^The (\d+) entries by class: (.+)\.$", head, re.M)
+    if not counted:
+        found.append("ERRATA.md index: no sentence 'The N entries by class: ...' before the table")
+    else:
+        claimed, actual = {}, {}
+        for item in counted.group(2).split("; "):
+            pair = re.fullmatch(r'(\d+) "([^"]+)"', item)
+            if not pair:
+                found.append("ERRATA.md index: %r in the count sentence is not a number and a class" % item)
+                continue
+            claimed[pair.group(2)] = int(pair.group(1))
+        for _, _, kind, _ in entries:
+            actual[kind] = actual.get(kind, 0) + 1
+        if int(counted.group(1)) != len(entries) or claimed != actual:
+            found.append("ERRATA.md index: the sentence counts %s entries, %r; the entries are %d, %r"
+                         % (counted.group(1), claimed, len(entries), actual))
+    return found
 
 
 def form_findings(cff, meta):
@@ -119,6 +191,7 @@ def compare(files):
     found = form_findings(cff, meta)
     if found:
         return found
+    found.extend(errata_index_findings(files["errata"]))
 
     def same(what, a, b):
         if a != b:
@@ -229,6 +302,10 @@ def selftest():
         ("a paper reference in codemeta.json that is not a mapping",
          mutated("meta", dict(meta, referencePublication=[ref])),
          ("codemeta.json referencePublication is not a mapping",)),
+        ("an errata index row whose class differs from its entry",
+         mutated("errata", re.sub(r"^(\| \[P-E001\]\(#p-e001\) \| [^|]+ \| )[^|]+( \|)",
+                                  r"\1typographical\2", files["errata"], count=1, flags=re.M)),
+         ("ERRATA.md index: the class of P-E001 is 'typographical', the entry says ",)),
     ]
     failures = 0
     for name, case, expected in cases:
@@ -260,9 +337,11 @@ def main(argv):
     for line in found:
         print("  [DIFF] %s" % line)
     if found:
-        print("  [FAIL] %d finding(s) in CITATION.cff, codemeta.json, the README and SHA256SUMS" % len(found))
+        print("  [FAIL] %d finding(s) in CITATION.cff, codemeta.json, the README, SHA256SUMS and the errata index"
+              % len(found))
         return 1
-    print("  [OK]   CITATION.cff, codemeta.json, the README's BibTeX entry and SHA256SUMS agree")
+    print("  [OK]   CITATION.cff, codemeta.json, the README's BibTeX entry and SHA256SUMS agree, and so do the errata"
+          " index and its entries")
     return 0
 
 

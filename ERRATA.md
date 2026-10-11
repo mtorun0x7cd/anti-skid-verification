@@ -8,6 +8,69 @@ Each entry quotes the deposited text verbatim; words divided at a line end are j
 
 ## Errata
 
+The 58 entries by class: 24 "claim not supported by the work's evidence"; 19 "factual, not affecting results"; 8 "affecting a result"; 3 "attribution"; 2 "typographical"; 2 "reference could not be traced".
+
+| Entry | Location | Class | Status |
+| --- | --- | --- | --- |
+| [P-E001](#p-e001) | p. 3 (PDF p. 3) | factual, not affecting results | confirmed |
+| [P-E002](#p-e002) | p. 3 (PDF p. 3) | claim not supported by the work's evidence | confirmed |
+| [P-E003](#p-e003) | p. 3 (PDF p. 3) | claim not supported by the work's evidence | confirmed |
+| [P-E004](#p-e004) | p. 3 (PDF p. 3) | claim not supported by the work's evidence | confirmed |
+| [P-E005](#p-e005) | p. 3 (PDF p. 3) | claim not supported by the work's evidence | confirmed |
+| [P-E006](#p-e006) | pp. 3 to 4 (PDF pp. 3 to 4) | affecting a result | confirmed |
+| [P-E007](#p-e007) | p. 3 (PDF p. 3) | factual, not affecting results | confirmed |
+| [P-E008](#p-e008) | p. 3 (PDF p. 3) | factual, not affecting results | confirmed |
+| [P-E009](#p-e009) | p. 4 (PDF p. 4) | claim not supported by the work's evidence | confirmed |
+| [P-E010](#p-e010) | p. 4 (PDF p. 4) | affecting a result | confirmed |
+| [P-E011](#p-e011) | p. 4 (PDF p. 4) | affecting a result | confirmed |
+| [P-E012](#p-e012) | p. 4 (PDF p. 4) | claim not supported by the work's evidence | confirmed |
+| [P-E013](#p-e013) | p. 4 (PDF p. 4) | claim not supported by the work's evidence | confirmed |
+| [P-E014](#p-e014) | p. 4 (PDF p. 4) | claim not supported by the work's evidence | confirmed |
+| [P-E015](#p-e015) | p. 4 (PDF p. 4) | factual, not affecting results | confirmed |
+| [P-E016](#p-e016) | p. 4 (PDF p. 4) | claim not supported by the work's evidence | confirmed |
+| [P-E017](#p-e017) | p. 4 (PDF p. 4) | typographical | confirmed |
+| [P-E018](#p-e018) | p. 4 (PDF p. 4) | factual, not affecting results | confirmed |
+| [P-E019](#p-e019) | p. 4 (PDF p. 4) | claim not supported by the work's evidence | confirmed |
+| [P-E020](#p-e020) | p. 4 (PDF p. 4) | claim not supported by the work's evidence | confirmed |
+| [P-E021](#p-e021) | p. 5 (PDF p. 5) | factual, not affecting results | confirmed |
+| [P-E022](#p-e022) | p. 5 (PDF p. 5) | factual, not affecting results | confirmed |
+| [P-E023](#p-e023) | p. 5 (PDF p. 5) | typographical | confirmed |
+| [P-E024](#p-e024) | p. 5 (PDF p. 5) | factual, not affecting results | confirmed |
+| [P-E025](#p-e025) | p. 5 (PDF p. 5) | factual, not affecting results | confirmed |
+| [P-E026](#p-e026) | p. 5 (PDF p. 5) | claim not supported by the work's evidence | confirmed |
+| [P-E027](#p-e027) | p. 5 (PDF p. 5) | claim not supported by the work's evidence | confirmed |
+| [P-E028](#p-e028) | p. 5 (PDF p. 5) | claim not supported by the work's evidence | confirmed |
+| [P-E029](#p-e029) | p. 6 (PDF p. 6) | attribution | confirmed |
+| [P-E030](#p-e030) | p. 6 (PDF p. 6) | affecting a result | confirmed |
+| [P-E031](#p-e031) | p. 6 (PDF p. 6) | factual, not affecting results | confirmed |
+| [P-E032](#p-e032) | p. 6 (PDF p. 6) | attribution | confirmed |
+| [P-E033](#p-e033) | p. 6 (PDF p. 6) | affecting a result | confirmed |
+| [P-E034](#p-e034) | p. 7 (PDF p. 7) | factual, not affecting results | confirmed |
+| [P-E035](#p-e035) | p. 7 (PDF p. 7) | claim not supported by the work's evidence | confirmed |
+| [P-E036](#p-e036) | p. 7 (PDF p. 7) | claim not supported by the work's evidence | confirmed |
+| [P-E037](#p-e037) | p. 7 (PDF p. 7) | attribution | confirmed |
+| [P-E038](#p-e038) | p. 7 (PDF p. 7) | claim not supported by the work's evidence | confirmed |
+| [P-E039](#p-e039) | p. 7 (PDF p. 7) | affecting a result | confirmed |
+| [P-E040](#p-e040) | p. 7 (PDF p. 7) | factual, not affecting results | confirmed |
+| [P-E041](#p-e041) | p. 8 (PDF p. 8) | claim not supported by the work's evidence | confirmed |
+| [P-E042](#p-e042) | p. 8 (PDF p. 8) | affecting a result | confirmed |
+| [P-E043](#p-e043) | p. 9 (PDF p. 9) | claim not supported by the work's evidence | confirmed |
+| [P-E044](#p-e044) | p. 10 (PDF p. 10) | factual, not affecting results | confirmed |
+| [P-E045](#p-e045) | p. 10 (PDF p. 10) | factual, not affecting results | confirmed |
+| [P-E046](#p-e046) | p. 10 (PDF p. 10) | reference could not be traced | confirmed |
+| [P-E047](#p-e047) | p. 10 (PDF p. 10) | reference could not be traced | confirmed |
+| [P-E048](#p-e048) | p. 10 (PDF p. 10) | factual, not affecting results | confirmed |
+| [P-E049](#p-e049) | p. 10 (PDF p. 10) | factual, not affecting results | confirmed |
+| [P-E050](#p-e050) | p. 4 (PDF p. 4) | factual, not affecting results | confirmed |
+| [P-E051](#p-e051) | p. 5 (PDF p. 5) | factual, not affecting results | confirmed |
+| [P-E052](#p-e052) | p. 6 (PDF p. 6) | claim not supported by the work's evidence | confirmed |
+| [P-E053](#p-e053) | p. 6 (PDF p. 6) | claim not supported by the work's evidence | confirmed |
+| [P-E054](#p-e054) | p. 7 (PDF p. 7) | factual, not affecting results | confirmed |
+| [P-E055](#p-e055) | p. 7 (PDF p. 7) | claim not supported by the work's evidence | confirmed |
+| [P-E056](#p-e056) | p. 7 (PDF p. 7) | affecting a result | confirmed |
+| [P-E057](#p-e057) | p. 9 (PDF p. 9) | claim not supported by the work's evidence | confirmed |
+| [P-E058](#p-e058) | p. 9 (PDF p. 9) | claim not supported by the work's evidence | confirmed |
+
 ### P-E001
 
 - **Location:** p. 3 (PDF p. 3), Abstract.

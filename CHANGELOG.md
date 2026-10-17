@@ -12,6 +12,7 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 - `README.md`: the section Citing the code under Citation, with that identifier and the badge of the Software Heritage archive.
 - `ERRATA.md`: an index before the first entry, with the number of entries per class and one row per entry, which `tools/check_metadata.py` holds against the entries; and, under the properties of the record, the series name as the catalogue record gives it, read again on 2026-10-11.
 - `CITATION.cff`: the keywords at the top level, as `codemeta.json` gives them; `codemeta.json`: the addresses of the README, the changelog, the build instructions and the issue tracker.
+- `.github/dependabot.yml`: Dependabot proposes updates of the pinned actions once a month.
 
 ### Changed
 

@@ -23,6 +23,7 @@ This repository was recreated with a new history on 2026-10-05; the earlier rele
 
 ### Fixed
 
+- `.github/workflows/build.yml`: the step that reads the commit time of each folder writes its three outputs in one redirect, as ShellCheck asks.
 - `README.md`: the labels of the diagram keep their ends on GitHub at every zoom. Each label breaks its own lines, and the diagram raises Mermaid's wrapping width to 400 px, so that Mermaid wraps none of them; in Safari, a label that Mermaid wrapped could be measured too narrow at some page zooms and lose its end. The wording is unchanged.
 
 ## [1.1.0] - 2026-10-09

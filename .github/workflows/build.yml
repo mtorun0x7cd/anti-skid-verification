@@ -37,9 +37,11 @@ jobs:
       - name: Read the commit time of each folder
         id: epoch
         run: |
-          echo "paper=$(git log -1 --format=%ct -- paper)" >> "$GITHUB_OUTPUT"
-          echo "report=$(git log -1 --format=%ct -- report)" >> "$GITHUB_OUTPUT"
-          echo "slides=$(git log -1 --format=%ct -- slides paper/fig)" >> "$GITHUB_OUTPUT"
+          {
+            echo "paper=$(git log -1 --format=%ct -- paper)"
+            echo "report=$(git log -1 --format=%ct -- report)"
+            echo "slides=$(git log -1 --format=%ct -- slides paper/fig)"
+          } >> "$GITHUB_OUTPUT"
 
   documents:
     name: Typeset ${{ matrix.document }} twice and compare
